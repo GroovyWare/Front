@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Layout from './components/layouts/Layout';
 import ApprovalLayout from './Approval/layouts/ApprovalLayout';
-
+import Schedule from './schedule/Schedule';
 
 function App() {
   return (
@@ -10,6 +10,7 @@ function App() {
         <Route path="/" element={<Layout/>}>
           
           <Route path="approval" element={<ApprovalLayout/>}/>
+          <Route path="schedule"  element={<Schedule/>}/>
 
         </Route>
       </Routes>
