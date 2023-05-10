@@ -52,8 +52,7 @@ function ApvContent(){
                             결재 양식 선택
                         </div>
                             <li onClick={() => onclickHandler('휴가신청서')}>휴가신청서</li>
-                            <li onClick={() => onclickHandler('시말서')}>시말서</li>
-                            <li onClick={() => onclickHandler('구매품의서')}>구매품의서</li>
+                            <li onClick={() => onclickHandler('시말서')}>사유서</li>
                             <li onClick={() => onclickHandler('사직서')}>사직서</li>
                      </div>
 

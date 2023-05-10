@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import ApvVacationCSS from "./ApvVacation.module.css";
+import ApvVacationDocCSS from './ApvVacationDoc.module.css';
 
 function ApvVacationDoc(props){
 
@@ -38,15 +38,15 @@ function ApvVacationDoc(props){
     
     return(
         <>
-        <div className={ApvVacationCSS.normal}>
-            <div className={ApvVacationCSS.normals}>
-                <div className={ApvVacationCSS.document}>휴가신청서</div>
+        <div className={ApvVacationDocCSS.normal}>
+            <div className={ApvVacationDocCSS.normals}>
+                <div className={ApvVacationDocCSS.document}>휴가신청서</div>
                 {/* 표 그리기 */}
-                <div className={ApvVacationCSS.text}>
-                    <div className={ApvVacationCSS.text2}>
-                        <div className={ApvVacationCSS.text3}>
+                <div className={ApvVacationDocCSS.text}>
+                    <div className={ApvVacationDocCSS.text2}>
+                        <div className={ApvVacationDocCSS.text3}>
                             {/* 표 제목 그리기 */}
-                            <div className={ApvVacationCSS.title} >
+                            <div className={ApvVacationDocCSS.title} >
                                 휴가종류
                                 {/* 라디오 버튼 선택 */}
                                 <input 
@@ -75,12 +75,11 @@ function ApvVacationDoc(props){
                                         onChange={onchangeHandler}
                                         style={{marginLeft: 10}}/>질병
                                 <div style={{marginLeft: 150}}>
-                                    <button onClick={onClickConfirm}>확인</button>
                                 </div>
                             </div>
                         </div>
-                        <div className={ApvVacationCSS.text3}>
-                            <div className={ApvVacationCSS.title2} >
+                        <div className={ApvVacationDocCSS.text3}>
+                            <div className={ApvVacationDocCSS.title2} >
                                 기간 및 일시
                                 {/* 기간 선택 */}
                                 <input
@@ -95,19 +94,22 @@ function ApvVacationDoc(props){
                                 />
                             </div>
                         </div>
-                        <div className={ApvVacationCSS.context}>
-                            <div className={ApvVacationCSS.title} >
+                        <div className={ApvVacationDocCSS.context}>
+                            <div className={ApvVacationDocCSS.title} >
                                 연차일수
                             </div>
                         </div>
+                        <button 
+                            onClick={onClickConfirm}
+                            className={ApvVacationDocCSS.check}>확인</button>
                     </div>
                     {/* 신청 사유 작성 */}
-                    <div className={ApvVacationCSS.context2}>신청사유
+                    <div className={ApvVacationDocCSS.context2}>신청사유
                     </div>
                     {/* 텍스트 박스 생성 */}
                         <input 
                             type="textbox"
-                            className={ApvVacationCSS.textbox}
+                            className={ApvVacationDocCSS.textbox}
                             onChange={onChangeTextHandler}/>
                 </div>
             </div>

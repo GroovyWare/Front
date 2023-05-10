@@ -60,12 +60,11 @@ function Navbar(){
                             </Accordion>
                     </NavLink></li>
                     <li><NavLink 
-                        to="/" 
+                        to="/play" 
                         style={{textDecoration : "none", textAlign : "center", color:'white'}}>
                              <Accordion title="운동량">
-                                <div className={NavbarCSS.linkto}>회수함</div>
-                                <div className={NavbarCSS.linkto}>종결함</div>
-                                <div className={NavbarCSS.linkto}>반려함</div>
+                                <div className={NavbarCSS.linkto}>
+                                    <NavLink to="/play/history" style={{textDecoration : "none", color : "white"}}>운동 이력 조회</NavLink></div>
                             </Accordion>
                     </NavLink></li>
                     <div className={NavbarCSS.empDiv}>조직도</div>

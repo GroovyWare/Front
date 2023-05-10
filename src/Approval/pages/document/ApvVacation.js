@@ -2,12 +2,11 @@ import { useEffect, useState } from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import ApvVacationCSS from './ApvVacation.module.css';
 import ApvVacationDoc from "./ApvVacationDoc";
-import axios from "axios";
-import { setSelectionRange } from "@testing-library/user-event/dist/utils";
-import ApvVacationContext from "./ApvVacationContext";
-
+import { useDispatch, useSelector } from "react-redux";
+import { registVacationDoc } from "../../../api/ApprovalAPICall";
 
 function ApvVacation(){
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const location = useLocation();
     const {item, startDate, endDate} = location.state;
@@ -15,34 +14,26 @@ function ApvVacation(){
     const [vacStartDate, setVacStartDate] = useState();
     const [vacEndDate, setVacEndDate] = useState();
     const [vacContext, setVacContext] = useState();
-    
-    console.log('1', selectedOption);
-    console.log('2', vacStartDate);
-    console.log('3', vacEndDate);
-    console.log('4', vacContext);
+    const {regist}  = useSelector(state => state.approvalReducer);
 
     const onClickDocHandler = () => {
-        navigate("/approval/vacation/getContext", 
-        {state : { selectedOption : selectedOption, vacStartDate : vacStartDate, vacEndDate : vacEndDate, vacContext :vacContext }});
 
-        const data = {
-            docTitle : item,
-            docCustom : selectedOption,
-            docStartDate : vacStartDate,
-            docEndDate : vacEndDate,
-            docContext : vacContext
-        }
+                const data = {
+                    docTitle : item,
+                    docCustom : selectedOption,
+                    docStartDate : vacStartDate,
+                    docEndDate : vacEndDate,
+                    docContext : vacContext
+                }
 
-        console.log(data);
+                dispatch(registVacationDoc(data));
 
-        fetch('http://localhost:8059/document/save', {
-            method: "POST",
-            headers : {
-                "Content-Type" : "application/json"
-            },
-            body : JSON.stringify(data)
-        })
-    }
+                if(regist?.status === 200){
+                    navigate("/approval", {replace : true})
+                }   
+            }
+        
+    
 
     return(
         <>
@@ -55,7 +46,7 @@ function ApvVacation(){
             <div>
                 {/* 결재권자 표시 */}
                 
-                <div style={{display:"flex"}}>
+                <div className={ApvVacationCSS.authors}>
                     <div className={ApvVacationCSS.author}></div>
                     <div className={ApvVacationCSS.common}></div>
                     <div className={ApvVacationCSS.common}></div>
