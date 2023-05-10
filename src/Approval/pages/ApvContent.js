@@ -1,10 +1,6 @@
 import { useState } from "react";
 import ApvContentCSS from "./ApvContent.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import { renderToString } from 'react-dom/server';
-import ApvVacationDoc from "./document/ApvVacationDoc";
-import axios from "axios";
-
 
 function ApvContent(){
     const navigate = useNavigate();
@@ -22,15 +18,14 @@ function ApvContent(){
                 navigate(`/approval/vacation`, {state : { item: item, startDate : startDate, endDate : endDate }});
             }else if(item === '사직서'){
                 navigate("/approval/resignation", {state : { item:item, startDate : startDate, endDate : endDate }});
-            }else if(item === '시말서'){
+            }else if(item === '사유서'){
                 navigate("/approval/reason", {state : { item : item, startDate : startDate, endDate : endDate }});
-            }else if(item === '구매품의서'){
-                navigate("/approval/purchase", {state : { item : item, startDate : startDate, endDate : endDate }});
             }
     }
     
 
     
+
     const onChangeStartHandler = (e) => {
         setStartDate(e.target.value);
     }
@@ -52,7 +47,8 @@ function ApvContent(){
                             결재 양식 선택
                         </div>
                             <li onClick={() => onclickHandler('휴가신청서')}>휴가신청서</li>
-                            <li onClick={() => onclickHandler('시말서')}>사유서</li>
+                            <li onClick={() => onclickHandler('시말서')}>시말서</li>
+                            <li onClick={() => onclickHandler('구매품의서')}>구매품의서</li>
                             <li onClick={() => onclickHandler('사직서')}>사직서</li>
                      </div>
 
