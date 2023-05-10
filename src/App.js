@@ -8,7 +8,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout/>}>
-          <Route path="schedule" element={<Schedule/>}/>
+          {/* <Route path="schedule" element={<Schedule/>}/> */}
           
           <Route path="approval" element={<ApprovalLayout/>}/>
 
