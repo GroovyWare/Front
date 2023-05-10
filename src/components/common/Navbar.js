@@ -12,7 +12,7 @@ function Navbar(){
                     <li>시설관리</li>
                     <li>예약관리</li>
                     <li>회원관리</li>
-                    <li><NavLink to="approval">결재</NavLink></li>
+                    <li><NavLink to="/approval">결재</NavLink></li>
                     <li>운동량</li>
                     <div className={NavbarCSS.empDiv}>조직도</div>
             </div>
