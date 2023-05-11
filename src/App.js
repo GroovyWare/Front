@@ -3,11 +3,11 @@ import Layout from './components/layouts/Layout';
 import ApprovalLayout from './Approval/layouts/ApprovalLayout';
 import Schedule from './schedule/Schedule';
 import ApvContent from './Approval/pages/ApvContent';
-import ApvRegist from "./Approval/pages/ApvRegist";
 import ApvVacation from './Approval/pages/document/ApvVacation';
 import ApvResign from "./Approval/pages/document/ApvResign";
 import ApvPurchase from "./Approval/pages/document/ApvPurchase";
 import ApvReason from "./Approval/pages/document/ApvReason";
+import ApvEmployee from './Approval/pages/ApvEmployee';
 
 function App() {
   return (
@@ -18,11 +18,11 @@ function App() {
           <Route path="approval">
             <Route index element={<ApprovalLayout/>}/>
             <Route path="new" element={<ApvContent/>}/>
-            <Route path="regist" element={<ApvRegist/>}/>
             <Route path="vacation" element={<ApvVacation/>}/>
-            <Route path="resignation" element={<ApvResign/>}/>
+            {/* <Route path="resignation" element={<ApvResign/>}/>
             <Route path="purchase" element={<ApvPurchase/>}/>
-            <Route path="reason" element={<ApvReason/>}/>
+            <Route path="reason" element={<ApvReason/>}/> */}
+            <Route path="employee" element={<ApvEmployee/>}/>
           </Route>
           {/* <Route path="schedule"  element={<Schedule/>}/> */}
 

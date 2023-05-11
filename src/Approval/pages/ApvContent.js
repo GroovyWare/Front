@@ -15,13 +15,13 @@ function ApvContent(){
     const onClickDocHandler = () => {
         if(item && startDate && endDate) {
             if(item === '휴가신청서'){
-                navigate("/approval/Vacation", {state : { startDate : startDate, endDate : endDate}});
+                navigate('/approval/vacation', {state : { item: item, startDate : startDate, endDate : endDate }});
             }else if(item === '사직서'){
-                navigate("/approval/resignation", {state : { startDate : startDate, endDate : endDate }});
+                navigate("/approval/resignation", {state : { item:item, startDate : startDate, endDate : endDate }});
             }else if(item === '시말서'){
-                navigate("/approval/reason", {state : { startDate : startDate, endDate : endDate }});
+                navigate("/approval/reason", {state : { item : item, startDate : startDate, endDate : endDate }});
             }else if(item === '구매품의서'){
-                navigate("/approval/purchase", {state : { startDate : startDate, endDate : endDate }});
+                navigate("/approval/purchase", {state : { item : item, startDate : startDate, endDate : endDate }});
             }
         }
     }
@@ -33,7 +33,11 @@ function ApvContent(){
     const onChangeEndHandler = (e) => {
         setEndDate(e.target.value);
     }
-    
+
+    const onClickEmpHandler = () => {
+        navigate('/approval/employee')
+    }
+
     return(
         <>
              <div className={ApvContentCSS.centerDiv}>
@@ -63,7 +67,10 @@ function ApvContent(){
                             </div>
                             <div className={ApvContentCSS.docTitle} style={{display:"flex", marginTop:10}}>
                                 <div>결재, 열람</div> <div style={{marginLeft : 50, fontSize: 14}}>
-                                    <button style={{width:100, marginTop: 0}}>조직도</button>
+                                    <button 
+                                        style={{width:100, marginTop: 0}}
+                                        onClick={onClickEmpHandler}    
+                                    >조직도</button>
                                 </div>
                             </div>
                             <div className={ApvContentCSS.docTitle} style={{display:"flex", marginTop:10}}>

@@ -45,3 +45,9 @@
     width: 100px;
     margin-left: 100px;
 }
+
+.linkto :hover{
+    background-color:#1A1779;
+    color:white;
+    width: 300px;
+}
