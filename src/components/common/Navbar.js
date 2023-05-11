@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import NavbarCSS from "./Navbar.module.css";
 import { useState } from "react";
+import Accordion from "../../Approval/common/ApvArcodian";
 
 
 function Navbar(){
@@ -21,19 +22,52 @@ function Navbar(){
         <div className={NavbarCSS.navbarDiv}>
             <div className={NavbarCSS.navbarUl}>
                 <button>로그아웃</button>
-                    <li style={{marginTop:40}}>일정관리</li>
+                    <li style={{marginTop:40}}><NavLink 
+                        to="" 
+                        style={{textDecoration : "none", textAlign : "center", color:'white'}}>
+                             <Accordion title="일정관리">
+                                <div className={NavbarCSS.linkto}>회수함</div>
+                                <div className={NavbarCSS.linkto}>종결함</div>
+                                <div className={NavbarCSS.linkto}>반려함</div>
+                            </Accordion>
+                    </NavLink></li>
                     <li>공지사항</li>
-                    <li>시설관리</li>
-                    <li>예약관리</li>
-                    <li>회원관리</li>
+                    <li><NavLink 
+                        to="" 
+                        style={{textDecoration : "none", textAlign : "center", color:'white'}}>
+                             <Accordion title="시설관리">
+                                <div className={NavbarCSS.linkto}>회수함</div>
+                                <div className={NavbarCSS.linkto}>종결함</div>
+                                <div className={NavbarCSS.linkto}>반려함</div>
+                            </Accordion>
+                    </NavLink></li>
+                    <li><NavLink 
+                        to="" 
+                        style={{textDecoration : "none", textAlign : "center", color:'white'}}>
+                             <Accordion title="회원관리">
+                                <div className={NavbarCSS.linkto}>회수함</div>
+                                <div className={NavbarCSS.linkto}>종결함</div>
+                                <div className={NavbarCSS.linkto}>반려함</div>
+                            </Accordion>
+                    </NavLink></li>
                     <li><NavLink 
                         to="/approval" 
-                        style={{textDecoration : "none"}}>
-                            <div 
-                                style={hovered ? styles.hovered : styles.default}
-                                onClick={() => setHovered(true)}
-                                onMouseOver={() => setHovered(false)}>결재</div></NavLink></li>
-                    <li>운동량</li>
+                        style={{textDecoration : "none", textAlign : "center", color:'white'}}>
+                             <Accordion title="결재">
+                                <div className={NavbarCSS.linkto}>회수함</div>
+                                <div className={NavbarCSS.linkto}>종결함</div>
+                                <div className={NavbarCSS.linkto}>반려함</div>
+                            </Accordion>
+                    </NavLink></li>
+                    <li><NavLink 
+                        to="/" 
+                        style={{textDecoration : "none", textAlign : "center", color:'white'}}>
+                             <Accordion title="운동량">
+                                <div className={NavbarCSS.linkto}>회수함</div>
+                                <div className={NavbarCSS.linkto}>종결함</div>
+                                <div className={NavbarCSS.linkto}>반려함</div>
+                            </Accordion>
+                    </NavLink></li>
                     <div className={NavbarCSS.empDiv}>조직도</div>
             </div>
             

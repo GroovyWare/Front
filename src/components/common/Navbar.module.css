@@ -46,8 +46,10 @@
     margin-left: 100px;
 }
 
-.linkto :hover{
-    background-color:#1A1779;
-    color:white;
-    width: 300px;
+.linkto{
+    color: white;
+    font-family: 'GongGothicMedium';
+    font-size: 14px;
+    text-align: center;
+    margin-top: 10px;
 }
