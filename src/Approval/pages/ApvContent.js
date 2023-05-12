@@ -1,6 +1,10 @@
 import { useState } from "react";
 import ApvContentCSS from "./ApvContent.module.css";
 import { Link, useNavigate } from "react-router-dom";
+import { renderToString } from 'react-dom/server';
+import ApvVacationDoc from "./document/ApvVacationDoc";
+import axios from "axios";
+
 
 function ApvContent(){
     const navigate = useNavigate();
@@ -13,9 +17,9 @@ function ApvContent(){
     }
 
     const onClickDocHandler = () => {
-        if(item && startDate && endDate) {
+    
             if(item === '휴가신청서'){
-                navigate('/approval/vacation', {state : { item: item, startDate : startDate, endDate : endDate }});
+                navigate(`/approval/vacation`, {state : { item: item, startDate : startDate, endDate : endDate }});
             }else if(item === '사직서'){
                 navigate("/approval/resignation", {state : { item:item, startDate : startDate, endDate : endDate }});
             }else if(item === '시말서'){
@@ -23,8 +27,9 @@ function ApvContent(){
             }else if(item === '구매품의서'){
                 navigate("/approval/purchase", {state : { item : item, startDate : startDate, endDate : endDate }});
             }
-        }
     }
+    
+
     
     const onChangeStartHandler = (e) => {
         setStartDate(e.target.value);
