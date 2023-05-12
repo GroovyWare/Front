@@ -1,0 +1,147 @@
+.normal{
+    display : flex;
+    margin-bottom: 40px;
+}
+
+.normals{
+    height:800px;
+    width: 700px;
+    border: solid black 1px;
+    margin-left:40px;
+    margin-top: 30px;
+    margin-bottom: 80px;
+}
+
+.document{
+    text-align : center;
+    margin-top:30px;
+    font-family:"LINESeedKR-Bd";
+    color: #505050;
+    font-size: 22;
+}
+
+.text{
+    height:150px;
+    width: 600px;
+    border: solid black 1px;
+    margin-left : 45px;
+    margin-top: 30px;
+}
+
+.text2{
+    border-right: solid black 1px;
+    width: 150px;
+    height:150px;
+}
+
+.text3{
+    border-bottom : solid black 1px;
+    width: 600px;
+    height: 50px;
+    font-family :"LINESeedKR-Bd";
+    color: #505050;
+    font-size: 18;
+}
+
+.title{
+    padding-left: 40px;
+    padding-top: 10px;
+}
+
+.title2{
+    padding-left: 25px;
+    padding-top: 10px;
+}
+
+.context{
+    font-family:"LINESeedKR-Bd";
+    color:#505050;
+    font-size: 18px;
+}
+
+.context2{
+    font-family:"LINESeedKR-Bd";
+    color:#505050;
+    font-size: 22px;
+    text-align:center;
+    margin-top: 20px;
+}
+
+.textbox{
+    width: 500px;
+    height: 300px;
+    margin-left: 50px;
+    margin-top:30px;
+    font-family:"LINESeedKR-Bd";
+    color:#505050;
+    font-size: 14px;
+    text-align: center;
+}
+
+.author{
+    border: solid black 1px;
+    width: 80px;
+    height:100px;
+    margin-left:400px;
+    margin-top:30px;
+}
+
+.common{
+   border: solid black 1px;
+   width: 80px;
+   height:100px;
+   margin-left:400;
+   margin-top:30px;
+}
+
+.detail{
+    background-color:#EBEAFC;
+    width:600px;
+    height:500px;
+    margin-left: 1100px;
+    margin-top: -650px;
+    margin-bottom: 30px;
+    border-radius : 20px;
+}
+
+.detail2{
+    background-color:#1A1779;
+    color:white;
+    border-radius:20px;
+    height: 50px;
+    font-family:"LINESeedKR-Bd";
+    font-size: 22px;
+    text-align:center;
+    padding-top: 20px;
+}
+
+.details{
+    margin-bottom: 30px;
+    margin-top: 20px;
+    margin-left: 50px;
+}
+
+.details2{
+    margin-bottom: 30px;
+    margin-top: 30px;
+    margin-left: 50px;
+}
+
+.confirm{
+    font-family:"LINESeedKR-Bd";
+    color:white;
+    font-size: 14px;
+    text-align: center;
+    width: 50px;
+    background-color: #1A1779;
+    margin-left: 1300px;
+}
+
+.cancel{
+   font-family:"LINESeedKR-Bd";
+   color:white;
+   font-size: 14px;
+   text-align: center;
+   width: 50px;
+   background-color:#4A5CFF;
+}
