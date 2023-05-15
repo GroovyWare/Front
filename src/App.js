@@ -3,7 +3,6 @@ import Layout from './components/layouts/Layout';
 import ApprovalLayout from './Approval/layouts/ApprovalLayout';
 import Schedule from './schedule/Schedule';
 import ApvContent from './Approval/pages/ApvContent';
-
 import ApvVacation from './Approval/pages/document/ApvVacation';
 import ApvResign from "./Approval/pages/document/ApvResign";
 import ApvReason from "./Approval/pages/document/ApvReason";
@@ -30,6 +29,7 @@ function App() {
           <Route path="play">
             <Route index element ={<PlayMemberList/>}/>
             <Route path="history" element={<PlayHistory/>}/>
+
           </Route>
           {/* <Route path="schedule"  element={<Schedule/>}/> */}
 

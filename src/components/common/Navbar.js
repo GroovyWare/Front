@@ -67,6 +67,7 @@ function Navbar(){
                                     <NavLink to="/play/history" style={{textDecoration : "none", color : "white"}}>운동 이력 조회</NavLink></div>
                             </Accordion>
                     </NavLink></li>
+
                     <div className={NavbarCSS.empDiv}>조직도</div>
             </div>
             
