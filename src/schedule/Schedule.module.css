@@ -1,0 +1,37 @@
+/* Schedule.module.css */
+
+@font-face {
+    font-family: "LINESeedKR-Bold";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2")
+      format("woff2");
+    font-weight: normal;
+    font-style: normal;
+}
+
+.mainContents {
+    height: 100%;
+    width: 100%;
+    font-family: "LINESeedKR-Bold", sans-serif;
+  }
+  
+  .calendar1 {
+    height: 80vh;
+    width: 80%;
+    margin: auto;
+  }
+  
+  .eventStyle {
+    background-color: rgb(24, 24, 22);
+  }
+  
+  .fcday {
+    color: black;
+  }
+  
+  .saturday {
+    color: blue;
+  }
+  
+  .sunday {
+    color: red;
+  }
