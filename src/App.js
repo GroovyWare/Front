@@ -24,7 +24,7 @@ function App() {
             <Route path="reason" element={<ApvReason/>}/> */}
             <Route path="employee" element={<ApvEmployee/>}/>
           </Route>
-          {/* <Route path="schedule"  element={<Schedule/>}/> */}
+          <Route path="schedule"  element={<Schedule/>}/>
 
         </Route>
       </Routes>
