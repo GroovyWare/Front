@@ -31,7 +31,11 @@ function Navbar(){
                                 <div className={NavbarCSS.linkto}>반려함</div>
                             </Accordion>
                     </NavLink></li>
-                    <li>공지사항</li>
+                    <li><NavLink 
+                        to="/announce" 
+                        style={{textDecoration : "none", textAlign : "center", color:'white'}}>
+                            공지사항
+                    </NavLink></li>
                     <li><NavLink 
                         to="" 
                         style={{textDecoration : "none", textAlign : "center", color:'white'}}>
