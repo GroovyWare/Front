@@ -23,13 +23,12 @@ function App() {
             <Route path="vacation" element={<ApvVacation/>}/>
             <Route path="resignation" element={<ApvResign/>}/>
             <Route path="reason" element={<ApvReason/>}/>
-            {/* <Route path="employee" element={<ApvEmployee/>}/> */}
+            <Route path="employee" element={<ApvEmployee/>}/>
           </Route>
 
           <Route path="play">
             <Route index element ={<PlayMemberList/>}/>
             <Route path="history" element={<PlayHistory/>}/>
-
           </Route>
           {/* <Route path="schedule"  element={<Schedule/>}/> */}
 
