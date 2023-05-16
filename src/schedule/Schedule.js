@@ -1,18 +1,19 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AllSchedules } from "../api/CalendarAPICalls";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import styles from "./Schedule.module.css";
-import { useState } from "react";
 
 const Schedule = () => {
+  const dispatch = useDispatch();
+  const events = useSelector((state) => state.events); // 상태 관리 라이브러리로부터 이벤트 데이터 가져오기
 
-  const [ eventConstructor, setEventConstructor ] = useState(false);
-  const [ selectedEvent, setSelectedEvent] = useState({});
+  useEffect(() => {
+    dispatch(AllSchedules()); // 이벤트 데이터 가져오기
+  }, [dispatch]);
 
-  const clickEventHandler = (info) => {
-    setSelectedEvent(info.event);
-    setEventConstructor(true);
-  }
 
   return (
     <div className={styles.mainContents}>
@@ -45,11 +46,7 @@ const Schedule = () => {
           return <span className={classNames.join(" ")}>{weekday}</span>;
         }}
         dayHeaderClassNames={styles.fcday}
-        events={[
-          { title: "event 1", start: "2023-05-01" },
-          { title: "event 2", start: "2023-05-05", end: "2023-05-07" },
-          { title: "event 5", start: "2023-05-09T12:30:00" , end: "2023-05-10T16:30:05", allDay: false },
-        ]}
+        events={events}
         eventClassNames={styles.eventStyle}
       />
 
@@ -57,3 +54,4 @@ const Schedule = () => {
   );
 };
 
+export default Schedule;
