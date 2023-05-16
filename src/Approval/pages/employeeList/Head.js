@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import ApvEmployeeCSS from "../ApvEmployee.module.css";
+import ApvEmployeeCSS from "../../employee/ApvEmployee.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { selectEmployeeList } from "../../../api/ApprovalAPICall";
 
-function Head(){
+function Head({name}){
 
     const [imgUrl, setImgUrl] = useState("../images/plus.png");
     const [imgYn, setImageYn] = useState(true);
@@ -17,21 +17,16 @@ function Head(){
 
         setImgClicked(true);
 
-        if(e.target.src === "http://localhost:3000/images/minus.png"){
-            e.target.src = "http://localhost:3000/images/plus.png";
-            setImageYn(false);
-        }else if(e.target.src === "http://localhost:3000/images/plus.png"){
-            e.target.src = "http://localhost:3000/images/minus.png"
+        if(e.target.src === "http://localhost:3000/images/plus.png"){
+            e.target.src = "http://localhost:3000/images/minus.png";
+            dispatch(selectEmployeeList());
             setImageYn(true);
+        }else if(e.target.src === "http://localhost:3000/images/minus.png"){
+            e.target.src = "http://localhost:3000/images/plus.png"
+            setImageYn(false);
         }
     }
 
-    useEffect(
-        () => {
-            dispatch(selectEmployeeList());
-        }
-    )
-    
     return(
         <>
             <div className={ApvEmployeeCSS.title}> 대표 
@@ -39,9 +34,9 @@ function Head(){
                     onClick={onClickHandler}
                     src = {imgUrl}
                 />  
-                    {imgClicked && imgYn && employeeList && employeeList.data.data.map((employee, index) => (
+                    {imgClicked && imgYn && employeeList && employeeList.data.data.map((employee) => (
                         <div className={ApvEmployeeCSS.subTitle}>
-                            <div key={index} className={ApvEmployeeCSS.name1}>
+                            <div key={employee.position.positionCode} className={ApvEmployeeCSS.name1}>
                                     {employee.position.positionName === '대표' && employee.position.positionName}
                             </div>
                             <div className={ApvEmployeeCSS.name2}>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ApvEmployeeCSS from "../ApvEmployee.module.css";
+import ApvEmployeeCSS from "../../employee/ApvEmployee.module.css";
 import { useSelector } from "react-redux";
 
 function Fitness(){
@@ -29,7 +29,7 @@ function Fitness(){
         src = {imgUrl}/>
             {imgClicked && imgYn && employeeList && employeeList.data.data.map((employee, index) => (
                 <div className={ApvEmployeeCSS.subTitle}>
-                    <div key={index} className={ApvEmployeeCSS.name1}>
+                    <div key={employee.position.positionCode} className={ApvEmployeeCSS.name1}>
                         {employee.dept.deptTitle === '피트니스' && employee.position.positionName}
                     </div>
                     <div className={ApvEmployeeCSS.name2}>
