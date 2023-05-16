@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { callAnnounceListAPI, callAnnounceSearchListAPI } from "../../api/AnnounceAPICalls";
+import { callAnnounceListAPI, callAnnounceSearchListAPI } from "../../../api/AnnounceAPICalls";
 import AnnounceList from "./AnnounceList";
 import PagingBar from "../../../components/common/PagingBar";
 import { useSearchParams } from "react-router-dom";
@@ -28,7 +28,7 @@ function AnnounceMain() {
             }
             
         },
-        [currentPage, search]
+        [dispatch]
     );
 
     return (

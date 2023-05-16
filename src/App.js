@@ -9,6 +9,10 @@ import ApvReason from "./Approval/pages/document/ApvReason";
 import ApvEmployee from './Approval/pages/ApvEmployee';
 import PlayMemberList from './play/PlayMemberList';
 import PlayHistory from './play/PlayHistory';
+import AnnounceMain from "./Announce/pages/announces/AnnounceMain";
+import AnnounceDetail from "./Announce/pages/announces/AnnounceDetail";
+import AnnounceList from './Announce/pages/announces/AnnounceList';
+import AnnounceItem from './Announce/items/AnnounceItem';
 
 function App() {
 
@@ -31,6 +35,12 @@ function App() {
             <Route path="history" element={<PlayHistory/>}/>
 
           </Route>
+
+          <Route path="announce" element={<AnnounceMain/>}>
+            <Route index element={<AnnounceList/>}/>
+            <Route path=":announceCode" element={<AnnounceItem/>}/>
+          </Route>
+
           {/* <Route path="schedule"  element={<Schedule/>}/> */}
 
         </Route>
