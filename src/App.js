@@ -13,6 +13,7 @@ import AnnounceMain from "./Announce/pages/announces/AnnounceMain";
 import AnnounceDetail from "./Announce/pages/announces/AnnounceDetail";
 import AnnounceList from './Announce/pages/announces/AnnounceList';
 import AnnounceItem from './Announce/items/AnnounceItem';
+import MemberMain from './Member/pages/MemberMain';
 
 function App() {
 
@@ -41,6 +42,11 @@ function App() {
           </Route>
 
           <Route path="schedule"  element={<Schedule/>}/>
+
+          <Route path="member">
+            <Route index element={ <MemberMain/> }/>
+          </Route>
+
 
         </Route>
       </Routes>
