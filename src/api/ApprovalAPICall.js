@@ -1,4 +1,5 @@
 import {registVacation, registResign, registReason } from "../modules/ApprovalModule";
+import { selectEmployee } from "../modules/ApprovalModule";
 
 const RESTAPI_SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const RESTAPI_SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
@@ -58,6 +59,19 @@ export const registReasonDoc = (data) => {
         }).then(response => response.json());
 
         dispatch(registReason(result));
+    }
+}
+
+/* 조직도 조회 */
+export const selectEmployeeList = () => {
+
+    const requestURL = `${PRE_URL}/auth/emp`;
+
+    return async (dispatch, getState) => {
+
+        const result = await fetch(requestURL).then(response => response.json());
+
+        dispatch(selectEmployee(result));
     }
 }
 
