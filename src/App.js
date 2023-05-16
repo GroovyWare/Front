@@ -6,7 +6,7 @@ import ApvContent from './Approval/pages/ApvContent';
 import ApvVacation from './Approval/pages/document/ApvVacation';
 import ApvResign from "./Approval/pages/document/ApvResign";
 import ApvReason from "./Approval/pages/document/ApvReason";
-import ApvEmployee from './Approval/pages/ApvEmployee';
+import ApvEmployee from './Approval/employee/ApvEmployee';
 import PlayMemberList from './play/PlayMemberList';
 import PlayHistory from './play/PlayHistory';
 
@@ -23,13 +23,12 @@ function App() {
             <Route path="vacation" element={<ApvVacation/>}/>
             <Route path="resignation" element={<ApvResign/>}/>
             <Route path="reason" element={<ApvReason/>}/>
-            {/* <Route path="employee" element={<ApvEmployee/>}/> */}
+            <Route path="employee" element={<ApvEmployee/>}/>
           </Route>
 
           <Route path="play">
             <Route index element ={<PlayMemberList/>}/>
             <Route path="history" element={<PlayHistory/>}/>
-
           </Route>
           {/* <Route path="schedule"  element={<Schedule/>}/> */}
 
