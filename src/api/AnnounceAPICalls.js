@@ -10,7 +10,9 @@ export const callAnnounceListAPI = ({ currentPage = 1 }) => {
 
     return async (dispatch, getState) => {
 
-        const result = await fetch(requestURL).then(response => response.json());
+        const result = await fetch(requestURL, {
+            method: 'GET',
+        }).then(response => response.json());        
 
         if(result.status === 200) {
             console.log('[AnnounceAPICalls] : callAnnounceListAPI result : ', result);
@@ -25,7 +27,10 @@ export const callAnnounceSearchListAPI = ({ search, currentPage = 1}) => {
 
     return async (dispatch, getState) => {
 
-        const result = await fetch(requestURL).then(response => response.json());
+        const result = await fetch(requestURL, {
+            method: 'GET',
+        }).then(response => response.json());
+        
 
         if(result.status === 200) {
             console.log("[AnnounceAPICalls] callAnnounceSearchAPI result : ", result);
@@ -40,7 +45,10 @@ export const callAnnounceDetailAPI = ({ annCode }) => {
 
     return async (dispatch, getState) => {
 
-        const result = await fetch(requestURL).then(response => response.json());
+        const result = await fetch(requestURL, {
+            method: 'GET',
+        }).then(response => response.json());
+        
 
         if(result.status === 200) {
             console.log("[AnnounceAPICalls] callAnnounceDetailAPI result : ", result);
@@ -59,7 +67,7 @@ export const callAnnounceListForAdminAPI = ({ currentPage = 1 }) => {
             method : 'GET',
             headers : {
                 "Content-Type" : "application/json",
-                "Authorization" : "Bearer" + window.localStorage.getItem('accessToken')
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
             }
         }).then(response => response.json());
 
@@ -79,7 +87,7 @@ export const callAnnounceRegistAPI = (formData) => {
         const result = await fetch(requestURL, {
             method : 'POST',
             headers : {
-                "Authorization" : "Bearer" + window.localStorage.getItem('accessToken')
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
             },
             body : formData
         }).then(response => response.json());
@@ -100,7 +108,7 @@ export const callAnnounceDetailForAdminAPI = ({ annCode }) => {
         const result = await fetch(requestURL, {
             method : 'GET',
             headers : {
-                "Authorization" : "Bearer" + window.localStorage.getItem('accessToken')
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
             }
         }).then(response => response.json());
 
@@ -120,7 +128,7 @@ export const callAnnounceUpdateAPI = (formData) => {
         const result = await fetch(requestURL, {
             method : 'PUT',
             headers : {
-                "Authorization" : "Bearer" + window.localStorage.getItem('accessToken')
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
             },
             body : formData
         }).then(response => response.json());
@@ -141,7 +149,7 @@ export const callAnnounceDeleteAPI = (formData) => {
         const result = await fetch(requestURL, {
             method : 'DELETE',
             headers : {
-                "Authorization" : "Bearer" + window.localStorage.getItem('accessToken')
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
             },
             body : formData
         }).then(response => response.json());
@@ -152,4 +160,3 @@ export const callAnnounceDeleteAPI = (formData) => {
         }
     }
 }
-// 테스트용
