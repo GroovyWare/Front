@@ -46,12 +46,13 @@ function Navbar(){
                             </Accordion>
                     </NavLink></li>
                     <li><NavLink 
-                        to="" 
+                        to="/member" 
                         style={{textDecoration : "none", textAlign : "center", color:'white'}}>
                              <Accordion title="회원관리">
-                                <div className={NavbarCSS.linkto}>회수함</div>
-                                <div className={NavbarCSS.linkto}>종결함</div>
-                                <div className={NavbarCSS.linkto}>반려함</div>
+                                <div className={NavbarCSS.linkto}>
+                                <NavLink to="/member/regist" style={{textDecoration : "none", color : "white"}}>회원등록</NavLink></div>
+                                <div className={NavbarCSS.linkto}>
+                                <NavLink to="/member/pass" style={{textDecoration : "none", color : "white"}}>회원권</NavLink></div>
                             </Accordion>
                     </NavLink></li>
                     <li><NavLink 
