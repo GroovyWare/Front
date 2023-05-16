@@ -30,7 +30,7 @@ function App() {
             <Route index element ={<PlayMemberList/>}/>
             <Route path="history" element={<PlayHistory/>}/>
           </Route>
-          {/* <Route path="schedule"  element={<Schedule/>}/> */}
+          <Route path="schedule"  element={<Schedule/>}/>
 
         </Route>
       </Routes>
