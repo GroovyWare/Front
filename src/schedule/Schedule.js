@@ -12,7 +12,7 @@ const Schedule = () => {
 
   useEffect(() => {
     dispatch(AllSchedules()); // 이벤트 데이터 가져오기
-  }, [dispatch]);
+  }, []);
 
 
   return (
