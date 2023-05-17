@@ -4,15 +4,17 @@ import approvalReducer from "./ApprovalModule";
 import playReducer from "./PlayModule";
 import memberReducer from "./MemberModule";
 import passReducer from "./PassModule";
-import scheduleReducer from "./CalendarModule"
+import scheduleReducer from "./CalendarModule";
+import loginReducer from "./LoginModule";
 
 const rootReducer = combineReducers({
     announceReducer,
     approvalReducer,
     playReducer,
     memberReducer,
-    passReducer
-    scheduleReducer
+    passReducer,
+    scheduleReducer,
+    loginReducer
 });
 
 export default rootReducer;
