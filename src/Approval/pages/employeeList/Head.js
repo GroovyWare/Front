@@ -1,53 +1,72 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import ApvEmployeeCSS from "../../employee/ApvEmployee.module.css";
-import { useDispatch, useSelector } from "react-redux";
-import { selectEmployeeList } from "../../../api/ApprovalAPICall";
 
-function Head({name}){
+function Head({empName}){
 
     const [imgUrl, setImgUrl] = useState("../images/plus.png");
-    const [imgYn, setImageYn] = useState(true);
-    const [imgClicked, setImgClicked ] = useState();
+    const [imgYn, setImgYn] = useState({});
+    const [imgClicked, setImgClicked] = useState({});
 
-    const { employeeList } = useSelector(state => state.approvalReducer);
-
-    const dispatch = useDispatch();
+    const { employeeList, searchList, department } = useSelector(state => state.approvalReducer);
     
-    const onClickHandler = (e) => {
+    const onClickHandler = (deptTitle) => {
+        setImgYn(prevState => ({
+            ...prevState,
+            [deptTitle]: !prevState[deptTitle]
+        }));
 
-        setImgClicked(true);
-
-        if(e.target.src === "http://localhost:3000/images/plus.png"){
-            e.target.src = "http://localhost:3000/images/minus.png";
-            dispatch(selectEmployeeList());
-            setImageYn(true);
-        }else if(e.target.src === "http://localhost:3000/images/minus.png"){
-            e.target.src = "http://localhost:3000/images/plus.png"
-            setImageYn(false);
-        }
+        setImgClicked(prevState => ({
+            ...prevState,
+            [deptTitle]: true
+        }));
     }
 
     return(
         <>
-            <div className={ApvEmployeeCSS.title}> 대표 
-                <img 
-                    onClick={onClickHandler}
-                    src = {imgUrl}
-                />  
-                    {imgClicked && imgYn && employeeList && employeeList.data.data.map((employee) => (
-                        <div className={ApvEmployeeCSS.subTitle}>
-                            <div key={employee.position.positionCode} className={ApvEmployeeCSS.name1}>
-                                    {employee.position.positionName === '대표' && employee.position.positionName}
+            <div className={ApvEmployeeCSS.title}> 
+                {department && department.data.map(
+                    (department) => (
+                        <div key={department.deptTitle}>
+                            <div style={{display:"flex"}}>
+                                <div className={ApvEmployeeCSS.title}>
+                                    {department.deptTitle}
+                                </div>
+                                <img 
+                                    onClick={() => onClickHandler(department.deptTitle)}
+                                    src={imgClicked[department.deptTitle] && imgYn[department.deptTitle] ? "../images/minus.png" : "../images/plus.png"}
+                                    className={ApvEmployeeCSS.titleimg}
+                                />
                             </div>
-                            <div className={ApvEmployeeCSS.name2}>
-                                    {employee.position.positionName === '대표' && employee.empName}
-                            </div>
+                            
+                            {imgClicked[department.deptTitle] && imgYn[department.deptTitle] &&  employeeList && employeeList.data.data.map((employee) => (
+                                employee.dept.deptTitle === department.deptTitle &&
+                                <div className={ApvEmployeeCSS.subTitle}>
+                                    <div className={ApvEmployeeCSS.name1}>
+                                        {employee.position.positionName}
+                                    </div>
+                                    <div className={ApvEmployeeCSS.name2}>
+                                        {employee.empName}
+                                    </div>
+                                </div>
+                            ))} 
+                            
+                            {(empName && searchList) && searchList.data.map((search) => (
+                                search.dept.deptTitle === department.deptTitle && search.empName.includes(empName) &&
+                                <div className={ApvEmployeeCSS.subTitle}>
+                                    <div className={ApvEmployeeCSS.name1}>
+                                        {search.position.positionName}
+                                    </div>
+                                    <div className={ApvEmployeeCSS.name2}>
+                                        {search.empName}
+                                    </div>
+                                </div>
+                            ))}
                         </div>
-                    ))}           
+                    )
+                )}
             </div>
-
-    </>   
-    )
-}
+        </>
+    )}
 
 export default Head;

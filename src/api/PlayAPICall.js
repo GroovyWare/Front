@@ -5,9 +5,9 @@ const RESTAPI_SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
 const PRE_URL = `http://${RESTAPI_SERVER_IP}:${RESTAPI_SERVER_PORT}`;
 
 /* 회원 목록 조회 */
-export const selectPlayMember = ({ empCode, currentPage = 1 }) => {
+export const selectPlayMember = ({ currentPage = 1 }) => {
 
-    const requestURL = `${PRE_URL}/play/memberList/empCode=${empCode}?page=${currentPage}`;
+    const requestURL = `${PRE_URL}/play/memberList?page=${currentPage}`;
     
     console.log(requestURL);
 

@@ -32,7 +32,9 @@ function App() {
           </Route>
 
           <Route path="play">
-            <Route index element ={<PlayMemberList/>}/>
+            <Route index element ={
+                <PlayMemberList/>
+              }/>
             <Route path="history" element={<PlayHistory/>}/>
           </Route>
 
