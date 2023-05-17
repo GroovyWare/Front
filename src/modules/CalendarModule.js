@@ -1,7 +1,9 @@
 import { createActions, handleActions } from "redux-actions";
 
 /* 초기값 */
-const initialState = {};
+const initialState = {
+    events : []
+};
 
 /* 액션 */
 const GET_SCHEDUELS = 'schedule/GET_SCHEDULES'
@@ -13,7 +15,7 @@ const DELETE_SCHEDULE = 'schedule/DELETE_SCHEDULE'
 
 export const { schedule : { getSchedules, getSchedule, postSchedule, putSchedule, deleteschedule}}
 = createActions({
-    [GET_SCHEDUELS] : res => res.data,
+    [GET_SCHEDUELS] : res => res,
     [GET_SCHEDULE] : res => res.data,
     [PUT_SCHEDULE] : res => res,
     [POST_SCHEDULE] : res => res
@@ -21,15 +23,15 @@ export const { schedule : { getSchedules, getSchedule, postSchedule, putSchedule
 
 /* 리듀서 */
 
-const scheduleReducer = handleActions({
-
-    [GET_SCHEDUELS] : (state, {payload}) => payload,
-    [GET_SCHEDULE]  : (state, { payload }) => payload,
-    [POST_SCHEDULE] : (state, { payload }) => ({ regist : payload }),
-    [PUT_SCHEDULE] : (state, { payload }) => ({ modify : payload }),
-
-
-
-}, initialState)
-
-export default scheduleReducer;
+const scheduleReducer = handleActions(
+    {
+      [GET_SCHEDUELS]: (state, { payload }) => ({ ...state, events: payload }),
+      [GET_SCHEDULE]: (state, { payload }) => payload,
+      [POST_SCHEDULE]: (state, { payload }) => ({ regist: payload }),
+      [PUT_SCHEDULE]: (state, { payload }) => ({ modify: payload }),
+    },
+    initialState
+  );
+  
+  export default scheduleReducer;
+  
