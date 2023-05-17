@@ -14,6 +14,10 @@ import AnnounceDetail from "./Announce/pages/announces/AnnounceDetail";
 import AnnounceList from './Announce/pages/announces/AnnounceList';
 import AnnounceItem from './Announce/items/AnnounceItem';
 import MemberMain from './Member/pages/MemberMain';
+import MemberDetail from './Member/pages/MemberDetail';
+import MemberRegist from './Member/pages/MemberRegist';
+import PassRegist from './Pass/pages/PassRegist';
+import PassMain from './Pass/pages/PassMain';
 
 function App() {
 
@@ -47,6 +51,13 @@ function App() {
 
           <Route path="member">
             <Route index element={ <MemberMain/> }/>
+            <Route path="detail/:memCode" element={<MemberDetail/>} />
+            <Route path="regist" element={<MemberRegist/>} />
+          </Route>
+
+          <Route path="pass">
+            <Route index element={ <PassMain/> }/>
+            <Route path="regist" element={<PassRegist/>} />
           </Route>
 
 
