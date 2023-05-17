@@ -15,6 +15,7 @@ const rootReducer = combineReducers({
     passReducer,
     scheduleReducer,
     loginReducer
+
 });
 
 export default rootReducer;
