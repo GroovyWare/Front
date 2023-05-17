@@ -13,7 +13,7 @@ export const { play : {selectList}} = createActions({
 
 /* 리듀서 */
 const playReducer = handleActions({
-    [SELECT_LIST] : (state, {payload}) => ({ memberList : payload })
+    [SELECT_LIST] : (state, {payload}) => ({memberList : payload})
 }, initalState)
 
 export default playReducer;
