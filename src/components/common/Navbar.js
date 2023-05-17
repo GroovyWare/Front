@@ -23,12 +23,11 @@ function Navbar(){
             <div className={NavbarCSS.navbarUl}>
                 <button>로그아웃</button>
                     <li style={{marginTop:40}}><NavLink 
-                        to="" 
+                        to="/schedule" 
                         style={{textDecoration : "none", textAlign : "center", color:'white'}}>
                              <Accordion title="일정관리">
-                                <div className={NavbarCSS.linkto}>회수함</div>
-                                <div className={NavbarCSS.linkto}>종결함</div>
-                                <div className={NavbarCSS.linkto}>반려함</div>
+                                <div className={NavbarCSS.linkto}>캘린더</div>
+                                <div className={NavbarCSS.linkto}>근태</div>
                             </Accordion>
                     </NavLink></li>
                     <li><NavLink 
