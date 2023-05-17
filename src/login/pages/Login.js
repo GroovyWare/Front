@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { callLoginAPI } from '../../api/LoginAPICalls';
 import { useNavigate } from 'react-router';
+import { resetEmp } from '../../modules/LoginModule';
 
 function Login() {
 
@@ -21,8 +22,10 @@ function Login() {
         () => {
             if(login?.status === 200) {
                 navigate("/", { replace : true });
+                dispatch(resetEmp());
             } else if(login?.state === 400) {
                 alert(login.message);
+                dispatch(resetEmp());
             }
         },
         [login]
