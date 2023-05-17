@@ -1,57 +1,73 @@
 import { useEffect, useState } from 'react';
 import ApvEmployeeCSS from './ApvEmployee.module.css';
 import Head from '../pages/employeeList/Head';
-import Fitness from '../pages/employeeList/Fitness';
-import Filates from '../pages/employeeList/Filates';
-import GX from '../pages/employeeList/GX';
-import Info from '../pages/employeeList/Info';
-import SelectReader from '../pages/person/SelectReader';
-import SelectApprove from '../pages/person/SelectApprove';
-import { useDispatch } from 'react-redux';
+import SelectReader from "../pages/person/SelectReader";
+import SelectApprove from "../pages/person/SelectApprove";
+import { useDispatch, useSelector } from 'react-redux';
+import { searchEmployeeList, selectEmployeeList, searchDepartmentList } from '../../api/ApprovalAPICall';
 
-function ApvEmployee(){
 
-    const [name, setName] = useState('');
+function ApvEmployee({setModalOpen}){
+
+    const [empName, setEmpName] = useState('');
+
     const dispatch = useDispatch();
 
-    const onChangeHandler = (e) => {
-        setName(e.target.value);
+    const closeModal = () => {
+        setModalOpen(false);
     }
 
     const onKeyPressHandler = (e) => {
         if (e.key === "Enter") {
-            console.log(name);
+            setEmpName(e.target.value);
         }
     }
 
+    useEffect(
+        () => {
+            if(empName){
+                dispatch(searchEmployeeList({empName}));
+            }else{
+                dispatch(selectEmployeeList());
+            }
+        }, [empName]
+    )
+
+    useEffect(
+        () => {
+            dispatch(searchDepartmentList());
+        }
+    )
+
     return(
-        <>
+        <div className={ApvEmployeeCSS.container}>
             <div className={ApvEmployeeCSS.wrap}>
-                <div className={ApvEmployeeCSS.emp}>
-                    <input
-                        type="text"
-                        placeholder='이름'
-                        onChange={onChangeHandler}
-                        className={ApvEmployeeCSS.textbox}
-                        onKeyPress={onKeyPressHandler}
-                    />
-                    <div>
-                        <Head name = {name}/>
-                        <Fitness/>
-                        <Filates/>
-                        <GX/>
-                        <Info/>
+                    <div className={ApvEmployeeCSS.emp}>
+                        <input
+                            type="text"
+                            placeholder='이름'
+                            className={ApvEmployeeCSS.textbox}
+                            onKeyPress={onKeyPressHandler}
+                        />
+                        <div>
+                            <Head empName = {empName}/>
+                        </div>
                     </div>
-                </div>
-                    <div>
-                        <SelectApprove/>
-                        <SelectReader/>
-                        <button className={ApvEmployeeCSS.confirm}>확인</button>
-                        <button className={ApvEmployeeCSS.cancel}>취소</button>
-                    </div>
-                </div>
-                
-        </>
+                        <div>
+                            <SelectApprove/>
+                            <SelectReader/>
+
+                            <button 
+                                className={ApvEmployeeCSS.close}
+                                onClick={closeModal}    
+                            >취소</button>
+                            <button 
+                                className={ApvEmployeeCSS.confirm}
+                                onClick={closeModal}    
+                            >확인</button>
+                        </div>
+            </div>       
+        </div>
     )
 }
 
