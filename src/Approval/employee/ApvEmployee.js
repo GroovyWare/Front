@@ -17,6 +17,10 @@ function ApvEmployee({setModalOpen}){
         setModalOpen(false);
     }
 
+    const onClickHandler = () => {
+        setModalOpen(false);
+    }
+
     const onKeyPressHandler = (e) => {
         if (e.key === "Enter") {
             setEmpName(e.target.value);
@@ -63,7 +67,7 @@ function ApvEmployee({setModalOpen}){
                             >취소</button>
                             <button 
                                 className={ApvEmployeeCSS.confirm}
-                                onClick={closeModal}    
+                                onClick={onClickHandler}    
                             >확인</button>
                         </div>
             </div>       
