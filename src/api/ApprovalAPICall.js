@@ -1,5 +1,5 @@
 import {registVacation, registResign, registReason } from "../modules/ApprovalModule";
-import { selectEmployee } from "../modules/ApprovalModule";
+import { selectEmployee, searchEmployee, searchDepartment } from "../modules/ApprovalModule";
 
 const RESTAPI_SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const RESTAPI_SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
@@ -72,6 +72,33 @@ export const selectEmployeeList = () => {
         const result = await fetch(requestURL).then(response => response.json());
 
         dispatch(selectEmployee(result));
+    }
+}
+
+/* 조직도 검색 */
+export const searchEmployeeList = ({empName}) => {
+    const requestURL = `${PRE_URL}/approval/search?empName=${empName}`
+
+    return async (dispatch, getState) => {
+
+        const result = await fetch(requestURL).then(response => response.json());
+
+        console.log("result", result);
+
+        dispatch(searchEmployee(result));
+    }
+}
+
+/* 조직도 부서 조회 */
+export const searchDepartmentList = () => {
+
+    const requestURL = `${PRE_URL}/approval/search/dept`
+
+    return async (dispatch, getState) => {
+        
+        const result = await fetch(requestURL).then(response => response.json());
+
+        dispatch(searchDepartment(result));
     }
 }
 
