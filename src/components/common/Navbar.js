@@ -52,7 +52,7 @@ function Navbar(){
                                 <div className={NavbarCSS.linkto}>
                                 <NavLink to="/member/regist" style={{textDecoration : "none", color : "white"}}>회원등록</NavLink></div>
                                 <div className={NavbarCSS.linkto}>
-                                <NavLink to="/member/pass" style={{textDecoration : "none", color : "white"}}>회원권</NavLink></div>
+                                <NavLink to="/pass" style={{textDecoration : "none", color : "white"}}>회원권</NavLink></div>
                             </Accordion>
                     </NavLink></li>
                     <li><NavLink 
