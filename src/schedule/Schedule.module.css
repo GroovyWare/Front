@@ -1,0 +1,72 @@
+/* Schedule.module.css */
+
+@font-face {
+    font-family: "LINESeedKR-Bold";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2")
+      format("woff2");
+    font-weight: normal;
+    font-style: normal;
+}
+
+.mainContents {
+   
+    font-family: "LINESeedKR-Bold", sans-serif;
+    flex: 1;
+    position: relative;
+    margin-left: 50px;
+    margin-top: 30px;
+    border: 2px solid bisque;
+    
+  }
+  
+  .calendar1 {
+    height: 50vh;
+    width: 50%;
+    margin: auto;
+    
+  }
+  
+  .eventStyle {
+    background-color: rgb(255, 255, 0);
+  }
+  
+  .fcday {
+    color: black;
+  }
+  
+  .saturday {
+    color: blue;
+  }
+  
+  .sunday {
+    color: red;
+  }
+
+  .inserting {
+    position: relative;
+    top: 20px;
+    left: 20px;
+    bottom: 20px;
+    right: 20px;
+    background-color: #fbfbfb;
+    padding: 10px;
+    border: 2px solid black; 
+    border-radius: 4px;
+    font-family: "LINESeedKR-Bold", sans-serif;
+    font-weight: bold;
+    color: #000000;
+    cursor: pointer;
+    margin-top: 85vh;
+    margin-bottom: 15vh;
+    margin-right: 10vw;
+    box-shadow: 2px 3px 3px rgb(44, 41, 41);
+  }
+  
+
+.allview {
+  display: flex;
+  
+ 
+}
+ 
+  
