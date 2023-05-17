@@ -1,4 +1,4 @@
-import { getAnnounce, getAnnounces, postAnnounce, putAnnounce, deleteAnnounce } from "../Announce/modules/AnnounceModule.js";
+import { getAnnounce, getAnnounces, postAnnounce, putAnnounce, deleteAnnounce } from "../modules/AnnounceModule";
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
@@ -16,7 +16,7 @@ export const callAnnounceListAPI = ({ currentPage = 1 }) => {
 
         if(result.status === 200) {
             console.log('[AnnounceAPICalls] : callAnnounceListAPI result : ', result);
-            dispatch(getAnnounces)
+            dispatch(getAnnounces(result));
         }
     }
 }

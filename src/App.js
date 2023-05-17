@@ -36,9 +36,9 @@ function App() {
 
           </Route>
 
-          <Route path="announce" element={<AnnounceMain/>}>
-            <Route index element={<AnnounceList/>}/>
-            <Route path=":announceCode" element={<AnnounceItem/>}/>
+          <Route path="/announce" element={<AnnounceMain/>}>
+              <Route index element={<AnnounceList/>}/>
+              <Route path=":announceCode" element={<AnnounceItem/>}/>
           </Route>
 
           {/* <Route path="schedule"  element={<Schedule/>}/> */}
