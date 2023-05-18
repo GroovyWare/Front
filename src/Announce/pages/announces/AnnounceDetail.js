@@ -1,38 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { callAnnounceDetailAPI } from "../../../api/AnnounceAPICalls";
 
 function AnnounceDetail() {
-  const { announceCode } = useParams();
-  const [announce, setAnnounce] = useState(null);
 
-  useEffect(() => {
-    const fetchAnnounce = async () => {
-      try {
-        const response = await axios.get(`/api/announces/${announceCode}`);
-        setAnnounce(response.data);
-      } catch (error) {
-        console.error("Error fetching announce details:", error);
-      }
-    };
+    const dispatch = useDispatch();
+    const Navigate = useNavigate();
+    // const announce = useSelector(state => state.productReducer);
+    const params = useParams();
+    const annCode = params.annCode;
+    const [amount, setAmount] = useState(1);
+    
+    useEffect(() => {
+        dispatch(callAnnounceDetailAPI({ annCode }));
+        },
+        []
+    );
 
-    fetchAnnounce();
-  }, [announceCode]);
+    // 목록 버튼 클릭 시 목록으로 돌아가는 이벤트
 
-  if (!announce) {
-    return <div>Loading...</div>;
-  }
-
-  return (
-    <div>
-      <h1>{announce.annTitle}</h1>
-      <h2>
-        {announce.employee.empName}{" "}
-        {new Date(announce.annDate).toLocaleString("ko-KR")}
-      </h2>
-      <div>{announce.annContent}</div>
-    </div>
-  );
+    return (
+        <div>
+            
+        </div>
+    );
 }
 
 export default AnnounceDetail;

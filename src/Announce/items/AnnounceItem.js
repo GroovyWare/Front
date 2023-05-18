@@ -9,7 +9,7 @@ function AnnounceItem({ announce }) {
 
   return (
     <div onClick={() => onClickAnnounceHandler(announce.annCode)}>
-      {/* 공지사항 아이템 내용 */}
+      
     </div>
   );
 }
