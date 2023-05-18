@@ -28,9 +28,9 @@ function ScheduleInsertModal({ schedule, setScheduleInsertModal }) {
     console.log("form : ", form);
     const handleSubmit = () => {
 
-        setScheduleInsertModal(false); 
+        setScheduleInsertModal(false);
         dispatch(createSchedule(form));
-      };
+    };
 
 
     return (
@@ -38,12 +38,13 @@ function ScheduleInsertModal({ schedule, setScheduleInsertModal }) {
             <div className={ScheduleInsertModalCSS.modalContainer}>
                 <div className={ScheduleInsertModalCSS.insertingformDiv}>
                     <h1>일정생성</h1>
-                    <select name="">
-                        <option value={"전체"}>전체</option>
-                        <option value={"부서"}>부서</option>
-                        <option value={"개인"}>개인</option>
+                    <select name="schDiv" onChange={onChangeHandler}>
+                        <option value="전체">전체</option>
+                        <option value="부서">부서</option>
+                        <option value="개인">개인</option>
                     </select>
-                 
+
+
                     <input
                         type="text"
                         name="title"
@@ -57,23 +58,23 @@ function ScheduleInsertModal({ schedule, setScheduleInsertModal }) {
                     ></textarea>
                     <input
                         placeholder="시작일 입력"
-                        type="datetime-local"   
+                        type="datetime-local"
                         name="start"
                         onChange={onChangeHandler}
 
                     />
                     <input
-                       placeholder="종료일 입력"
-                       type="datetime-local"   
-                       name="end"
-                       onChange={onChangeHandler} 
+                        placeholder="종료일 입력"
+                        type="datetime-local"
+                        name="end"
+                        onChange={onChangeHandler}
                     />
                     <label>이벤트 색상 입력</label>
                     <input
                         type="color"
                         name="color"
                         placeholder="이벤트 색상입력"
-                        onChange={onChangeHandler} 
+                        onChange={onChangeHandler}
 
                     />
                     <label
@@ -82,12 +83,12 @@ function ScheduleInsertModal({ schedule, setScheduleInsertModal }) {
                         type="color"
                         name="textColor"
                         placeholder="이벤트 글색상입력"
-                        onChange={onChangeHandler} 
+                        onChange={onChangeHandler}
                     />
 
-<button onClick={handleSubmit}>
-            등록하기
-          </button>
+                    <button onClick={handleSubmit}>
+                        등록하기
+                    </button>
                 </div>
             </div>
 
