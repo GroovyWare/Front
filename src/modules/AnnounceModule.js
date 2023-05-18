@@ -21,7 +21,7 @@ export const { announce : { getAnnounces, getAnnounce, postAnnounce, putAnnounce
 /* 리듀서 */
 const announceReducer = handleActions(
     {
-        [GET_ANNOUNCES] : (state, { payload }) => ({ board : payload, }),
+        [GET_ANNOUNCES] : (state, { payload }) => payload,
         [GET_ANNOUNCE] : (state, { payload }) => payload,
         [POST_ANNOUNCE] : (state, { payload }) => ({ regist : payload }),
         [PUT_ANNOUNCE] : (state, { payload }) => ({ regist : payload }),

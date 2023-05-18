@@ -3,8 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { callAnnounceListAPI, callAnnounceSearchListAPI } from "../../../api/AnnounceAPICalls";
 import AnnounceList from "./AnnounceList";
 import PagingBar from "../../../components/common/PagingBar";
-import { useSearchParams } from "react-router-dom";
-import SearchBar from "../../../components/common/SearchBar"; // SearchBar 컴포넌트를 가져옵니다.
+import { Navigate, useSearchParams } from "react-router-dom";
+import SearchBar from "../../../components/common/SearchBar";
+import AnnounceMainCSS from './AnnounceMain.module.css';
+import { NavLink } from "react-router-dom";
 
 function AnnounceMain() {
 
@@ -15,41 +17,92 @@ function AnnounceMain() {
     const pageInfo = announces?.pageInfo || null;
 
     const [currentPage, setCurrentPage] = useState(1);
-    /* 검색어 요청시 사용할 값 */
     const [searchParams] = useSearchParams();
-    const search = searchParams.get('value');
+    const search = searchParams.get('search');
 
-    // 검색 기능을 위한 상태를 추가합니다.
-    const [searchTerm, setSearchTerm] = useState('');
+    const [searchTerm, setSearchTerm] = useState(search || '');
 
     useEffect(
         () => {
             if(searchTerm) {
-                /* 검색어에 해당하는 공지사항에 대한 요청 */
                 dispatch(callAnnounceSearchListAPI({ search: searchTerm, currentPage }));
             } else {
-                /* 모든 공지사항에 대한 요청 */
                 dispatch(callAnnounceListAPI({ currentPage }));
             }
-            
         },
-        [dispatch, currentPage, searchTerm]  // searchTerm을 의존성 배열에 추가
+        [dispatch, currentPage, searchTerm]
     );
 
-    // 검색 함수를 구현합니다.
+    const displayTimeAgo = (dateString) => {
+        const date = new Date(dateString);
+        const now = new Date();
+        const diffInSeconds = Math.floor((now - date) / 1000);
+    
+        if (diffInSeconds < 60) {
+            return `${diffInSeconds}초 전`;
+        } else if (diffInSeconds < 3600) {
+            return `${Math.floor(diffInSeconds / 60)}분 전`;
+        } else if (diffInSeconds < 86400) {
+            return `${Math.floor(diffInSeconds / 3600)}시간 전`;
+        } else {
+            const year = date.getFullYear().toString().substr(2);
+            const month = (date.getMonth() + 1).toString().padStart(2, '0');
+            const day = date.getDate().toString().padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+    };
+
+    const onClickTableTr = (annCode) => {
+        Navigate(`/announce-update/${annCode}`);
+    }
+
     const onSearch = (searchValue) => {
         setSearchTerm(searchValue);
     }
 
     return (
         <>  
-            <SearchBar onSearch={onSearch} />
+            <SearchBar search={searchTerm} onSearch={onSearch} />
+            <div className={ AnnounceMainCSS.bodyDiv }>
+            <div className={ AnnounceMainCSS.buttonDiv }>
+            </div>
+            <table className={ AnnounceMainCSS.productTable }>
+                <colgroup>
+                    <col width="5%" />
+                    <col width="75%" />
+                    <col width="10%" />
+                    <col width="10%" />
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>제목</th>
+                        <th>작성자</th>
+                        <th>작성일</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {announceList.map((p) => (
+                        <tr key={p.annCode}>
+                            <td>{p.annCode}</td>
+                            <td>
+                            <NavLink to={`/announce/${p.annCode}`} className="announce-link">
+                                {p.annTitle}
+                            </NavLink>
+                            </td>
+                            <td>{p.employee.empName}</td>
+                            <td>{displayTimeAgo(p.annDate)}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
             <div>
                 { announceList.length > 0 && <AnnounceList announceList={announceList} /> }
             </div>
             <div>
                 { pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage } /> }
             </div>
+        </div>
         </>
     );
 }
