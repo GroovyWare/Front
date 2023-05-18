@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-function AnnounceItem({ announce : { announceCode, announceImgUrl, announceTitle }}) {
+function AnnounceItem({ announce }) {
 
     const navigate = useNavigate();
 
@@ -9,12 +9,11 @@ function AnnounceItem({ announce : { announceCode, announceImgUrl, announceTitle
     }
 
     return (
-        <div
-            
-            onClick={ () => onClickAnnounceHandler(announceCode) }
-        >
-            <img src={ announceImgUrl } alt={ announceTitle }/>
-            <h5>{ announceTitle }</h5>
+        <div onClick={ () => onClickAnnounceHandler(announce.annCode) }>
+            <img src={ announce.announceImgUrl } alt={ announce.annTitle }/>
+            <h5>{ announce.annTitle }</h5>
+            <p>{ announce.employee }</p>
+            <p>{ announce.annDate }</p>
         </div>
     )
 }

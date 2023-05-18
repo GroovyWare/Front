@@ -16,7 +16,7 @@ function MemberDetail() {
     const params = useParams();
     const memCode = params.memCode;
     const [memberHistoryModal, setMemberHistoryModal] = useState(false);
-    
+
 
     useEffect(() => {
         dispatch(callMemberDetailAPI({ memCode }));
@@ -32,8 +32,10 @@ function MemberDetail() {
         },
         [history]);
 
+        
+
     /* 회원 이력 상세 보기 버튼 */
-    const onClickHistoryHandler = (memCode) => {
+    const onClickHistoryHandler = ( memCode ) => {
         /* 이력 유무 확인 */
         dispatch(callMemberHistoryCheckAPI({memCode}));
         setMemberHistoryModal(memCode);

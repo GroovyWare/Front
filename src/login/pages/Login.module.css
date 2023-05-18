@@ -1,0 +1,90 @@
+@font-face {
+    font-family: 'esamanru';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LINESeedKR-Bd';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.loginBg {
+    width: 700px;
+    height: 700px;
+    background-color: #4A5CFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginForm {
+    width: 300px;
+    height: 50px;
+    border: 2px solid #1A1779;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    font-size : 18px;
+    font-family: 'LINESeedKR-Bd';
+    color: #505050;
+    box-sizing: border-box;
+    padding-left: 12px;
+}
+
+input:focus {
+    outline: none;
+}
+
+.loginBtn {
+    width: 300px;
+    height: 50px;
+    border: 2px solid #1A1779;
+    border-radius: 4px;
+    background-color: #1A1779;
+    font-size : 18px;
+    font-family: 'LINESeedKR-Bd';
+    color: #ffffff;
+    padding: 0px;
+    margin-top: 20px;
+    cursor: pointer;
+    box-sizing: border-box;
+    
+}
+
+/* 로고 부분*/
+.logoDiv {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.text1 {
+    font-size: 40px;
+    color: #ffffff;
+    font-family: 'esamanru';
+}
+
+.text2 {
+    font-size: 18px;
+    color: #ffffff;
+    font-family: 'esamanru';
+}
+
+.logo {
+    width: 140px;
+}
+

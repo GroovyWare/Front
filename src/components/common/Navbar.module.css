@@ -53,3 +53,7 @@
     text-align: center;
     margin-top: 10px;
 }
+
+.logoutBtn {
+    cursor: pointer;
+}

@@ -43,4 +43,4 @@ function AnnounceManagement() {
 
 }
 
-
+export default AnnounceManagement;

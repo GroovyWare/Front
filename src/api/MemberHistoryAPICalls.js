@@ -8,7 +8,7 @@ const PRE_URL = `http://${SERVER_IP}:${SERVER_PORT}`;
 /* 회원 이력 유무확인(모달) */
 export const callMemberHistoryCheckAPI = ({ memCode }) => {
 
-    const requestURL = `${PRE_URL}/member/log/${memCode}`;
+    const requestURL = `${PRE_URL}/history/log/${memCode}`;
 
     return async (dispatch, getState) => {
         const result = await fetch(requestURL, {
@@ -24,5 +24,7 @@ export const callMemberHistoryCheckAPI = ({ memCode }) => {
           dispatch(getHistory(result));
         }
       };
+
+      
 
 };

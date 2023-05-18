@@ -69,4 +69,18 @@
     margin-left: 100px;
     margin-top: 30px;
     padding-bottom: 20px;
+    display: flex;
+    margin-top: 10px;
+}
+
+.common{
+    margin-left: 80px;
+    font-size: 14px;
+}
+
+.confirm{
+    background-color: #1A1779;
+    color: white;
+    width: 100px;
+    margin-right: 20px;
 }

@@ -15,7 +15,7 @@ export const { history : { getHistory } } = createActions ({
 /* 리듀서 */
 const historyReducer = handleActions (
     {
-        [GET_HISTORY] : (state, { payload }) => payload
+        [GET_HISTORY] : (state, { payload }) => ({ history: payload })
     }
 , initialState);
 
