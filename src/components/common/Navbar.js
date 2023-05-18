@@ -1,10 +1,12 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import NavbarCSS from "./Navbar.module.css";
 import { useState } from "react";
 import Accordion from "../../Approval/common/ApvArcodian";
 
 
 function Navbar(){
+
+    const navigate = useNavigate();
 
     const [hovered, setHovered] = useState(false);
 
@@ -18,10 +20,19 @@ function Navbar(){
         }
     }
 
+    const onClickLogoutHandler = () => {
+        window.localStorage.removeItem('accessToken');
+        navigate('/login', { replace : true });
+    
+    }
+
     return(
         <div className={NavbarCSS.navbarDiv}>
             <div className={NavbarCSS.navbarUl}>
-                <button>로그아웃</button>
+                <button
+                    className={NavbarCSS.logoutBtn}
+                    onClick={ onClickLogoutHandler }
+                >로그아웃</button>
                     <li style={{marginTop:40}}><NavLink 
                         to="/schedule" 
                         style={{textDecoration : "none", textAlign : "center", color:'white'}}>
