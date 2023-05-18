@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ScheduleInsertModalCSS from "./ScheduleInsertModal.module.css"
+import { createSchedule } from "../../api/CalendarAPICalls";
 
 
-function ScheduleInsertModal({ writer, setScheduleInsertModal }) {
-    const [form, setForm] = useState({ product: { productCode } });
+function ScheduleInsertModal({ schedule, setScheduleInsertModal }) {
+    const [form, setForm] = useState({});
     const dispatch = useDispatch();
     const { regist } = useSelector(state => state.scheduleReducer);
 
@@ -25,6 +26,11 @@ function ScheduleInsertModal({ writer, setScheduleInsertModal }) {
     };
 
     console.log("form : ", form);
+    const handleSubmit = () => {
+
+        setScheduleInsertModal(false); 
+        dispatch(createSchedule(form));
+      };
 
 
     return (
@@ -32,6 +38,12 @@ function ScheduleInsertModal({ writer, setScheduleInsertModal }) {
             <div className={ScheduleInsertModalCSS.modalContainer}>
                 <div className={ScheduleInsertModalCSS.insertingformDiv}>
                     <h1>일정생성</h1>
+                    <select name="">
+                        <option value={"전체"}>전체</option>
+                        <option value={"부서"}>부서</option>
+                        <option value={"개인"}>개인</option>
+                    </select>
+                 
                     <input
                         type="text"
                         name="title"
@@ -44,9 +56,38 @@ function ScheduleInsertModal({ writer, setScheduleInsertModal }) {
                         onChange={onChangeHandler}
                     ></textarea>
                     <input
-                        type=""   
+                        placeholder="시작일 입력"
+                        type="datetime-local"   
+                        name="start"
+                        onChange={onChangeHandler}
+
+                    />
+                    <input
+                       placeholder="종료일 입력"
+                       type="datetime-local"   
+                       name="end"
+                       onChange={onChangeHandler} 
+                    />
+                    <label>이벤트 색상 입력</label>
+                    <input
+                        type="color"
+                        name="color"
+                        placeholder="이벤트 색상입력"
+                        onChange={onChangeHandler} 
+
+                    />
+                    <label
+                    >글색상입력</label>
+                    <input
+                        type="color"
+                        name="textColor"
+                        placeholder="이벤트 글색상입력"
+                        onChange={onChangeHandler} 
                     />
 
+<button onClick={handleSubmit}>
+            등록하기
+          </button>
                 </div>
             </div>
 
@@ -56,3 +97,6 @@ function ScheduleInsertModal({ writer, setScheduleInsertModal }) {
     )
 
 }
+
+
+export default ScheduleInsertModal;
