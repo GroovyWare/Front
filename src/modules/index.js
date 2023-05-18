@@ -12,7 +12,7 @@ const rootReducer = combineReducers({
     approvalReducer,
     playReducer,
     memberReducer,
-    passReducer,,
+    passReducer,
     scheduleReducer,
     loginReducer
 

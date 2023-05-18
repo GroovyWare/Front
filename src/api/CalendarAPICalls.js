@@ -1,4 +1,4 @@
-import { getSchedules } from "../modules/CalendarModule";
+import { getSchedules, postSchedule, putSchedule } from "../modules/CalendarModule";
 
 
 
@@ -37,4 +37,56 @@ console.log(result);
 
 }
 
+
+
+
 /* 등록하기 */
+export const createSchedule = (form) => {
+    const requestURL = `${PRE_URL}/calendar/schedule`
+
+    return async (dispatch, getState) => {
+
+        const result = await fetch(requestURL, {
+            method : 'POST',
+            headers : {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + window.localStorage.getItem("accessToken")
+            },
+            body : JSON.stringify(form)
+        }).then(response => response.json());
+
+        if(result.status === 200) {
+            console.log('[CalendarAPICalls] : callcreateAPI result : ', result);
+            dispatch(postSchedule(result));
+        }
+    }
+}
+
+
+/* 수정하기 */
+export const updateSchedule = (formData, schCode) => {
+    const requestURL = `${PRE_URL}/calendar/${schCode}`;
+
+    return async (dispatch, getState) => {
+
+        const result = await fetch(requestURL, {
+            method : 'PUT',
+            headers : {
+                "Content-Type": "application/json",
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            },
+            body: JSON.stringify(formData),
+        }).then(response => response.json());
+
+        if(result.status === 200) {
+            console.log('[ProductAPICalls] callProductUpdateAPI result :', result);
+            dispatch(putSchedule(result));
+        }
+    }
+
+
+
+
+}
+
+/* 삭제하기 */
