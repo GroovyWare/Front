@@ -18,13 +18,16 @@ import MemberDetail from './Member/pages/MemberDetail';
 import MemberRegist from './Member/pages/MemberRegist';
 import PassRegist from './Pass/pages/PassRegist';
 import PassMain from './Pass/pages/PassMain';
+import ProtecdRoute from './components/router/ProtectedRoute';
+import Login from './login/pages/Login';
 
 function App() {
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout/>}>
+        <Route path="/login" element={ <Login/> }/>
+        <Route path="/" element={ <ProtecdRoute loginCheck={ true }><Layout/></ProtecdRoute> }>
           
           <Route path="approval">
             <Route index element={<ApprovalLayout/>}/>
