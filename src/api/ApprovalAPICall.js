@@ -1,5 +1,5 @@
 import {registVacation, registResign, registReason } from "../modules/ApprovalModule";
-import { selectEmployee, searchEmployee, searchDepartment } from "../modules/ApprovalModule";
+import { selectEmployee, searchEmployee, searchDepartment, searchDocument } from "../modules/ApprovalModule";
 
 const RESTAPI_SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const RESTAPI_SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
@@ -102,3 +102,16 @@ export const searchDepartmentList = () => {
     }
 }
 
+/* 문서 조회 */
+export const searchDocumentList = () => {
+
+    const requestURL = `${PRE_URL}/document/set`
+
+    return async (dispatch, getState) => {
+        const result = await fetch(requestURL).then(response => response.json());
+
+        console.log(result)
+
+        dispatch(searchDocument(result));
+    }
+}

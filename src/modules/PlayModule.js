@@ -1,11 +1,10 @@
-import { initializeConnect } from "react-redux/es/components/connect";
 import { createActions, handleActions } from "redux-actions";
 
 /* 초기값 */
 const initalState = {};
 
 /* 액션 */
-const SELECT_LIST = 'play/selectList';
+const SELECT_LIST = 'play/SELECT_LIST';
 
 export const { play : {selectList}} = createActions({
     [SELECT_LIST] : res => res

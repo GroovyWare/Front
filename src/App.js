@@ -18,8 +18,13 @@ import MemberDetail from './Member/pages/MemberDetail';
 import MemberRegist from './Member/pages/MemberRegist';
 import PassRegist from './Pass/pages/PassRegist';
 import PassMain from './Pass/pages/PassMain';
-import ProtecdRoute from './components/router/ProtectedRoute';
+import ProtectedRoute from './components/router/ProtectedRoute'
 import Login from './login/pages/Login';
+import TestEditorForm from './Editor';
+import Test2 from './Test2';
+
+
+
 
 function App() {
 
@@ -27,7 +32,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={ <Login/> }/>
-        <Route path="/" element={ <ProtecdRoute loginCheck={ true }><Layout/></ProtecdRoute> }>
+        <Route path="/" element={ <ProtectedRoute loginCheck={ true }><Layout/></ProtectedRoute> }>
           
           <Route path="approval">
             <Route index element={<ApprovalLayout/>}/>
@@ -40,14 +45,15 @@ function App() {
 
           <Route path="play">
             <Route index element ={
+              <ProtectedRoute loginCheck={true}>
                 <PlayMemberList/>
+              </ProtectedRoute>
               }/>
             <Route path="history" element={<PlayHistory/>}/>
           </Route>
 
-          <Route path="/announce" element={<AnnounceMain/>}>
-              <Route index element={<AnnounceList/>}/>
-              <Route path=":announceCode" element={<AnnounceItem/>}/>
+          <Route path="/announce" element={<AnnounceMain />}>
+            <Route path="/announce/:announceCode" element={<AnnounceDetail />} />
           </Route>
 
           <Route path="schedule"  element={<Schedule/>}/>
@@ -61,6 +67,10 @@ function App() {
           <Route path="pass">
             <Route index element={ <PassMain/> }/>
             <Route path="regist" element={<PassRegist/>} />
+          </Route>
+
+          <Route path="document">
+            <Route index element={<Test2/>}/>
           </Route>
         </Route>
       </Routes>
