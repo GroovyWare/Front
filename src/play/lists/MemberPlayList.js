@@ -1,13 +1,15 @@
 import MemberPlayItem from "../item/MemberPlayItem";
 
-function MemberPlayList({MemberPlayList}){
+function MemberPlayList({memberList}){
 
     return(
-        <div>
-            {
-                Array.isArray(MemberPlayList) && MemberPlayList.map(member => <MemberPlayItem key={member.resHistory} member={member}/>)
-            }
-        </div>
+        <>
+            {memberList && memberList.data.data.map((member) => (
+                <div>
+                    {member.memName}
+                </div>
+            ))}
+        </>
     )
 }
 

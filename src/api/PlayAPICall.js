@@ -8,12 +8,16 @@ const PRE_URL = `http://${RESTAPI_SERVER_IP}:${RESTAPI_SERVER_PORT}`;
 export const selectPlayMember = ({ currentPage = 1 }) => {
 
     const requestURL = `${PRE_URL}/play/memberList?page=${currentPage}`;
-    
-    console.log(requestURL);
 
     return async (dispatch, getState) => {
 
-        const result = await fetch(requestURL).then(response => response.json());
+        const result = await fetch(requestURL,{
+            method : "GET",
+            headers : {
+                "Content-Type" : "application/json",
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            } 
+        }).then(response => response.json());
 
         console.log('result', result)
 
