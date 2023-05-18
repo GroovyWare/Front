@@ -35,6 +35,8 @@ function ApvVacationDoc(props){
         props.setVacEndDate(vacEndDate);
         props.setVacContext(vacContext);
     }
+
+    const html = ``
     
     return(
         <>
