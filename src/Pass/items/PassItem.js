@@ -18,7 +18,7 @@ function PassItem({ passLists }) {
                 </tr>
             </div>
 
-        {/* <div>
+        <div>
                 <div> 
                     <div><th>{ passLists.passCode }</th></div>
                     <div><th>{ passLists.passType }</th></div>
@@ -26,7 +26,7 @@ function PassItem({ passLists }) {
                     <div><th>{ passLists[0] && passLists[0].passEtc}</th></div>
                 </div>
 
-        </div> */}
+        </div>
         
         </>
     );

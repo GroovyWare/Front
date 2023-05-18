@@ -22,16 +22,12 @@ function PassMain() {
 
     return(
         <>
-
-            
             <div>
                 { passLists && <PassItem passLists={passLists}/> }
             </div>
             <div>
                 { pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage }/> }
             </div>
-
-            
 
             <button>등록</button>
             <button>취소</button>
