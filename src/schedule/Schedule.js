@@ -1,14 +1,15 @@
 
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AllSchedules, updateSchedule } from "../api/CalendarAPICalls";
+import { AllSchedules, searchingSchedule, updateSchedule } from "../api/CalendarAPICalls";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import styles from "./Schedule.module.css";
 import ScheduleCss from "./Schedule.css";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import ScheduleInsertModal from "./modal/ScheduleInsertmodal";
+import ScheduleSearchModal from "./modal/ScheduleSearchModal";
 
 const Schedule = () => {
   const dispatch = useDispatch();
@@ -17,16 +18,18 @@ const Schedule = () => {
   const navigate = useNavigate();
   const [scheduleInsertModal, setScheduleInsertModal] = useState(false);
   const [filteredEvents, setFilteredEvents] = useState([]);
+  const [searchSchedule, setSearchSchedule] = useState([]);
+  const [scheduleSearchModal, setScheduleSearchModal] = useState(false);
 
   useEffect(() => {
     dispatch(AllSchedules());
   }, []);
 
   useEffect(() => {
-    if (scheduleInsertModal) {
+    if (scheduleInsertModal == false) {
       dispatch(AllSchedules());
     }
-  }, [dispatch, scheduleInsertModal]);
+  }, [scheduleInsertModal]);
 
   useEffect(() => {
     if (events?.data) {
@@ -42,11 +45,17 @@ const Schedule = () => {
       });
       setFilteredEvents(filtered);
     }
-  }, [events, filterType]);
-
+  }, [events, filterType , scheduleInsertModal]);
+  /* 필터링 */
   const handleFilterChange = (event) => {
     setFilterType(event.target.value); // 라디오 버튼 값 변경
   };
+  /*  제목으로 검색하기 */
+  const searchingTitleHandler = () => {
+    setScheduleSearchModal(true);
+  }
+  
+
 
 
   /* 일정수정 */
@@ -59,10 +68,21 @@ const Schedule = () => {
     dispatch(updateSchedule(event.id, updatedEvent));
   };
 
+  
+  /* 생성 */
   const onClickHandler = () => {
     setScheduleInsertModal(true);
   };
 
+
+
+
+
+
+
+
+
+  /* 캘린더 옵션 일부 */
   const calendarOptions = {
     height: 950, 
     plugins: [dayGridPlugin, interactionPlugin],
@@ -84,13 +104,16 @@ const Schedule = () => {
       locale: "ko"},
 
     events: filteredEvents, 
-    eventDrop: handleEventDrop,
+    // eventDrop: handleEventDrop,
   };
 
   return (
     <div className={styles.allview}>
       {scheduleInsertModal && (
         <ScheduleInsertModal setScheduleInsertModal={setScheduleInsertModal} />
+      )}
+      {scheduleSearchModal && ( 
+        <ScheduleSearchModal setScheduleSearchModal={setScheduleSearchModal} searchSchedule={ searchSchedule}/>
       )}
       <div className={`${styles.mainContents} ScheduleCSS`} style={{ maxWidth: '1680px' }}>
         <FullCalendar
@@ -136,7 +159,14 @@ const Schedule = () => {
           개인일정
         </label>
       </div>
+
+      <div>
+        <label>제목으로 검색</label>
+        <input type="text" name="title" value={searchSchedule} onChange={(e) => setSearchSchedule(e.target.value)}></input>
+        <button onClick={searchingTitleHandler}>검색</button>
+      </div>
     </div>
+    
   );
 };
 

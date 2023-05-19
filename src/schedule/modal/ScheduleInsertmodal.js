@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ScheduleInsertModalCSS from "./ScheduleInsertModal.module.css"
 import { createSchedule } from "../../api/CalendarAPICalls";
+import { initSchedule } from "../../modules/CalendarModule";
 
 
 function ScheduleInsertModal({ schedule, setScheduleInsertModal }) {
@@ -9,14 +10,13 @@ function ScheduleInsertModal({ schedule, setScheduleInsertModal }) {
     const dispatch = useDispatch();
     const { regist } = useSelector(state => state.scheduleReducer);
 
-    useEffect(
-        () => {
-            if (regist?.status === 200) {
-                setScheduleInsertModal(false);
-                alert("일정 등록 완료");
-            }
-        }, [regist]
-    )
+    useEffect(() => {
+        if (regist?.status === 200 && setScheduleInsertModal) {
+          setScheduleInsertModal(false);
+          alert("일정 등록 완료");
+          dispatch(initSchedule());    /// 초기화를 시켜주는 리듀서를 디스패치한다.
+        }
+      }, [regist, setScheduleInsertModal]);
 
     const onChangeHandler = (e) => {
         setForm({
@@ -28,8 +28,8 @@ function ScheduleInsertModal({ schedule, setScheduleInsertModal }) {
     console.log("form : ", form);
     const handleSubmit = () => {
 
-        setScheduleInsertModal(false);
         dispatch(createSchedule(form));
+
     };
 
 
@@ -88,6 +88,18 @@ function ScheduleInsertModal({ schedule, setScheduleInsertModal }) {
 
                     <button onClick={handleSubmit}>
                         등록하기
+                    </button>
+
+                    <button
+                        style={{
+                            border: "none",
+                            margin: 0,
+                            fontSize: "10px",
+                            height: "10px",
+                        }}
+                        onClick={() => setScheduleInsertModal(false)}
+                    >
+                        돌아가기
                     </button>
                 </div>
             </div>
