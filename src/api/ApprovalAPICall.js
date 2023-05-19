@@ -110,7 +110,7 @@ export const searchDocumentList = () => {
     return async (dispatch, getState) => {
         const result = await fetch(requestURL).then(response => response.json());
 
-        console.log(result)
+        console.log(result);
 
         dispatch(searchDocument(result));
     }

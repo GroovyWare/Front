@@ -20,11 +20,7 @@ import PassRegist from './Pass/pages/PassRegist';
 import PassMain from './Pass/pages/PassMain';
 import ProtectedRoute from './components/router/ProtectedRoute'
 import Login from './login/pages/Login';
-import TestEditorForm from './Editor';
-import Test2 from './Test2';
-
-
-
+import Test3 from './Test3';
 
 function App() {
 
@@ -52,8 +48,8 @@ function App() {
             <Route path="history" element={<PlayHistory/>}/>
           </Route>
 
-          <Route path="/announce" element={<AnnounceMain />}>
-            <Route path="/announce/:announceCode" element={<AnnounceDetail />} />
+          <Route path="announce" element={<AnnounceMain />}>
+            <Route path="announce/:announceCode" element={<AnnounceDetail />} />
           </Route>
 
           <Route path="schedule"  element={<Schedule/>}/>
@@ -70,7 +66,7 @@ function App() {
           </Route>
 
           <Route path="document">
-            <Route index element={<Test2/>}/>
+            <Route index element={<Test3/>}/>
           </Route>
         </Route>
       </Routes>

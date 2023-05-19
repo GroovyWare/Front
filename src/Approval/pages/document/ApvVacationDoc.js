@@ -29,14 +29,11 @@ function ApvVacationDoc(props){
     }
 
     const onClickConfirm = () => {
-
         props.setSelectedOption(selectedOption);
         props.setVacStartDate(vacStartDate);
         props.setVacEndDate(vacEndDate);
         props.setVacContext(vacContext);
     }
-
-    const html = ``
     
     return(
         <>

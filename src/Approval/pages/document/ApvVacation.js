@@ -4,6 +4,7 @@ import ApvVacationCSS from './ApvVacation.module.css';
 import ApvVacationDoc from "./ApvVacationDoc";
 import { useDispatch, useSelector } from "react-redux";
 import { registVacationDoc } from "../../../api/ApprovalAPICall";
+import ReactDOMServer from 'react-dom/server';
 
 function ApvVacation(){
     const dispatch = useDispatch();
@@ -14,6 +15,7 @@ function ApvVacation(){
     const [vacStartDate, setVacStartDate] = useState();
     const [vacEndDate, setVacEndDate] = useState();
     const [vacContext, setVacContext] = useState();
+    const [form, setForm] = useState();
     const {regist}  = useSelector(state => state.approvalReducer);
 
     const onClickDocHandler = () => {
@@ -41,7 +43,7 @@ function ApvVacation(){
             setSelectedOption = {setSelectedOption}
             setVacStartDate = {setVacStartDate}
             setVacEndDate = {setVacEndDate}
-            setVacContext = {setVacContext} />
+            setVacContext = {setVacContext}/>
 
             <div>
                 {/* 결재권자 표시 */}

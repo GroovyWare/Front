@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^37.1.0",
+    "@ckeditor/ckeditor5-react": "^6.0.0",
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "@fullcalendar/core": "^6.1.7",
@@ -24,6 +26,7 @@
     "draftjs-to-html": "^0.9.1",
     "html-to-draftjs": "^1.5.0",
     "jwt-decode": "^3.1.2",
+    "mammoth": "^1.5.1",
     "prosemirror-model": "^1.19.1",
     "prosemirror-schema-basic": "^1.2.2",
     "quill": "latest",
@@ -45,9 +48,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -69,7 +72,13 @@
     ]
   },
   "devDependencies": {
+    "buffer": "^6.0.3",
+    "customize-cra": "^1.0.0",
     "moment-timezone-data-webpack-plugin": "^1.5.1",
-    "typescript": "^4.9.5"
+    "path-browserify": "^1.0.1",
+    "react-app-rewired": "^2.2.1",
+    "stream-browserify": "^3.0.0",
+    "typescript": "^4.9.5",
+    "util": "^0.12.5"
   }
 }
