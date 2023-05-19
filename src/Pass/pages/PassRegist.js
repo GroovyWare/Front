@@ -12,7 +12,6 @@ function PassRegist() {
     const { regist } = useSelector(state => state.passReducer);
     const [form, setForm] = useState({});
 
-
     /* 회원권 등록 후 회원권 리스트로 이동 */
     useEffect(
         () => {
@@ -38,10 +37,11 @@ function PassRegist() {
 
         /* 서버로 전달할 formData 형태의 객체 설정 */
         const formData = new FormData();
-        formData.append("passType");
-        formData.append("passEtc");
-        formData.append("passPrice");
-        formData.append("passAmount");
+
+        formData.append("passType", form.passType);
+        formData.append("passEtc", form.passEtc);
+        formData.append("passPrice", form.passPrice);
+        formData.append("passAmount", form.passAmount);
 
         dispatch(callPassRegistAPI(formData));
     }
@@ -59,10 +59,10 @@ function PassRegist() {
                                 name='passType'
                                 onChange={ onChangeHandler }
                             >
-                                <option value="1">3개월</option>
-                                <option value="2">6개월</option>
-                                <option value="3">12개월</option>
-                                <option value="4">PT</option>
+                                <option value="3개월">3개월</option>
+                                <option value="6개월">6개월</option>
+                                <option value="12개월">12개월</option>
+                                <option value="PT">PT</option>
                             </select>
                         </td>
                     </tr>
@@ -73,6 +73,7 @@ function PassRegist() {
                             <input
                                 name='passPrice'
                                 placeholder='가격'
+                                type='number'
                                 onChange={ onChangeHandler }
                             />
                         </td>
@@ -83,7 +84,8 @@ function PassRegist() {
                         <td>
                             <input
                                 name='passAmount'
-                                placeholder='횟수'
+                                placeholder='숫자만 입력하세요'
+                                type='number'
                                 onChange={ onChangeHandler }
                             />
                         </td>

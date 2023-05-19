@@ -1,4 +1,4 @@
-import { getMember, getMembers, postMember } from "../modules/MemberModule";
+import { getMember, getMembers, postMember, putMember } from "../modules/MemberModule";
 
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
@@ -71,4 +71,50 @@ export const callMemberRegistAPI = (formData) => {
         }
     }
 }
+
+/* 회원 수정을 위한 정보 조회 */
+export const callMemberDetailReadModifyAPI = ({ memCode }) => {
+
+    const requestURL = `${PRE_URL}/member/modify/${memCode}`;
+    
+    return async (dispatch, getState) => {
+        
+        const result = await fetch(requestURL, {
+            method : 'GET',
+            headers : {
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then(response => response.json());
+
+        if(result.status === 200) {
+            console.log("[MemberAPICalls] callMemberDetailReadModifyAPI result : ", result);
+        }
+
+    }
+
+}
+
+/* 회원 수정 */
+export const callMemberUpdateAPI = (formData) => {
+    
+    const requestURL = `${PRE_URL}/member/modify`;
+
+    return async (dispatch, getState) => {
+
+        const result = await fetch(requestURL, {
+            method : 'PUT',
+            headers : {
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            },
+            body : formData
+        }).then(response => response.json());
+
+        if(result.status === 200) {
+            console.log('[MemberAPICalls] callMemberUpdateAPI result :', result);
+            dispatch(putMember(result));
+        }
+    }
+
+}
+
 
