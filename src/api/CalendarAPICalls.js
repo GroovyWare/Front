@@ -21,22 +21,33 @@ export const AllSchedules = () => {
                 "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
             }
         }).then(response => response.json());
-
+        
 console.log(result);
-
 
         if(result.status === 200) {
             console.log('[CalendarAPICalls] : callScheduleListAPI result,', result);
             dispatch(getSchedules(result));
         }
 
-
-
     }
-
-
+    
+    
 }
 
+/* 검색하기  페이징, 리스트*/
+export const  searchingSchedule = ({search, currentPage = 1}) => {
+    const requestURL = `${PRE_URL}/calendar/list?search=${search}&page=${currentPage}`
+
+    return async (dispatch, getState) => {
+
+    const result = await fetch(requestURL).then(response => response.json());
+
+    if(result.status === 200) {
+        console.log("[searchingSchedule] calling result :  " , result);
+        dispatch(getSchedules(result));
+    }
+
+}
 
 
 
@@ -58,14 +69,15 @@ export const createSchedule = (form) => {
         if(result.status === 200) {
             console.log('[CalendarAPICalls] : callcreateAPI result : ', result);
             dispatch(postSchedule(result));
+            dispatch(AllSchedules());
         }
     }
 }
 
 
 /* 수정하기 */
-export const updateSchedule = (formData, schCode) => {
-    const requestURL = `${PRE_URL}/calendar/${schCode}`;
+export const updateSchedule = (formData) => {
+    const requestURL = `${PRE_URL}/calendar/`;
 
     return async (dispatch, getState) => {
 
@@ -90,3 +102,6 @@ export const updateSchedule = (formData, schCode) => {
 }
 
 /* 삭제하기 */
+
+
+}
