@@ -3,9 +3,6 @@ import Layout from './components/layouts/Layout';
 import ApprovalLayout from './Approval/layouts/ApprovalLayout';
 import Schedule from './schedule/Schedule';
 import ApvContent from './Approval/pages/ApvContent';
-import ApvVacation from './Approval/pages/document/ApvVacation';
-import ApvResign from "./Approval/pages/document/ApvResign";
-import ApvReason from "./Approval/pages/document/ApvReason";
 import ApvEmployee from './Approval/employee/ApvEmployee';
 import PlayMemberList from './play/PlayMemberList';
 import PlayHistory from './play/PlayHistory';
@@ -20,7 +17,7 @@ import PassRegist from './Pass/pages/PassRegist';
 import PassMain from './Pass/pages/PassMain';
 import ProtectedRoute from './components/router/ProtectedRoute'
 import Login from './login/pages/Login';
-import Test3 from './Test3';
+import Document from './Approval/pages/document/Document';
 
 function App() {
 
@@ -31,12 +28,19 @@ function App() {
         <Route path="/" element={ <ProtectedRoute loginCheck={ true }><Layout/></ProtectedRoute> }>
           
           <Route path="approval">
+            
             <Route index element={<ApprovalLayout/>}/>
-            <Route path="new" element={<ApvContent/>}/>
-            <Route path="vacation" element={<ApvVacation/>}/>
-            <Route path="resignation" element={<ApvResign/>}/>
-            <Route path="reason" element={<ApvReason/>}/>
-            <Route path="employee" element={<ApvEmployee/>}/>
+            <Route path="new" element={
+            <ProtectedRoute loginCheck={true}>
+              <ApvContent/>
+            </ProtectedRoute>}/>
+            <Route path="document" element={<ProtectedRoute loginCheck={true}>
+              <Document/>
+            </ProtectedRoute>}/>
+            <Route path="employee" element={<ProtectedRoute loginCheck={true}>
+              <ApvEmployee/>
+            </ProtectedRoute>}/>
+            
           </Route>
 
           <Route path="play">
@@ -63,10 +67,6 @@ function App() {
           <Route path="pass">
             <Route index element={ <PassMain/> }/>
             <Route path="regist" element={<PassRegist/>} />
-          </Route>
-
-          <Route path="document">
-            <Route index element={<Test3/>}/>
           </Route>
         </Route>
       </Routes>
