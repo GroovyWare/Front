@@ -7,6 +7,7 @@ import passReducer from "./PassModule";
 import historyReducer from "./HistoryModule";
 import scheduleReducer from "./CalendarModule";
 import loginReducer from "./LoginModule";
+import documentReducer from './DocumentModule';
 
 const rootReducer = combineReducers({
     announceReducer,
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
     passReducer,
     historyReducer,
     scheduleReducer,
-    loginReducer
+    loginReducer,
+    documentReducer
 });
 
 export default rootReducer;

@@ -4,12 +4,12 @@ import Head from '../pages/employeeList/Head';
 import SelectReader from "../pages/person/SelectReader";
 import SelectApprove from "../pages/person/SelectApprove";
 import { useDispatch, useSelector } from 'react-redux';
-import { searchEmployeeList, selectEmployeeList, searchDepartmentList } from '../../api/ApprovalAPICall';
+import { searchEmployeeList, selectEmployeeList, searchDepartmentList, registDoc } from '../../api/ApprovalAPICall';
 
 
 function ApvEmployee({setModalOpen}){
 
-    const [empName, setEmpName] = useState('');
+    const [empName, setEmpName] = useState(''); 
 
     const dispatch = useDispatch();
 
@@ -19,6 +19,8 @@ function ApvEmployee({setModalOpen}){
 
     const onClickHandler = () => {
         setModalOpen(false);
+
+        dispatch(registDoc());
     }
 
     const onKeyPressHandler = (e) => {
