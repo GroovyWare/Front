@@ -65,10 +65,20 @@ export function ScheduleUpdateModal({ writer, setScheduleInsertModal }) {
           <label>스케줄 글색상지정</label>
           <input type="color" name="textColor" value={form.textColor || ""} />
 
-          {/* <div>
+          <div>
             <button onClick={handleConfirm}>확인</button>
-            <button onClick={handleCancel}>취소</button>
-          </div> */}
+            <button
+                        style={{
+                            border: "none",
+                            margin: 0,
+                            fontSize: "10px",
+                            height: "10px",
+                        }}
+                        onClick={() => setScheduleInsertModal(false)}
+                    >
+                        돌아가기
+                    </button>
+          </div>
         </div>
       </div>
     </div>
