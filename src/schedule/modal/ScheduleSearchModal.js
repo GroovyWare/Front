@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ScheduleInsertModalCSS from "./ScheduleInsertModal.module.css"
-import { AllSchedules, createSchedule } from "../../api/CalendarAPICalls";
+import { AllSchedules, createSchedule, searchingSchedule } from "../../api/CalendarAPICalls";
 import { getSchedule, getSchedules, initSchedule } from "../../modules/CalendarModule";
 
 
@@ -9,9 +9,9 @@ import { getSchedule, getSchedules, initSchedule } from "../../modules/CalendarM
 
 function ScheduleSearchModal({ searchSchedule, setScheduleSearchModal }) {
     const [schCode, setschCode] = useState(0);
-    const { data } = useSelector((state) => state.scheduleReducer);
+    const { events } = useSelector((state) => state.scheduleReducer);
     const dispatch = useDispatch();
-
+    const [currentPage, setCurrentPage] = useState(1);
 
 
 
@@ -22,8 +22,8 @@ function ScheduleSearchModal({ searchSchedule, setScheduleSearchModal }) {
 
 
         useEffect(() => {
-            dispatch(AllSchedules());
-        },[])
+            dispatch(searchingSchedule());
+        },[currentPage ,searchingSchedule])
 
         return (
             <div className={ScheduleInsertModalCSS.modal}>
@@ -49,8 +49,8 @@ function ScheduleSearchModal({ searchSchedule, setScheduleSearchModal }) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {data && data.length > 0 ? (
-                                        data.map((searchSchedule) => (
+                                    {events && events.length > 0 ? (
+                                        events.map((searchSchedule) => (
                                             <tr key={searchSchedule.schCode}>
                                                 <td>{searchSchedule.start}</td>
                                                 <td>{searchSchedule.end}</td>
@@ -72,10 +72,17 @@ function ScheduleSearchModal({ searchSchedule, setScheduleSearchModal }) {
                                 <button>
                                     확인
                                 </button>
-
-                                <button>
-                                    닫기
-                                </button></div>
+                                <button
+                        style={{
+                            border: "none",
+                            margin: 0,
+                            fontSize: "10px",
+                            height: "10px",
+                        }}
+                        onClick={() => setScheduleSearchModal(false)}
+                    >
+                        돌아가기
+                    </button></div>
                         </div>
 
 

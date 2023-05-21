@@ -35,8 +35,8 @@ console.log(result);
 }
 
 /* 검색하기  페이징, 리스트 (DOING)*/
-export const  searchingSchedule = ({search, currentPage = 1}) => {
-    const requestURL = `${PRE_URL}/calendar/list?search=${search}&page=${currentPage}`
+export const  searchingSchedule = ({searchSchedule, currentPage = 1}) => {
+    const requestURL = `${PRE_URL}/calendar/list?title=${searchSchedule}&page=${currentPage}`
 
     return async (dispatch, getState) => {
 

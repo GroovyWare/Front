@@ -18,7 +18,7 @@ const Schedule = () => {
   const navigate = useNavigate();
   const [scheduleInsertModal, setScheduleInsertModal] = useState(false);
   const [filteredEvents, setFilteredEvents] = useState([]);
-  const [searchSchedule, setSearchSchedule] = useState([]);
+  const [searchSchedule, setSearchSchedule] = useState("");
   const [scheduleSearchModal, setScheduleSearchModal] = useState(false);
 
   useEffect(() => {
@@ -113,7 +113,7 @@ const Schedule = () => {
         <ScheduleInsertModal setScheduleInsertModal={setScheduleInsertModal} />
       )}
       {scheduleSearchModal && ( 
-        <ScheduleSearchModal setScheduleSearchModal={setScheduleSearchModal} searchSchedule={ searchSchedule}/>
+        <ScheduleSearchModal setScheduleSearchModal={setScheduleSearchModal}/>
       )}
       <div className={`${styles.mainContents} ScheduleCSS`} style={{ maxWidth: '1680px' }}>
         <FullCalendar
