@@ -17,6 +17,8 @@ import PassRegist from './Pass/pages/PassRegist';
 import PassMain from './Pass/pages/PassMain';
 import ProtectedRoute from './components/router/ProtectedRoute'
 import Login from './login/pages/Login';
+import Employee from './employee/pages/Employee';
+import EmployeeDetails from './employee/pages/EmployeeDetails';
 import Document from './Approval/pages/document/Document';
 import 'react-toastify/dist/ReactToastify.css';
 import { createGlobalStyle } from 'styled-components';
@@ -69,6 +71,11 @@ function App() {
             <Route index element={<PassMain />} />
             <Route path="regist" element={<PassRegist />} />
           </Route>
+
+          <Route path="employee">
+            <Route index element={ <Employee/> }/>
+          </Route>
+
         </Route>
       </Routes>
     </BrowserRouter>

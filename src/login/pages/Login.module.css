@@ -1,7 +1,7 @@
 @font-face {
     font-family: 'esamanru';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
-    font-weight: normal;
+    font-weight: bold;
     font-style: normal;
 }
 
@@ -12,21 +12,23 @@
     font-style: normal;
 }
 
-* {
-    padding: 0px;
-    margin: 0px;
-}
-
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+   /* background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%); */
+   /* background-image: linear-gradient(45deg, #ee9ca7 0%, #ffdde1 100%); */
+    background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
 }
 .loginBg {
     width: 700px;
     height: 700px;
-    background-color: #4A5CFF;
+   /* background-color: #4A5CFF; */
+    background:  rgba( 255, 255, 255, 0.65 );
+    backdrop-filter: blur( 20px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -36,6 +38,7 @@
 .loginForm {
     width: 300px;
     height: 50px;
+    background: rgba( 255, 255, 255, 0.3 );
     border: 2px solid #1A1779;
     border-radius: 4px;
     margin-bottom: 5px;
@@ -74,17 +77,16 @@ input:focus {
 
 .text1 {
     font-size: 40px;
-    color: #ffffff;
+    color: #1A1779;
     font-family: 'esamanru';
 }
 
 .text2 {
     font-size: 18px;
-    color: #ffffff;
+    color: #1A1779;
     font-family: 'esamanru';
 }
 
 .logo {
     width: 140px;
 }
-

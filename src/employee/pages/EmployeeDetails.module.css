@@ -1,0 +1,20 @@
+.container {
+    z-index: 999;
+    width: 500px;
+    height: 500px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+}
+
+.closeBtn {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    right: 10px;
+    top: 10px;
+}
+
