@@ -3,27 +3,36 @@ import { useDispatch, useSelector } from "react-redux";
 import ScheduleInsertModalCSS from "./ScheduleInsertModal.module.css"
 import { AllSchedules, createSchedule, searchingSchedule } from "../../api/CalendarAPICalls";
 import { getSchedule, getSchedules, initSchedule } from "../../modules/CalendarModule";
+import ScheduleList from "../lists/ScheduleList";
+import PagingBar from "../../components/common/PagingBar";
 
 
 
 
 function ScheduleSearchModal({ searchSchedule, setScheduleSearchModal }) {
     const [schCode, setschCode] = useState(0);
-    const { events } = useSelector((state) => state.scheduleReducer);
+    const { searchvalues } = useSelector((state) => state.scheduleReducer);
     const dispatch = useDispatch();
     const [currentPage, setCurrentPage] = useState(1);
+    const [scheduleUpdateModal, setScheduleUpdateModal] = useState(false);
+    // const pageInfo = searchvalues.pageInfo;
+    const [form, setForm] = useState({});
+    
 
 
 
-/* 검색 결과창 띄우기 */ {
+/* 클릭으로 모달창 옮김 */ {
         const onClickHandler = (schCode) => {
             dispatch(getSchedule({ schCode }));
+            // setScheduleSearchModal(false);
+            setScheduleUpdateModal(true);
+            setForm(searchvalues.data.find((searchvalue) => searchvalue.schCode === schCode));
         }
 
 
         useEffect(() => {
-            dispatch(searchingSchedule());
-        },[currentPage ,searchingSchedule])
+            dispatch(searchingSchedule({ searchSchedule }));
+        }, [searchSchedule])
 
         return (
             <div className={ScheduleInsertModalCSS.modal}>
@@ -49,13 +58,14 @@ function ScheduleSearchModal({ searchSchedule, setScheduleSearchModal }) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {events && events.length > 0 ? (
-                                        events.map((searchSchedule) => (
-                                            <tr key={searchSchedule.schCode}>
-                                                <td>{searchSchedule.start}</td>
-                                                <td>{searchSchedule.end}</td>
-                                                <td>{searchSchedule.title}</td>
-                                                <td>{searchSchedule.schDiv}</td>
+                                    {searchvalues && searchvalues.data && searchvalues.data.length > 0 ? (
+                                        searchvalues.data.map((searchvalue) => (
+                                            <tr key={searchvalue.title} onClick={() => onClickHandler(searchvalue.schCode)}>
+                                                {/* 한국어 표시 */}
+                                                <td>{new Date(searchvalue.start).toLocaleString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' })}</td>
+                                                <td>{new Date(searchvalue.end).toLocaleString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' })}</td>
+                                                <td>{searchvalue.title}</td>
+                                                <td>{searchvalue.schDiv}</td>
                                             </tr>
                                         ))
                                     ) : (
@@ -73,19 +83,25 @@ function ScheduleSearchModal({ searchSchedule, setScheduleSearchModal }) {
                                     확인
                                 </button>
                                 <button
-                        style={{
-                            border: "none",
-                            margin: 0,
-                            fontSize: "10px",
-                            height: "10px",
-                        }}
-                        onClick={() => setScheduleSearchModal(false)}
-                    >
-                        돌아가기
-                    </button></div>
+                                    style={{
+                                        border: "none",
+                                        margin: 0,
+                                        fontSize: "10px",
+                                        height: "10px",
+                                    }}
+                                    onClick={() => setScheduleSearchModal(false)}
+                                >
+                                    돌아가기
+                                </button></div>
                         </div>
 
 
+
+                    </div>
+                    <div>
+
+                    </div>
+                    <div>
 
                     </div>
                 </div>

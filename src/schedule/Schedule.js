@@ -113,7 +113,7 @@ const Schedule = () => {
         <ScheduleInsertModal setScheduleInsertModal={setScheduleInsertModal} />
       )}
       {scheduleSearchModal && ( 
-        <ScheduleSearchModal setScheduleSearchModal={setScheduleSearchModal}/>
+        <ScheduleSearchModal setScheduleSearchModal={setScheduleSearchModal} searchSchedule={searchSchedule}/>
       )}
       <div className={`${styles.mainContents} ScheduleCSS`} style={{ maxWidth: '1680px' }}>
         <FullCalendar

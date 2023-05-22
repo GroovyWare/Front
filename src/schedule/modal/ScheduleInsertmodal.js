@@ -14,8 +14,8 @@ function ScheduleInsertModal({ schedule, setScheduleInsertModal }) {
     useEffect(() => {
         if (regist?.status === 200 && setScheduleInsertModal) {
           setScheduleInsertModal(false);
-        //   toast.warning("일정 등록 완료");
-          alert("일정 등록 완료");
+          toast.warning("일정 등록 완료");
+        //   alert("일정 등록 완료");
           dispatch(initSchedule());    /// 초기화를 시켜주는 리듀서를 디스패치한다.
         }
       }, [regist, setScheduleInsertModal]);
