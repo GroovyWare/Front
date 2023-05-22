@@ -46,9 +46,14 @@ const modules = {
   const StyledQuill = styled(ReactQuill)`
   .ql-toolbar {
     height: 50px;
+    background-color : white
   }
   .ql-container {
-    height: 700px;
+    height: 600px;
+  }
+  
+  .ql-editor{
+    background-color : white;
   }
 `;
 
@@ -92,10 +97,8 @@ function AddDocument(){
         navigate('/approval');
     }
 
-    
-
     return(
-        <div>
+        <div className={ApvVacationCSS.container}>
             <div>
             <input
                 type="text"
@@ -103,7 +106,7 @@ function AddDocument(){
                 placeholder='양식명을 입력해주세요.'
                 onChange={onChangeHandler}
             />
-            <div style={{width:700, height : 600, marginLeft : 650}}>
+            <div style={{width:700, height : 600, marginLeft : 350}}>
             <StyledQuill 
                 ref={quillRef}
                 value={html} 
