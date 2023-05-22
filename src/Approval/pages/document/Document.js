@@ -7,7 +7,6 @@ import ApvVacationCSS from './ApvVacation.module.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { registDoc, selectPersonAPICall } from '../../../api/ApprovalAPICall';
-import { RichUtils } from 'draft-js';
 
 const Parchment = Quill.import('parchment');
 
@@ -50,10 +49,6 @@ const modules = {
   }
   .ql-container {
     height: 700px;
-  }
-  
-  .ql-editor{
-    background-color : white
   }
 `;
 
@@ -110,8 +105,8 @@ function Document() {
   }
 
   return (
-    <div className={ApvVacationCSS.container}>
-        <div style={{width:600, height: 600, marginLeft : 140}}>
+    <div>
+        <div style={{width:600, height: 600, marginLeft:400, marginTop:10}}>
           <StyledQuill 
               ref={quillRef}
               value={html} 
@@ -133,8 +128,8 @@ function Document() {
                 {/* 결재권자 표시 */}
                 <div className={ApvVacationCSS.authors}>
                     <div className={ApvVacationCSS.author}></div>
-                    <div className={ApvVacationCSS.author}></div>
-                    <div className={ApvVacationCSS.author}></div>
+                    <div className={ApvVacationCSS.common}></div>
+                    <div className={ApvVacationCSS.common}></div>
                 </div>
             </div>
 

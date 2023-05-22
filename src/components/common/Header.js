@@ -2,6 +2,9 @@ import HeaderCSS from "./Header.module.css";
 import logo from "../common/img/logo.png";
 
 function Header() {
+    
+    
+
     return (
         <div className={ HeaderCSS.container }>
            <div className={ HeaderCSS.logoDiv }>

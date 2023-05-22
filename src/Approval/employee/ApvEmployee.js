@@ -44,7 +44,7 @@ function ApvEmployee({setModalOpen}){
     )
 
     return(
-        <>
+        <div className={ApvEmployeeCSS.container}>
             <div className={ApvEmployeeCSS.wrap}>
                     <div className={ApvEmployeeCSS.emp}>
                         <input
@@ -71,7 +71,7 @@ function ApvEmployee({setModalOpen}){
                             >확인</button>
                         </div>
             </div>       
-        </>
+        </div>
     )
 }
 
