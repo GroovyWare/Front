@@ -3,7 +3,6 @@
     flex-direction: column;
     margin-top: 15px;
     height: 100%;
-    /* width: calc(100% - 200px); */
     padding: 0 0 20px;
 }
 
@@ -23,15 +22,15 @@
     font-weight: bold;
 }
 
-.productTable{
+.announceTable{
     width: 100%;
 }
 
-.productTable tr:hover { 
+.announceTable tr:hover { 
     background-color: #F5F5F5; 
 }
 
-.productTable tr {
+.announceTable tr {
     cursor: pointer;
 }
 
