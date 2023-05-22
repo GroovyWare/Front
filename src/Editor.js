@@ -50,6 +50,10 @@ const Editor = ({ placeholder }) => {
   );
 };
 
+/*
+ * Quill modules to attach to editor
+ * See https://quilljs.com/docs/modules/ for complete options
+ */
 Editor.modules = {
   toolbar: [
     [{ header: '1' }, { header: '2' }, { font: [] }],
@@ -65,6 +69,10 @@ Editor.modules = {
   ]
 };
 
+/*
+ * Quill editor formats
+ * See https://quilljs.com/docs/formats/
+ */
 Editor.formats = [
   'header',
   'font',

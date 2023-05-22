@@ -5,6 +5,7 @@ const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
 const PRE_URL = `http://${SERVER_IP}:${SERVER_PORT}`;
 
+
 /* 회원 전체 리스트 조회 */
 export const callMemberListAPI = ( {currentPage = 1} ) => {
 
@@ -12,7 +13,7 @@ export const callMemberListAPI = ( {currentPage = 1} ) => {
 
     return async(dispatch, getState) => {
 
-        const result = await fetch(requestURL,{
+        const result = await fetch(requestURL, {
             method : 'GET',
             headers : {
                 "Content-Type" : "application/json",
@@ -97,7 +98,7 @@ export const callMemberDetailReadModifyAPI = ({ memCode }) => {
 /* 회원 수정 */
 export const callMemberUpdateAPI = (formData) => {
     
-    const requestURL = `${PRE_URL}/member/modify`;
+    const requestURL = `${PRE_URL}/member/modify/`;
 
     return async (dispatch, getState) => {
 

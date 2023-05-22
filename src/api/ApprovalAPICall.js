@@ -1,43 +1,64 @@
-import { registApproval } from "../modules/ApprovalModule";
-import { selectEmployee, searchEmployee, searchDepartment, addApproveLine } from "../modules/ApprovalModule";
-import { selectPerson } from "../modules/ApprovalModule";
+import {registVacation, registResign, registReason } from "../modules/ApprovalModule";
+import { selectEmployee, searchEmployee, searchDepartment, searchDocument } from "../modules/ApprovalModule";
 
 const RESTAPI_SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const RESTAPI_SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
 const PRE_URL = `http://${RESTAPI_SERVER_IP}:${RESTAPI_SERVER_PORT}`;
 
-/* 결재 등록 */
-export const registDoc = (data, docTitle) => {
-    const requestURL = `${PRE_URL}/approval/save?docTitle=${docTitle}`;
-  
+/* 휴가 신청서 등록 */
+export const registVacationDoc = (data) => {
+
+    const requestURL = `${PRE_URL}/document/save`;
+
     return async (dispatch, getState) => {
-    
-    const result = await fetch(requestURL, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
-        },
-        body: JSON.stringify(data)
-      }).then(response => response.json());
-  
-      dispatch(registApproval(result));
-    };
-  };
 
-  /* 기안서 작성자 찾기 */
-export const selectPersonAPICall = () => {
-    const requestURL = `${PRE_URL}/approval/search/employee`;
-
-        return async (dispatch, getState) => {
-        const result = await fetch(requestURL,{
-            method : "GET",
+        const result = await fetch(requestURL, {
+            method : 'POST',
             headers : {
-                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
-            }
+                'Content-Type' : 'application/json'
+            },
+            body : JSON.stringify(data)
         }).then(response => response.json());
 
-        dispatch(selectPerson(result));
+        dispatch(registVacation(result));
+    }
+}
+
+/* 사직서 등록 */
+export const registResignDoc = (data) => {
+
+    const requestURL = `${PRE_URL}/document/save`;
+
+    return async (dispatch, getState) => {
+
+        const result = await fetch(requestURL, {
+            method : 'POST',
+            headers : {
+                'Content-Type' : 'application/json'
+            },
+            body : JSON.stringify(data)
+        }).then(response => response.json());
+
+        dispatch(registResign(result));
+    }
+}
+
+/* 사유서 등록 */
+export const registReasonDoc = (data) => {
+
+    const requestURL = `${PRE_URL}/document/save`;
+
+    return async (dispatch, getState) => {
+
+        const result = await fetch(requestURL, {
+            method : 'POST',
+            headers : {
+                'Content-Type' : 'application/json'
+            },
+            body : JSON.stringify(data)
+        }).then(response => response.json());
+
+        dispatch(registReason(result));
     }
 }
 
@@ -81,24 +102,16 @@ export const searchDepartmentList = () => {
     }
 }
 
-/* 결재권자 추가 */
-export const addApproveLineAPI = () => {
+/* 문서 조회 */
+export const searchDocumentList = () => {
 
-    const requestURL = `${PRE_URL}/approval/save`
+    const requestURL = `${PRE_URL}/document/set`
 
     return async (dispatch, getState) => {
-        
-        const result = await fetch(requestURL, {
-            method : "POST",
-            headers : {
-                'Content-Type': 'application/json',
-                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
-            },
-            body : {
-                
-            }
-        }).then(response => response.json());
+        const result = await fetch(requestURL).then(response => response.json());
 
-        dispatch(addApproveLine(result));
+        console.log(result)
+
+        dispatch(searchDocument(result));
     }
 }

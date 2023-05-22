@@ -59,6 +59,7 @@ function PassRegist() {
                                 name='passType'
                                 onChange={ onChangeHandler }
                             >
+                                <option>선택하세요</option>
                                 <option value="3개월">3개월</option>
                                 <option value="6개월">6개월</option>
                                 <option value="12개월">12개월</option>

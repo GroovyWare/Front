@@ -14,11 +14,6 @@ function PagingBar({pageInfo, setCurrentPage}){
         <div style={ {listStyleType : 'none', display : 'flex', justifyContent : 'center'} }>
             <button 
             className={PagingBarCSS.pagingBtn}
-            onClick={() => setCurrentPage(pageInfo.startPage)}
-            disabled={pageInfo.currentPage <= 1}
-            >&lt;&lt;</button>
-            <button 
-            className={PagingBarCSS.pagingBtn}
             onClick={() => setCurrentPage(pageInfo.currentPage - 1)}
             disabled={pageInfo.currentPage <= 1}
             >&lt;</button>
@@ -26,17 +21,13 @@ function PagingBar({pageInfo, setCurrentPage}){
                 <li key={num} onClick={ () => setCurrentPage(num)}>
                     <button 
                     className={PagingBarCSS.pagingBtn}
-                    style={pageInfo.currentPage === num? {backgroundColor : '#627ef1', color: '#ffffff'} : null}>{num}</button>
+                    style={pageInfo.currentPage === num? {backgroundColor : 'orange'} : null}>{num}</button>
                 </li>
             ))}
             <button 
             className={PagingBarCSS.pagingBtn}
             onClick={() => setCurrentPage(pageInfo.currentPage + 1)}
             disabled={pageInfo.currentPage >= pageInfo.maxPage}>&gt;</button>
-            <button 
-            className={PagingBarCSS.pagingBtn}
-            onClick={() => setCurrentPage(pageInfo.endPage)}
-            disabled={pageInfo.currentPage >= pageInfo.maxPage}>&gt;&gt;</button>
         </div>
     )
 }

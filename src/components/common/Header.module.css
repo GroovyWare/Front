@@ -1,21 +1,13 @@
-@font-face {
-    font-family: 'esamanru';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
-    font-weight: bold;
-    font-style: normal;
-}
 *{
-    margin: 0px;
-    padding: 0px;
+    margin:0
 }
-.container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 5px;
+
+.headerDiv{
     width: 100%;
-    cursor: pointer;
+    height: 100px;
+    background-color: rgba(74,92,255);
 }
+
 
 .logo {
     width: 80px;
@@ -35,3 +27,4 @@
 .titleDiv .text2 {
     font-size: 16px;
 }
+

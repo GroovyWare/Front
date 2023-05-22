@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { callMemberDetailReadModifyAPI, callMemberUpdateAPI } from "../../api/MemberAPICalls";
+import { callMemberDetailReadModifyAPI, callMemberRegistAPI } from "../../api/MemberAPICalls";
 
 
 function MemberModify() {
 
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { memCode } = useParams();
-    dispatch = useDispatch();
-    navigate = useNavigate();
+    const data = useSelector(state => state.memberReducer);
     const { modify } = useSelector((state => state.memberReducer));
+    const[form, setForm] = useState({});
 
 
     /* 읽기 모드, 수정 모드를 구분 */
-    const [editMode, setEditMode] = useState(false);
+    const [modifyMode, setModifyMode] = useState(false);
 
     /* 회원 상세정보 조회 */
     useEffect(
@@ -25,12 +27,12 @@ function MemberModify() {
     /* 회원 수정완료 후 이동 */
     useEffect(
         () => {
-            if(edit?.state === 200) {
+            if(modify?.state === 200) {
                 alert('회원 수정이 완료되었습니다.');
-                navigate('member',{ replace : true });
+                navigate('/member',{ replace : true });
             }
         },
-        [edit]
+        [modify]
     );
 
     /* 입력 양식 값 변경될 때 */
@@ -50,13 +52,14 @@ function MemberModify() {
     }
 
     /* 수정 모드 변경 이벤트 */
-    const onclickEditModeHandler = () => {
-        setEditMode(true);
+    const onclickModifyModeHandler = () => {
+        setModifyMode(true);
         setForm({ ...data });
     }
 
+    
     /* 회원 수정 저장 버튼 클릭 이벤트 */
-    const onClickMemberUpdateHandler = () => {
+    const onClickMemberModifyHandler = () => {
 
         /* 서버로 전달할 formData 형태의 객체 설정 */
         const formData = new FormData();
@@ -72,11 +75,11 @@ function MemberModify() {
         formData.append("history[0].pass.passCode", form.passCode);
         formData.append("history[0].employee.empCode", form.empCode);
 
-        dispatch(callMemberUpdateAPI(formData));
+        dispatch(callMemberRegistAPI(formData));
     }
 
-    const inputStyle = !editMode ? { backgroundColor : 'gray'} : null;
-    const checkValue = !editMode ? data.history?.pass.passType : form.history.pass.passType;
+    const inputStyle = !modifyMode ? { backgroundColor : 'gray'} : null;
+    const checkValue = !modifyMode ? data.history?.pass.passType : form.history.pass.passType;
 
     return(
         <>
@@ -91,6 +94,8 @@ function MemberModify() {
                                 name='memName'
                                 placeholder='회원 이름'
                                 onChange={ onChangeHandler }
+                                value={ !modifyMode ? data.memName : form.memName }
+                                readOnly={ !modifyMode }
                             />
                         </td>
                     </tr>
@@ -102,6 +107,8 @@ function MemberModify() {
                                 name='memPhone'
                                 placeholder='숫자만 입력하세요'
                                 onChange={ onChangeHandler }
+                                value={ !modifyMode ? data.memPhone : form.memPhone }
+                                readOnly={ !modifyMode }
                             />
                         </td>
                     </tr>
@@ -114,10 +121,10 @@ function MemberModify() {
                                 onChange={ onChangePassHandler }
                             >
                                 <option>선택하세요</option>
-                                <option value="1">3개월</option>
-                                <option value="2">6개월</option>
-                                <option value="3">12개월</option>
-                                <option value="4">PT</option>
+                                <option value={1} checked={ checkValue === 1 } readOnly={ !modifyMode }>3개월</option>
+                                <option value={2} checked={ checkValue === 2 } readOnly={ !modifyMode }>6개월</option>
+                                <option value={3} checked={ checkValue === 3 } readOnly={ !modifyMode }>12개월</option>
+                                <option value={4} checked={ checkValue === 4 } readOnly={ !modifyMode }>PT</option>
                             </select>
                         </td>
                     </tr>
@@ -127,7 +134,6 @@ function MemberModify() {
                         <td>
                             <input 
                                 type='date'
-                                min={ getToday() }
                                 name='memStartDate'
                                 onChange={ onChangeHandler }
                             />
@@ -140,7 +146,6 @@ function MemberModify() {
                             <input
                                 type='date'
                                 name='memEndDate'
-                                min={ getToday() }
                                 onChange={ onChangeHandler }
                             />
                         </td>
@@ -152,7 +157,6 @@ function MemberModify() {
                             <input
                                 type='date'
                                 name='memDeleteDate'
-                                min={ getFiveYear() }
                                 onChange={ onChangeHandler }
                             />
                         </td>
@@ -192,7 +196,7 @@ function MemberModify() {
 
         <div>
             <button
-                onClick={ onClickMemberUpdateHandler }
+                onClick={ onClickMemberModifyHandler }
             >
                 등록
             </button>

@@ -16,17 +16,15 @@
     text-align: center;
 }
 
-.button{
+.navbarDiv button{
+    text-align: center;
     font-family: "LINESeedKR-Bd";
-    font-size : 18px;
+    font-size : 22px;
+    color: #505050;
     margin-top: 50px;
-}
-
-.button2{
-    font-family: "LINESeedKR-Bd";
-    font-size : 18px;
-    margin-top: 10px;
     margin-bottom: 50px;
+    border-radius: 10px;
+    background-color: white;
 }
 
 .navbarDiv li{

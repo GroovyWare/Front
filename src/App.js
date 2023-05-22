@@ -3,6 +3,9 @@ import Layout from './components/layouts/Layout';
 import ApprovalLayout from './Approval/layouts/ApprovalLayout';
 import Schedule from './schedule/Schedule';
 import ApvContent from './Approval/pages/ApvContent';
+import ApvVacation from './Approval/pages/document/ApvVacation';
+import ApvResign from "./Approval/pages/document/ApvResign";
+import ApvReason from "./Approval/pages/document/ApvReason";
 import ApvEmployee from './Approval/employee/ApvEmployee';
 import PlayMemberList from './play/PlayMemberList';
 import PlayHistory from './play/PlayHistory';
@@ -19,71 +22,66 @@ import PassRegist from './Pass/pages/PassRegist';
 import PassMain from './Pass/pages/PassMain';
 import ProtectedRoute from './components/router/ProtectedRoute'
 import Login from './login/pages/Login';
-import Employee from './employee/pages/Employee';
-import EmployeeDetails from './employee/pages/EmployeeDetails';
-import Document from './Approval/pages/document/Document';
-import 'react-toastify/dist/ReactToastify.css';
-import { createGlobalStyle } from 'styled-components';
-import AddDocument from './Approval/pages/document/AddDocument';
+import TestEditorForm from './Editor';
+import Test2 from './Test2';
+import MemberModify from './Member/pages/MemberModify';
 
-export const GlobalStyle = createGlobalStyle`
-.Toastify__toast-container {
-  width: 300px !important;
-  max-width: 300px !important;
-  position: fixed;
-  padding-top: 50px;
-  z-index: 9999;
-  box-sizing: border-box;
-  color: #fff;
-  top: 0;
-  left: 53%;
-  transform: translateX(-50%);
-}
-`;
+
+
 
 function App() {
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/" element={<ProtectedRoute loginCheck={true}><Layout /></ProtectedRoute>}>
-
+        <Route path="/login" element={ <Login/> }/>
+        <Route path="/" element={ <ProtectedRoute loginCheck={ true }><Layout/></ProtectedRoute> }>
+          
           <Route path="approval">
-            <Route index element={<ApvContent />}/>
-            <Route path="new" element={<ProtectedRoute loginCheck={true}><ApvContent /></ProtectedRoute>} />
-            <Route path="add" element={<ProtectedRoute loginCheck={true}><AddDocument /></ProtectedRoute>} />
-            <Route path="document" element={<ProtectedRoute loginCheck={true}><Document /></ProtectedRoute>} />
-            <Route path="employee" element={<ProtectedRoute loginCheck={true}><ApvEmployee /></ProtectedRoute>} />
+
+            <Route index element={<ApprovalLayout/>}/>
+            <Route path="new" element={<ApvContent/>}/>
+            <Route path="vacation" element={<ApvVacation/>}/>
+            <Route path="resignation" element={<ApvResign/>}/>
+            <Route path="reason" element={<ApvReason/>}/>
+            <Route path="employee" element={<ApvEmployee/>}/>
+
           </Route>
 
-          <Route path="play" element={<PlayMemberList />}>
-            <Route index element={<ProtectedRoute loginCheck={true}><PlayMemberList /></ProtectedRoute>} />
-            <Route path="history" element={<PlayHistory />} />
+          <Route path="play">
+            <Route index element ={
+              <ProtectedRoute loginCheck={true}>
+                <PlayMemberList/>
+              </ProtectedRoute>
+              }/>
+            <Route path="history" element={<PlayHistory/>}/>
           </Route>
+
 
           <Route path="/announce">
               <Route index element={<ProtectedRoute loginCheck={true}><AnnounceMain /></ProtectedRoute>} />
               <Route path=":annCode" element={<ProtectedRoute loginCheck={true}><AnnounceDetail /></ProtectedRoute>} />
               <Route path="announce-registration" element={<AnnounceRegistration />} />
+
           </Route>
 
-          <Route path="schedule" element={<Schedule />} />
+          <Route path="schedule"  element={<Schedule/>}/>
 
-          <Route path="member" element={<MemberMain />}>
-            <Route index element={<MemberMain />} />
-            <Route path="detail/:memCode" element={<MemberDetail />} />
-            <Route path="regist" element={<MemberRegist />} />
+          <Route path="member">
+            <Route index element={ <MemberMain/> }/>
+            <Route path="detail/:memCode" element={<MemberDetail/>} />
+            <Route path="regist" element={<MemberRegist/>} />
+            <Route path="modify/:memCode" element={<MemberModify/>} />
           </Route>
 
-          <Route path="pass" element={<PassMain />}>
-            <Route index element={<PassMain />} />
-            <Route path="regist" element={<PassRegist />} />
+          <Route path="pass">
+            <Route index element={ <PassMain/> }/>
+            <Route path="regist" element={<PassRegist/>} />
           </Route>
 
-          <Route path="employee">
-            <Route index element={ <Employee/> }/>
+          <Route path="document">
+            <Route index element={<Test2/>}/>
           </Route>
-
         </Route>
       </Routes>
     </BrowserRouter>

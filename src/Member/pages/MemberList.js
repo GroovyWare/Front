@@ -27,8 +27,9 @@ function MemberList({memberList}) {
             <div>
                 {
                     Array.isArray(memberList) 
-                    && memberList.map(member => <MemberItem key={member.memCode} member={member}/>)
+                    && memberList.map(member => <MemberItem key={ member.memCode} member={member}/>)
                 }
+ 
             </div>
         </>
 
