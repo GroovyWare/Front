@@ -27,15 +27,10 @@ function AnnounceManagement() {
         navigate("/announce-registration");
     }
 
-    const onClickAnnounceDelete = () => {
-        navigate("/announce-delete");
-    }
-
     return (
         <div className={ AnnounceManagementCSS.bodyDiv }>
             <div className={ AnnounceManagementCSS.buttonDiv }>
                 <button onClick={ onClickAnnounceInsert }>글쓰기</button>
-                <button onClick={ onClickAnnounceDelete }>글삭제</button>
             </div>
             <table className={ AnnounceManagementCSS.productTable }>
                 <colgroup>

@@ -8,6 +8,8 @@ import PlayMemberList from './play/PlayMemberList';
 import PlayHistory from './play/PlayHistory';
 import AnnounceMain from "./Announce/pages/announces/AnnounceMain";
 import AnnounceDetail from "./Announce/pages/announces/AnnounceDetail";
+import AnnounceRegistration from './Announce/pages/admin/AnnounceRegistration';
+import AnnounceAdminProtectedRoute from './Announce/pages/admin/AnnounceAdminProtectedRoute';
 import AnnounceList from './Announce/pages/announces/AnnounceList';
 import AnnounceItem from './Announce/items/AnnounceItem';
 import MemberMain from './Member/pages/MemberMain';
@@ -53,8 +55,9 @@ function App() {
           </Route>
 
           <Route path="/announce">
-            <Route index element={<AnnounceMain />}/>
-            <Route path=":annCode" element={<AnnounceDetail />} />
+              <Route index element={<ProtectedRoute loginCheck={true}><AnnounceMain /></ProtectedRoute>} />
+              <Route path=":annCode" element={<ProtectedRoute loginCheck={true}><AnnounceDetail /></ProtectedRoute>} />
+              <Route path="announce-registration" element={<AnnounceRegistration />} />
           </Route>
 
           <Route path="schedule"  element={<Schedule/>}/>

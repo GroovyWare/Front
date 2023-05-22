@@ -1,0 +1,7 @@
+.announceDiv {
+    display: flex;
+    flex-wrap: wrap;
+    width: 850px;
+    height: 100%;
+    margin: 10px auto;
+}
