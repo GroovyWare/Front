@@ -20,6 +20,8 @@ import PassRegist from './Pass/pages/PassRegist';
 import PassMain from './Pass/pages/PassMain';
 import ProtecdRoute from './components/router/ProtectedRoute';
 import Login from './login/pages/Login';
+import Employee from './employee/pages/Employee';
+import EmployeeDetails from './employee/pages/EmployeeDetails';
 
 function App() {
 
@@ -63,6 +65,9 @@ function App() {
             <Route path="regist" element={<PassRegist/>} />
           </Route>
 
+          <Route path="employee">
+            <Route index element={ <Employee/> }/>
+          </Route>
 
         </Route>
       </Routes>
