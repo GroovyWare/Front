@@ -1,5 +1,6 @@
 import { registApproval } from "../modules/ApprovalModule";
 import { selectEmployee, searchEmployee, searchDepartment } from "../modules/ApprovalModule";
+import { selectPerson } from "../modules/ApprovalModule";
 
 const RESTAPI_SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const RESTAPI_SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
@@ -23,6 +24,22 @@ export const registDoc = (data, docTitle) => {
       dispatch(registApproval(result));
     };
   };
+
+  /* 기안서 작성자 찾기 */
+export const selectPersonAPICall = () => {
+    const requestURL = `${PRE_URL}/approval/search/employee`;
+
+        return async (dispatch, getState) => {
+        const result = await fetch(requestURL,{
+            method : "GET",
+            headers : {
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then(response => response.json());
+
+        dispatch(selectPerson(result));
+    }
+}
 
 /* 조직도 조회 */
 export const selectEmployeeList = () => {

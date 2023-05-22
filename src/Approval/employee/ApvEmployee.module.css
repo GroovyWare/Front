@@ -83,10 +83,9 @@
     font-size : 14px;
     background-color: #1A1779;
     color: white;
-    margin-right: 10px;
     width: 20px;
    
-    transform: translate(0, -2200%);
+    transform: translate(0, -2800%);
 }
 
 .close{
@@ -94,9 +93,13 @@
     font-size : 14px;
     background-color: #4A5CFF;
     color: white;
-    margin-right: 10px;
+    margin-right: 60px;
     width: 20px;
     margin-bottom: 20px;
 
-    transform: translate(0, -2200%);
+    transform: translate(0, -2800%);
+}
+
+.line{
+    width: 300px;
 }

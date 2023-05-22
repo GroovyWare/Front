@@ -18,6 +18,23 @@ import PassMain from './Pass/pages/PassMain';
 import ProtectedRoute from './components/router/ProtectedRoute'
 import Login from './login/pages/Login';
 import Document from './Approval/pages/document/Document';
+import 'react-toastify/dist/ReactToastify.css';
+import { createGlobalStyle } from 'styled-components';
+
+export const GlobalStyle = createGlobalStyle`
+.Toastify__toast-container {
+  width: 300px !important;
+  max-width: 300px !important;
+  position: fixed;
+  padding-top: 50px;
+  z-index: 9999;
+  box-sizing: border-box;
+  color: #fff;
+  top: 0;
+  left: 53%;
+  transform: translateX(-50%);
+}
+`;
 
 function App() {
 
@@ -28,7 +45,6 @@ function App() {
         <Route path="/" element={ <ProtectedRoute loginCheck={ true }><Layout/></ProtectedRoute> }>
           
           <Route path="approval">
-            
             <Route index element={<ApprovalLayout/>}/>
             <Route path="new" element={
             <ProtectedRoute loginCheck={true}>
@@ -37,11 +53,9 @@ function App() {
             <Route path="document" element={<ProtectedRoute loginCheck={true}>
               <Document/>
             </ProtectedRoute>}/>
-            <Route path="employee" element={<ProtectedRoute loginCheck={true}>
-              <ApvEmployee/>
-            </ProtectedRoute>}/>
-            
-          </Route>
+              <Route path="employee" element={<ProtectedRoute loginCheck={true}>
+                <ApvEmployee/>
+              </ProtectedRoute>}/>
 
           <Route path="play">
             <Route index element ={
@@ -68,6 +82,7 @@ function App() {
             <Route index element={ <PassMain/> }/>
             <Route path="regist" element={<PassRegist/>} />
           </Route>
+        </Route>
         </Route>
       </Routes>
     </BrowserRouter>
