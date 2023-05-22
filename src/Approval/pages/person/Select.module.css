@@ -26,3 +26,15 @@
     text-align: center;
     padding-top: 25px;
 }
+
+.contextTitle{
+    padding-left: 10px;
+    font-family: "LINESeedKR-Bd";
+    font-size : 18px;
+}
+
+.context{
+    padding-left: 10px;
+    font-family: "LINESeedKR-Bd";
+    font-size : 14px;
+}

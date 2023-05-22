@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import ApvEmployeeCSS from "../../employee/ApvEmployee.module.css";
+import ApvEmployeeCSS from "./ApvEmployee.module.css";
+import ApvEmployeeDrag from './ApvEmployeeDrag';
 
 function Head({empName}){
 
@@ -24,7 +25,7 @@ function Head({empName}){
 
     return(
         <>
-            <div className={ApvEmployeeCSS.title}> 
+             <div className={ApvEmployeeCSS.title}> 
                 {department && department.data.map(
                     (department) => (
                         <div key={department.deptTitle}>
@@ -38,18 +39,13 @@ function Head({empName}){
                                     className={ApvEmployeeCSS.titleimg}
                                 />
                             </div>
+                            <hr className={ApvEmployeeCSS.line}/>
                             
-                            {imgClicked[department.deptTitle] && imgYn[department.deptTitle] &&  employeeList && employeeList.data.data.map((employee) => (
-                                employee.dept.deptTitle === department.deptTitle &&
-                                <div className={ApvEmployeeCSS.subTitle}>
-                                    <div className={ApvEmployeeCSS.name1}>
-                                        {employee.position.positionName}
-                                    </div>
-                                    <div className={ApvEmployeeCSS.name2}>
-                                        {employee.empName}
-                                    </div>
-                                </div>
-                            ))} 
+                            {imgClicked[department.deptTitle] && imgYn[department.deptTitle] &&  employeeList && employeeList.data.data.map((employee) => {
+                                if(employee.dept.deptTitle === department.deptTitle) {
+                                    return <ApvEmployeeDrag employee={employee} />
+                                }
+                            })}
                             
                             {(empName && searchList) && searchList.data.map((search) => (
                                 search.dept.deptTitle === department.deptTitle && search.empName.includes(empName) &&
