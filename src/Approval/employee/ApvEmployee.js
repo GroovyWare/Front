@@ -5,15 +5,12 @@ import SelectReader from "../pages/person/SelectReader";
 import SelectApprove from "../pages/person/SelectApprove";
 import { useDispatch, useSelector } from 'react-redux';
 import { searchEmployeeList, selectEmployeeList, searchDepartmentList, registDoc } from '../../api/ApprovalAPICall';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
-
 
 
 function ApvEmployee({setModalOpen}){
 
-    const [empName, setEmpName] = useState(''); 
-    const [form, setForm] = useState([]);
+    const [empName, setEmpName] = useState('');
+    const [approvedEmployees, setApprovedEmployees] = useState([]);
 
     const dispatch = useDispatch();
 

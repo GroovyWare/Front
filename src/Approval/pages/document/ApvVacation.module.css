@@ -66,7 +66,39 @@
    background-color:#4A5CFF;
 }
 
+.confirm2{
+    font-family:"LINESeedKR-Bd";
+    color:white;
+    font-size: 14px;
+    text-align: center;
+    width: 50px;
+    background-color: #1A1779;
+    margin-left: 950px;
+    transform: translateY(700%);
+}
+
+.cancel2{
+   font-family:"LINESeedKR-Bd";
+   color:white;
+   font-size: 14px;
+   text-align: center;
+   width: 50px;
+   background-color:#4A5CFF;
+   transform: translateY(700%);
+}
+
 .authors{
     display: flex;
+}
+
+.text{
+    width: 700px;
+    font-size: 14px;
+    font-family:"LINESeedKR-Bd";
+    color: #505050;
+    margin-bottom: 10px;
+    text-align: center;
+    margin-top: 30px;
+    margin-left: 350px;
 }
 
