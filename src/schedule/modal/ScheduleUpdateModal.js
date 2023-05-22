@@ -5,18 +5,21 @@ import { updateSchedule } from "../../api/CalendarAPICalls";
 import { initSchedule } from "../../modules/CalendarModule";
 import { toast } from "react-toastify";
 
+
+
 function ScheduleUpdateModal({ searchSchedule, setScheduleUpdateModal }) {
   const [form, setForm] = useState({});
   const dispatch = useDispatch();
-  const { update } = useSelector((state) => state.scheduleReducer);
+  const { modify } = useSelector((state) => state.scheduleReducer);
+  
 
   useEffect(() => {
-    if (update?.status === 200 && setScheduleUpdateModal) {
+    if (modify?.status === 200 && setScheduleUpdateModal) {
       setScheduleUpdateModal(false);
       toast.warning("일정 수정 완료");
       dispatch(initSchedule());
     }
-  }, [update, setScheduleUpdateModal]);
+  }, [modify, setScheduleUpdateModal]);
 
   const onClickHandler = (schCode) => {
     setForm(

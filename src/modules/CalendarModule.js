@@ -18,7 +18,7 @@ const SEARCH_SCHEDULE = 'schedule/SEARCH_SCHEDULES'
 export const { schedule : { getSchedules, getSchedule, postSchedule, putSchedule, deleteschedule, initSchedule, searchSchedules}}
 = createActions({
     [GET_SCHEDUELS] : res => res,
-    [GET_SCHEDULE] : res => res.data,
+    [GET_SCHEDULE] : res => res,
     [PUT_SCHEDULE] : res => res,
     [POST_SCHEDULE] : res => res,
     [INIT_SCHEDULE] : () => {}   ,     // 초기화를 시켜주는 액션을 추가하고 

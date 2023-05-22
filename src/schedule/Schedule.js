@@ -77,11 +77,6 @@ const Schedule = () => {
 
 
 
-
-
-
-
-
   /* 캘린더 옵션 일부 */
   const calendarOptions = {
     height: 950, 
