@@ -60,7 +60,7 @@ function ApvContent(){
       );
 
     return(
-        <>
+        <div className={ApvContentCSS.container}>
              <div className={ApvContentCSS.centerDiv}>
                 <div style={{display:"flex"}}>
                     <div className={ApvContentCSS.docChooseDiv}>
@@ -75,9 +75,6 @@ function ApvContent(){
                      </div>
 
                     <div className={ApvContentCSS.docDiv}>
-                        <div className={ApvContentCSS.title}>
-                            상세정보
-                        </div>
                         
                         <div>
                             <div className={ApvContentCSS.docTitle} style={{display:"flex"}}>
@@ -130,7 +127,7 @@ function ApvContent(){
                     확인
                 </button>
             </div>
-        </>
+        </div>
     )
 }
 
