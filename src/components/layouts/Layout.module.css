@@ -11,8 +11,8 @@
 
 .content {
     display: flex;
-
 }
+
 .contentBg {
     background:  rgba( 255, 255, 255, 0.65 );
     backdrop-filter: blur( 20px );

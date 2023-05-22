@@ -1,14 +1,37 @@
+@font-face {
+    font-family: 'esamanru';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
 *{
-    margin:0
+    margin: 0px;
+    padding: 0px;
 }
-
-.headerDiv{
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
     width: 100%;
-    height: 100px;
-    background-color: rgba(74,92,255);
+    cursor: pointer;
 }
 
-.logoImg{
-   float: right;
-   margin-top: 8px;
+.logo {
+    width: 100%;
+    height: 80px;
+}
+
+.titleDiv {
+    text-transform: uppercase;
+    font-family: 'esamanru';
+    color: #ffffff;
+}
+
+.titleDiv .text1 {
+    font-size: 36px;
+}
+
+.titleDiv .text2 {
+    font-size: 16px;
 }
