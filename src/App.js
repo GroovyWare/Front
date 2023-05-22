@@ -49,7 +49,7 @@ function App() {
         <Route path="/" element={<ProtectedRoute loginCheck={true}><Layout /></ProtectedRoute>}>
 
           <Route path="approval">
-            <Route index element={<ApprovalLayout />}/>
+            <Route index element={<ApvContent />}/>
             <Route path="new" element={<ProtectedRoute loginCheck={true}><ApvContent /></ProtectedRoute>} />
             <Route path="add" element={<ProtectedRoute loginCheck={true}><AddDocument /></ProtectedRoute>} />
             <Route path="document" element={<ProtectedRoute loginCheck={true}><Document /></ProtectedRoute>} />
