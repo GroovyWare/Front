@@ -10,6 +10,7 @@ import ScheduleCss from "./Schedule.css";
 import { Navigate, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import ScheduleInsertModal from "./modal/ScheduleInsertmodal";
 import ScheduleSearchModal from "./modal/ScheduleSearchModal";
+import ScheduleUpdateModal from "./modal/ScheduleUpdateModal";
 
 const Schedule = () => {
   const dispatch = useDispatch();
@@ -20,10 +21,12 @@ const Schedule = () => {
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [searchSchedule, setSearchSchedule] = useState("");
   const [scheduleSearchModal, setScheduleSearchModal] = useState(false);
-
+  const [scheduleUpdateModal, setScheduleUpdateModal] = useState(false);
+  const [ schCode , setschCode] = useState(0);
   useEffect(() => {
     dispatch(AllSchedules());
   }, []);
+
 
   useEffect(() => {
     if (scheduleInsertModal == false) {
@@ -108,8 +111,12 @@ const Schedule = () => {
         <ScheduleInsertModal setScheduleInsertModal={setScheduleInsertModal} />
       )}
       {scheduleSearchModal && ( 
-        <ScheduleSearchModal setScheduleSearchModal={setScheduleSearchModal} searchSchedule={searchSchedule}/>
+        <ScheduleSearchModal setScheduleSearchModal={setScheduleSearchModal} searchSchedule={searchSchedule} setScheduleUpdateModal={setScheduleUpdateModal}/>
       )}
+      {scheduleUpdateModal && (
+        <ScheduleUpdateModal setScheduleUpdateModal={setScheduleUpdateModal} schCode={schCode}/>
+      )}
+      
       <div className={`${styles.mainContents} ScheduleCSS`} style={{ maxWidth: '1680px' }}>
         <FullCalendar
           {...calendarOptions}

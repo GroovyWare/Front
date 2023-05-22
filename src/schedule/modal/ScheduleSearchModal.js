@@ -135,12 +135,12 @@ import ScheduleList from "../lists/ScheduleList";
 import PagingBar from "../../components/common/PagingBar";
 import ScheduleUpdateModal from "./ScheduleUpdateModal";
 
-function ScheduleSearchModal({ searchSchedule, setScheduleSearchModal }) {
+function ScheduleSearchModal({ searchSchedule, setScheduleSearchModal, setScheduleUpdateModal }) {
   const [schCode, setschCode] = useState(0);
   const { searchvalues } = useSelector((state) => state.scheduleReducer);
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
-  const [scheduleUpdateModal, setScheduleUpdateModal] = useState(false);
+  
   const [form, setForm] = useState({});
 
   const searchData = searchvalues && searchvalues.data ? searchvalues.data : [];
@@ -154,7 +154,7 @@ function ScheduleSearchModal({ searchSchedule, setScheduleSearchModal }) {
 
   useEffect(() => {
     dispatch(getSchedule());
-  }, [scheduleUpdateModal]);
+  }, [schCode]);
 
   useEffect(() => {
     dispatch(searchingSchedule({ searchSchedule }));
@@ -217,9 +217,7 @@ function ScheduleSearchModal({ searchSchedule, setScheduleSearchModal }) {
           </div>
         </div>
       </div>
-      {scheduleUpdateModal && (
-        <ScheduleUpdateModal schCode={schCode} setScheduleUpdateModal={setScheduleUpdateModal} />
-      )}
+   
     </div>
   );
 }
