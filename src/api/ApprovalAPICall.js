@@ -1,5 +1,5 @@
 import { registApproval } from "../modules/ApprovalModule";
-import { selectEmployee, searchEmployee, searchDepartment } from "../modules/ApprovalModule";
+import { selectEmployee, searchEmployee, searchDepartment, addApproveLine } from "../modules/ApprovalModule";
 import { selectPerson } from "../modules/ApprovalModule";
 
 const RESTAPI_SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
@@ -78,5 +78,27 @@ export const searchDepartmentList = () => {
         const result = await fetch(requestURL).then(response => response.json());
 
         dispatch(searchDepartment(result));
+    }
+}
+
+/* 결재권자 추가 */
+export const addApproveLineAPI = () => {
+
+    const requestURL = `${PRE_URL}/approval/save`
+
+    return async (dispatch, getState) => {
+        
+        const result = await fetch(requestURL, {
+            method : "POST",
+            headers : {
+                'Content-Type': 'application/json',
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            },
+            body : {
+                
+            }
+        }).then(response => response.json());
+
+        dispatch(addApproveLine(result));
     }
 }

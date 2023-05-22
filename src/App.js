@@ -22,6 +22,7 @@ import EmployeeDetails from './employee/pages/EmployeeDetails';
 import Document from './Approval/pages/document/Document';
 import 'react-toastify/dist/ReactToastify.css';
 import { createGlobalStyle } from 'styled-components';
+import AddDocument from './Approval/pages/document/AddDocument';
 
 export const GlobalStyle = createGlobalStyle`
 .Toastify__toast-container {
@@ -44,8 +45,11 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<ProtectedRoute loginCheck={true}><Layout /></ProtectedRoute>}>
-          <Route path="approval" element={<ApprovalLayout />}>
+
+          <Route path="approval">
+            <Route index element={<ApprovalLayout />}/>
             <Route path="new" element={<ProtectedRoute loginCheck={true}><ApvContent /></ProtectedRoute>} />
+            <Route path="add" element={<ProtectedRoute loginCheck={true}><AddDocument /></ProtectedRoute>} />
             <Route path="document" element={<ProtectedRoute loginCheck={true}><Document /></ProtectedRoute>} />
             <Route path="employee" element={<ProtectedRoute loginCheck={true}><ApvEmployee /></ProtectedRoute>} />
           </Route>
