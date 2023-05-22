@@ -43,7 +43,7 @@ function MemberDetail() {
 
     /* 수정하기 버튼 */
     const onClickModifyHandler = () => {
-        navigate(`/member/modify/${params.memCode}`)
+        navigate(`/member/modify/${memCode}`)
     }
 
     /* 취소하기(페이지로 돌아가기) 버튼 */

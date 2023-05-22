@@ -98,7 +98,7 @@ function MemberRegist() {
     return (
         <>
         <div>회원 등록</div>
-        <div>
+        
             <table>
                 <tbody>
                     <tr>
@@ -204,9 +204,7 @@ function MemberRegist() {
 
                 </tbody>
             </table>
-        </div>
-
-
+        
         <div>
             <button
                 onClick={ onClickMemberRegistHandler }

@@ -22,6 +22,7 @@ import ProtectedRoute from './components/router/ProtectedRoute'
 import Login from './login/pages/Login';
 import TestEditorForm from './Editor';
 import Test2 from './Test2';
+import MemberModify from './Member/pages/MemberModify';
 
 
 
@@ -62,6 +63,7 @@ function App() {
             <Route index element={ <MemberMain/> }/>
             <Route path="detail/:memCode" element={<MemberDetail/>} />
             <Route path="regist" element={<MemberRegist/>} />
+            <Route path="modify/:memCode" element={<MemberModify/>} />
           </Route>
 
           <Route path="pass">
