@@ -6,8 +6,8 @@ import Quill from 'quill';
 import ApvVacationCSS from './ApvVacation.module.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { registDoc, registVacationDoc } from '../../../api/ApprovalAPICall';
-import { searchDocumentList } from '../../../api/DocumentAPICalls';
+import { registDoc, selectPersonAPICall } from '../../../api/ApprovalAPICall';
+import { RichUtils } from 'draft-js';
 
 const Parchment = Quill.import('parchment');
 
@@ -51,27 +51,39 @@ const modules = {
   .ql-container {
     height: 700px;
   }
+  
+  .ql-editor{
+    background-color : white
+  }
 `;
 
 function Document() {
-  const quillRef = useRef(null); // Add this line
-  const [savedHtml, setSavedHtml] = useState(null); // Add this line
+  const quillRef = useRef(null);
 
   const location = useLocation();
   const {docTitle, startDate, endDate } = location.state;  
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const {regist} = useSelector(state => state.approvalReducer);
+  const {employee} = useSelector(state => state.approvalReducer);
+
   const {setDocument} = useSelector(state => state.documentReducer);
   const [html, setHtml] = useState(setDocument?.data?.docContext);
 
+  /* html 내용이 변할 때 마다 새로 세팅 */
   useEffect(() => {
     setHtml(html);
   }, [html]);
-  
 
+  /* 기안서 작성자 및 부서 알아오기 */
+  useEffect(
+    () => {
+      dispatch(selectPersonAPICall());
+    },[]
+  )
+  
+  /* 결재 요청 보내기 */
   const onClickDocHandler = () => {
     if (quillRef.current) {
       const quillInstance = quillRef.current.getEditor();
@@ -92,13 +104,14 @@ function Document() {
     }
   }
 
+  /* 취소 버튼 클릭 시 */
   const onClickCancelHandler = () => {
     navigate("/approval/new", {replace:true});
   }
 
   return (
-    <div>
-        <div style={{width:600, height: 600, marginLeft:400, marginTop:10}}>
+    <div className={ApvVacationCSS.container}>
+        <div style={{width:600, height: 600, marginLeft : 140}}>
           <StyledQuill 
               ref={quillRef}
               value={html} 
@@ -120,8 +133,8 @@ function Document() {
                 {/* 결재권자 표시 */}
                 <div className={ApvVacationCSS.authors}>
                     <div className={ApvVacationCSS.author}></div>
-                    <div className={ApvVacationCSS.common}></div>
-                    <div className={ApvVacationCSS.common}></div>
+                    <div className={ApvVacationCSS.author}></div>
+                    <div className={ApvVacationCSS.author}></div>
                 </div>
             </div>
 
@@ -139,14 +152,22 @@ function Document() {
                             <th className={ApvVacationCSS.details}>보존일</th>
                             <td className={ApvVacationCSS.details2}>90일</td>
                           </tr>
-                          <tr>
-                            <th className={ApvVacationCSS.details}>기안자</th>
-                            <td className={ApvVacationCSS.details2}>xxx</td>
-                          </tr>
-                          <tr>
-                            <th className={ApvVacationCSS.details}>소속</th>
-                            <td className={ApvVacationCSS.details2}>xxx</td>
-                          </tr>
+                          {employee && employee.data.map((row) => (
+                            <tr>
+                              <th className={ApvVacationCSS.details}>기안자</th>
+                                <td className={ApvVacationCSS.details2}>
+                                  {row.empName}
+                                </td>
+                            </tr>
+                          ))}
+                          {employee && employee.data.map((row) => (
+                            <tr>
+                              <th className={ApvVacationCSS.details}>부서</th>
+                                <td className={ApvVacationCSS.details2}>
+                                  {row.dept.deptTitle}
+                                </td>
+                            </tr>
+                          ))}
                           <tr>
                             <th className={ApvVacationCSS.details}>기안일</th>
                             <td className={ApvVacationCSS.details2}>[{startDate}] ~ [{endDate}]</td>

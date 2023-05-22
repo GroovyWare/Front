@@ -19,39 +19,46 @@ import PassRegist from './Pass/pages/PassRegist';
 import PassMain from './Pass/pages/PassMain';
 import ProtectedRoute from './components/router/ProtectedRoute'
 import Login from './login/pages/Login';
+import Employee from './employee/pages/Employee';
+import EmployeeDetails from './employee/pages/EmployeeDetails';
 import Document from './Approval/pages/document/Document';
+import 'react-toastify/dist/ReactToastify.css';
+import { createGlobalStyle } from 'styled-components';
+import AddDocument from './Approval/pages/document/AddDocument';
+
+export const GlobalStyle = createGlobalStyle`
+.Toastify__toast-container {
+  width: 300px !important;
+  max-width: 300px !important;
+  position: fixed;
+  padding-top: 50px;
+  z-index: 9999;
+  box-sizing: border-box;
+  color: #fff;
+  top: 0;
+  left: 53%;
+  transform: translateX(-50%);
+}
+`;
 
 function App() {
-
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={ <Login/> }/>
-        <Route path="/" element={ <ProtectedRoute loginCheck={ true }><Layout/></ProtectedRoute> }>
-          
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<ProtectedRoute loginCheck={true}><Layout /></ProtectedRoute>}>
+
           <Route path="approval">
-            
-            <Route index element={<ApprovalLayout/>}/>
-            <Route path="new" element={
-            <ProtectedRoute loginCheck={true}>
-              <ApvContent/>
-            </ProtectedRoute>}/>
-            <Route path="document" element={<ProtectedRoute loginCheck={true}>
-              <Document/>
-            </ProtectedRoute>}/>
-            <Route path="employee" element={<ProtectedRoute loginCheck={true}>
-              <ApvEmployee/>
-            </ProtectedRoute>}/>
-            
+            <Route index element={<ApprovalLayout />}/>
+            <Route path="new" element={<ProtectedRoute loginCheck={true}><ApvContent /></ProtectedRoute>} />
+            <Route path="add" element={<ProtectedRoute loginCheck={true}><AddDocument /></ProtectedRoute>} />
+            <Route path="document" element={<ProtectedRoute loginCheck={true}><Document /></ProtectedRoute>} />
+            <Route path="employee" element={<ProtectedRoute loginCheck={true}><ApvEmployee /></ProtectedRoute>} />
           </Route>
 
-          <Route path="play">
-            <Route index element ={
-              <ProtectedRoute loginCheck={true}>
-                <PlayMemberList/>
-              </ProtectedRoute>
-              }/>
-            <Route path="history" element={<PlayHistory/>}/>
+          <Route path="play" element={<PlayMemberList />}>
+            <Route index element={<ProtectedRoute loginCheck={true}><PlayMemberList /></ProtectedRoute>} />
+            <Route path="history" element={<PlayHistory />} />
           </Route>
 
           <Route path="/announce">
@@ -60,18 +67,23 @@ function App() {
               <Route path="announce-registration" element={<AnnounceRegistration />} />
           </Route>
 
-          <Route path="schedule"  element={<Schedule/>}/>
+          <Route path="schedule" element={<Schedule />} />
 
-          <Route path="member">
-            <Route index element={ <MemberMain/> }/>
-            <Route path="detail/:memCode" element={<MemberDetail/>} />
-            <Route path="regist" element={<MemberRegist/>} />
+          <Route path="member" element={<MemberMain />}>
+            <Route index element={<MemberMain />} />
+            <Route path="detail/:memCode" element={<MemberDetail />} />
+            <Route path="regist" element={<MemberRegist />} />
           </Route>
 
-          <Route path="pass">
-            <Route index element={ <PassMain/> }/>
-            <Route path="regist" element={<PassRegist/>} />
+          <Route path="pass" element={<PassMain />}>
+            <Route index element={<PassMain />} />
+            <Route path="regist" element={<PassRegist />} />
           </Route>
+
+          <Route path="employee">
+            <Route index element={ <Employee/> }/>
+          </Route>
+
         </Route>
       </Routes>
     </BrowserRouter>

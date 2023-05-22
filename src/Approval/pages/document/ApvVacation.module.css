@@ -1,72 +1,121 @@
+@font-face {
+    font-family: 'LINESeedKR-Rg';
+    src: url('https://cdn.jsdelivr.net/gh/wizfile/font/LINESeedKR-Rg.eot');
+    src:url('https://cdn.jsdelivr.net/gh/wizfile/font/LINESeedKR-Rg.woff') format('woff');
+    font-style: normal;
+}
 
 .author{
     border: solid black 1px;
     width: 80px;
     height:100px;
-    margin-left: 1400px;
-    margin-top:-800px;
+    transform: translate(1230%, -600%);
+    background-color: white;
 }
 
 .common{
    border: solid black 1px;
    width: 80px;
    height:100px;
-   margin-top:-800px;
+   background-color: white;
 }
 
 .detail{
-    background-color:#EBEAFC;
-    width:600px;
-    height:500px;
-    margin-left: 1100px;
-    margin-top: -600px;
+    background-color:white;
+    width:450px;
+    height:430px;
+    transform: translate(180%, -170%);
     margin-bottom: 30px;
-    border-radius : 20px;
 }
 
 .detail2{
-    background-color:#1A1779;
+    background-color:#667eea;
     color:white;
-    border-radius:20px;
-    height: 50px;
-    font-family:"LINESeedKR-Bd";
+    font-family:'LINESeedKR-Rg';
     font-size: 22px;
     text-align:center;
-    padding-top: 20px;
     margin-top: 250px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .details{
     padding-bottom: 30px;
     padding-right: 30px;
     padding-left: 40px;
+    font-size: 18px;
 }
 
 .details2{
     padding-bottom: 30px;
     padding-left: 40px;
+    font-size: 14px;
 }
 
 .confirm{
-    font-family:"LINESeedKR-Bd";
+    font-family:'LINESeedKR-Rg';
     color:white;
     font-size: 14px;
     text-align: center;
     width: 50px;
-    background-color: #1A1779;
-    margin-left: 500px;
+    background-color: #667eea;
+    transform: translate(2050%, -100%);
 }
 
 .cancel{
-   font-family:"LINESeedKR-Bd";
+   font-family:'LINESeedKR-Rg';
    color:white;
    font-size: 14px;
    text-align: center;
    width: 50px;
    background-color:#4A5CFF;
+   transform: translate(2050%, -100%);
+}
+
+.confirm2{
+    font-family:'LINESeedKR-Rg';
+    color:white;
+    font-size: 14px;
+    text-align: center;
+    width: 50px;
+    background-color: #4A5CFF;
+    transform: translate(1900%, 250%);
+}
+
+.cancel2{
+   font-family:'LINESeedKR-Rg';
+   color:white;
+   font-size: 14px;
+   text-align: center;
+   width: 50px;
+   background-color:#4A5CFF;
+   transform: translate(1900%, 250%);
 }
 
 .authors{
     display: flex;
+}
+
+.text{
+    width: 700px;
+    font-size: 14px;
+    font-family:'LINESeedKR-Rg';
+    color: #505050;
+    margin-bottom: 10px;
+    text-align: center;
+    margin-left: 350px;
+}
+
+.container {
+    background:  rgba(253, 253, 253, 0.8);
+    backdrop-filter: blur( 20px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    width: 100vw;
+    height: 700px;   
+    margin-right: 10px;
+    margin-top: 10px;
+    padding: 20px;
+    font-family: 'LINESeedKR-Rg';
 }
 
