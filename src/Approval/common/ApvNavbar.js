@@ -10,7 +10,7 @@ function ApvNavbar(){
         <div className={ApvNavbarCSS.wrap}>
             <div className={ApvNavbarCSS.navbarDiv}>
                 <div>
-                    <button><NavLink to="/approval/new" style={{textDecoration : "none"}}>새 결재 진행</NavLink></button>
+                    <button><NavLink to="/approval/new" style={{textDecoration : "none", color : "#505050"}}>새 결재 진행</NavLink></button>
                     <li>자주 쓰는 양식</li>
                     <div></div>
                     <li style={{marginTop:50, marginBottom:10}}>개인</li>

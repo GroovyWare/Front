@@ -1,50 +1,62 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { callMemberRegistAPI } from "../../api/MemberAPICalls";
+import { useNavigate, useParams } from "react-router-dom";
+import { callMemberDetailReadModifyAPI, callMemberUpdateAPI } from "../../api/MemberAPICalls";
 
 
+function MemberModify() {
 
-function MemberRegist() {
-
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const { regist } = useSelector(state => state.memberReducer);
-    const [form, setForm] = useState({
-        memStartDate : getToday(),
-        memDeleteDate : getFiveYear(),
-        memEndDate: getThreeMonth(),
-        passCode : 1,
-        empcode : 1
-    });
+    const { memCode } = useParams();
+    dispatch = useDispatch();
+    navigate = useNavigate();
+    const { modify } = useSelector((state => state.memberReducer));
 
 
-    
-    /* 회원 등록 완료 후 리스트로 이동 */
+    /* 읽기 모드, 수정 모드를 구분 */
+    const [editMode, setEditMode] = useState(false);
+
+    /* 회원 상세정보 조회 */
     useEffect(
         () => {
-            if(regist?.status === 200) {
-                alert('회원 등록이 완료되었습니다.');
-                navigate('/member', { replace : true });
+            dispatch(callMemberDetailReadModifyAPI({ memCode }));
+        },
+        []);
+
+    /* 회원 수정완료 후 이동 */
+    useEffect(
+        () => {
+            if(edit?.state === 200) {
+                alert('회원 수정이 완료되었습니다.');
+                navigate('member',{ replace : true });
             }
         },
-        [regist]
+        [edit]
     );
 
     /* 입력 양식 값 변경될 때 */
-    const onChangeHandler= (e) => {
+    const onChangeHandler = (e) => {
         setForm({
             ...form,
             [e.target.name] : e.target.value
-        });
+        })
     }
 
-    /* 회원권 변경 */
-    
+    /* 회원권 변경될 때 */
+    const onChangePassHandler = (e) => {
+        setForm({
+            ...form,
+            pass : { passCode : e.target.value }
+        })
+    }
 
-    
-    /* 회원등록 버튼 클릭 */
-    const onClickMemberRegistHandler = () => {
+    /* 수정 모드 변경 이벤트 */
+    const onclickEditModeHandler = () => {
+        setEditMode(true);
+        setForm({ ...data });
+    }
+
+    /* 회원 수정 저장 버튼 클릭 이벤트 */
+    const onClickMemberUpdateHandler = () => {
 
         /* 서버로 전달할 formData 형태의 객체 설정 */
         const formData = new FormData();
@@ -60,44 +72,15 @@ function MemberRegist() {
         formData.append("history[0].pass.passCode", form.passCode);
         formData.append("history[0].employee.empCode", form.empCode);
 
-        dispatch(callMemberRegistAPI(formData));
+        dispatch(callMemberUpdateAPI(formData));
     }
 
-    /* 오늘 날짜 가져오기 */
-    function getToday() {     
-        const today = new Date();
-        return today.getFullYear() + "-" + ((today.getMonth()+1)>9 ? (today.getMonth()+1) : "0"+(today.getMonth()+1)) + "-" + (today.getDate()>9 ? today.getDate() : "0"+today.getDate());
-    }
+    const inputStyle = !editMode ? { backgroundColor : 'gray'} : null;
+    const checkValue = !editMode ? data.history?.pass.passType : form.history.pass.passType;
 
-
-    /* 5년 뒤 날짜 가져오기 */
-    function getFiveYear() {     
-        const today = new Date();
-        return today.getFullYear() + 5 + "-" + ((today.getMonth()+1)>9 ? (today.getMonth()+1) : "0"+(today.getMonth()+1)) + "-" + (today.getDate()>9 ? today.getDate() : "0"+today.getDate());
-    }
-
-    /* 1년 뒤 날짜 가져오기 */
-    function getOneYear() {     
-        const today = new Date();
-        return today.getFullYear() + 1 + "-" + ((today.getMonth()+1)>9 ? (today.getMonth()+1) : "0"+(today.getMonth()+1)) + "-" + (today.getDate()>9 ? today.getDate() : "0"+today.getDate());
-    }
-
-    /* 3개월 뒤 날짜 가져오기 */
-    function getThreeMonth() {     
-        const today = new Date();
-        return today.getFullYear() + "-" + ((today.getMonth()+4)>9 ? (today.getMonth()+4) : "0"+(today.getMonth()+4)) + "-" + (today.getDate()>9 ? today.getDate() : "0"+today.getDate());
-    }
-
-    /* 6개월 뒤 날짜 가져오기 */
-    function getSixMonth() {     
-        const today = new Date();
-        return today.getFullYear() + "-" + ((today.getMonth()+7)>9 ? (today.getMonth()+7) : "0"+(today.getMonth()+7)) + "-" + (today.getDate()>9 ? today.getDate() : "0"+today.getDate());
-    }
-
-
-    return (
+    return(
         <>
-        <div>회원 등록</div>
+        <div>회원 수정</div>
         <div>
             <table>
                 <tbody>
@@ -128,7 +111,7 @@ function MemberRegist() {
                         <td>
                             <select
                                 name='passCode'
-                                onChange={ onChangeHandler }
+                                onChange={ onChangePassHandler }
                             >
                                 <option>선택하세요</option>
                                 <option value="1">3개월</option>
@@ -209,7 +192,7 @@ function MemberRegist() {
 
         <div>
             <button
-                onClick={ onClickMemberRegistHandler }
+                onClick={ onClickMemberUpdateHandler }
             >
                 등록
             </button>
@@ -225,4 +208,5 @@ function MemberRegist() {
     );
 }
 
-export default MemberRegist;
+export default MemberModify;
+

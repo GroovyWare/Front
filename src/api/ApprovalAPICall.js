@@ -1,64 +1,43 @@
-import {registVacation, registResign, registReason } from "../modules/ApprovalModule";
+import { registApproval } from "../modules/ApprovalModule";
 import { selectEmployee, searchEmployee, searchDepartment } from "../modules/ApprovalModule";
+import { selectPerson } from "../modules/ApprovalModule";
 
 const RESTAPI_SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const RESTAPI_SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
 const PRE_URL = `http://${RESTAPI_SERVER_IP}:${RESTAPI_SERVER_PORT}`;
 
-/* 휴가 신청서 등록 */
-export const registVacationDoc = (data) => {
-
-    const requestURL = `${PRE_URL}/document/save`;
-
+/* 결재 등록 */
+export const registDoc = (data, docTitle) => {
+    const requestURL = `${PRE_URL}/approval/save?docTitle=${docTitle}`;
+  
     return async (dispatch, getState) => {
+    
+    const result = await fetch(requestURL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+        },
+        body: JSON.stringify(data)
+      }).then(response => response.json());
+  
+      dispatch(registApproval(result));
+    };
+  };
 
-        const result = await fetch(requestURL, {
-            method : 'POST',
+  /* 기안서 작성자 찾기 */
+export const selectPersonAPICall = () => {
+    const requestURL = `${PRE_URL}/approval/search/employee`;
+
+        return async (dispatch, getState) => {
+        const result = await fetch(requestURL,{
+            method : "GET",
             headers : {
-                'Content-Type' : 'application/json'
-            },
-            body : JSON.stringify(data)
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            }
         }).then(response => response.json());
 
-        dispatch(registVacation(result));
-    }
-}
-
-/* 사직서 등록 */
-export const registResignDoc = (data) => {
-
-    const requestURL = `${PRE_URL}/document/save`;
-
-    return async (dispatch, getState) => {
-
-        const result = await fetch(requestURL, {
-            method : 'POST',
-            headers : {
-                'Content-Type' : 'application/json'
-            },
-            body : JSON.stringify(data)
-        }).then(response => response.json());
-
-        dispatch(registResign(result));
-    }
-}
-
-/* 사유서 등록 */
-export const registReasonDoc = (data) => {
-
-    const requestURL = `${PRE_URL}/document/save`;
-
-    return async (dispatch, getState) => {
-
-        const result = await fetch(requestURL, {
-            method : 'POST',
-            headers : {
-                'Content-Type' : 'application/json'
-            },
-            body : JSON.stringify(data)
-        }).then(response => response.json());
-
-        dispatch(registReason(result));
+        dispatch(selectPerson(result));
     }
 }
 
@@ -101,4 +80,3 @@ export const searchDepartmentList = () => {
         dispatch(searchDepartment(result));
     }
 }
-

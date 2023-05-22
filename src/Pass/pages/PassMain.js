@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { callPassListAPI } from "../../api/PassAPICalls";
 import PagingBar from "../../components/common/PagingBar";
-import PassItem from "../items/PassItem";
+import PassList from "./PassList";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 function PassMain() {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const pass = useSelector(state => state.passReducer);
     const passLists = pass.data;
     const pageInfo = pass.pageInfo;
@@ -20,21 +22,24 @@ function PassMain() {
         [currentPage]
     );
 
+    /* 회원권 등록하기 버튼 */
+    const onClickRegistHandler = () => {
+        navigate(`regist`)
+    }
+
     return(
         <>
-
-            
+        <div>
+            <div>회원권 조회</div>
+        </div>
             <div>
-                { passLists && <PassItem passLists={passLists}/> }
+                { passLists && <PassList passLists={passLists}/> }
             </div>
             <div>
                 { pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage }/> }
             </div>
 
-            
-
-            <button>등록</button>
-            <button>취소</button>
+            <button onClick={ onClickRegistHandler }>등록</button>
         </>
     );  
 }

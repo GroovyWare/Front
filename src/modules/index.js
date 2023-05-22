@@ -4,9 +4,12 @@ import approvalReducer from "./ApprovalModule";
 import playReducer from "./PlayModule";
 import memberReducer from "./MemberModule";
 import passReducer from "./PassModule";
+import historyReducer from "./HistoryModule";
 import scheduleReducer from "./CalendarModule";
 import loginReducer from "./LoginModule";
 import employeeReducer from './EmployeeModule';
+import documentReducer from './DocumentModule';
+
 
 const rootReducer = combineReducers({
     announceReducer,
@@ -14,9 +17,12 @@ const rootReducer = combineReducers({
     playReducer,
     memberReducer,
     passReducer,
+    historyReducer,
     scheduleReducer,
     loginReducer,
-    employeeReducer
+    employeeReducer,
+    documentReducer
+
 });
 
 export default rootReducer;

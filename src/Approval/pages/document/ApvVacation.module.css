@@ -3,16 +3,15 @@
     border: solid black 1px;
     width: 80px;
     height:100px;
-    margin-left:1100px;
-    margin-top: -900px;
+    margin-left: 1400px;
+    margin-top:-800px;
 }
 
 .common{
    border: solid black 1px;
    width: 80px;
    height:100px;
-   margin-left:400;
-   margin-top:-900px;
+   margin-top:-800px;
 }
 
 .detail{
@@ -20,7 +19,7 @@
     width:600px;
     height:500px;
     margin-left: 1100px;
-    margin-top: -700px;
+    margin-top: -600px;
     margin-bottom: 30px;
     border-radius : 20px;
 }
@@ -34,18 +33,18 @@
     font-size: 22px;
     text-align:center;
     padding-top: 20px;
+    margin-top: 250px;
 }
 
 .details{
-    margin-bottom: 30px;
-    margin-top: 20px;
-    margin-left: 50px;
+    padding-bottom: 30px;
+    padding-right: 30px;
+    padding-left: 40px;
 }
 
 .details2{
-    margin-bottom: 30px;
-    margin-top: 30px;
-    margin-left: 50px;
+    padding-bottom: 30px;
+    padding-left: 40px;
 }
 
 .confirm{
@@ -55,8 +54,7 @@
     text-align: center;
     width: 50px;
     background-color: #1A1779;
-    margin-left: 1300px;
-    margin-bottom: 50px;
+    margin-left: 500px;
 }
 
 .cancel{

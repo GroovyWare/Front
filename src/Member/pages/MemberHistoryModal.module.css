@@ -1,0 +1,60 @@
+@font-face {
+    font-family: 'GongGothicMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LINESeedKR-Bd';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* 버튼 기본 스타일링 제거 */
+button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+
+.modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.modalContainer{
+    width: 600px;
+    height: 600px;
+    padding: 10px;
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    z-index: 1000;
+}
+
+.modalTitle{
+    margin-top: 30px;
+    font-family: LINESeedKR-Bd;
+    font-size: xx-large;
+}
+
+.modalTable{
+    padding: 30px;
+    margin-top: 30px;
+    font-family: LINESeedKR-Bd;
+    font-size:16px;
+}
+
+.modalTr {
+    padding: 15px;
+}
+

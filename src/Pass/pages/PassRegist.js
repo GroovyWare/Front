@@ -9,9 +9,8 @@ function PassRegist() {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { regist } = useSelector(state => state.PassReducer);
+    const { regist } = useSelector(state => state.passReducer);
     const [form, setForm] = useState({});
-
 
     /* 회원권 등록 후 회원권 리스트로 이동 */
     useEffect(
@@ -23,6 +22,7 @@ function PassRegist() {
         },
         [regist]
     );
+
 
     /* 입력 양식 값이 변경될 때 */
     const onChangeHandler = (e) => {
@@ -37,14 +37,14 @@ function PassRegist() {
 
         /* 서버로 전달할 formData 형태의 객체 설정 */
         const formData = new FormData();
-        formData.append("passType");
-        formData.append("passEtc");
-        formData.append("passPrice");
-        formData.append("passAmount");
+
+        formData.append("passType", form.passType);
+        formData.append("passEtc", form.passEtc);
+        formData.append("passPrice", form.passPrice);
+        formData.append("passAmount", form.passAmount);
 
         dispatch(callPassRegistAPI(formData));
     }
-
 
     return(
         <>
@@ -53,73 +53,39 @@ function PassRegist() {
             <table>
                 <tbody>
                     <tr>
-                        <td><label>회원이름</label></td>
-                        <td>
-                            <input
-                                name='memName'
-                                placeholder='회원 이름'
-                                onChange={ onChangeHandler }
-                            />
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><label>전화번호</label></td>
-                        <td>
-                            <input
-                                name='memPhone'
-                                placeholder='전화번호'
-                                onChange={ onChangeHandler }
-                            />
-                        </td>
-                    </tr>
-
-                    <tr>
                         <td><label>회원권</label></td>
                         <td>
                             <select
                                 name='passType'
                                 onChange={ onChangeHandler }
                             >
-                                <option value="1">3개월</option>
-                                <option value="2">6개월</option>
-                                <option value="3">12개월</option>
-                                <option value="4">PT</option>
+                                <option value="3개월">3개월</option>
+                                <option value="6개월">6개월</option>
+                                <option value="12개월">12개월</option>
+                                <option value="PT">PT</option>
                             </select>
                         </td>
                     </tr>
 
                     <tr>
-                        <td><label>시작일</label></td>
+                        <td><label>가격</label></td>
                         <td>
-                            <input 
-                                type='date'
-                                name='memStartDate'
-                                placeholder='시작일'
+                            <input
+                                name='passPrice'
+                                placeholder='가격'
+                                type='number'
                                 onChange={ onChangeHandler }
                             />
                         </td>
                     </tr>
 
                     <tr>
-                        <td><label>종료일</label></td>
+                        <td><label>횟수</label></td>
                         <td>
                             <input
-                                type='date'
-                                name='memEndDate'
-                                placeholder='종료일'
-                                onChange={ onChangeHandler }
-                            />
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><label>삭제일</label></td>
-                        <td>
-                            <input
-                                type='date'
-                                name='memDeleteDate'
-                                placeholder='삭제일'
+                                name='passAmount'
+                                placeholder='숫자만 입력하세요'
+                                type='number'
                                 onChange={ onChangeHandler }
                             />
                         </td>
@@ -129,7 +95,7 @@ function PassRegist() {
                         <td><label>비고</label></td>
                         <td>
                             <input
-                                name='memEtc'
+                                name='passEtc'
                                 placeholder='비고'
                                 onChange={ onChangeHandler }
                             />
@@ -139,7 +105,6 @@ function PassRegist() {
                 </tbody>
             </table>
         </div>
-
 
         <div>
             <button
@@ -157,8 +122,6 @@ function PassRegist() {
 
         </>
     );
-
-
 }
 
 export default PassRegist;

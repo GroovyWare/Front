@@ -1,0 +1,48 @@
+.bodyDiv{
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+    height: 100%;
+    /* width: calc(100% - 200px); */
+    padding: 0 0 20px;
+}
+
+.buttonDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+.buttonDiv button {
+    width: 100px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 25px;
+    height: 30px;
+    border-radius: 25px;
+    background-color: white;
+    font-weight: bold;
+}
+
+.productTable{
+    width: 100%;
+}
+
+.productTable tr:hover { 
+    background-color: #F5F5F5; 
+}
+
+.productTable tr {
+    cursor: pointer;
+}
+
+.pagingBtn{
+    margin: 5px;
+    border-radius: 25px;
+    background-color: white;
+    font-weight: bold;
+}
+
+.pagingBtn:hover{
+    cursor: pointer;
+    background-color: burlywood;
+}
