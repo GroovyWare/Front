@@ -57,6 +57,7 @@ function MemberModify() {
         setForm({ ...data });
     }
 
+    
     /* 회원 수정 저장 버튼 클릭 이벤트 */
     const onClickMemberModifyHandler = () => {
 

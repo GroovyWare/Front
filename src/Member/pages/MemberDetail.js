@@ -41,6 +41,7 @@ function MemberDetail() {
         setMemberHistoryModal(memCode);
     };
 
+    
     /* 수정하기 버튼 */
     const onClickModifyHandler = () => {
         navigate(`/member/modify/${memCode}`)

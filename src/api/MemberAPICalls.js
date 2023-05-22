@@ -5,6 +5,7 @@ const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
 const PRE_URL = `http://${SERVER_IP}:${SERVER_PORT}`;
 
+
 /* 회원 전체 리스트 조회 */
 export const callMemberListAPI = ( {currentPage = 1} ) => {
 
