@@ -1,28 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { callAnnounceDetailAPI } from "../../../api/AnnounceAPICalls";
 
 function AnnounceDetail() {
-
     const dispatch = useDispatch();
-    const Navigate = useNavigate();
-    // const announce = useSelector(state => state.productReducer);
     const params = useParams();
+    const announce = useSelector(state => state.announceReducer);
     const annCode = params.annCode;
-    const [amount, setAmount] = useState(1);
-    
+
     useEffect(() => {
         dispatch(callAnnounceDetailAPI({ annCode }));
-        },
-        []
-    );
-
-    // 목록 버튼 클릭 시 목록으로 돌아가는 이벤트
+    }, [annCode, dispatch]);
 
     return (
         <div>
-            
+            <h2>{announce.annTitle}</h2>
+            <p>{`${announce?.employee?.empName}`}</p>
+            <p>{`${new Date(announce.annDate).toLocaleString()}`}</p>
+            <p>{announce.annContent}</p>
         </div>
     );
 }

@@ -8,9 +8,7 @@ function AnnounceItem({ announce }) {
   };
 
   return (
-    <div onClick={() => onClickAnnounceHandler(announce.annCode)}>
-      
-    </div>
+    <div onClick={() => onClickAnnounceHandler(announce.annCode)}/>
   );
 }
 

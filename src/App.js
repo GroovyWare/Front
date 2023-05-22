@@ -52,8 +52,9 @@ function App() {
             <Route path="history" element={<PlayHistory/>}/>
           </Route>
 
-          <Route path="announce" element={<AnnounceMain />}>
-            <Route path="announce/:announceCode" element={<AnnounceDetail />} />
+          <Route path="/announce">
+            <Route index element={<AnnounceMain />}/>
+            <Route path=":annCode" element={<AnnounceDetail />} />
           </Route>
 
           <Route path="schedule"  element={<Schedule/>}/>
