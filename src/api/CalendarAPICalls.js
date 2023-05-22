@@ -1,4 +1,4 @@
-import { getSchedules, postSchedule, putSchedule, getSchedule } from "../modules/CalendarModule";
+import { getSchedules, postSchedule, putSchedule, getSchedule, searchSchedules } from "../modules/CalendarModule";
 
 
 
@@ -34,17 +34,41 @@ console.log(result);
     
 }
 
-/* 검색하기  페이징, 리스트 (DOING)*/
-export const  searchingSchedule = ({search, currentPage = 1}) => {
-    const requestURL = `${PRE_URL}/calendar/list?search=${search}&page=${currentPage}`
+/* 하나 가져오기 */
+export const oneSchedule = ({ schCode }) => { 
+
+    const requestURL = `${PRE_URL}/calendar/schedule/${schCode}`;
 
     return async (dispatch, getState) => {
 
-    const result = await fetch(requestURL).then(response => response.json());
+        const result = await fetch(requestURL).then(response => response.json());
+
+        if(result.status === 200) {
+            console.log("[ProductAPICalls] callProductCategoriesListAPI result : ", result);
+            dispatch(getSchedule(result));
+        }
+    }
+}
+
+
+/* 검색하기  페이징, 리스트 (DOING, 일부 ok)*/
+export const  searchingSchedule = ({searchSchedule, currentPage = 1}) => {
+    const encodedSearchSchedule = encodeURIComponent(searchSchedule);
+    const requestURL = `${PRE_URL}/calendar/schedule/list?title=${encodedSearchSchedule}&page=${currentPage}`
+
+    return async(dispatch, getState) => {
+
+        const result = await fetch(requestURL,{
+            method : 'GET',
+            headers : {
+                "Content-Type" : "application/json",
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then(response => response.json());
 
     if(result.status === 200) {
         console.log("[searchingSchedule] calling result :  " , result);
-        dispatch(getSchedules(result));
+        dispatch(searchSchedules(result));
     }
 
 }
@@ -76,30 +100,30 @@ export const createSchedule = (form) => {
 
 
 /* 수정하기 */
-export const updateSchedule = (formData) => {
-    const requestURL = `${PRE_URL}/calendar/`;
+export const updateSchedule = (formData, schCode) => {
+    const requestURL = `${PRE_URL}/calendar/schedule/${schCode}`;
 
     return async (dispatch, getState) => {
-
         const result = await fetch(requestURL, {
-            method : 'PUT',
-            headers : {
+            method: 'PUT',
+            headers: {
                 "Content-Type": "application/json",
-                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+                "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
             },
-            body: JSON.stringify(formData),
+            body: JSON.stringify(formData), // JSON.stringify를 사용하여 객체를 JSON 문자열로 변환
         }).then(response => response.json());
 
-        if(result.status === 200) {
-            console.log('[ProductAPICalls] callProductUpdateAPI result :', result);
+        if (result.status === 200) {
+            console.log('[ProductAPICalls] callProductUpdateAPI result:', result);
             dispatch(putSchedule(result));
         }
     }
-
-
-
-
 }
+
+
+
+
+
 
 /* 삭제하기 */
 
