@@ -38,14 +38,11 @@ function App() {
         <Route path="/" element={ <ProtectedRoute loginCheck={ true }><Layout/></ProtectedRoute> }>
           
           <Route path="approval">
-
-            <Route index element={<ApprovalLayout/>}/>
-            <Route path="new" element={<ApvContent/>}/>
-            <Route path="vacation" element={<ApvVacation/>}/>
-            <Route path="resignation" element={<ApvResign/>}/>
-            <Route path="reason" element={<ApvReason/>}/>
-            <Route path="employee" element={<ApvEmployee/>}/>
-
+            <Route index element={<ApprovalLayout />}/>
+            <Route path="new" element={<ProtectedRoute loginCheck={true}><ApvContent /></ProtectedRoute>} />
+            <Route path="add" element={<ProtectedRoute loginCheck={true}><AddDocument /></ProtectedRoute>} />
+            <Route path="document" element={<ProtectedRoute loginCheck={true}><Document /></ProtectedRoute>} />
+            <Route path="employee" element={<ProtectedRoute loginCheck={true}><ApvEmployee /></ProtectedRoute>} />
           </Route>
 
           <Route path="play">
