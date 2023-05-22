@@ -83,7 +83,52 @@ function Navbar(){
                             </Accordion>
                     </NavLink></li>
 
-                    <div className={NavbarCSS.empDiv}>조직도</div>
+
+
+                    <li><NavLink to="/" className={ NavbarCSS.link }>
+                        시설관리
+                        <img src={ arrow } className = { NavbarCSS.arrowNo }/>
+                        </NavLink>
+                    </li>
+
+                    <li><NavLink to="/member" className={ NavbarCSS.link }>
+                        회원관리
+                        <img src={ arrow } className = { NavbarCSS.arrowYes }/>
+                            <ul className={ NavbarCSS.subMenu }>
+                                    <li><NavLink to="/member/regist" className={ NavbarCSS.link }>회원등록</NavLink></li>
+                                    <li><NavLink to="/pass" className={ NavbarCSS.link }>회원권</NavLink></li>
+                            </ul>
+                        </NavLink>
+                    </li>
+
+                    <li><NavLink to="/approval" className={ NavbarCSS.link }>     
+                        결재
+                        <img src={ arrow } className = { NavbarCSS.arrowYes }/>
+                            <ul className={ NavbarCSS.subMenu }>
+                                    <li><NavLink to="/approval/new" className={NavbarCSS.link}>새 결재 진행</NavLink></li>
+                                    <li><NavLink to="/approval/add" className={NavbarCSS.link}>결재 양식 추가</NavLink></li>
+                                    <li>결재 요청</li>
+                                    <li>결재 대기</li>
+                                    <li>회수함</li>
+                                    <li>종결함</li>
+                                    <li>반려함</li>
+                            </ul>
+                        </NavLink>
+                    </li>
+                        
+                    <li><NavLink to="/play" className={ NavbarCSS.link }>
+                        운동량
+                        <img src={ arrow } className = { NavbarCSS.arrowNo }/>
+                        </NavLink>
+                    </li>
+
+                    <li><Link to="/employee" className={ NavbarCSS.link }>
+                        직원관리
+                        <img src={ arrow } className = { NavbarCSS.arrowNo }/>
+                        </Link>
+                    </li>
+
+
             </div>
             
         </div>

@@ -8,7 +8,23 @@
     background-color: rgba(74,92,255);
 }
 
-.logoImg{
-   float: right;
-   margin-top: 8px;
+
+.logo {
+    width: 80px;
+    height: 100%;
 }
+
+.titleDiv {
+    text-transform: uppercase;
+    font-family: 'esamanru';
+    color: #ffffff;
+}
+
+.titleDiv .text1 {
+    font-size: 36px;
+}
+
+.titleDiv .text2 {
+    font-size: 16px;
+}
+

@@ -11,6 +11,8 @@ import PlayMemberList from './play/PlayMemberList';
 import PlayHistory from './play/PlayHistory';
 import AnnounceMain from "./Announce/pages/announces/AnnounceMain";
 import AnnounceDetail from "./Announce/pages/announces/AnnounceDetail";
+import AnnounceRegistration from './Announce/pages/admin/AnnounceRegistration';
+import AnnounceAdminProtectedRoute from './Announce/pages/admin/AnnounceAdminProtectedRoute';
 import AnnounceList from './Announce/pages/announces/AnnounceList';
 import AnnounceItem from './Announce/items/AnnounceItem';
 import MemberMain from './Member/pages/MemberMain';
@@ -36,12 +38,14 @@ function App() {
         <Route path="/" element={ <ProtectedRoute loginCheck={ true }><Layout/></ProtectedRoute> }>
           
           <Route path="approval">
+
             <Route index element={<ApprovalLayout/>}/>
             <Route path="new" element={<ApvContent/>}/>
             <Route path="vacation" element={<ApvVacation/>}/>
             <Route path="resignation" element={<ApvResign/>}/>
             <Route path="reason" element={<ApvReason/>}/>
             <Route path="employee" element={<ApvEmployee/>}/>
+
           </Route>
 
           <Route path="play">
@@ -53,8 +57,12 @@ function App() {
             <Route path="history" element={<PlayHistory/>}/>
           </Route>
 
-          <Route path="/announce" element={<AnnounceMain />}>
-            <Route path="/announce/:announceCode" element={<AnnounceDetail />} />
+
+          <Route path="/announce">
+              <Route index element={<ProtectedRoute loginCheck={true}><AnnounceMain /></ProtectedRoute>} />
+              <Route path=":annCode" element={<ProtectedRoute loginCheck={true}><AnnounceDetail /></ProtectedRoute>} />
+              <Route path="announce-registration" element={<AnnounceRegistration />} />
+
           </Route>
 
           <Route path="schedule"  element={<Schedule/>}/>
