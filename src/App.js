@@ -37,52 +37,38 @@ export const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
-
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={ <Login/> }/>
-        <Route path="/" element={ <ProtectedRoute loginCheck={ true }><Layout/></ProtectedRoute> }>
-          
-          <Route path="approval">
-            <Route index element={<ApprovalLayout/>}/>
-            <Route path="new" element={
-            <ProtectedRoute loginCheck={true}>
-              <ApvContent/>
-            </ProtectedRoute>}/>
-            <Route path="document" element={<ProtectedRoute loginCheck={true}>
-              <Document/>
-            </ProtectedRoute>}/>
-              <Route path="employee" element={<ProtectedRoute loginCheck={true}>
-                <ApvEmployee/>
-              </ProtectedRoute>}/>
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<ProtectedRoute loginCheck={true}><Layout /></ProtectedRoute>}>
+          <Route path="approval" element={<ApprovalLayout />}>
+            <Route path="new" element={<ProtectedRoute loginCheck={true}><ApvContent /></ProtectedRoute>} />
+            <Route path="document" element={<ProtectedRoute loginCheck={true}><Document /></ProtectedRoute>} />
+            <Route path="employee" element={<ProtectedRoute loginCheck={true}><ApvEmployee /></ProtectedRoute>} />
+          </Route>
 
-          <Route path="play">
-            <Route index element ={
-              <ProtectedRoute loginCheck={true}>
-                <PlayMemberList/>
-              </ProtectedRoute>
-              }/>
-            <Route path="history" element={<PlayHistory/>}/>
+          <Route path="play" element={<PlayMemberList />}>
+            <Route index element={<ProtectedRoute loginCheck={true}><PlayMemberList /></ProtectedRoute>} />
+            <Route path="history" element={<PlayHistory />} />
           </Route>
 
           <Route path="announce" element={<AnnounceMain />}>
             <Route path="announce/:announceCode" element={<AnnounceDetail />} />
           </Route>
 
-          <Route path="schedule"  element={<Schedule/>}/>
+          <Route path="schedule" element={<Schedule />} />
 
-          <Route path="member">
-            <Route index element={ <MemberMain/> }/>
-            <Route path="detail/:memCode" element={<MemberDetail/>} />
-            <Route path="regist" element={<MemberRegist/>} />
+          <Route path="member" element={<MemberMain />}>
+            <Route index element={<MemberMain />} />
+            <Route path="detail/:memCode" element={<MemberDetail />} />
+            <Route path="regist" element={<MemberRegist />} />
           </Route>
 
-          <Route path="pass">
-            <Route index element={ <PassMain/> }/>
-            <Route path="regist" element={<PassRegist/>} />
+          <Route path="pass" element={<PassMain />}>
+            <Route index element={<PassMain />} />
+            <Route path="regist" element={<PassRegist />} />
           </Route>
-        </Route>
         </Route>
       </Routes>
     </BrowserRouter>

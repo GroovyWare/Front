@@ -18,7 +18,7 @@ function SelectApprove(){
 
             // 이미 승인된 목록에 직원이 있는지 확인합니다.
             if (approvedEmployees.find(emp => emp.name === item.name)) {
-                toast.warning('동일인은 추가할 수 없습니다.');
+                toast.warning('동일인은 추가 할 수 없습니다.')
                 return;
             }
             

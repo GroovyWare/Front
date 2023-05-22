@@ -59,16 +59,12 @@ function ApvEmployee({setModalOpen}){
                         />
                          
                         <div>
-                        <DndProvider backend={HTML5Backend}>
-                                <Head empName = {empName}/>
-                        </DndProvider>
+                            <Head empName = {empName}/>
                         </div>
                     </div>
                         <div>
-                        <DndProvider backend={HTML5Backend}>
-                                <SelectApprove/>
-                                <SelectReader/>
-                        </DndProvider>
+                            <SelectApprove/>
+                            <SelectReader/>
                             <button 
                                 className={ApvEmployeeCSS.close}
                                 onClick={closeModal}    
