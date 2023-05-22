@@ -5,15 +5,16 @@ import ApvEmployee from "../employee/ApvEmployee";
 import { rangesIntersect } from "@fullcalendar/core/internal";
 import { useDispatch } from "react-redux";
 import { searchDepartmentList } from "../../api/ApprovalAPICall";
+import { searchDocumentList } from "../../api/DocumentAPICalls";
 
 function ApvContent(){
     const navigate = useNavigate();
     const dispatch = useDispatch();
     
-    const [item, setItem] = useState();
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
     const [modalOpen, setModalOpen] = useState(false);
+    const [docTitle, setDocTitle] = useState();
 
     /* 모달창 노출 */
     const showModal = () => {
@@ -22,28 +23,32 @@ function ApvContent(){
 
     /* 파일 양식명 저장 */
     const onclickHandler = (name) => {
-        setItem(name);
+        setDocTitle(name);
     }
 
     /* 확인 버튼 클릭 시 양식에 맞는 페이지로 이동 */
     const onClickDocHandler = () => {
-    
-            if(item === '휴가신청서'){
-                navigate(`/approval/vacation`, {state : { item: item, startDate : startDate, endDate : endDate }});
-            }else if(item === '사직서'){
-                navigate("/approval/resignation", {state : { item:item, startDate : startDate, endDate : endDate }});
-            }else if(item === '사유서'){
-                navigate("/approval/reason", {state : { item : item, startDate : startDate, endDate : endDate }});
-            }
+        if(docTitle && startDate && endDate){
+            navigate(`/approval/document`, {state : { docTitle: docTitle, startDate : startDate, endDate : endDate}});
+        }
     }
 
+    /* 기안서 결재 기간 설정(시작일) */
     const onChangeStartHandler = (e) => {
         setStartDate(e.target.value);
     }
 
+    /* 기안서 결재 기간 설정(종료일) */
     const onChangeEndHandler = (e) => {
         setEndDate(e.target.value);
     }
+
+    /* 선택한 양식명에 따라 기본 세팅되는 양식 다르게 하기 */
+    useEffect(
+        () => {
+          dispatch(searchDocumentList(docTitle));
+        },[docTitle]
+      );
 
     return(
         <>
@@ -66,7 +71,7 @@ function ApvContent(){
                         
                         <div>
                             <div className={ApvContentCSS.docTitle} style={{display:"flex"}}>
-                                <div>제목</div> {item && <div style={{marginLeft: 100, fontSize: 18}}>{item}</div>}
+                                <div>제목</div> {docTitle && <div style={{marginLeft: 100, fontSize: 18}}>{docTitle}</div>}
                             </div>
                             <div className={ApvContentCSS.docTitle}>
                                 <div>보존일</div> <div className={ApvContentCSS.common}>90일</div>

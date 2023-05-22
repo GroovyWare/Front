@@ -31,8 +31,8 @@ function MemberHistoryModal({ history, setMemberHistoryModal }) {
                     <td>{ history && history.data[0].pass.passType }</td>
                     <td>{ history && history.data[0].pass.passAmount }</td>
                     <td>{ history && history.data[0].employee.empName }</td>
-                    <td>시작일</td>
-                    <td>종료일</td>
+                    <td>{ history && history.data[0].resStart }</td>
+                    <td>{ history && history.data[0].resEnd }</td>
                    </tr>
                    </tbody>
                  </table>
