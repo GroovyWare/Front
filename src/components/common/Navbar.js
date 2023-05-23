@@ -90,6 +90,12 @@ function Navbar() {
                         결재
                         <img src={ arrow } className = { NavbarCSS.arrowYes }/>
                             <ul className={ NavbarCSS.subMenu }>
+<<<<<<< HEAD
+=======
+                                    <li><NavLink to="/approval/add" className={NavbarCSS.link}>결재 양식 추가</NavLink></li>
+                                    <li>결재 요청</li>
+                                    <li>결재 대기</li>
+>>>>>>> 37798f8bb7450396051fb147b4274708a059d9ff
                                     <li>회수함</li>
                                     <li>종결함</li>
                                     <li>반려함</li>

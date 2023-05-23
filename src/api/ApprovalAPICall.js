@@ -7,7 +7,7 @@ const RESTAPI_SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
 const PRE_URL = `http://${RESTAPI_SERVER_IP}:${RESTAPI_SERVER_PORT}`;
 
 /* 결재 등록 */
-export const registDoc = (data, docTitle) => {
+export const registDoc = (formData, docTitle) => {
     const requestURL = `${PRE_URL}/approval/save?docTitle=${docTitle}`;
   
     return async (dispatch, getState) => {
@@ -15,13 +15,14 @@ export const registDoc = (data, docTitle) => {
     const result = await fetch(requestURL, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
             "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
         },
-        body: JSON.stringify(data)
+        body: formData
       }).then(response => response.json());
   
-      dispatch(registApproval(result));
+      if(result.status === 200){
+        dispatch(registApproval(result));
+      }
     };
   };
 
@@ -37,7 +38,9 @@ export const selectPersonAPICall = () => {
             }
         }).then(response => response.json());
 
-        dispatch(selectPerson(result));
+        if(result.status === 200){
+            dispatch(selectPerson(result));
+        }
     }
 }
 
@@ -50,7 +53,9 @@ export const selectEmployeeList = () => {
 
         const result = await fetch(requestURL).then(response => response.json());
 
-        dispatch(selectEmployee(result));
+        if(result.status === 200){
+            dispatch(selectEmployee(result));
+        }
     }
 }
 
@@ -64,7 +69,9 @@ export const searchEmployeeList = ({empName}) => {
 
         console.log("result", result);
 
-        dispatch(searchEmployee(result));
+       if(result.status === 200){
+        dispatch(selectEmployee(result));
+       }
     }
 }
 
@@ -77,6 +84,35 @@ export const searchDepartmentList = () => {
         
         const result = await fetch(requestURL).then(response => response.json());
 
-        dispatch(searchDepartment(result));
+        if(result.status === 200){
+            dispatch(searchDepartment(result));
+        }
     }
 }
+<<<<<<< HEAD
+=======
+
+/* 결재권자 추가 */
+export const addApproveLineAPI = () => {
+
+    const requestURL = `${PRE_URL}/approval/save`
+
+    return async (dispatch, getState) => {
+        
+        const result = await fetch(requestURL, {
+            method : "POST",
+            headers : {
+                'Content-Type': 'application/json',
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            },
+            body : {
+                
+            }
+        }).then(response => response.json());
+
+        if(result.status === 200){
+            dispatch(addApproveLine(result));
+        }
+    }
+}
+>>>>>>> 37798f8bb7450396051fb147b4274708a059d9ff
