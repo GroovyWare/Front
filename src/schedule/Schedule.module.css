@@ -52,9 +52,9 @@
     font-weight: bold;
     color: #000000;
     cursor: pointer;
-    margin-top: 85vh;
-    margin-bottom: 15vh;
-    margin-right: 10vw;
+    margin-top: 600px;
+    margin-bottom: 50px;
+    margin-right: 20px;
     box-shadow: 2px 3px 3px rgb(44, 41, 41);
   }
   
@@ -65,4 +65,10 @@
  
 }
  
-  
+.radioOptions {
+  position: relative;
+}
+
+.searchOptions {
+  position: relative;
+}

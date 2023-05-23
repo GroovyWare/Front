@@ -92,7 +92,7 @@ const Schedule = () => {
 
   /* 캘린더 옵션 일부 */
   const calendarOptions = {
-    height: 950, 
+    
     plugins: [dayGridPlugin, interactionPlugin],
     titleFormat: (date) => {
       const year = `${date.date.year} 년`;
@@ -138,7 +138,8 @@ const Schedule = () => {
           weekends={true}
           dayMaxEventRows={3}
           eventBackgroundColor="white"
-          contentHeight={100}
+          contentHeight={600}
+          contentWidth={800}
         />
       </div>
       

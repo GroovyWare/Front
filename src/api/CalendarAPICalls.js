@@ -100,8 +100,8 @@ export const createSchedule = (form) => {
 
 
 /* 수정하기 */
-export const updateSchedule = (formData, schCode) => {
-    const requestURL = `${PRE_URL}/calendar/schedule/${schCode}`;
+export const updateSchedule = (form) => {
+    const requestURL = `${PRE_URL}/calendar/schedule/${form.schCode}`;
 
     return async (dispatch, getState) => {
         const result = await fetch(requestURL, {
@@ -110,7 +110,7 @@ export const updateSchedule = (formData, schCode) => {
                 "Content-Type": "application/json",
                 "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
             },
-            body: JSON.stringify(formData), // JSON.stringify를 사용하여 객체를 JSON 문자열로 변환
+            body: JSON.stringify(form), // JSON.stringify를 사용하여 객체를 JSON 문자열로 변환
         }).then(response => response.json());
 
         if (result.status === 200) {

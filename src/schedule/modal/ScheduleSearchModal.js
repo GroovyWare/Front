@@ -27,9 +27,9 @@ function ScheduleSearchModal({ searchSchedule, setScheduleSearchModal, setSchedu
     setScheduleSearchModal(false);
   };
 
-  useEffect(() => {
-    dispatch(getSchedule());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getSchedule());
+  // }, []);
 
   useEffect(() => {
     dispatch(searchingSchedule({ searchSchedule }));

@@ -9,11 +9,12 @@ import { toast } from "react-toastify";
 
 function ScheduleUpdateModal({  setScheduleUpdateModal , justSchedule}) {
   const [form, setForm] = useState(justSchedule);
-  const { searchvalue } = useSelector((state) => state.scheduleReducer);
-  const [schCode, setschCode] = useState( searchvalue );
+ 
+ 
   const dispatch = useDispatch();
   const { modify } = useSelector((state) => state.scheduleReducer);
   
+  console.log(form)
 
   useEffect(() => {
     if (modify?.status === 200 && setScheduleUpdateModal) {
@@ -25,12 +26,9 @@ function ScheduleUpdateModal({  setScheduleUpdateModal , justSchedule}) {
   }, [modify, setScheduleUpdateModal]);
 
   const handleSubmit = () => {
-    dispatch(updateSchedule(form, schCode));
+    dispatch(updateSchedule(form));
   };
-  const onClickHandler = () => {
-    setschCode(justSchedule.schCode);
-    handleSubmit()
-  };
+  
   
 
   const onChangeHandler = (e) => {
@@ -49,7 +47,7 @@ function ScheduleUpdateModal({  setScheduleUpdateModal , justSchedule}) {
         <div className={ScheduleUpdateModalCSS.updatingformDiv}>
           <h1>일정 수정</h1>
           <select name="schDiv" onChange={onChangeHandler}>
-            <option value="전체">전체</option>
+            <option value="선택">선택</option>
             <option value="부서">부서</option>
             <option value="개인">개인</option>
           </select>
@@ -96,7 +94,7 @@ function ScheduleUpdateModal({  setScheduleUpdateModal , justSchedule}) {
             onChange={onChangeHandler}
             value={form.textColor}
           />
-          <button onClick={onClickHandler}>수정하기</button>
+          <button onClick={handleSubmit}>수정하기</button>
           <button
             style={{
               border: "none",
