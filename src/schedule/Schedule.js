@@ -27,6 +27,7 @@ const Schedule = () => {
  
 
 
+
   useEffect(() => {
     dispatch(AllSchedules());
   }, []);
@@ -88,6 +89,7 @@ const Schedule = () => {
   };
 
   const onEventClickHandler = (info) => {
+    console.log(events.info)
     const clickedEvent = events.data.find(event => event.id === info.event.id);
     // setSelectedEvent(clickedEvent);
     setScheduleUpdateModal(true);    // id 를 얻어온다. find 기준으로 잡고 찾는다. => set justschedule로 넣어줌
@@ -177,7 +179,7 @@ const Schedule = () => {
             contentHeight={600}
             contentWidth={1600}
             eventClick={ onEventClickHandler }
-          
+            eventChange = {(e) => {console.log(e)}}
           />
         </div>
 
