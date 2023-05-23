@@ -8,9 +8,23 @@
 .author{
     border: solid black 1px;
     width: 80px;
-    height:100px;
-    transform: translate(1230%, -600%);
+    height:45px;
+    transform: translate(810%, -1180%);
     background-color: white;
+    text-align: center;
+}
+
+.authorPosition{
+    font-size: 18px;
+    color: black;
+    font-weight: 900;
+}
+
+.authorName{
+    font-family:'LINESeedKR-Rg';
+    font-size: 14px;
+    color: #505050;
+    font-weight: 600;
 }
 
 .common{
@@ -22,34 +36,26 @@
 
 .detail{
     background-color:white;
-    width:450px;
-    height:430px;
-    transform: translate(180%, -170%);
-    margin-bottom: 30px;
-}
-
-.detail2{
-    background-color:#667eea;
-    color:white;
-    font-family:'LINESeedKR-Rg';
-    font-size: 22px;
-    text-align:center;
-    margin-top: 250px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    width:300px;
+    height:550px;
+    transform: translate(35.5%, -98.3%);
+    background-color: #667eea;
 }
 
 .details{
     padding-bottom: 30px;
-    padding-right: 30px;
-    padding-left: 40px;
+    padding-left: 10px;
     font-size: 18px;
+    padding-top: 20px;
+    color: white;
 }
 
 .details2{
-    padding-bottom: 30px;
-    padding-left: 40px;
+    padding-left: 10px;
     font-size: 14px;
+    display: flex;
+    padding-top: 23px;
+    color: white;
 }
 
 .confirm{
@@ -59,7 +65,7 @@
     text-align: center;
     width: 50px;
     background-color: #667eea;
-    transform: translate(2050%, -100%);
+    transform: translate(800%, 45%);
 }
 
 .cancel{
@@ -69,7 +75,7 @@
    text-align: center;
    width: 50px;
    background-color:#4A5CFF;
-   transform: translate(2050%, -100%);
+   transform: translate(800%, 45%);
 }
 
 .confirm2{
@@ -93,7 +99,7 @@
 }
 
 .authors{
-    display: flex;
+    display: -webkit-inline-box;
 }
 
 .text{
@@ -117,5 +123,18 @@
     margin-top: 10px;
     padding: 20px;
     font-family: 'LINESeedKR-Rg';
+}
+
+.wrap{
+    background-color: white;
+    width: 1000px;
+    height: 700px;
+    transform: translate(22.5%, 0%);
+    border-radius: 20px;
+}
+
+.editor{
+    width: 500px;
+    transform: translate(82%, 14%);
 }
 

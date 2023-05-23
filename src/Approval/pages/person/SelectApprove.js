@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import SelectCSS from "./Select.module.css";
 import { useDrop } from 'react-dnd';
 import { toast } from 'react-toastify';
-import { useDispatch } from 'react-redux';
-import { addApproveLineAPI } from '../../../api/ApprovalAPICall';
+import { EmployeeContext } from '../../employee/EmployeeProvider';
+import { useLocation } from 'react-router-dom';
 
 function SelectApprove(){
+    const {approvedEmployees, setApprovedEmployees} = useContext(EmployeeContext);
 
-    const [approvedEmployees, setApprovedEmployees] = useState([]);
     const positionWeight = { '대표': 1, '팀매니저': 2, '시니어': 3, '일반': 4 };
-    const dispatch = useDispatch();
-
+    const location = useLocation();
+    
     const [, drop] = useDrop({
         accept: 'employee',
         drop: 
@@ -42,12 +42,19 @@ function SelectApprove(){
     
           // 직급에 따라 정렬하여 추가합니다.
           setApprovedEmployees(prev => {
-            const newList = [item, ...prev];
+            const newList = [...prev];
+            newList.push(item);
             newList.sort((a, b) => positionWeight[a.position] - positionWeight[b.position]);
             return newList;
           });
         },
       });
+
+      useEffect(() => {
+        if (location.pathname !== '/approval/document') {
+            setApprovedEmployees([]);
+        }
+      }, [location, setApprovedEmployees]);
 
     return(
         <>
