@@ -132,6 +132,7 @@ function Document() {
             onClick={onClickCancelHandler}
             >취소</button>
         </div>
+
           <div>
             {/* 결재권자 표시 */}
               {
