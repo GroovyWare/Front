@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ScheduleInsertModalCSS from "./ScheduleInsertModal.module.css";
+import ScheduleUpdateModalCSS from "./ScheduleUpdateModal.module.css";
+import { updateSchedule } from "../../api/CalendarAPICalls";
+import { initSchedule } from "../../modules/CalendarModule";
+import { toast } from "react-toastify";
+
+
 
 function ScheduleUpdateModal({  setScheduleUpdateModal , justSchedule}) {
   const [form, setForm] = useState(justSchedule);
@@ -23,6 +28,7 @@ function ScheduleUpdateModal({  setScheduleUpdateModal , justSchedule}) {
   const handleSubmit = () => {
     dispatch(updateSchedule(form));
   };
+  
   
 
   const onChangeHandler = (e) => {
@@ -48,23 +54,25 @@ function ScheduleUpdateModal({  setScheduleUpdateModal , justSchedule}) {
           <input
             type="text"
             name="title"
-            placeholder="일정제목의 입력을 바랍니다!"
+            placeholder="일정 제목을 입력해주세요!"
             onChange={onChangeHandler}
             value={form.title}
           />
           <textarea
-            placeholder="일정내용을 입력해주시기 바랍니다."
+            placeholder="일정 내용을 입력해주세요."
             name="context"
             onChange={onChangeHandler}
             value={form.context}
           ></textarea>
           <input
+            placeholder="시작일 입력"
             type="datetime-local"
             name="start"
             onChange={onChangeHandler}
             value={form.start}
           />
           <input
+            placeholder="종료일 입력"
             type="datetime-local"
             name="end"
             onChange={onChangeHandler}
@@ -103,3 +111,5 @@ function ScheduleUpdateModal({  setScheduleUpdateModal , justSchedule}) {
     </div>
   );
 }
+
+export default ScheduleUpdateModal;
