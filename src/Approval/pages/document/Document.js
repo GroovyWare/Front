@@ -7,10 +7,7 @@ import ApvDocumentCSS from './ApvDocument.module.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { registDoc, selectPersonAPICall } from '../../../api/ApprovalAPICall';
-<<<<<<< HEAD
-=======
 import { EmployeeContext } from '../../employee/EmployeeProvider';
->>>>>>> 37798f8bb7450396051fb147b4274708a059d9ff
 
 const Parchment = Quill.import('parchment');
 
@@ -52,11 +49,7 @@ const modules = {
     height: 50px;
   }
   .ql-container {
-<<<<<<< HEAD
-    height: 700px;
-=======
     height: 550px;
->>>>>>> 37798f8bb7450396051fb147b4274708a059d9ff
   }
 `;
 
@@ -120,14 +113,9 @@ function Document() {
   }
 
   return (
-<<<<<<< HEAD
-    <div>
-        <div style={{width:600, height: 600, marginLeft:400, marginTop:10}}>
-=======
     <div className={ApvDocumentCSS.container}>
       <div className={ApvDocumentCSS.wrap}>
         <div className={ApvDocumentCSS.editor}>
->>>>>>> 37798f8bb7450396051fb147b4274708a059d9ff
           <StyledQuill 
               ref={quillRef}
               value={html} 
@@ -144,17 +132,6 @@ function Document() {
             onClick={onClickCancelHandler}
             >취소</button>
         </div>
-
-<<<<<<< HEAD
-        <div>
-                {/* 결재권자 표시 */}
-                <div className={ApvVacationCSS.authors}>
-                    <div className={ApvVacationCSS.author}></div>
-                    <div className={ApvVacationCSS.common}></div>
-                    <div className={ApvVacationCSS.common}></div>
-                </div>
-            </div>
-=======
           <div>
             {/* 결재권자 표시 */}
               {
@@ -173,7 +150,6 @@ function Document() {
                 ))
               } 
           </div>
->>>>>>> 37798f8bb7450396051fb147b4274708a059d9ff
 
             {/* 상세 정보 */}
             <div className={ApvDocumentCSS.detail}>
