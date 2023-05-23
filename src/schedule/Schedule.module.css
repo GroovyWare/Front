@@ -15,12 +15,12 @@
     position: relative;
     margin-left: 50px;
     margin-top: 30px;
-    border: 2px solid bisque;
+    border: 2px solid whitesmoke;
     
   }
   
   .calendar1 {
-    height: 50vh;
+    
     width: 50%;
     margin: auto;
     
@@ -61,14 +61,17 @@
 
 .allview {
   display: flex;
-  
- 
 }
  
 .radioOptions {
   position: relative;
+  margin-left: 390px;
+  font-family: "LINESeedKR-Regular";
+  margin-top : 25px;
 }
+.radioOptions input{ margin-left: 15px;}
 
-.searchOptions {
-  position: relative;
+.searching {
+  position: absolute;
+  margin-left: 360;
 }
