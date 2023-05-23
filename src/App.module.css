@@ -1,0 +1,12 @@
+.Toastify__toast-container {
+    width: 300px !important;
+    max-width: 300px !important;
+    position: fixed;
+    padding: 0;
+    z-index: 9999;
+    box-sizing: border-box;
+    color: #fff;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

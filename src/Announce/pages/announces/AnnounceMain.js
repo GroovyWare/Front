@@ -7,15 +7,12 @@ import { Navigate, useSearchParams } from "react-router-dom";
 import SearchBar from "../../../components/common/SearchBar";
 import AnnounceMainCSS from './AnnounceMain.module.css';
 import { NavLink } from "react-router-dom";
-import { useNavigate } from "react-router-dom/dist";
 
 function AnnounceMain() {
 
     const dispatch = useDispatch();
-    // const userRole = useSelector('state => state.authCode'); // 이 부분은 실제 authCode를 가져오는 Redux Selector로 변경해야 합니다.
-    const [userRole, setUserRole] = useState('1'); // 임의의 userRole 상태 생성
     const announces = useSelector(state => state.announceReducer);
-    const navigate = useNavigate();
+
     const announceList = announces?.data || [];
     const pageInfo = announces?.pageInfo || null;
 
@@ -55,12 +52,8 @@ function AnnounceMain() {
         }
     };
 
-    const goToRegistration = () => {
-        navigate("/announce/announce-registration");
-    }
-
     const onClickTableTr = (annCode) => {
-        navigate(`/announce/announce-update/${annCode}`);
+        Navigate(`/announce-update/${annCode}`);
     }
 
     const onSearch = (searchValue) => {
@@ -72,7 +65,6 @@ function AnnounceMain() {
             <SearchBar search={searchTerm} onSearch={onSearch} />
             <div className={ AnnounceMainCSS.bodyDiv }>
             <div className={ AnnounceMainCSS.buttonDiv }>
-                {userRole === '1' && <button onClick={ goToRegistration }>등록</button>}
             </div>
             <table className={ AnnounceMainCSS.productTable }>
                 <colgroup>

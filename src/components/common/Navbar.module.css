@@ -46,13 +46,18 @@
 }
 
 .logoutBtn {
-    height: 30px;
-    border: 2px solid #1A1779;
+    width: 65px;
+    height: 25px;
+    border: 0px solid #1A1779;
     border-radius: 4px;
     background-color: #1A1779;
     color: #ffffff;
     cursor: pointer;
     font-family: 'esamanru';
+}
+
+.logoutBtn:hover {
+    background-color: #94a9ff;
 }
 
 /* navbar */
