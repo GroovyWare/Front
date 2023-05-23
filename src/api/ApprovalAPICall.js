@@ -89,30 +89,4 @@ export const searchDepartmentList = () => {
         }
     }
 }
-<<<<<<< HEAD
-=======
 
-/* 결재권자 추가 */
-export const addApproveLineAPI = () => {
-
-    const requestURL = `${PRE_URL}/approval/save`
-
-    return async (dispatch, getState) => {
-        
-        const result = await fetch(requestURL, {
-            method : "POST",
-            headers : {
-                'Content-Type': 'application/json',
-                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
-            },
-            body : {
-                
-            }
-        }).then(response => response.json());
-
-        if(result.status === 200){
-            dispatch(addApproveLine(result));
-        }
-    }
-}
->>>>>>> 37798f8bb7450396051fb147b4274708a059d9ff
