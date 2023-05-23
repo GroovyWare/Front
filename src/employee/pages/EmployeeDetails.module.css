@@ -1,13 +1,39 @@
+@font-face {
+    font-family: 'esamanru';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LINESeedKR-Bd';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .container {
     z-index: 999;
-    width: 500px;
-    height: 500px;
+    width: 600px;
+    height: 600px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: rgb(255, 255, 255);
+    border: 1px solid;
     border-radius: 10px;
+    font-family: 'LINESeedKR-Rg';
+}
+
+.container > div {
+    border: 1px solid black;
+}
+
+.modalHeader {
+    height : 20px;
+    text-align: left;
+    /* background-image: linear-gradient(to bottom, #fe7277 0%, #f9509c 50%); */
 }
 
 .closeBtn {
@@ -18,3 +44,46 @@
     top: 10px;
 }
 
+.modalBody {
+    display: flex;
+}
+
+/* 프로필 이미지 */
+.profileDiv > img {
+    width: 110px;
+    height: 110px;
+    border-radius: 70%;
+    overflow: hidden;
+    border: 5px solid #716dff;
+    display: block;
+}
+
+.profileDiv > button {
+    width: 80px;
+    height: 25px;
+    border: 0px solid #1A1779;
+    border-radius: 10px;
+    background-color: #1A1779;
+    color: #ffffff;
+    cursor: pointer;
+    font-family: 'esamanru';
+    letter-spacing: 1px;
+}
+
+.profileDiv > button:hover {
+    background-color: #94a9ff;
+}
+
+.imgInput {
+    display: none;
+}
+
+.userInfo {
+    flex: 1;
+    
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+}

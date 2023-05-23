@@ -1,6 +1,6 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import NavbarCSS from '../common/Navbar.module.css';
-import profileImg from './img/user.svg';
+import profileImg from './img/profile_default.svg';
 import { Link } from 'react-router-dom';
 import arrow from './img/arrow.svg';
 import { useDispatch, useSelector } from 'react-redux';
@@ -29,18 +29,25 @@ function Navbar() {
 
     return (
         <div className={ NavbarCSS.container }>
-
+            { user &&   
             <div className={ NavbarCSS.profileDiv }>
+                
                 <div className={ NavbarCSS.profileBox }>
-                    <img src={ user.data.file.fileSavedName } alt={user.data?.file.fileSavedName} className= { NavbarCSS.profile }/>
+                { user.data.file !== null &&
+                    <img src={ user.data?.file.fileSavedName } alt="프로필" className= { NavbarCSS.profile }/>
+                }
+                { user.data.file === null &&
+                    <img src={ profileImg } alt="프로필" className= { NavbarCSS.profile }/>
+                }
                 </div>
-                    <div className={ NavbarCSS.userName }>{ user.empName }님</div>
+                    <div className={ NavbarCSS.userName }>{ user.data.dept.deptTitle }팀&nbsp;{ user.data.empName }&nbsp;</div>
+                
                     <button
-                        type='submit'
                         onClick={ onClickLogoutHandler }
                         className={ NavbarCSS.logoutBtn }
                     >로그아웃</button>
             </div>
+            }
 
             <div className={ NavbarCSS.navDiv }>
                 <ul className={ NavbarCSS.menu }>
@@ -56,7 +63,7 @@ function Navbar() {
                         </li>
 
  
-                        <li><NavLink to="/" className={ NavbarCSS.link }>
+                        <li><NavLink to="/announce" className={ NavbarCSS.link }>
                             공지사항
                             <img src={ arrow } className = { NavbarCSS.arrowNo }/>
                             </NavLink>
