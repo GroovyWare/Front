@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { callMemberDetailReadModifyAPI, callMemberRegistAPI } from "../../api/MemberAPICalls";
+import { callMemberDetailReadModifyAPI, callMemberModifyAPI } from "../../api/MemberAPICalls";
 
 
 function MemberModify() {
 
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
     const { memCode } = useParams();
     const data = useSelector(state => state.memberReducer);
-    const { modify } = useSelector((state => state.memberReducer));
+    const { modify } = useSelector(state => state.memberReducer);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const[form, setForm] = useState({});
+    
 
 
     /* 읽기 모드, 수정 모드를 구분 */
@@ -20,20 +21,32 @@ function MemberModify() {
     /* 회원 상세정보 조회 */
     useEffect(
         () => {
-            dispatch(callMemberDetailReadModifyAPI({ memCode }));
+            dispatch(callMemberDetailReadModifyAPI({ memCode }));   
         },
-        []);
-
+        [modify]
+        );
+    
     /* 회원 수정완료 후 이동 */
     useEffect(
         () => {
-            if(modify?.state === 200) {
+            if(modify?.status === 200) {
                 alert('회원 수정이 완료되었습니다.');
-                navigate('/member',{ replace : true });
+                navigate('/member/detail/${memCode}',{ replace : true });
             }
         },
-        [modify]
+        []
     );
+
+
+    /* 수정 모드 변경 이벤트 */
+    const onclickMemberModifyModeHandler = () => {
+        setForm({ 
+            ...data, 
+            passCode : data.history[0]?.pass.passCode,
+            empCode :  data.history[0]?.employee.empCode 
+        });
+        setModifyMode(true);
+    }
 
     /* 입력 양식 값 변경될 때 */
     const onChangeHandler = (e) => {
@@ -43,27 +56,14 @@ function MemberModify() {
         })
     }
 
-    /* 회원권 변경될 때 */
-    const onChangePassHandler = (e) => {
-        setForm({
-            ...form,
-            pass : { passCode : e.target.value }
-        })
-    }
-
-    /* 수정 모드 변경 이벤트 */
-    const onclickModifyModeHandler = () => {
-        setModifyMode(true);
-        setForm({ ...data });
-    }
-
-    
     /* 회원 수정 저장 버튼 클릭 이벤트 */
-    const onClickMemberModifyHandler = () => {
+    const onClickMemberUpdateHandler = () => {
 
         /* 서버로 전달할 formData 형태의 객체 설정 */
         const formData = new FormData();
 
+        formData.append("memCode", form.memCode);
+        
         formData.append("memName", form.memName);
         formData.append("memPhone", form.memPhone);
         formData.append("memStartDate", form.memStartDate);
@@ -75,27 +75,49 @@ function MemberModify() {
         formData.append("history[0].pass.passCode", form.passCode);
         formData.append("history[0].employee.empCode", form.empCode);
 
-        dispatch(callMemberRegistAPI(formData));
+        dispatch(callMemberModifyAPI(formData));
     }
 
+   
+    /* 오늘 날짜 가져오기 */
+    function getToday() {     
+        const today = new Date();
+        return today.getFullYear() + "-" + ((today.getMonth()+1)>9 ? (today.getMonth()+1) : "0"+(today.getMonth()+1)) + "-" + (today.getDate()>9 ? today.getDate() : "0"+today.getDate());
+    }
+
+    const inputStyleMemCode = !modifyMode ? { backgroundColor : 'gray'} : { backgroundColor : 'gray'};
     const inputStyle = !modifyMode ? { backgroundColor : 'gray'} : null;
-    const checkValue = !modifyMode ? data.history?.pass.passType : form.history.pass.passType;
+    const checkValuePass = data.history[0]?.pass.passCode;
+    const checkValueEmp = data.history[0]?.employee.empCode;
 
     return(
         <>
         <div>회원 수정</div>
-        <div>
+        
             <table>
                 <tbody>
+                <tr>
+                        <td><label>회원번호</label></td>
+                        <td>
+                            <input
+                                name='memCode'
+                                onChange={ onChangeHandler }
+                                value={ data.memCode }
+                                readOnly={ modifyMode }
+                                style={ inputStyleMemCode }
+                            />
+                        </td>
+                    </tr>
+
                     <tr>
                         <td><label>회원이름</label></td>
                         <td>
                             <input
                                 name='memName'
-                                placeholder='회원 이름'
                                 onChange={ onChangeHandler }
                                 value={ !modifyMode ? data.memName : form.memName }
                                 readOnly={ !modifyMode }
+                                style={ inputStyle }
                             />
                         </td>
                     </tr>
@@ -105,10 +127,10 @@ function MemberModify() {
                         <td>
                             <input
                                 name='memPhone'
-                                placeholder='숫자만 입력하세요'
                                 onChange={ onChangeHandler }
                                 value={ !modifyMode ? data.memPhone : form.memPhone }
                                 readOnly={ !modifyMode }
+                                style={ inputStyle }
                             />
                         </td>
                     </tr>
@@ -118,13 +140,24 @@ function MemberModify() {
                         <td>
                             <select
                                 name='passCode'
-                                onChange={ onChangePassHandler }
+                                onChange={ onChangeHandler }
+                                style={ inputStyle }
+                                value={ !modifyMode ? checkValuePass : form.passCode }
                             >
                                 <option>선택하세요</option>
-                                <option value={1} checked={ checkValue === 1 } readOnly={ !modifyMode }>3개월</option>
-                                <option value={2} checked={ checkValue === 2 } readOnly={ !modifyMode }>6개월</option>
-                                <option value={3} checked={ checkValue === 3 } readOnly={ !modifyMode }>12개월</option>
-                                <option value={4} checked={ checkValue === 4 } readOnly={ !modifyMode }>PT</option>
+
+                                <option value={1}
+                                        readOnly={ !modifyMode }>3개월</option>
+
+                                <option value={2}
+                                        readOnly={ !modifyMode }>6개월</option>
+
+                                <option value={3}
+                                        readOnly={ !modifyMode }>12개월</option>
+
+                                <option value={4}
+                                        readOnly={ !modifyMode }>PT</option>
+
                             </select>
                         </td>
                     </tr>
@@ -135,7 +168,10 @@ function MemberModify() {
                             <input 
                                 type='date'
                                 name='memStartDate'
+                                min={ getToday() }
+                                value={ !modifyMode ? data.memStartDate : form.memStartDate }
                                 onChange={ onChangeHandler }
+                                style={ inputStyle }
                             />
                         </td>
                     </tr>
@@ -146,7 +182,10 @@ function MemberModify() {
                             <input
                                 type='date'
                                 name='memEndDate'
+                                min={ getToday() }
+                                value={ !modifyMode ? data.memEndDate : form.memEndDate }
                                 onChange={ onChangeHandler }
+                                style={ inputStyle }
                             />
                         </td>
                     </tr>
@@ -157,7 +196,10 @@ function MemberModify() {
                             <input
                                 type='date'
                                 name='memDeleteDate'
+                                min={ getToday() }
+                                value={ !modifyMode ? data.memDeleteDate : form.memDeleteDate }
                                 onChange={ onChangeHandler }
+                                style={ inputStyle }
                             />
                         </td>
                     </tr>
@@ -168,12 +210,18 @@ function MemberModify() {
                         <select
                                 name='empCode'
                                 onChange={ onChangeHandler }
+                                style={ inputStyle }
+                                value={ !modifyMode ? checkValueEmp : form.empCode }
                             >
                                 <option>선택하세요</option>
-                                <option value="1">김필라</option>
-                                <option value="2">김건강</option>
-                                <option value="3">김자자</option>
-                                <option value="4">피사번</option>
+                                <option value={1}
+                                        readOnly={ !modifyMode }>김필라</option>
+                                <option value={2}
+                                        readOnly={ !modifyMode }>김건강</option>
+                                <option value={3}
+                                        readOnly={ !modifyMode }>김자자</option>
+                                <option value={4}
+                                        readOnly={ !modifyMode }>피사번</option>
                             </select>
                         </td>
                     </tr>
@@ -183,20 +231,23 @@ function MemberModify() {
                         <td>
                             <input
                                 name='memEtc'
-                                placeholder='비고'
                                 onChange={ onChangeHandler }
+                                style={ inputStyle }
                             />
                         </td>
                     </tr>
 
                 </tbody>
             </table>
-        </div>
-
-
+        
         <div>
+        <button
+                onClick={ onclickMemberModifyModeHandler }
+            >
+                수정모드
+            </button>
             <button
-                onClick={ onClickMemberModifyHandler }
+                onClick={ onClickMemberUpdateHandler }
             >
                 등록
             </button>

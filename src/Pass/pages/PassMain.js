@@ -39,7 +39,9 @@ function PassMain() {
                 { pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage }/> }
             </div>
 
+            <div>
             <button onClick={ onClickRegistHandler }>등록</button>
+            </div>
         </>
     );  
 }

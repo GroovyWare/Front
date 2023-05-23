@@ -41,7 +41,6 @@ function MemberDetail() {
         setMemberHistoryModal(memCode);
     };
 
-    
     /* 수정하기 버튼 */
     const onClickModifyHandler = () => {
         navigate(`/member/modify/${memCode}`)
@@ -61,28 +60,30 @@ function MemberDetail() {
             />
         ) : true}
 
-            <div>
+            
                 {member.memCode && (
                   <>
                     <table>
-                        <tbody>
+                        
                             <tr>회원번호 { member.memCode }</tr>
                             <tr>이름 { member.memName }</tr>
                             <tr>전화번호 { member.memPhone }</tr>
-                            <tr>회원권 { member.memPhone }</tr>
-                            <div>
+                            <tr>회원권 { member.history[0].pass.passType }</tr>
+                     
+                    <tr>
                               <button
                                 onClick={ () => 
                                     onClickHistoryHandler(member.memCode)
                                 }
                               >
                                 상세보기</button>
-                            </div>
+                    </tr>
+                        
                             <tr>시작일 { member.memStartDate }</tr>
                             <tr>종료일 { member.memEndDate }</tr>
                             <tr>삭제일 { member.memDeleteDate }</tr>
                             <tr>비고 { member.memEtc }</tr>
-                        </tbody>
+                        
                     </table>
 
                     <div>
@@ -91,8 +92,6 @@ function MemberDetail() {
                     </div>
                   </>
                 )}
-            </div>
-        
         </>
     );
 }

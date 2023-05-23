@@ -11,14 +11,12 @@
     height:100px;
     transform: translate(1230%, -600%);
     background-color: white;
-
 }
 
 .common{
    border: solid black 1px;
    width: 80px;
    height:100px;
-
    background-color: white;
 }
 
@@ -52,7 +50,6 @@
     padding-bottom: 30px;
     padding-left: 40px;
     font-size: 14px;
-
 }
 
 .confirm{
@@ -63,7 +60,6 @@
     width: 50px;
     background-color: #667eea;
     transform: translate(2050%, -100%);
-
 }
 
 .cancel{
@@ -75,7 +71,6 @@
    background-color:#4A5CFF;
    transform: translate(2050%, -100%);
 }
-
 
 .confirm2{
     font-family:'LINESeedKR-Rg';
@@ -123,5 +118,4 @@
     padding: 20px;
     font-family: 'LINESeedKR-Rg';
 }
-
 

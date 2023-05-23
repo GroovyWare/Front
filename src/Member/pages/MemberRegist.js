@@ -88,7 +88,6 @@ function MemberRegist() {
         return today.getFullYear() + "-" + ((today.getMonth()+4)>9 ? (today.getMonth()+4) : "0"+(today.getMonth()+4)) + "-" + (today.getDate()>9 ? today.getDate() : "0"+today.getDate());
     }
 
-    
     /* 6개월 뒤 날짜 가져오기 */
     function getSixMonth() {     
         const today = new Date();

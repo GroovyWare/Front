@@ -5,7 +5,6 @@ const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
 const PRE_URL = `http://${SERVER_IP}:${SERVER_PORT}`;
 
-
 /* 회원 전체 리스트 조회 */
 export const callMemberListAPI = ( {currentPage = 1} ) => {
 
@@ -76,7 +75,7 @@ export const callMemberRegistAPI = (formData) => {
 /* 회원 수정을 위한 정보 조회 */
 export const callMemberDetailReadModifyAPI = ({ memCode }) => {
 
-    const requestURL = `${PRE_URL}/member/modify/${memCode}`;
+    const requestURL = `${PRE_URL}/member/detail/${memCode}`;
     
     return async (dispatch, getState) => {
         
@@ -90,15 +89,13 @@ export const callMemberDetailReadModifyAPI = ({ memCode }) => {
         if(result.status === 200) {
             console.log("[MemberAPICalls] callMemberDetailReadModifyAPI result : ", result);
         }
-
     }
-
 }
 
 /* 회원 수정 */
-export const callMemberUpdateAPI = (formData) => {
+export const callMemberModifyAPI = (formData) => {
     
-    const requestURL = `${PRE_URL}/member/modify/`;
+    const requestURL = `${PRE_URL}/member/modify`;
 
     return async (dispatch, getState) => {
 
@@ -111,7 +108,7 @@ export const callMemberUpdateAPI = (formData) => {
         }).then(response => response.json());
 
         if(result.status === 200) {
-            console.log('[MemberAPICalls] callMemberUpdateAPI result :', result);
+            console.log('[MemberAPICalls] callMemberModifyAPI result :', result);
             dispatch(putMember(result));
         }
     }
