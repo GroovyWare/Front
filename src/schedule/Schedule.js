@@ -24,7 +24,7 @@ const Schedule = () => {
   const [scheduleUpdateModal, setScheduleUpdateModal] = useState(false);
   const [schCode, setschCode] = useState(0);
   const [justSchedule, setJustSchedule] = useState({});
-
+ 
 
 
   useEffect(() => {
@@ -88,7 +88,9 @@ const Schedule = () => {
   };
 
   const onEventClickHandler = (info) => {
-    console.log(info.event.id);       // id 를 얻어온다. find 기준으로 잡고 찾는다. => set justschedule로 넣어줌
+    const clickedEvent = events.data.find(event => event.id === info.event.id);
+    // setSelectedEvent(clickedEvent);
+    setScheduleUpdateModal(true);    // id 를 얻어온다. find 기준으로 잡고 찾는다. => set justschedule로 넣어줌
   }
 
 
@@ -106,6 +108,7 @@ const Schedule = () => {
     droppable: true,
     navLinks: true,
     eventLimit: true,
+    eventDuationeditable: true,
     themeSystem: 'standard',
     headerToolbar: {
       left: "prevYear,prev,next,nextYear today",
