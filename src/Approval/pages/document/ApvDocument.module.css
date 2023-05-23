@@ -106,18 +106,6 @@
     margin-left: 350px;
 }
 
-.container {
-    background:  rgba(253, 253, 253, 0.8);
-    backdrop-filter: blur( 20px );
-    border-radius: 10px;
-    border: 1px solid rgba( 255, 255, 255, 0.18 );
-    width: 100vw;
-    height: 700px;   
-    margin-right: 10px;
-    margin-top: 10px;
-    padding: 20px;
-    font-family: 'LINESeedKR-Rg';
-}
 
 .wrap{
     background-color: white;
