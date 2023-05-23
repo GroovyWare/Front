@@ -36,4 +36,3 @@ export const callEmployeeDetailsAPI = ({ empCode }) => {
     }
 }
 
-/* 직원 들록 */

@@ -1,13 +1,12 @@
-@font-face {
-    font-family: 'LINESeedKR-Rg';
-    src: url('https://cdn.jsdelivr.net/gh/wizfile/font/LINESeedKR-Rg.eot');
-    src:url('https://cdn.jsdelivr.net/gh/wizfile/font/LINESeedKR-Rg.woff') format('woff');
-    font-style: normal;
-}
 
 .author{
     border: solid black 1px;
     width: 80px;
+<<<<<<< HEAD:src/Approval/pages/document/ApvVacation.module.css
+    height:100px;
+    margin-left: 1400px;
+    margin-top:-800px;
+=======
     height:45px;
     transform: translate(810%, -1180%);
     background-color: white;
@@ -25,25 +24,57 @@
     font-size: 14px;
     color: #505050;
     font-weight: 600;
+>>>>>>> 37798f8bb7450396051fb147b4274708a059d9ff:src/Approval/pages/document/ApvDocument.module.css
 }
 
 .common{
    border: solid black 1px;
    width: 80px;
    height:100px;
-   background-color: white;
+   margin-top:-800px;
 }
 
 .detail{
+<<<<<<< HEAD:src/Approval/pages/document/ApvVacation.module.css
+    background-color:#EBEAFC;
+    width:600px;
+    height:500px;
+    margin-left: 1100px;
+    margin-top: -600px;
+    margin-bottom: 30px;
+    border-radius : 20px;
+}
+
+.detail2{
+    background-color:#1A1779;
+    color:white;
+    border-radius:20px;
+    height: 50px;
+    font-family:"LINESeedKR-Bd";
+    font-size: 22px;
+    text-align:center;
+    padding-top: 20px;
+    margin-top: 250px;
+=======
     background-color:white;
     width:300px;
     height:550px;
     transform: translate(35.5%, -98.3%);
     background-color: #667eea;
+>>>>>>> 37798f8bb7450396051fb147b4274708a059d9ff:src/Approval/pages/document/ApvDocument.module.css
 }
 
 .details{
     padding-bottom: 30px;
+<<<<<<< HEAD:src/Approval/pages/document/ApvVacation.module.css
+    padding-right: 30px;
+    padding-left: 40px;
+}
+
+.details2{
+    padding-bottom: 30px;
+    padding-left: 40px;
+=======
     padding-left: 10px;
     font-size: 18px;
     padding-top: 20px;
@@ -56,25 +87,33 @@
     display: flex;
     padding-top: 23px;
     color: white;
+>>>>>>> 37798f8bb7450396051fb147b4274708a059d9ff:src/Approval/pages/document/ApvDocument.module.css
 }
 
 .confirm{
-    font-family:'LINESeedKR-Rg';
+    font-family:"LINESeedKR-Bd";
     color:white;
     font-size: 14px;
     text-align: center;
     width: 50px;
+<<<<<<< HEAD:src/Approval/pages/document/ApvVacation.module.css
+    background-color: #1A1779;
+    margin-left: 500px;
+=======
     background-color: #667eea;
     transform: translate(800%, 45%);
+>>>>>>> 37798f8bb7450396051fb147b4274708a059d9ff:src/Approval/pages/document/ApvDocument.module.css
 }
 
 .cancel{
-   font-family:'LINESeedKR-Rg';
+   font-family:"LINESeedKR-Bd";
    color:white;
    font-size: 14px;
    text-align: center;
    width: 50px;
    background-color:#4A5CFF;
+<<<<<<< HEAD:src/Approval/pages/document/ApvVacation.module.css
+=======
    transform: translate(800%, 45%);
 }
 
@@ -96,12 +135,15 @@
    width: 50px;
    background-color:#4A5CFF;
    transform: translate(1900%, 250%);
+>>>>>>> 37798f8bb7450396051fb147b4274708a059d9ff:src/Approval/pages/document/ApvDocument.module.css
 }
 
 .authors{
     display: -webkit-inline-box;
 }
 
+<<<<<<< HEAD:src/Approval/pages/document/ApvVacation.module.css
+=======
 .text{
     width: 700px;
     font-size: 14px;
@@ -138,3 +180,4 @@
     transform: translate(82%, 14%);
 }
 
+>>>>>>> 37798f8bb7450396051fb147b4274708a059d9ff:src/Approval/pages/document/ApvDocument.module.css

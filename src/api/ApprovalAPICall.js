@@ -1,5 +1,5 @@
 import { registApproval } from "../modules/ApprovalModule";
-import { selectEmployee, searchEmployee, searchDepartment, addApproveLine } from "../modules/ApprovalModule";
+import { selectEmployee, searchEmployee, searchDepartment } from "../modules/ApprovalModule";
 import { selectPerson } from "../modules/ApprovalModule";
 
 const RESTAPI_SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
@@ -89,6 +89,8 @@ export const searchDepartmentList = () => {
         }
     }
 }
+<<<<<<< HEAD
+=======
 
 /* 결재권자 추가 */
 export const addApproveLineAPI = () => {
@@ -113,3 +115,4 @@ export const addApproveLineAPI = () => {
         }
     }
 }
+>>>>>>> 37798f8bb7450396051fb147b4274708a059d9ff

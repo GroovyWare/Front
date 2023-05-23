@@ -8,8 +8,6 @@ import PlayMemberList from './play/PlayMemberList';
 import PlayHistory from './play/PlayHistory';
 import AnnounceMain from "./Announce/pages/announces/AnnounceMain";
 import AnnounceDetail from "./Announce/pages/announces/AnnounceDetail";
-import AnnounceRegistration from './Announce/pages/admin/AnnounceRegistration';
-import AnnounceAdminProtectedRoute from './Announce/pages/admin/AnnounceAdminProtectedRoute';
 import AnnounceList from './Announce/pages/announces/AnnounceList';
 import AnnounceItem from './Announce/items/AnnounceItem';
 import MemberMain from './Member/pages/MemberMain';
@@ -24,8 +22,11 @@ import EmployeeDetails from './employee/pages/EmployeeDetails';
 import Document from './Approval/pages/document/Document';
 import 'react-toastify/dist/ReactToastify.css';
 import { createGlobalStyle } from 'styled-components';
+<<<<<<< HEAD
+=======
 import AddDocument from './Approval/pages/document/AddDocument';
 import { EmployeeProvider } from './Approval/employee/EmployeeProvider';
+>>>>>>> 37798f8bb7450396051fb147b4274708a059d9ff
 
 export const GlobalStyle = createGlobalStyle`
 .Toastify__toast-container {
@@ -48,11 +49,13 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<ProtectedRoute loginCheck={true}><Layout /></ProtectedRoute>}>
-
-          <Route path="approval">
-            <Route index element={<ApvContent />}/>
+          <Route path="approval" element={<ApprovalLayout />}>
             <Route path="new" element={<ProtectedRoute loginCheck={true}><ApvContent /></ProtectedRoute>} />
+<<<<<<< HEAD
+            <Route path="document" element={<ProtectedRoute loginCheck={true}><Document /></ProtectedRoute>} />
+=======
             <Route path="add" element={<ProtectedRoute loginCheck={true}><AddDocument /></ProtectedRoute>} />
+>>>>>>> 37798f8bb7450396051fb147b4274708a059d9ff
             <Route path="employee" element={<ProtectedRoute loginCheck={true}><ApvEmployee /></ProtectedRoute>} />
             <Route path="document" element={<ProtectedRoute loginCheck={true}><Document /></ProtectedRoute>} />
           </Route>
@@ -62,10 +65,8 @@ function App() {
             <Route path="history" element={<PlayHistory />} />
           </Route>
 
-          <Route path="/announce">
-              <Route index element={<ProtectedRoute loginCheck={true}><AnnounceMain /></ProtectedRoute>} />
-              <Route path=":annCode" element={<ProtectedRoute loginCheck={true}><AnnounceDetail /></ProtectedRoute>} />
-              <Route path="announce-registration" element={<AnnounceRegistration />} />
+          <Route path="announce" element={<AnnounceMain />}>
+            <Route path="announce/:announceCode" element={<AnnounceDetail />} />
           </Route>
 
           <Route path="schedule" element={<Schedule />} />
