@@ -7,25 +7,31 @@ import { toast } from "react-toastify";
 
 
 
-function ScheduleUpdateModal({ searchSchedule, setScheduleUpdateModal }) {
-  const [form, setForm] = useState({});
+function ScheduleUpdateModal({  setScheduleUpdateModal , justSchedule}) {
+  const [form, setForm] = useState(justSchedule);
+  const { searchvalue } = useSelector((state) => state.scheduleReducer);
+  const [schCode, setschCode] = useState( searchvalue );
   const dispatch = useDispatch();
   const { modify } = useSelector((state) => state.scheduleReducer);
   
 
   useEffect(() => {
     if (modify?.status === 200 && setScheduleUpdateModal) {
+  
       setScheduleUpdateModal(false);
       toast.warning("일정 수정 완료");
       dispatch(initSchedule());
     }
   }, [modify, setScheduleUpdateModal]);
 
-  const onClickHandler = (schCode) => {
-    setForm(
-      searchSchedule.find((searchvalue) => searchvalue.schCode === schCode)
-    );
+  const handleSubmit = () => {
+    dispatch(updateSchedule(form, schCode));
   };
+  const onClickHandler = () => {
+    setschCode(justSchedule.schCode);
+    handleSubmit()
+  };
+  
 
   const onChangeHandler = (e) => {
     setForm({
@@ -34,9 +40,9 @@ function ScheduleUpdateModal({ searchSchedule, setScheduleUpdateModal }) {
     });
   };
 
-  const handleSubmit = () => {
-    dispatch(updateSchedule(form));
-  };
+  console.log("form : ", form);
+
+ 
   return (
     <div className={ScheduleUpdateModalCSS.modal}>
       <div className={ScheduleUpdateModalCSS.modalContainer}>
@@ -52,23 +58,27 @@ function ScheduleUpdateModal({ searchSchedule, setScheduleUpdateModal }) {
             name="title"
             placeholder="일정 제목을 입력해주세요!"
             onChange={onChangeHandler}
+            value={form.title}
           />
           <textarea
             placeholder="일정 내용을 입력해주세요."
             name="context"
             onChange={onChangeHandler}
+            value={form.context}
           ></textarea>
           <input
             placeholder="시작일 입력"
             type="datetime-local"
             name="start"
             onChange={onChangeHandler}
+            value={form.start}
           />
           <input
             placeholder="종료일 입력"
             type="datetime-local"
             name="end"
             onChange={onChangeHandler}
+            value={form.end}
           />
           <label>이벤트 색상 입력</label>
           <input
@@ -76,6 +86,7 @@ function ScheduleUpdateModal({ searchSchedule, setScheduleUpdateModal }) {
             name="color"
             placeholder="이벤트 색상을 입력해주세요."
             onChange={onChangeHandler}
+            value={form.color}
           />
           <label>글 색상 입력</label>
           <input
@@ -83,8 +94,9 @@ function ScheduleUpdateModal({ searchSchedule, setScheduleUpdateModal }) {
             name="textColor"
             placeholder="글 색상을 입력해주세요."
             onChange={onChangeHandler}
+            value={form.textColor}
           />
-          <button onClick={handleSubmit}>수정하기</button>
+          <button onClick={onClickHandler}>수정하기</button>
           <button
             style={{
               border: "none",

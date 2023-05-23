@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AllSchedules, searchingSchedule, updateSchedule } from "../api/CalendarAPICalls";
+import { AllSchedules, oneSchedule, searchingSchedule, updateSchedule } from "../api/CalendarAPICalls";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
@@ -23,7 +23,11 @@ const Schedule = () => {
   const [scheduleSearchModal, setScheduleSearchModal] = useState(false);
   const [scheduleUpdateModal, setScheduleUpdateModal] = useState(false);
   const [ schCode , setschCode] = useState(0);
-  useEffect(() => {
+  const [ justSchedule, setJustSchedule] = useState({});
+
+
+
+    useEffect(() => {
     dispatch(AllSchedules());
   }, []);
 
@@ -33,6 +37,18 @@ const Schedule = () => {
       dispatch(AllSchedules());
     }
   }, [scheduleInsertModal]);
+
+  useEffect(() => {
+    if (searchSchedule.schCode) {
+      dispatch(oneSchedule(schCode));
+    }
+  },[])
+
+  useEffect(() => {
+    if( scheduleUpdateModal == false){
+    dispatch(AllSchedules());
+  }
+  },[scheduleUpdateModal])
 
   useEffect(() => {
     if (events?.data) {
@@ -58,20 +74,14 @@ const Schedule = () => {
     setScheduleSearchModal(true);
   }
   
-
-
-
-  /* 일정수정 */
-  const handleEventDrop = (eventDropInfo) => {
-    const { event } = eventDropInfo;
-    const updatedEvent = {
-      // ... updated event data ...
-    };
-    // update event API call
-    dispatch(updateSchedule(event.id, updatedEvent));
-  };
-
   
+  /* 수정 페이지 진입 */
+  // const selectedSchedule = (schedule) => {
+  //   setJustSchedule(schedule);
+  //   setScheduleUpdateModal(true);
+  // }
+
+
   /* 생성 */
   const onClickHandler = () => {
     setScheduleInsertModal(true);
@@ -111,10 +121,14 @@ const Schedule = () => {
         <ScheduleInsertModal setScheduleInsertModal={setScheduleInsertModal} />
       )}
       {scheduleSearchModal && ( 
-        <ScheduleSearchModal setScheduleSearchModal={setScheduleSearchModal} searchSchedule={searchSchedule} setScheduleUpdateModal={setScheduleUpdateModal}/>
+        <ScheduleSearchModal setScheduleSearchModal={setScheduleSearchModal} 
+        searchSchedule={searchSchedule}
+        setScheduleUpdateModal={setScheduleUpdateModal}
+        setJustSchedule={setJustSchedule}/>
       )}
       {scheduleUpdateModal && (
-        <ScheduleUpdateModal setScheduleUpdateModal={setScheduleUpdateModal} schCode={schCode}/>
+        <ScheduleUpdateModal setScheduleUpdateModal={setScheduleUpdateModal}
+        justSchedule={justSchedule} />
       )}
       
       <div className={`${styles.mainContents} ScheduleCSS`} style={{ maxWidth: '1680px' }}>
