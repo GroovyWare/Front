@@ -39,7 +39,7 @@ function ScheduleInsertModal({ schedule, setScheduleInsertModal }) {
                 <div className={ScheduleInsertModalCSS.insertingformDiv}>
                     <h1>일정생성</h1>
                     <select name="schDiv" onChange={onChangeHandler}>
-                        <option value="전체">전체</option>
+                        <option value="선택">선택</option>
                         <option value="부서">부서</option>
                         <option value="개인">개인</option>
                     </select>

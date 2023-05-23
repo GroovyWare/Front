@@ -2,24 +2,28 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ScheduleInsertModalCSS from "./ScheduleInsertModal.module.css";
 
-export function ScheduleUpdateModal({ writer, setScheduleInsertModal }) {
-  const [form, setForm] = useState({});
+function ScheduleUpdateModal({  setScheduleUpdateModal , justSchedule}) {
+  const [form, setForm] = useState(justSchedule);
+ 
+ 
   const dispatch = useDispatch();
-  const { put } = useSelector((state) => state.scheduleReducer);
+  const { modify } = useSelector((state) => state.scheduleReducer);
+  
+  console.log(form)
 
   useEffect(() => {
-    // 조회한 내용을 바탕으로 필드의 초기값 설정
-    if (writer) {
-      setForm({
-        title: writer.Title,
-        context: writer.context,
-        start: writer.start,
-        end: writer.end,
-        color: writer.color,
-        textColor: writer.textColor,
-      });
+    if (modify?.status === 200 && setScheduleUpdateModal) {
+  
+      setScheduleUpdateModal(false);
+      toast.warning("일정 수정 완료");
+      dispatch(initSchedule());
     }
-  }, [put]);
+  }, [modify, setScheduleUpdateModal]);
+
+  const handleSubmit = () => {
+    dispatch(updateSchedule(form));
+  };
+  
 
   const onChangeHandler = (e) => {
     setForm({
@@ -30,45 +34,70 @@ export function ScheduleUpdateModal({ writer, setScheduleInsertModal }) {
 
   console.log("form : ", form);
 
+ 
   return (
-    <div className={ScheduleInsertModalCSS.modal}>
-      <div className={ScheduleInsertModalCSS.modalContainer}>
-        <div className={ScheduleInsertModalCSS.insertingformDiv}>
-          <h1>일정수정</h1>
+    <div className={ScheduleUpdateModalCSS.modal}>
+      <div className={ScheduleUpdateModalCSS.modalContainer}>
+        <div className={ScheduleUpdateModalCSS.updatingformDiv}>
+          <h1>일정 수정</h1>
+          <select name="schDiv" onChange={onChangeHandler}>
+            <option value="선택">선택</option>
+            <option value="부서">부서</option>
+            <option value="개인">개인</option>
+          </select>
           <input
             type="text"
             name="title"
             placeholder="일정제목의 입력을 바랍니다!"
             onChange={onChangeHandler}
-            value={form.title || ""}
+            value={form.title}
           />
           <textarea
             placeholder="일정내용을 입력해주시기 바랍니다."
             name="context"
             onChange={onChangeHandler}
-            value={form.context || ""}
+            value={form.context}
           ></textarea>
           <input
             type="datetime-local"
             name="start"
-            placeholder="시작하는 시간을 지정하세요"
-            value={form.start || ""}
+            onChange={onChangeHandler}
+            value={form.start}
           />
           <input
             type="datetime-local"
             name="end"
-            placeholder="끝나는 시간을 지정하세요"
-            value={form.end || ""}
+            onChange={onChangeHandler}
+            value={form.end}
           />
-          <label>스케줄 색상지정</label>
-          <input type="color" name="color" value={form.color || ""} />
-          <label>스케줄 글색상지정</label>
-          <input type="color" name="textColor" value={form.textColor || ""} />
-
-          {/* <div>
-            <button onClick={handleConfirm}>확인</button>
-            <button onClick={handleCancel}>취소</button>
-          </div> */}
+          <label>이벤트 색상 입력</label>
+          <input
+            type="color"
+            name="color"
+            placeholder="이벤트 색상을 입력해주세요."
+            onChange={onChangeHandler}
+            value={form.color}
+          />
+          <label>글 색상 입력</label>
+          <input
+            type="color"
+            name="textColor"
+            placeholder="글 색상을 입력해주세요."
+            onChange={onChangeHandler}
+            value={form.textColor}
+          />
+          <button onClick={handleSubmit}>수정하기</button>
+          <button
+            style={{
+              border: "none",
+              margin: 0,
+              fontSize: "10px",
+              height: "10px",
+            }}
+            onClick={() => setScheduleUpdateModal(false)}
+          >
+            돌아가기
+          </button>
         </div>
       </div>
     </div>
