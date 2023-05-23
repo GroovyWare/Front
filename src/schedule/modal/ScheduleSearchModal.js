@@ -1,9 +1,10 @@
+
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ScheduleInsertModalCSS from "./ScheduleInsertModal.module.css";
 import { AllSchedules, createSchedule, oneSchedule, searchingSchedule } from "../../api/CalendarAPICalls";
 import { getSchedule, getSchedules, initSchedule } from "../../modules/CalendarModule";
-import ScheduleList from "../lists/ScheduleList";
+
 import PagingBar from "../../components/common/PagingBar";
 import ScheduleUpdateModal from "./ScheduleUpdateModal";
 
@@ -96,17 +97,4 @@ function ScheduleSearchModal({ searchSchedule, setScheduleSearchModal, setSchedu
   );
 }
 
-
-
-        )
-
-    }
-
-
-
-
-
-
-
-}
 export default ScheduleSearchModal;
