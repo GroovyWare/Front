@@ -9,7 +9,6 @@ import PlayHistory from './play/PlayHistory';
 import AnnounceMain from "./Announce/pages/announces/AnnounceMain";
 import AnnounceDetail from "./Announce/pages/announces/AnnounceDetail";
 import AnnounceRegistration from './Announce/pages/admin/AnnounceRegistration';
-import AnnounceAdminProtectedRoute from './Announce/pages/admin/AnnounceAdminProtectedRoute';
 import AnnounceList from './Announce/pages/announces/AnnounceList';
 import AnnounceItem from './Announce/items/AnnounceItem';
 import MemberMain from './Member/pages/MemberMain';
@@ -25,6 +24,7 @@ import Document from './Approval/pages/document/Document';
 import 'react-toastify/dist/ReactToastify.css';
 import { createGlobalStyle } from 'styled-components';
 import AddDocument from './Approval/pages/document/AddDocument';
+import { EmployeeProvider } from './Approval/employee/EmployeeProvider';
 
 export const GlobalStyle = createGlobalStyle`
 .Toastify__toast-container {
@@ -52,8 +52,8 @@ function App() {
             <Route index element={<ApvContent />}/>
             <Route path="new" element={<ProtectedRoute loginCheck={true}><ApvContent /></ProtectedRoute>} />
             <Route path="add" element={<ProtectedRoute loginCheck={true}><AddDocument /></ProtectedRoute>} />
-            <Route path="document" element={<ProtectedRoute loginCheck={true}><Document /></ProtectedRoute>} />
             <Route path="employee" element={<ProtectedRoute loginCheck={true}><ApvEmployee /></ProtectedRoute>} />
+            <Route path="document" element={<ProtectedRoute loginCheck={true}><Document /></ProtectedRoute>} />
           </Route>
 
           <Route path="play" element={<PlayMemberList />}>

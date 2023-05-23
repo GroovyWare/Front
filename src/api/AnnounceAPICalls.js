@@ -79,29 +79,25 @@ export const callAnnounceListForAdminAPI = ({ currentPage = 1 }) => {
 }
 
 export const callAnnounceRegistAPI = (formData) => {
-    
-    const requestURL = `${PRE_URL}/announce/announce-registration`;
+
+    const requestURL = `${PRE_URL}/announce`;
 
     return async (dispatch, getState) => {
-        const response = await fetch(requestURL, {
+
+        const result = await fetch(requestURL, {
             method : 'POST',
             headers : {
                 "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
             },
             body : formData
-        });
+        }).then(response => response.json());
 
-        const result = await response.json();
-
-        console.log("[AnnounceAPICalls] callAnnounceRegistAPI result : ", result);
-        dispatch(postAnnounce(result));
-
-        // Always return the result, regardless of the status
-        return result;
+        if(result.status === 200) {
+            console.log("[AnnounceAPICalls] callAnnounceRegistAPI result : ", result);
+            dispatch(postAnnounce(result));
+        }
     }
 }
-
-
 
 export const callAnnounceDetailForAdminAPI = ({ annCode }) => {
 

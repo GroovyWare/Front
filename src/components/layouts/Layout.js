@@ -11,7 +11,9 @@ function Layout(){
                     <Header/>
                 <div className={ LayoutCSS.content}>
                     <Navbar/>
-                    <Outlet className={ LayoutCSS.contentBg }/>
+                    <div className={ LayoutCSS.contentBg }>
+                        <Outlet/>
+                    </div>
                 </div>
             </div>
 

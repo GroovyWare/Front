@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ScheduleInsertModalCSS from "./ScheduleInsertModal.module.css";
@@ -97,4 +96,17 @@ function ScheduleSearchModal({ searchSchedule, setScheduleSearchModal, setSchedu
   );
 }
 
+
+
+        )
+
+    }
+
+
+
+
+
+
+
+}
 export default ScheduleSearchModal;
