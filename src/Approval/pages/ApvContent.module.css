@@ -53,6 +53,15 @@
     font-family: "LineSeedKR-Bd";
 }
 
+.centerDivButton{
+    width: 50px;
+    font-size: 14px;
+    font-family: "LineSeedKR-Bd";
+    background-color: #667eea;
+    color: white;
+    transform: translate(-200%, -750%);
+}
+
 .docTitle{
     font-family: "LineSeedKR-Bd";
     font-size: 22px;
