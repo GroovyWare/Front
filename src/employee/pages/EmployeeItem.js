@@ -1,30 +1,27 @@
 import { useState } from "react";
-import EmpDetails from "./EmployeeDetails";
-import { useNavigate } from "react-router-dom";
+import EmplyoeeDetails from "./EmployeeDetails";
 
-function EmployeeItem({ emp : { empCode, empName, empPhone, empEmail, empAddress, dept, position, empEntDate } }) {
+function EmployeeItem({ emp }) {
 
     const [ empDetailsOpen, setEmpDetailsOpen ] = useState(false);
-    const navigate = useNavigate();
 
     const openEmpDetails = () => {
         setEmpDetailsOpen(true);
-        navigate(`/employee/details/${ empCode }`);
     }
 
     return (
         <>
-        <tr onClick={ () => openEmpDetails(empCode) }>
-            <td>{ empCode }</td>
-            <td>{ empName }</td>
-            <td>{ empPhone }</td>
-            <td>{ empEmail }</td>
-            <td>{ empAddress }</td>
-            <td>{ dept.deptTitle }</td>
-            <td>{ position.positionName }</td>
-            <td>{ empEntDate }</td>
-        </tr>
-        { empDetailsOpen && <EmpDetails setEmpDetailsOpen={ setEmpDetailsOpen }/> }
+            <tr onClick={ () => openEmpDetails() }>
+                <td>{ emp.empCode }</td>
+                <td>{ emp.empName }</td>
+                <td>{ emp.empPhone }</td>
+                <td>{ emp.empEmail }</td>
+                <td>{ emp.dept.deptTitle }</td>
+                <td>{ emp.position.positionName }</td>
+                <td>{ emp.empAddress }</td>
+                <td>{ emp.empEntDate }</td>
+            </tr>
+        { empDetailsOpen && <EmplyoeeDetails setEmpDetailsOpen={ setEmpDetailsOpen } emp={ emp }/> }
         </>
     );
 }

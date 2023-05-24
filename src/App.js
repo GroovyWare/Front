@@ -9,7 +9,6 @@ import PlayHistory from './play/PlayHistory';
 import AnnounceMain from "./Announce/pages/announces/AnnounceMain";
 import AnnounceDetail from "./Announce/pages/announces/AnnounceDetail";
 import AnnounceRegistration from './Announce/pages/admin/AnnounceRegistration';
-import AnnounceAdminProtectedRoute from './Announce/pages/admin/AnnounceAdminProtectedRoute';
 import AnnounceList from './Announce/pages/announces/AnnounceList';
 import AnnounceItem from './Announce/items/AnnounceItem';
 import MemberMain from './Member/pages/MemberMain';
@@ -50,11 +49,11 @@ function App() {
         <Route path="/" element={<ProtectedRoute loginCheck={true}><Layout /></ProtectedRoute>}>
 
           <Route path="approval">
-            <Route index element={<ApprovalLayout />}/>
+            <Route index element={<ApvContent />}/>
             <Route path="new" element={<ProtectedRoute loginCheck={true}><ApvContent /></ProtectedRoute>} />
             <Route path="add" element={<ProtectedRoute loginCheck={true}><AddDocument /></ProtectedRoute>} />
-            <Route path="document" element={<ProtectedRoute loginCheck={true}><Document /></ProtectedRoute>} />
             <Route path="employee" element={<ProtectedRoute loginCheck={true}><ApvEmployee /></ProtectedRoute>} />
+            <Route path="document" element={<ProtectedRoute loginCheck={true}><Document /></ProtectedRoute>} />
           </Route>
 
           <Route path="play" element={<PlayMemberList />}>

@@ -5,7 +5,7 @@ function ApvEmployeeDrag({ employee }) {
     
     const [{ isDragging }, drag] = useDrag({
         type: 'employee',
-        item: { name: employee.empName, position: employee.position.positionName, dept : employee.dept.deptTitle },
+        item: { code: employee.empCode, name: employee.empName, position: employee.position.positionName, dept : employee.dept.deptTitle },
         collect: monitor => ({
             isDragging: !!monitor.isDragging(),
         }),

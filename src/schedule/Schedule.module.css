@@ -15,12 +15,12 @@
     position: relative;
     margin-left: 50px;
     margin-top: 30px;
-    border: 2px solid bisque;
+    border: 2px solid whitesmoke;
     
   }
   
   .calendar1 {
-    height: 50vh;
+    
     width: 50%;
     margin: auto;
     
@@ -52,17 +52,26 @@
     font-weight: bold;
     color: #000000;
     cursor: pointer;
-    margin-top: 85vh;
-    margin-bottom: 15vh;
-    margin-right: 10vw;
+    margin-top: 600px;
+    margin-bottom: 50px;
+    margin-right: 20px;
     box-shadow: 2px 3px 3px rgb(44, 41, 41);
   }
   
 
 .allview {
   display: flex;
-  
- 
 }
  
-  
+.radioOptions {
+  position: relative;
+  margin-left: 390px;
+  font-family: "LINESeedKR-Regular";
+  margin-top : 25px;
+}
+.radioOptions input{ margin-left: 15px;}
+
+.searching {
+  position: absolute;
+  margin-left: 360;
+}

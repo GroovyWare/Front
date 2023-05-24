@@ -53,6 +53,15 @@
     font-family: "LineSeedKR-Bd";
 }
 
+.centerDivButton{
+    width: 50px;
+    font-size: 14px;
+    font-family: "LineSeedKR-Bd";
+    background-color: #667eea;
+    color: white;
+    transform: translate(-200%, -750%);
+}
+
 .docTitle{
     font-family: "LineSeedKR-Bd";
     font-size: 22px;
@@ -75,17 +84,4 @@
     width:100px;
     transform:translate(-219%,-308%);
     /*%20margin-right:%2085px;%20*/
-}
-
-.container {
-    background:  rgba(253, 253, 253, 0.8);
-    backdrop-filter: blur( 20px );
-    border-radius: 10px;
-    border: 1px solid rgba( 255, 255, 255, 0.18 );
-    width: 100vw;
-    height: 700px;   
-    margin-right: 10px;
-    margin-top: 10px;
-    padding: 20px;
-    font-family: 'LINESeedKR-Rg';
 }

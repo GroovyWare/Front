@@ -5,17 +5,17 @@ import { callAnnounceDetailAPI } from "../../../api/AnnounceAPICalls";
 
 function AnnounceDetail() {
 
-    // const userRole = useSelector(state => state.authCode); // 이 부분은 실제 authCode를 가져오는 Redux Selector로 변경해야 합니다.
-    const [userRole, setUserRole] = useState('1'); // 임의의 userRole 상태 생성
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const params = useParams();
-    const announce = useSelector(state => state.announceReducer);
     const annCode = params.annCode;
-
+    const [amount, setAmount] = useState(1);
+    
     useEffect(() => {
         dispatch(callAnnounceDetailAPI({ annCode }));
-    }, [annCode, dispatch]);
+        },
+        []
+    );
 
     function PostContent({ content }) {
         const [iframelyContent, setIframelyContent] = useState(null);

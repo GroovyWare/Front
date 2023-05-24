@@ -76,6 +76,7 @@ function Login() {
             </div>
             <div >
                 <button 
+                    type="button"
                     className={ LoginCSS.loginBtn }
                     onClick={ onClickHandler }    
 

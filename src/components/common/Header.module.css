@@ -8,11 +8,12 @@
     margin: 0px;
     padding: 0px;
 }
+
 .container {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 5px;
+    padding: 10px;
     width: 100%;
     cursor: pointer;
 }

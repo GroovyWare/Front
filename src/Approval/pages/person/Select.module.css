@@ -7,36 +7,34 @@
 
 .wrap{
     width: 450px;
-    height: 230px;
-    background-color: white;
+    height: 300px;
+    background-color: #EBEAFC;
     margin-left: 500px;
+    border-radius: 20px;
     margin-bottom: 640px;
-    margin-top: -631px;
-    border: #4A5CFF solid 1px;
-    transform:translateY(55%);
+    margin-top: -620px;
 }
 
 .title{
-    background-color: #4A5CFF;
+    background-color: #1A1779;
     width: 450px;
-    height: 30px;
+    height: 50px;
+    border-radius: 20px;
     font-family: "LINESeedKR-Bd";
     font-size : 22px;
     color: white;
     text-align: center;
+    padding-top: 25px;
 }
 
 .contextTitle{
     padding-left: 10px;
     font-family: "LINESeedKR-Bd";
     font-size : 18px;
-    transform: translate(-10%, -50%);
 }
 
 .context{
     padding-left: 10px;
-    /* padding-right: 17px; */
     font-family: "LINESeedKR-Bd";
-    font-size: 14px;
-    transform: translate(-10%, -50%);
+    font-size : 14px;
 }
