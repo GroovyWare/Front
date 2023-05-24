@@ -9,12 +9,12 @@ import PagingBar from "../../components/common/PagingBar";
 import ScheduleUpdateModal from "./ScheduleUpdateModal";
 
 function ScheduleSearchModal({ searchSchedule, setScheduleSearchModal, setScheduleUpdateModal, setJustSchedule }) {
-  const [schCode, setschCode] = useState(0);
+  // const [schCode, setschCode] = useState(0);
   const { searchvalues } = useSelector((state) => state.scheduleReducer);
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
 
-  
+
  
 
   const searchData = searchvalues && searchvalues.data ? searchvalues.data : [];
@@ -26,6 +26,7 @@ function ScheduleSearchModal({ searchSchedule, setScheduleSearchModal, setSchedu
     setScheduleUpdateModal(true);
     setScheduleSearchModal(false);
   };
+
 
   // useEffect(() => {
   //   dispatch(getSchedule());
@@ -59,7 +60,7 @@ function ScheduleSearchModal({ searchSchedule, setScheduleSearchModal, setSchedu
               <tbody>
                 {searchvalues && searchvalues.data && searchvalues.data.length > 0 ? (
                   searchvalues.data.map((searchvalue) => (
-                    <tr key={searchvalue.schCode} onClick={() => onClickHandler(searchvalue)}>
+                    <tr key={searchvalue.id} onClick={() => onClickHandler(searchvalue)}>
                       <td>{new Date(searchvalue.start).toLocaleString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' })}</td>
                       <td>{new Date(searchvalue.end).toLocaleString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' })}</td>
                       <td>{searchvalue.title}</td>
@@ -74,9 +75,7 @@ function ScheduleSearchModal({ searchSchedule, setScheduleSearchModal, setSchedu
               </tbody>
             </table>
             <div className="button">
-              <button>
-                확인
-              </button>
+            
               <button
                 style={{
                   border: "none",

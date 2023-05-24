@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from 'react';
 import ApvEmployeeCSS from './ApvEmployee.module.css';
 import Head from './Head';
-import SelectReader from "../pages/person/SelectReader";
-import SelectApprove from "../pages/person/SelectApprove";
+import SelectReader from "../person/SelectReader";
+import SelectApprove from "../person/SelectApprove";
 import { useDispatch, useSelector } from 'react-redux';
-import { searchEmployeeList, selectEmployeeList, searchDepartmentList, registDoc } from '../../api/ApprovalAPICall';
+import { searchEmployeeList, selectEmployeeList, searchDepartmentList, registDoc } from '../../../api/ApprovalAPICall';
 import { EmployeeContext } from './EmployeeProvider';
 
 function ApvEmployee({setModalOpen}){
@@ -66,12 +66,12 @@ function ApvEmployee({setModalOpen}){
                             <SelectReader/>
                             <button 
                                 className={ApvEmployeeCSS.close}
-                                onClick={closeModal}    
-                            >취소</button>
-                            <button 
-                                className={ApvEmployeeCSS.confirm}
                                 onClick={onClickHandler}    
                             >확인</button>
+                            <button 
+                                className={ApvEmployeeCSS.confirm}
+                                onClick={closeModal}    
+                            >취소</button>
                         </div>
             </div>       
         </div>

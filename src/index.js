@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { EmployeeProvider } from './Approval/employee/EmployeeProvider';
+import { EmployeeProvider } from './Approval/pages/employee/EmployeeProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

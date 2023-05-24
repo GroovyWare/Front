@@ -7,7 +7,7 @@ import ApvDocumentCSS from './ApvDocument.module.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { registDoc, selectPersonAPICall } from '../../../api/ApprovalAPICall';
-import { EmployeeContext } from '../../employee/EmployeeProvider';
+import { EmployeeContext } from '../employee/EmployeeProvider';
 
 const Parchment = Quill.import('parchment');
 
@@ -68,7 +68,7 @@ function Document() {
   const {setDocument} = useSelector(state => state.documentReducer);
 
   const [html, setHtml] = useState(setDocument?.data?.docContext);
-  const [form, setForm] = useState();
+  const [apvCode, setApvCode] = useState(undefined);
 
   /* html 내용이 변할 때 마다 새로 세팅 */
   useEffect(() => {
@@ -81,7 +81,7 @@ function Document() {
       dispatch(selectPersonAPICall());
     },[]
   )
-  console.log(approvedEmployees)
+  
   /* 결재 요청 보내기 */
   const onClickDocHandler = () => {
     if (quillRef.current) {
@@ -92,18 +92,22 @@ function Document() {
       formData.append("apvCreatedDate", new Date(startDate));
       formData.append("apvStatus", '미열람');
       formData.append("apvEndDate", new Date(endDate));
-      // formData.append("apvContext", html);
+      formData.append("apvContext", html);
 
       approvedEmployees.forEach((employee, index) => {
-        formData.append(`approveLine[${index}].approveLineId.empCode`, employee.code);
+        formData.append(`approveLine[${index}].apvCode`, 0);
+        formData.append(`approveLine[${index}].empCode`, employee.code);
         formData.append(`approveLine[${index}].aplNum`, index + 1);
+      });
+
+      readEmployees.forEach((reader, index) => {
+        formData.append(`readerLine[${index}].apvCode`, 0);
+        formData.append(`readerLine[${index}].empCode`, reader.code);
       });
 
       dispatch(registDoc(formData, docTitle));
 
-      if (regist?.status === 200) {
-        navigate("/approval/new", {replace: true});
-      }
+      navigate('/approval', {replace : true});
     }
   }
 
@@ -120,7 +124,7 @@ function Document() {
               ref={quillRef}
               value={html} 
               theme="snow"
-              modules={{toolbar:false}} 
+              modules={{toolbar:false}}
           />
           {/* 확인 버튼 */}
           <button 

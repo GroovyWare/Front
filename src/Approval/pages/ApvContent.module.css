@@ -1,42 +1,42 @@
 .centerDiv{
-    width: 1000px;
-    height: 700px;
-    margin-top: 80px;
-    margin-bottom: 30px;
+    /* width: 1000px; */
+    /* height: 700px; */
+    /* margin-top: 80px; */
+    /* margin-bottom: 30px; */
     border-radius: 30px;
-    transform: translate(22%, -11.7%);
+    /* margin-right: 30px; */
+    /* background-color: white;*/
 }
 
 .docDiv{
-    width: 500px;
-    height: 400px;
-    margin-top: 81px;
+    /* margin-top: 81px; */
     padding-top: 38px;
     /* border-radius: 30px; */
     /* margin-right: 30px; */
     background-color: white;
+    width: 600px;
+    padding-bottom: 38px;
 }
 
 
-.favorite{
+/* .favorite{
     float:right;
     margin-top: 15px;
     font-family: "LINESeedKR-Bd";
     font-size : 14px;
     color: #505050;
     margin-right: 30px;
-}
+} */
 
 .docChooseDiv{
     font-family: "LineSeedKR-Bd";
     width: 300px;
     font-size: 22px;
     color: white;
-    text-align:center;
-    margin-top:81px;
-    margin-left:110px;
+    text-align: center;
+    /* margin-top: 81px; */
+    /* margin-left: 110px; */
     background-color: #667eea;
-    border-radius: 20px;
 }
 
 .docChooseDiv li{
@@ -47,8 +47,8 @@
 
 .centerDiv button{
     width: 50px;
-    float: right;
-    margin-top: 137px;
+    /* float: right; */
+    /* margin-top: 137px; */
     font-size: 14px;
     font-family: "LineSeedKR-Bd";
 }
@@ -59,7 +59,7 @@
     font-family: "LineSeedKR-Bd";
     background-color: #667eea;
     color: white;
-    transform: translate(-200%, -750%);
+    transform: translate(1680%, -150%);
 }
 
 .docTitle{
@@ -67,7 +67,7 @@
     font-size: 22px;
     color: #505050;
     margin-left: 100px;
-    margin-top: 30px;
+    /* margin-top: 30px; */
     padding-bottom: 20px;
     display: flex;
     margin-top: 10px;
@@ -84,4 +84,9 @@
     width:100px;
     transform:translate(-219%,-308%);
     /*%20margin-right:%2085px;%20*/
+}
+
+.container{
+    margin: auto;
+    transform: translate(23%, 18%);
 }

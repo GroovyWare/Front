@@ -1,21 +1,16 @@
 import { useContext, useEffect, useState } from "react";
 import ApvContentCSS from "./ApvContent.module.css";
-import { Link, useLoaderData, useLocation, useNavigate } from "react-router-dom";
-import ApvEmployee from "../employee/ApvEmployee";
-import { rangesIntersect } from "@fullcalendar/core/internal";
+import { useNavigate } from "react-router-dom";
+import ApvEmployee from "./employee/ApvEmployee";
 import { useDispatch, useSelector } from "react-redux";
-import { searchDepartmentList } from "../../api/ApprovalAPICall";
 import { searchDocTitleAPI, searchDocumentList } from "../../api/DocumentAPICalls";
 import React from "react";
-import { EmployeeContext } from "../employee/EmployeeProvider";
 
 function ApvContent(){
-    const{approvedEmployees, readEmployees, setApprovedEmployees, setReadEmployees } = useContext(EmployeeContext);
-
     const navigate = useNavigate();
     const dispatch = useDispatch();
     
-    const [startDate, setStartDate] = useState();
+    const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState();
     const [modalOpen, setModalOpen] = useState(false);
     const [docTitles, setDocTitles] = useState();

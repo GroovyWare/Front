@@ -29,7 +29,7 @@ export const { schedule : { getSchedules, getSchedule, postSchedule, putSchedule
 
 const scheduleReducer = handleActions(
     {
-      [GET_SCHEDUELS]: (state, { payload }) => ({ ...state, events: payload }),
+      [GET_SCHEDUELS]: (state, { payload }) => ({ ...state, events: payload, dragEvent: false }),
       [GET_SCHEDULE]: (state, { payload }) => payload,
       [POST_SCHEDULE]: (state, { payload }) => ({ regist: payload }),
       [PUT_SCHEDULE]: (state, { payload }) => ({ modify: payload }),

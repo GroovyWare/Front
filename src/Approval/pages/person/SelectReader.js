@@ -2,7 +2,7 @@ import { useDrop } from "react-dnd";
 import SelectCSS from "./Select.module.css";
 import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { EmployeeContext } from "../../employee/EmployeeProvider";
+import { EmployeeContext } from "../employee/EmployeeProvider";
 import { useLocation } from "react-router-dom";
 
 function SelectReader(){

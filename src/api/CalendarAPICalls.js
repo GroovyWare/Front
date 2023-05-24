@@ -35,9 +35,9 @@ console.log(result);
 }
 
 /* 하나 가져오기 */
-export const oneSchedule = ({ schCode }) => { 
+export const oneSchedule = ({ id }) => { 
 
-    const requestURL = `${PRE_URL}/calendar/schedule/${schCode}`;
+    const requestURL = `${PRE_URL}/calendar/schedule/${id}`;
 
     return async (dispatch, getState) => {
 
@@ -101,7 +101,7 @@ export const createSchedule = (form) => {
 
 /* 수정하기 */
 export const updateSchedule = (form) => {
-    const requestURL = `${PRE_URL}/calendar/schedule/${form.schCode}`;
+    const requestURL = `${PRE_URL}/calendar/schedule/${form.id}`;
 
     return async (dispatch, getState) => {
         const result = await fetch(requestURL, {
