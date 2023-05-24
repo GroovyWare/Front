@@ -6,6 +6,7 @@ import arrow from './img/arrow.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { callGetUserAPI } from '../../api/LoginAPICalls';
+import { toast } from 'react-toastify';
 
 function Navbar() {
 
@@ -16,7 +17,7 @@ function Navbar() {
 
     const onClickLogoutHandler = () => {
         window.localStorage.removeItem('accessToken');
-        alert('로그아웃이 완료되었습니다.');
+        toast('로그아웃이 완료되었습니다.');
         navigate('/login', { replace : true });
     }
 

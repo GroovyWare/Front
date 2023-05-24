@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { callLoginAPI } from '../../api/LoginAPICalls';
 import { useNavigate } from 'react-router';
 import { resetEmp } from '../../modules/LoginModule';
+import { toast } from 'react-toastify';
 
 function Login() {
 
@@ -24,7 +25,7 @@ function Login() {
                 navigate("/", { replace : true });
                 dispatch(resetEmp());
             } else if(login?.state === 400) {
-                alert(login.message);
+                toast.warning(login.message);
                 dispatch(resetEmp());
             }
         },

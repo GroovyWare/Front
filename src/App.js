@@ -3,7 +3,7 @@ import Layout from './components/layouts/Layout';
 import ApprovalLayout from './Approval/layouts/ApprovalLayout';
 import Schedule from './schedule/Schedule';
 import ApvContent from './Approval/pages/ApvContent';
-import ApvEmployee from './Approval/employee/ApvEmployee';
+import ApvEmployee from './Approval/pages/employee/ApvEmployee';
 import PlayMemberList from './play/PlayMemberList';
 import PlayHistory from './play/PlayHistory';
 import AnnounceMain from "./Announce/pages/announces/AnnounceMain";
@@ -24,7 +24,7 @@ import Document from './Approval/pages/document/Document';
 import 'react-toastify/dist/ReactToastify.css';
 import { createGlobalStyle } from 'styled-components';
 import AddDocument from './Approval/pages/document/AddDocument';
-import { EmployeeProvider } from './Approval/employee/EmployeeProvider';
+import { EmployeeProvider } from './Approval/pages/employee/EmployeeProvider';
 
 export const GlobalStyle = createGlobalStyle`
 .Toastify__toast-container {
