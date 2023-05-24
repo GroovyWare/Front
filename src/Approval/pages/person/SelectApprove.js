@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import SelectCSS from "./Select.module.css";
 import { useDrop } from 'react-dnd';
 import { toast } from 'react-toastify';
-import { EmployeeContext } from '../../employee/EmployeeProvider';
+import { EmployeeContext } from '../employee/EmployeeProvider';
 import { useLocation } from 'react-router-dom';
 
 function SelectApprove(){
@@ -53,7 +53,7 @@ function SelectApprove(){
                 <div className={SelectCSS.title}>
                     결재권자
                 </div>
-                <table style={{marginLeft : 120, marginTop : 55}}>
+                <table style={{width:300, marginTop : 10, marginLeft : 8}}>
                 {approvedEmployees.map(employee => (
                         <tr>
                             <td className={SelectCSS.contextTitle}>{employee.dept}</td>

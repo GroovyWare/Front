@@ -15,12 +15,12 @@
     position: relative;
     margin-left: 50px;
     margin-top: 30px;
-    border: 2px solid bisque;
+    border: 2px solid whitesmoke;
     
   }
   
   .calendar1 {
-    height: 50vh;
+    
     width: 50%;
     margin: auto;
     
@@ -44,25 +44,36 @@
     left: 20px;
     bottom: 20px;
     right: 20px;
-    background-color: #fbfbfb;
+    background-color: #9b83fa;
     padding: 10px;
-    border: 2px solid black; 
+    border: none;
     border-radius: 4px;
     font-family: "LINESeedKR-Bold", sans-serif;
     font-weight: bold;
-    color: #000000;
+    color: white;
     cursor: pointer;
-    margin-top: 85vh;
-    margin-bottom: 15vh;
-    margin-right: 10vw;
-    box-shadow: 2px 3px 3px rgb(44, 41, 41);
+    float: right;
+  
+    transform: translateX(-130%) translateY(-50%);
+  
+
+    /* box-shadow: 2px 3px 3px rgb(44, 41, 41); */
   }
   
 
 .allview {
   display: flex;
-  
- 
 }
  
-  
+.radioOptions {
+  position: relative;
+  margin-left: 390px;
+  font-family: "LINESeedKR-Regular";
+  margin-top : 25px;
+}
+.radioOptions input{ margin-left: 15px;}
+
+.searching {
+  position: absolute;
+  margin-left: 360;
+}
