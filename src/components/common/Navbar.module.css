@@ -76,6 +76,7 @@
     backdrop-filter: blur( 20px );
     border-radius: 10px;
     width: auto;
+    min-width: 180px;
     margin: 10px;
     cursor: pointer;
 }
@@ -105,7 +106,6 @@
     line-height: 32px;
     background-color: #94a9ff;
     text-align: left;
-    text-indent: 2.3em;
 }
   
 .subMenu {

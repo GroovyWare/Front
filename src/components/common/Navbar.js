@@ -17,7 +17,7 @@ function Navbar() {
 
     const onClickLogoutHandler = () => {
         window.localStorage.removeItem('accessToken');
-        toast('로그아웃이 완료되었습니다.');
+        toast.success('로그아웃이 완료되었습니다.');
         navigate('/login', { replace : true });
     }
 

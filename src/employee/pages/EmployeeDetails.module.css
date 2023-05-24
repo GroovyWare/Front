@@ -12,6 +12,19 @@
     font-style: normal;
 }
 
+.modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
 .container {
     z-index: 999;
     width: 600px;
@@ -24,11 +37,12 @@
     border: 1px solid;
     border-radius: 10px;
     font-family: 'LINESeedKR-Rg';
+    padding: 10px;
 }
 
-.container > div {
+/* .container > div {
     border: 1px solid black;
-}
+} */
 
 .modalHeader {
     height : 20px;
@@ -36,38 +50,48 @@
     /* background-image: linear-gradient(to bottom, #fe7277 0%, #f9509c 50%); */
 }
 
-.closeBtn {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    right: 10px;
-    top: 10px;
+.modalTitle {
+    text-decoration: 2px underline #1A1779;
+    text-underline-position: under;
+    text-align: center;
 }
 
 .modalBody {
     display: flex;
+    justify-content: center;
+    height: auto;
+
 }
 
 /* 프로필 이미지 */
+
+.profileDiv {
+    width: 300px;
+    margin-top: 20px;
+}
+
 .profileDiv > img {
-    width: 110px;
-    height: 110px;
+    width: 130px;
+    height: 130px;
     border-radius: 70%;
     overflow: hidden;
     border: 5px solid #716dff;
     display: block;
+    margin: auto;
 }
 
 .profileDiv > button {
     width: 80px;
     height: 25px;
-    border: 0px solid #1A1779;
-    border-radius: 10px;
+    border: none;
+    border-radius: 7px;
     background-color: #1A1779;
     color: #ffffff;
     cursor: pointer;
     font-family: 'esamanru';
     letter-spacing: 1px;
+    margin: auto;
+    margin-top: 10px;
 }
 
 .profileDiv > button:hover {
@@ -79,11 +103,37 @@
 }
 
 .userInfo {
-    flex: 1;
-    
+    width: 100%;
 }
 
-.btn {
-    display: flex;
-    justify-content: center;
+.userInfo > table {
+    text-align: left;
+    padding: 20px;
+}
+
+.userInfo > table > tr {
+    height: 25px;
+    border-bottom: 1px solid #1A1779;
+}
+
+.userInfo input {
+    width: 280px;
+    height: 18px;
+}
+
+.btn > button {
+    width: auto;
+    height: 25px;
+    border: none;
+    border-radius: 7px;
+    background-color: #1A1779;
+    color: #ffffff;
+    cursor: pointer;
+    font-family: 'esamanru';
+    padding: 0px 10px;
+    margin-right: 10px;
+}
+
+.btn > button:hover {
+    background-color: #94a9ff;
 }

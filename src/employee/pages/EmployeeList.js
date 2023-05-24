@@ -12,8 +12,8 @@ function EmployeeList({employeeList}) {
                     <th>휴대폰</th>
                     <th>이메일</th>
                     <th>주소</th>
-                    <th>담당부서</th>
-                    <th>직위</th>
+                    <th>부서</th>
+                    <th>직급</th>
                     <th>입사일</th>
                 </tr>
                 {   
