@@ -69,14 +69,14 @@ function ScheduleUpdateModal({  setScheduleUpdateModal , justSchedule}) {
             type="datetime-local"
             name="start"
             onChange={onChangeHandler}
-            value={form.start}
+            value={form.start.toISOString}
           />
           <input
             placeholder="종료일 입력"
             type="datetime-local"
             name="end"
             onChange={onChangeHandler}
-            value={form.end}
+            value={form.end.toISOString}
           />
           <label>이벤트 색상 입력</label>
           <input
