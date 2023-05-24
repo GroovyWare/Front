@@ -66,11 +66,11 @@ function ApvEmployee({setModalOpen}){
                             <SelectReader/>
                             <button 
                                 className={ApvEmployeeCSS.close}
-                                onClick={closeModal}    
+                                onClick={onClickHandler}    
                             >확인</button>
                             <button 
                                 className={ApvEmployeeCSS.confirm}
-                                onClick={onClickHandler}    
+                                onClick={closeModal}    
                             >취소</button>
                         </div>
             </div>       

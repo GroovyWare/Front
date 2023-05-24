@@ -5,8 +5,6 @@ import ApvEmployee from "./employee/ApvEmployee";
 import { useDispatch, useSelector } from "react-redux";
 import { searchDocTitleAPI, searchDocumentList } from "../../api/DocumentAPICalls";
 import React from "react";
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 
 function ApvContent(){
     const navigate = useNavigate();
