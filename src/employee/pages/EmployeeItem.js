@@ -16,9 +16,9 @@ function EmployeeItem({ emp }) {
                 <td>{ emp.empName }</td>
                 <td>{ emp.empPhone }</td>
                 <td>{ emp.empEmail }</td>
+                <td>{ emp.empAddress }</td>
                 <td>{ emp.dept.deptTitle }</td>
                 <td>{ emp.position.positionName }</td>
-                <td>{ emp.empAddress }</td>
                 <td>{ emp.empEntDate }</td>
             </tr>
         { empDetailsOpen && <EmplyoeeDetails setEmpDetailsOpen={ setEmpDetailsOpen } emp={ emp }/> }

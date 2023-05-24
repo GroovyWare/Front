@@ -3,18 +3,19 @@ import empDetailsCSS from './EmployeeDetails.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { callEmployeeDetailsAPI } from '../../api/EmployeeAPICalls';
 import { useEffect, useRef, useState } from 'react';
+import  profileDefaultImage  from '../../components/common/img/profile_default.svg';
+import DaumPostcode from 'react-daum-postcode';
 
 function EmployeeDetails({ setEmpDetailsOpen, emp }) {
     
     const ImageInput = useRef();    
     const [ image, setImage ] = useState(null);
-    const [ imageUrl, setImageUrl ] = useState(emp.file.fileSavedName);
+    const [ imageUrl, setImageUrl ] = useState(emp.file?.fileSavedName);
     const [ form, setForm ] = useState(emp);
 
     const closeEmpDetails = () => {
         setEmpDetailsOpen(false);
     };
-    
 
     useEffect(
         () => {
@@ -32,12 +33,12 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
         [image]
     );
 
-
     const onChangeHandler = (e) => {
         setForm({
             ...form,
             [e.target.name] : e.target.value
         });
+        console.log(form);
     }
 
     const onClickImageUpload = () => {
@@ -49,20 +50,18 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
     }
 
 
-
     return (
+    <div className={ empDetailsCSS.modal }>
         <div className={ empDetailsCSS.container }>
 
             <div className={ empDetailsCSS.modalHeader }>
-                <div>직원 상세 정보</div>
-                <button className={ empDetailsCSS.closeBtn } onClick={ closeEmpDetails }>
-                    x
-                </button>
+                <h3 className={ empDetailsCSS.modalTitle }>직원 상세 정보</h3>
             </div>
 
             <div className={ empDetailsCSS.modalBody }>
                 <div className={ empDetailsCSS.profileDiv }>
-                    <img src={ imageUrl }/>
+                    { imageUrl && <img src={ imageUrl }/> }
+                    { !imageUrl && <img src={ profileDefaultImage }/> }
                     <input
                         className={ empDetailsCSS.imgInput }
                         type="file"
@@ -84,9 +83,10 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
                             <td>
                                 <input
                                 type="text"
-                                name={ emp.empId }
+                                name="emp.empId"
                                 value={ emp.empId }
                                 onChange={ onChangeHandler }
+                                readOnly
                                 />
                             </td>
                         </tr>
@@ -95,6 +95,7 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
                             <td>
                                 <input
                                 type="password"
+                                value={ emp.empPassword }
                                 onChange={ onChangeHandler }
                                 />
                             </td>
@@ -105,7 +106,7 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
                                 <input
                                 type="text"
                                 value={ emp.empName }
-                                onChange={ onChangeHandler }
+                                readOnly
                                 />
                             </td>
                         </tr>
@@ -113,7 +114,8 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
                             <td><label>휴대폰번호</label></td>
                             <td>
                                 <input
-                                type="number"
+                                type="text"
+                                defaultValue={ emp.empPhone }
                                 onChange={ onChangeHandler }
                                 />
                             </td>
@@ -122,7 +124,8 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
                             <td><label>이메일</label></td>
                             <td>
                                 <input
-                                type="text"
+                                type="email"
+                                defaultValue={ emp.empEmail }
                                 onChange={ onChangeHandler }
                                 />
                             </td>
@@ -132,24 +135,8 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
                             <td>
                                 <input
                                 type="text"
-                                onChange={ onChangeHandler }
-                                />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><label>부서</label></td>
-                            <td>
-                                <input
-                                type="text"
-                                onChange={ onChangeHandler }
-                                />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><label>직급</label></td>
-                            <td>
-                                <input
-                                type="text"
+                                name="emp.empAddress"
+                                defaultValue={ emp.empAddress }
                                 onChange={ onChangeHandler }
                                 />
                             </td>
@@ -159,44 +146,60 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
                             <td>
                                 <input
                                 type="text"
+                                name="emp.empEntDate"
+                                defaultValue={ emp.empEntDate }
                                 onChange={ onChangeHandler }
+                                readOnly
                                 />
                             </td>
                         </tr>
                         <tr>
-                            <td><label>퇴사일</label></td>
+                            <td><label>부서</label></td>
                             <td>
-                                <input
-                                type="text"
-                                onChange={ onChangeHandler }
-                                />
+                                <select 
+                                    name="emp.dept.deptCode"
+                                    value={ emp.dept.deptCode }>
+                                    <option value="1">관리</option>
+                                    <option value="2">피트니스</option>
+                                    <option value="3">필라테스</option>
+                                    <option value="4">GX</option>
+                                </select>
                             </td>
                         </tr>
+                        <tr>
+                            <td><label>직급</label></td>
+                            <td>
+                                <select 
+                                    name="emp.position.positionCode"
+                                    value={ emp.position.positionCode }>
+                                    <option value="1">대표</option>
+                                    <option value="2">팀매니저</option>
+                                    <option value="3">시니어</option>
+                                    <option value="4">일반</option>
+                                </select>
+                            </td>
+                        </tr>
+
                         </table>
                     <div className={ empDetailsCSS.btn }>
                         <button>
-                            수정완료
+                            수정
                         </button>
                         <button
                             onClick={ closeEmpDetails }
                         >
                             취소
                         </button>
+
+
                     </div>
                 </div>
-            </div> {/* body end */}
+            </div> {/* modalbody end */}
 
         </div>
+    </div>
     )
 }
 
-  // <input                
-                        //     style={ { display: 'none' }}
-                        //     type="file"
-                        //     name='productImage' 
-                        //     accept='image/jpg,image/png,image/jpeg,image/gif'
-                        //     ref={ ImageInput }
-                        //     onChange={ onChangeImageUpload }
-                        // />
 
 export default EmployeeDetails;
