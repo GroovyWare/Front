@@ -12,6 +12,7 @@ import ScheduleInsertModal from "./modal/ScheduleInsertmodal";
 import ScheduleSearchModal from "./modal/ScheduleSearchModal";
 import ScheduleUpdateModal from "./modal/ScheduleUpdateModal";
 
+
 const Schedule = () => {
   const dispatch = useDispatch();
   const { events } = useSelector((state) => state.scheduleReducer);
@@ -24,9 +25,9 @@ const Schedule = () => {
   const [scheduleUpdateModal, setScheduleUpdateModal] = useState(false);
   const [schCode, setschCode] = useState(0);
   const [justSchedule, setJustSchedule] = useState({});
- 
-
-
+  const [form, setForm] = useState([]);
+  const { modify } = useSelector((state) => state.scheduleReducer);
+  const [id, setId] = useState({})
 
   useEffect(() => {
     dispatch(AllSchedules());
@@ -40,8 +41,8 @@ const Schedule = () => {
   }, [scheduleInsertModal]);
 
   useEffect(() => {
-    if (searchSchedule.schCode) {
-      dispatch(oneSchedule(schCode));
+    if (searchSchedule.id) {
+      dispatch(oneSchedule(id));
     }
   }, [])
 
@@ -89,10 +90,36 @@ const Schedule = () => {
   };
 
   const onEventClickHandler = (info) => {
-    console.log(events.info)
-    const clickedEvent = events.data.find(event => event.id === info.event.id);
-    // setSelectedEvent(clickedEvent);
-    setScheduleUpdateModal(true);    // id 를 얻어온다. find 기준으로 잡고 찾는다. => set justschedule로 넣어줌
+    
+    console.log(info)
+    console.log(info.event.id)
+    console.log(events.data);
+    
+
+    const clickedEvent = events.data.find(event => event.id == info.event.id); // 값이 안나와서 비교연산자를 사용해보았다.
+    console.log(clickedEvent);
+    setJustSchedule(clickedEvent);
+    setScheduleUpdateModal(true);
+    // const clickedEvent = events.find(info.event.id);
+    // setJustSchedule(clickedEvent);   // id 를 얻어온다. find 기준으로 잡고 찾는다. => set justschedule로 넣어줌
+  }
+
+  const DragHandler = (event) => {
+    const { id, start, end } = event.event;
+    const updatedEvent = {
+      id,
+      start,
+      end,
+      dragEvent: true,
+    };
+    console.log(event)
+    console.log(event.event)
+
+    console.log(updatedEvent);
+    dispatch(updateSchedule(updatedEvent));
+
+    
+
   }
 
 
@@ -120,7 +147,7 @@ const Schedule = () => {
     },
 
     events: filteredEvents,
-    // eventDrop: handleEventDrop,
+    
   };
 
   return (
@@ -153,6 +180,12 @@ const Schedule = () => {
           />
           개인일정
         </label>
+
+        
+        <button className={styles.inserting} onClick={onClickHandler}>
+          일정 생성
+        </button>
+
       </div>
 
       <div className={styles.allview}>
@@ -179,13 +212,9 @@ const Schedule = () => {
             contentHeight={600}
             contentWidth={1600}
             eventClick={ onEventClickHandler }
-            eventChange = {(e) => {console.log(e)}}
+            eventDrop = {DragHandler}
           />
         </div>
-
-        <button className={styles.inserting} onClick={onClickHandler}>
-          일정 생성
-        </button>
 
 
         <div className={styles.searching}>
