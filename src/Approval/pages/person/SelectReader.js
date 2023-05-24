@@ -40,7 +40,7 @@ function SelectReader(){
                 <div className={SelectCSS.title}>
                     열람권자
                 </div>
-                <table style={{marginLeft : 120, marginTop : 55}}>
+                <table style={{width:300, marginTop : 10, marginLeft : 8}}>
                 {readEmployees && readEmployees.map(employee => (
                         <tr>
                             <td className={SelectCSS.contextTitle}>{employee.dept}</td>
