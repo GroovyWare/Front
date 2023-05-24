@@ -31,7 +31,7 @@ function Navbar() {
                         </li>
 
  
-                        <li><NavLink to="/" className={ NavbarCSS.link }>
+                        <li><NavLink to="/announce" className={ NavbarCSS.link }>
                             공지사항
                             <img src={ arrow } className = { NavbarCSS.arrowNo }/>
                             </NavLink>

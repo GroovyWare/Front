@@ -59,10 +59,6 @@ function AnnounceMain() {
         navigate("/announce/announce-registration");
     }
 
-    const onClickTableTr = (annCode) => {
-        navigate(`/announce/announce-update/${annCode}`);
-    }
-
     const onSearch = (searchValue) => {
         setSearchTerm(searchValue);
     }
