@@ -24,7 +24,9 @@ import Document from './Approval/pages/document/Document';
 import 'react-toastify/dist/ReactToastify.css';
 import { createGlobalStyle } from 'styled-components';
 import AddDocument from './Approval/pages/document/AddDocument';
+import AnnounceUpdate from './Announce/pages/admin/AnnounceUpdate';
 import { EmployeeProvider } from './Approval/pages/employee/EmployeeProvider';
+
 
 export const GlobalStyle = createGlobalStyle`
 .Toastify__toast-container {
@@ -65,6 +67,7 @@ function App() {
               <Route index element={<ProtectedRoute loginCheck={true}><AnnounceMain /></ProtectedRoute>} />
               <Route path=":annCode" element={<ProtectedRoute loginCheck={true}><AnnounceDetail /></ProtectedRoute>} />
               <Route path="announce-registration" element={<AnnounceRegistration />} />
+              <Route path="announce-update/:annCode" element={<AnnounceUpdate />} />
           </Route>
 
           <Route path="schedule" element={<Schedule />} />
