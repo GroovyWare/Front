@@ -25,6 +25,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { createGlobalStyle } from 'styled-components';
 import AddDocument from './Approval/pages/document/AddDocument';
 import { EmployeeProvider } from './Approval/pages/employee/EmployeeProvider';
+import EmployeeRegist from './employee/pages/EmployeeRegist';
 
 export const GlobalStyle = createGlobalStyle`
 .Toastify__toast-container {
@@ -82,6 +83,7 @@ function App() {
 
           <Route path="employee">
             <Route index element={ <Employee/> }/>
+            <Route path="regist" element={ <EmployeeRegist/> }/>
           </Route>
 
         </Route>

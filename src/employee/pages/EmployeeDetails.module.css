@@ -64,7 +64,6 @@
 }
 
 /* 프로필 이미지 */
-
 .profileDiv {
     width: 300px;
     margin-top: 20px;
@@ -102,6 +101,7 @@
     display: none;
 }
 
+/* 직원 정보 */
 .userInfo {
     width: 100%;
 }

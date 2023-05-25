@@ -1,0 +1,49 @@
+/* 프로필 이미지 */
+.profileDiv {
+    width: 300px;
+    margin-top: 20px;
+}
+
+.profileDiv > img {
+    width: 130px;
+    height: 130px;
+    border-radius: 70%;
+    overflow: hidden;
+    border: 5px solid #716dff;
+    display: block;
+    margin: auto;
+}
+
+.profileDiv > button {
+    width: 80px;
+    height: 25px;
+    border: none;
+    border-radius: 7px;
+    background-color: #1A1779;
+    color: #ffffff;
+    cursor: pointer;
+    font-family: 'esamanru';
+    letter-spacing: 1px;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.profileDiv > button:hover {
+    background-color: #94a9ff;
+}
+
+.imgInput {
+    display: none;
+}
+
+/* 직원 정보 */
+.content {
+    display: flex;
+}
+
+
+
+/* 버튼 */
+.btn {
+    text-align: center;
+}

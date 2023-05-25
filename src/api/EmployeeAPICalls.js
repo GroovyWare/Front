@@ -1,4 +1,4 @@
-import { getEmployee, getEmployees } from "../modules/EmployeeModule";
+import { getEmployee, getEmployees, postEmployee } from "../modules/EmployeeModule";
 
 const RESTAPI_SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const RESTAPI_SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
@@ -20,18 +20,60 @@ export const callEmployeeListAPI = ({ currentPage=1}) => {
     }
 }
 
-/* 직원 상세 조회 */
-export const callEmployeeDetailsAPI = ({ empCode }) => {
+// /* 직원 상세 조회 */
+// export const callEmployeeDetailsAPI = ({ empCode }) => {
     
-    const requestURL =`${PRE_URL}/auth/emp/${ empCode }`;
+//     const requestURL =`${PRE_URL}/auth/emp/${ empCode }`;
 
+//     return async (dispatch, getState) => {
+
+//         const result = await fetch(requestURL).then(res => res.json());
+        
+//         if(result.status === 200) {
+//             console.log('[EmployeeAPICalls] : callEmployeeDetailsAPI result : ', result);
+//             dispatch(getEmployee(result));
+//         }
+//     }
+// }
+/* 직원 아이디 조회 */
+export const callEmployeeIdListAPI = () => {
+
+    const requestURL = `${PRE_URL}/auth/empidlist`;
+  
     return async (dispatch, getState) => {
 
-        const result = await fetch(requestURL).then(res => res.json());
-        
+        const result = await fetch(requestURL, {
+            method : 'GET',
+            headers : {
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            },
+        }).then(res => res.json());
+
         if(result.status === 200) {
-            console.log('[EmployeeAPICalls] : callEmployeeDetailsAPI result : ', result);
-            dispatch(getEmployee(result));
+            console.log('[EmployeeAPICalls] : callEmployeeIdListAPI result : ', result);
+            dispatch(postEmployee(result));
+        }
+    }
+}
+
+/* 직원 등록 */
+export const callEmployeeRegistAPI = (formData) => {
+
+    const requestURL = `${PRE_URL}/auth/emp`;
+  
+    return async (dispatch, getState) => {
+
+        const result = await fetch(requestURL, {
+            method : 'POST',
+            headers : {
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            },
+            body : formData
+        }).then(response => response.json());
+
+        if(result.status === 200) {
+            console.log('[ProductAPICalls] : callProductRegistAPI result : ', result);
+            dispatch(postEmployee(result));
         }
     }
 }
