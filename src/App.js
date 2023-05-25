@@ -82,6 +82,14 @@ function App() {
               <Route path="announce-update/:annCode" element={<AnnounceUpdate />} />
           </Route>
 
+          {/* <Route path="/equipment">
+            <Route index element={<ProtectedRoute loginCheck={true}><EquipmentMain /></ProtectedRoute>} />
+          </Route>
+
+          <Route path="/locker">
+            <Route index element={<ProtectedRoute loginCheck={true}><LockerMain /></ProtectedRoute>} />
+          </Route> */}
+
           <Route path="schedule" element={<Schedule />} />
 
           <Route path="member">
