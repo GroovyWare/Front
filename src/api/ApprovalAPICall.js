@@ -1,6 +1,7 @@
+import RequestWait from "../Approval/pages/getDocument/RequestWait";
 import { registApproval } from "../modules/ApprovalModule";
 import { selectEmployee, searchEmployee, searchDepartment } from "../modules/ApprovalModule";
-import { selectPerson } from "../modules/ApprovalModule";
+import { selectPerson, searchRequest, searchContext, searchWait, searchNow } from "../modules/ApprovalModule";
 
 const RESTAPI_SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const RESTAPI_SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
@@ -67,8 +68,6 @@ export const searchEmployeeList = ({empName}) => {
 
         const result = await fetch(requestURL).then(response => response.json());
 
-        console.log("result", result);
-
        if(result.status === 200){
         dispatch(selectEmployee(result));
        }
@@ -89,4 +88,96 @@ export const searchDepartmentList = () => {
         }
     }
 }
+
+/* 결재 요청 목록 조회 */
+export const searchRequestAPI = ({currentPage}) => {
+
+    const requestURL = `${PRE_URL}/approval/request?page=${currentPage}`
+
+    return async (dispatch, getState) => {
+
+        const result = await fetch(requestURL,{
+            method : "GET",
+            headers : {
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then(response => response.json());
+
+        if(result.status === 200){
+            dispatch(searchRequest(result));
+        }
+    }
+}
+
+/* 결재 대기 목록 조회 */
+export const searchWaitAPI = ({currentPage}) => {
+    const requestURL = `${PRE_URL}/approval/wait?page=${currentPage}`;
+
+    return async (dispatch, getState) => {
+        const result = await fetch(requestURL, {
+            method : "GET",
+            headers : {
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then(response => response.json());
+
+        if(result.status === 200){
+            dispatch(searchWait(result));
+        }
+    }
+}
+
+/* 기안서 조회 */
+export const searchContextAPI = (apvCode) => {
+
+    const requestURL = `${PRE_URL}/approval/context?apvCode=${apvCode}`
+
+    return async (dispatch, getState) => {
+        const result = await fetch(requestURL, {
+            method : "GET",
+            headers : {
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then(response => response.json());
+
+        if(result.status === 200){
+            dispatch(searchContext(result));
+        }
+    }
+}
+
+/* 현재 로그인 한 사람의 정보 */
+export const searchNowAPI = () => {
+    const requestURL = `${PRE_URL}/approval/now`;
+
+    return async (dispatch, getState) => {
+        const result = await fetch(requestURL, {
+            method : "GET",
+            headers : {
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then(response => response.json());
+
+        if(result.status === 200){
+            dispatch(searchNow(result));
+        }
+    }
+}
+
+// /* 상태 변경 */
+// export const addCountAPI = (apvCode, count) => {
+//     const requestURL = `${PRE_URL}/approval/count?apvCode=${apvCode}`
+
+//     return async (dispatch, getState) => {
+//         const result = await fetch(requestURL,{
+//             method : "POST",
+//             headers : {
+//                 "Content-Type" : "application/json",
+//                 "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+//             },
+//             body : JSON.stringify(count)
+            
+//         }).then(response => response.json());
+//     }
+// }
 

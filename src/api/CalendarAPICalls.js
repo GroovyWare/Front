@@ -1,4 +1,4 @@
-import { getSchedules, postSchedule, putSchedule, getSchedule, searchSchedules } from "../modules/CalendarModule";
+import { getSchedules, postSchedule, putSchedule, getSchedule, searchSchedules, deleteSchedule } from "../modules/CalendarModule";
 
 
 
@@ -126,4 +126,23 @@ export const updateSchedule = (form) => {
 
 
 /* 삭제하기 */
+export const deleteOne = (form) => {
+    const requestURL = `${PRE_URL}/calendar/schedule/delete/${form.id}`;
+  
+    return async (dispatch, getState) => {
+      const result = await fetch(requestURL, {
+        method: 'DELETE',
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
+        },
+      }).then(response => response.json());
+  
+      if (result.status === 200) {
+        console.log('[CalendarAPICalls] callDeleteAPI result:', result);
+        dispatch(deleteSchedule(result));
+      }
+    }
+  }
+  
 

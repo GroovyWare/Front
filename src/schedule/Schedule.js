@@ -90,11 +90,11 @@ const Schedule = () => {
   };
 
   const onEventClickHandler = (info) => {
-    
+
     console.log(info)
     console.log(info.event.id)
     console.log(events.data);
-    
+
 
     const clickedEvent = events.data.find(event => event.id == info.event.id); // 값이 안나와서 비교연산자를 사용해보았다.
     console.log(clickedEvent);
@@ -118,7 +118,7 @@ const Schedule = () => {
     console.log(updatedEvent);
     dispatch(updateSchedule(updatedEvent));
 
-    
+
 
   }
 
@@ -132,7 +132,7 @@ const Schedule = () => {
       const month = `${date.date.month + 1}월`;
       return ` ${year} ${month}`;
     },
-    editable: true,
+
     selectable: true,
     droppable: true,
     navLinks: true,
@@ -147,11 +147,17 @@ const Schedule = () => {
     },
 
     events: filteredEvents,
-    
+
   };
 
   return (
     <div>
+      <div className={styles.searching}>
+        <label>제목으로 검색</label>
+        <input type="text" name="title" value={searchSchedule} onChange={(e) => setSearchSchedule(e.target.value)}></input>
+        <button onClick={searchingTitleHandler}>검색</button>
+      </div>
+
       <div className={styles.radioOptions}>
         <label>
           <input
@@ -181,7 +187,7 @@ const Schedule = () => {
           개인일정
         </label>
 
-        
+
         <button className={styles.inserting} onClick={onClickHandler}>
           일정 생성
         </button>
@@ -202,31 +208,26 @@ const Schedule = () => {
           <ScheduleUpdateModal setScheduleUpdateModal={setScheduleUpdateModal}
             justSchedule={justSchedule} />
         )}
-
-        <div className={`${styles.mainContents} ScheduleCSS`} style={{ maxWidth: '1680px', minWidth: '1100px' }}>
-          <FullCalendar
-            {...calendarOptions}
-            locale={"ko-KR"}
-            weekends={true}
-            dayMaxEventRows={3}
-            contentHeight={600}
-            contentWidth={1600}
-            eventClick={ onEventClickHandler }
-            eventDrop = {DragHandler}
-          />
-        </div>
-
-
-        <div className={styles.searching}>
-          <label>제목으로 검색</label>
-          <input type="text" name="title" value={searchSchedule} onChange={(e) => setSearchSchedule(e.target.value)}></input>
-          <button onClick={searchingTitleHandler}>검색</button>
-        </div>
-
-
-
-
       </div>
+      <div className="calendarMain" style={{ maxWidth: '1680px', minWidth: '1100px' }}>
+        <FullCalendar
+          {...calendarOptions}
+          locale={"ko-KR"}
+          weekends={true}
+          dayMaxEventRows={3}
+          contentHeight={600}
+          contentWidth={1600}
+          eventClick={onEventClickHandler}
+          eventDrop={DragHandler}
+        />
+      </div>
+
+
+
+
+
+
+
 
     </div>
   );

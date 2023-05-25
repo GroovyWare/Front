@@ -1,30 +1,83 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { callAnnounceDetailAPI } from "../../../api/AnnounceAPICalls";
 
 function AnnounceDetail() {
 
+    // const userRole = useSelector(state => state.authCode); // 이 부분은 실제 authCode를 가져오는 Redux Selector로 변경해야 합니다.
+    const [userRole, setUserRole] = useState('1'); // 임의의 userRole 상태 생성
     const dispatch = useDispatch();
-    const Navigate = useNavigate();
-    // const announce = useSelector(state => state.productReducer);
+    const navigate = useNavigate();
     const params = useParams();
+    const announce = useSelector(state => state.announceReducer);
     const annCode = params.annCode;
-    const [amount, setAmount] = useState(1);
-    
+
     useEffect(() => {
         dispatch(callAnnounceDetailAPI({ annCode }));
-        },
-        []
-    );
+    }, [annCode, dispatch]);
 
-    // 목록 버튼 클릭 시 목록으로 돌아가는 이벤트
+    function PostContent({ content }) {
+        const [iframelyContent, setIframelyContent] = useState(null);
+      
+        useEffect(() => {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(content, 'text/html');
+            const oembedElements = doc.querySelectorAll('oembed[url]');
+            const mediaUrls = Array.from(oembedElements).map(element => element.getAttribute('url'));
+          
+            Promise.all(
+              mediaUrls.map(mediaUrl =>
+                fetch(`https://iframe.ly/api/iframely?url=${mediaUrl}&api_key=c591925649e078fb19faeb`)
+                  .then(response => response.json())
+                  .then(data => {
+                    const iframeDoc = parser.parseFromString(data.html, 'text/html');
+                    const iframeElement = iframeDoc.querySelector('iframe');
+                    iframeElement.style.width = '640px';
+                    iframeElement.style.height = '360px';
+                    iframeElement.style.position = 'static';
+                    return iframeElement.outerHTML;
+                  })
+              )
+            )
+              .then(iframelyContents => setIframelyContent(iframelyContents.join('')))
+              .catch(error => console.error(error));
+          }, [content]);
+      
+        return (
+            <div>
+                <div dangerouslySetInnerHTML={{ __html: iframelyContent }} />
+                <div id="content" dangerouslySetInnerHTML={{ __html: content }} />
+            </div>
+        );
+      }
+
+    const goToUpdate = (annCode) => {
+        navigate(`/announce/announce-update/${annCode}`);
+    }
+
+    const goToMain = () => {
+        navigate("/announce");
+    }
 
     return (
+        <>
         <div>
-            
+            {userRole === '1' && (
+                <>
+                <button onClick={() => goToUpdate(annCode)}>수정</button>
+                <button>삭제</button>
+                </>
+            )}
+            <h2>{announce.annTitle}</h2>
+            <p>{`${announce?.employee?.empName}`}</p>
+            <p>{`${new Date(announce.annDate).toLocaleString()}`}</p>
+            <PostContent content={announce.annContent} />
+            <button onClick={ goToMain }>목록</button>
         </div>
+        </>
     );
+    
 }
 
 export default AnnounceDetail;

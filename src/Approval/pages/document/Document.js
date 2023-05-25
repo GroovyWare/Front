@@ -63,12 +63,10 @@ function Document() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const {regist} = useSelector(state => state.approvalReducer);
   const {employee} = useSelector(state => state.approvalReducer);
   const {setDocument} = useSelector(state => state.documentReducer);
 
   const [html, setHtml] = useState(setDocument?.data?.docContext);
-  const [apvCode, setApvCode] = useState(undefined);
 
   /* html 내용이 변할 때 마다 새로 세팅 */
   useEffect(() => {
@@ -90,7 +88,13 @@ function Document() {
   
       const formData = new FormData();
       formData.append("apvCreatedDate", new Date(startDate));
-      formData.append("apvStatus", '미열람');
+
+      if(startDate = new Date()){
+        formData.append("apvStatus", '진행중');
+      }else if(endDate < new Date()){
+        formData.append('apvStatus', '기한마감')
+      }
+      
       formData.append("apvEndDate", new Date(endDate));
       formData.append("apvContext", html);
 

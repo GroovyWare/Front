@@ -1,5 +1,23 @@
-/* .fc  */
+/* font */
+@font-face {
+    font-family: "LINESeedKR-Bold";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2")
+      format("woff2");
+    font-weight: normal;
+    font-style: normal;
+}
 
+/* calendarmain */
+.calendarMain{
+    font-family: "LINESeedKR-Bold", sans-serif;
+    flex: 1;
+    position: relative;
+    margin-left: 50px;
+    margin-top: 30px;
+    border: 2px solid whitesmoke;
+}
+
+/* .fc  */
 .fc-border-color{
     border-color: black;
 } 
