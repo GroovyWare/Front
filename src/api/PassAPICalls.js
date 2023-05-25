@@ -1,4 +1,4 @@
-import { getPass, postPass } from "../modules/PassModule";
+import { getPass, postPass, putPass, getPas } from "../modules/PassModule";
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
@@ -46,6 +46,51 @@ export const callPassRegistAPI = (formData) => {
         if(result.status === 200) {
             console.log('[PassAPICalls] : callPassRegistAPI result,', result);
             dispatch(postPass(result));
+        }
+    }
+
+}
+
+/* 회원권 수정을 위한 정보 조회 */
+export const callPassDetailReadModifyAPI = ({ passCode }) => {
+
+    const requestURL = `${PRE_URL}/pass/detail/${passCode}`;
+    
+    return async (dispatch, getState) => {
+        
+        const result = await fetch(requestURL, {
+            method : 'GET',
+            headers : {
+                "Content-Type" : "application/json",
+                Authorization : "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then(response => response.json());
+
+        if(result.status === 200) {
+            console.log("[PassAPICalls] callPassDetailReadModifyAPI result : ", result);
+            dispatch(getPas(result));
+        }
+    }
+}
+
+/* 회원권 수정 */
+export const callPassModifyAPI = (formData) => {
+    
+    const requestURL = `${PRE_URL}/pass/modify`;
+
+    return async (dispatch, getState) => {
+
+        const result = await fetch(requestURL, {
+            method : 'PUT',
+            headers : {
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            },
+            body : formData
+        }).then(response => response.json());
+
+        if(result.status === 200) {
+            console.log('[PassAPICalls] callPassModifyAPI result :', result);
+            dispatch(putPass(result));
         }
     }
 

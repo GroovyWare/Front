@@ -1,0 +1,82 @@
+@font-face {
+    font-family: 'GongGothicMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LINESeedKR-Bd';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LINESeedKR-Rg';
+    src: url('https://cdn.jsdelivr.net/gh/wizfile/font/LINESeedKR-Rg.eot');
+    src:url('https://cdn.jsdelivr.net/gh/wizfile/font/LINESeedKR-Rg.woff') format('woff');
+    font-style: normal;
+}
+
+/* list CSS*/
+.contentTb {
+    border-collapse: collapse;
+    margin: auto;
+}
+
+.pageTitle {
+    font-family: LINESeedKR-Bd;
+    font-size: 1.2rem;
+    width: 130px;
+    margin-top: 30px;
+    margin-left: 30px;
+    margin-bottom: 20px;
+}
+
+.contentTitle {
+    font-family: LINESeedKR-Bd;
+    font-size: 14px;
+    color: white;
+    width: 140px;
+    margin-top: 60px;
+    text-align: center;
+    vertical-align: middle;
+    border-top: 1.5px solid #9BA4B5;
+    border-bottom: 1.5px solid #9BA4B5;
+    padding: 10px;
+    background-color: #9b83fa;
+}
+
+/* item CSS*/
+.itemContentTb {
+    border-collapse: collapse;
+    margin: auto;
+    background-color: #f3f3f3;
+}
+
+.itemContentTb > tr:hover {
+    border-collapse: collapse;
+    color: #fff;
+    background-color: rgba(173, 172, 192, 1);
+    cursor: pointer;
+}
+
+
+
+
+
+.contentText {
+    font-family: LINESeedKR-Rg;
+    font-size: 14px;
+    text-align: center;
+    width: 140px;
+    border-bottom: 1px solid #9BA4B5;
+    padding: 10px;
+}
+
+.contentHover > tr:hover {
+    color: #fff;
+    background-color: #7777775e;
+    cursor: pointer;
+}

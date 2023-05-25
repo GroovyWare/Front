@@ -14,7 +14,9 @@ import AnnounceItem from './Announce/items/AnnounceItem';
 import MemberMain from './Member/pages/MemberMain';
 import MemberDetail from './Member/pages/MemberDetail';
 import MemberRegist from './Member/pages/MemberRegist';
+import MemberModify from './Member/pages/MemberModify';
 import PassRegist from './Pass/pages/PassRegist';
+import PassModify from './Pass/pages/PassModify';
 import PassMain from './Pass/pages/PassMain';
 import ProtectedRoute from './components/router/ProtectedRoute'
 import Login from './login/pages/Login';
@@ -72,15 +74,17 @@ function App() {
 
           <Route path="schedule" element={<Schedule />} />
 
-          <Route path="member" element={<MemberMain />}>
+          <Route path="member">
             <Route index element={<MemberMain />} />
             <Route path="detail/:memCode" element={<MemberDetail />} />
             <Route path="regist" element={<MemberRegist />} />
+            <Route path="modify/:memCode" element={<MemberModify />} />
           </Route>
 
-          <Route path="pass" element={<PassMain />}>
+          <Route path="pass">
             <Route index element={<PassMain />} />
             <Route path="regist" element={<PassRegist />} />
+            <Route path="modify/:passCode" element={<PassModify />} />
           </Route>
 
           <Route path="employee">

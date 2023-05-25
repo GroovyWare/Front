@@ -1,5 +1,6 @@
 import MemberItem from "../items/MemberItem";
-import MemberCSS from "../items/MemberItem.module.css";
+import MemberListCSS from "./MemberList.module.css";
+
 
 
 
@@ -7,29 +8,25 @@ function MemberList({memberList}) {
 
     return(
         <>
-            <div className={ MemberCSS.titleDiv }>
-            <div>회원 조회</div>
-            </div>
-            <div className={ MemberCSS.listTitleDiv }>
-                <tr>
-                    <div className={ MemberCSS.contentWrap }>
-                        <div><th>회원번호</th></div>
-                        <div><th>이름</th></div>
-                        <div><th>전화번호</th></div>
-                        <div><th>회원권</th></div>
-                        <div><th>횟수</th></div>
-                        <div><th>시작일</th></div>
-                        <div><th>종료일</th></div>
-                    </div>
-                </tr>
-            </div>
+            <div className={MemberListCSS.pageTitle}>회원 조회</div>
+           
+           <table className={MemberListCSS.contentTb}>
+           <tr>
+               <td className={MemberListCSS.contentTitle}>회원번호</td>
+               <td className={MemberListCSS.contentTitle}>이름</td>
+               <td className={MemberListCSS.contentTitle}>전화번호</td>
+               <td className={MemberListCSS.contentTitle}>회원권</td>
+               <td className={MemberListCSS.contentTitle}>횟수</td>
+               <td className={MemberListCSS.contentTitle}>시작일</td>
+               <td className={MemberListCSS.contentTitle}>종료일</td>
+           </tr>
+           </table>
 
             <div>
                 {
                     Array.isArray(memberList) 
-                    && memberList.map(member => <MemberItem key={ member.memCode} member={member}/>)
+                    && memberList.map(member => <MemberItem key={member.memCode} member={member}/>)
                 }
- 
             </div>
         </>
 

@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { callPassListAPI } from "../../api/PassAPICalls";
-import PagingBar from "../../components/common/PagingBar";
 import PassList from "./PassList";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import PassCSS from "./Pass.module.css";
+import PagingBar from "../../components/common/PagingBar";
 
 function PassMain() {
 
@@ -13,7 +14,7 @@ function PassMain() {
     const passLists = pass.data;
     const pageInfo = pass.pageInfo;
 
-    const[currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(
         () => {
@@ -30,7 +31,7 @@ function PassMain() {
     return(
         <>
         <div>
-            <div>회원권 조회</div>
+            <div className={PassCSS.pageTitleRg}>회원권 조회</div>
         </div>
             <div>
                 { passLists && <PassList passLists={passLists}/> }
@@ -39,7 +40,11 @@ function PassMain() {
                 { pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage }/> }
             </div>
 
-            <button onClick={ onClickRegistHandler }>등록</button>
+            <div>
+            <button 
+                className={PassCSS.registBtnRg}
+                onClick={ onClickRegistHandler }>등록하기</button>
+            </div>
         </>
     );  
 }

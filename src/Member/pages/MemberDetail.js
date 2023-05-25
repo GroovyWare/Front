@@ -4,6 +4,7 @@ import { callMemberDetailAPI } from "../../api/MemberAPICalls";
 import { callMemberHistoryCheckAPI } from "../../api/MemberHistoryAPICalls";
 import { useNavigate, useParams } from "react-router-dom";
 import MemberHistoryModal from "./MemberHistoryModal";
+import MemberDetailCSS from "./MemberDetail.module.css";
 
 
 
@@ -43,7 +44,7 @@ function MemberDetail() {
 
     /* 수정하기 버튼 */
     const onClickModifyHandler = () => {
-        navigate(`/member/modify/${params.memCode}`)
+        navigate(`/member/modify/${memCode}`)
     }
 
     /* 취소하기(페이지로 돌아가기) 버튼 */
@@ -52,7 +53,9 @@ function MemberDetail() {
     }
     return(
         <>
-        <div>회원 페이지</div>
+        <div className={MemberDetailCSS.pageTitle}>회원 상세조회</div>
+        
+        <div className={MemberDetailCSS.contentWrap}>
         {memberHistoryModal ? (
             <MemberHistoryModal
                 history={history}
@@ -60,38 +63,79 @@ function MemberDetail() {
             />
         ) : true}
 
-            <div>
+            
                 {member.memCode && (
                   <>
-                    <table>
-                        <tbody>
-                            <tr>회원번호 { member.memCode }</tr>
-                            <tr>이름 { member.memName }</tr>
-                            <tr>전화번호 { member.memPhone }</tr>
-                            <tr>회원권 { member.memPhone }</tr>
-                            <div>
-                              <button
-                                onClick={ () => 
-                                    onClickHistoryHandler(member.memCode)
-                                }
-                              >
-                                상세보기</button>
-                            </div>
-                            <tr>시작일 { member.memStartDate }</tr>
-                            <tr>종료일 { member.memEndDate }</tr>
-                            <tr>삭제일 { member.memDeleteDate }</tr>
-                            <tr>비고 { member.memEtc }</tr>
-                        </tbody>
+                    <table className={MemberDetailCSS.contentTb}>
+                        <tr>
+                            <td className={MemberDetailCSS.contentTitle}>회원번호</td> 
+                            <td className={MemberDetailCSS.contentText} colspan="3">{ member.memCode }</td>
+                        </tr>
+                        
+                        <tr>
+                            <td className={MemberDetailCSS.contentTitle}>이름</td>
+                            <td className={MemberDetailCSS.contentText} colspan="3">{ member.memName }</td>
+                        </tr>
+
+                        <tr>
+                            <td className={MemberDetailCSS.contentTitle}>전화번호</td>
+                            <td className={MemberDetailCSS.contentText} colspan="3">{ member.memPhone }</td>
+                        </tr>
+
+                        <tr>
+                            <td className={MemberDetailCSS.contentTitle} colspan="2">회원권</td>
+                            <td className={MemberDetailCSS.contentText}>{ member.history[0].pass.passType }</td>
+                            <td className={MemberDetailCSS.contentText} >
+                                <button
+                                    className={MemberDetailCSS.detailBtn}
+                                    onClick={ () => 
+                                        onClickHistoryHandler(member.memCode)
+                                    }
+                                >
+                                    상세보기</button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td className={MemberDetailCSS.contentTitle}>시작일</td>
+                            <td className={MemberDetailCSS.contentText} colspan="3">{ member.memStartDate }</td>
+                        </tr>
+
+                        <tr>
+                            <td className={MemberDetailCSS.contentTitle}>종료일</td> 
+                            <td className={MemberDetailCSS.contentText} colspan="3">{ member.memEndDate }</td>
+                        </tr>
+
+                        <tr>
+                            <td className={MemberDetailCSS.contentTitle}>삭제일</td> 
+                            <td className={MemberDetailCSS.contentText} colspan="3">{ member.memDeleteDate }</td>
+                        </tr>
+
+                        <tr>
+                            <td className={MemberDetailCSS.contentTitle}>비고</td>
+                            <td className={MemberDetailCSS.contentText} colspan="3">{ member.memEtc }</td>
+                        </tr>
+                        
                     </table>
 
+                    <div className={MemberDetailCSS.btnWrap}>
                     <div>
-                        <button onClick={ onClickModifyHandler }>수정하기</button>
-                        <button onClick={ onClickCancelHandler }>취소하기</button>
+                        <button 
+                            className={MemberDetailCSS.modifyBtn}
+                            onClick={ onClickModifyHandler }>수정하기</button>
                     </div>
+                    <div>
+                        <button 
+                            className={MemberDetailCSS.cancelBtn}
+                            onClick={ onClickCancelHandler }>취소하기</button>
+                    </div>
+                    </div>
+
+                
                   </>
                 )}
             </div>
-        
+
         </>
     );
 }
