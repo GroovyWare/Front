@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { callPassRegistAPI } from "../../api/PassAPICalls";
-
+import PassCSS from "./Pass.module.css";
 
 
 function PassRegist() {
@@ -10,7 +10,10 @@ function PassRegist() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { regist } = useSelector(state => state.passReducer);
-    const [form, setForm] = useState({});
+    const [form, setForm] = useState({
+        passAmount : null,
+        passEtc : null
+    });
 
     /* 회원권 등록 후 회원권 리스트로 이동 */
     useEffect(
@@ -48,17 +51,18 @@ function PassRegist() {
 
     return(
         <>
-        <div>회원권 등록</div>
-        <div>
-            <table>
+        <div className={PassCSS.pageTitle}>회원권 등록</div>
+        <div className={PassCSS.contentWrap}>
+            <table className={PassCSS.contentTb}>
                 <tbody>
                     <tr>
-                        <td><label>회원권</label></td>
-                        <td>
+                        <td className={PassCSS.contentTitle}><label>회원권</label></td>
+                        <td className={PassCSS.contentText} colspan="3">
                             <select
                                 name='passType'
                                 onChange={ onChangeHandler }
                             >
+                                <option>선택하세요</option>
                                 <option value="3개월">3개월</option>
                                 <option value="6개월">6개월</option>
                                 <option value="12개월">12개월</option>
@@ -68,8 +72,8 @@ function PassRegist() {
                     </tr>
 
                     <tr>
-                        <td><label>가격</label></td>
-                        <td>
+                        <td className={PassCSS.contentTitle}><label>가격</label></td>
+                        <td className={PassCSS.contentText} colspan="3">
                             <input
                                 name='passPrice'
                                 placeholder='가격'
@@ -80,8 +84,8 @@ function PassRegist() {
                     </tr>
 
                     <tr>
-                        <td><label>횟수</label></td>
-                        <td>
+                        <td className={PassCSS.contentTitle}><label>횟수</label></td>
+                        <td className={PassCSS.contentText} colspan="3">
                             <input
                                 name='passAmount'
                                 placeholder='숫자만 입력하세요'
@@ -92,8 +96,8 @@ function PassRegist() {
                     </tr>
 
                     <tr>
-                        <td><label>비고</label></td>
-                        <td>
+                        <td className={PassCSS.contentTitle}><label>비고</label></td>
+                        <td className={PassCSS.contentText} colspan="3">
                             <input
                                 name='passEtc'
                                 placeholder='비고'
@@ -104,20 +108,28 @@ function PassRegist() {
 
                 </tbody>
             </table>
-        </div>
+        
 
-        <div>
+        <div className={PassCSS.btnWrap}>
+            <div>
             <button
+                className={PassCSS.registBtn}
                 onClick={ onClickPassRegistHandler }
             >
-                등록
+                등록하기
             </button>
+            </div>
 
+            <div>
             <button
+                className={PassCSS.cancelBtn}
                 onClick={ () => navigate(-1) }
             >
                 취소
             </button>
+            </div>
+        </div>
+
         </div>
 
         </>

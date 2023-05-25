@@ -1,7 +1,7 @@
 import PassItem from "../items/PassItem";
+import PassModify from "./PassModify";
 
 function PassList({passLists}) {
-
 
     return(
         <>
@@ -11,6 +11,7 @@ function PassList({passLists}) {
                     && passLists.data.map(pass => <PassItem key={ pass.passCode } pass={pass}/>)
                 }
             </div> 
+
         </>        
     );
 

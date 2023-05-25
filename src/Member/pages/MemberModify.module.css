@@ -1,0 +1,114 @@
+@font-face {
+    font-family: 'GongGothicMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LINESeedKR-Bd';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LINESeedKR-Rg';
+    src: url('https://cdn.jsdelivr.net/gh/wizfile/font/LINESeedKR-Rg.eot');
+    src:url('https://cdn.jsdelivr.net/gh/wizfile/font/LINESeedKR-Rg.woff') format('woff');
+    font-style: normal;
+}
+
+
+
+
+/* content */
+.contentWrap {
+    background-color: white;
+    width: 555px;
+    height: 600px;
+    margin-left: 30px;
+    margin-top: 15px;
+    padding-top: 3px;
+    padding-bottom: 15px;
+}
+
+.pageTitle {
+    font-family: "LINESeedKR-Bd";
+    font-size: 1.2rem;
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+.contentTb {
+    margin-top: 30px;
+    margin-left: 30px;
+    border-collapse: collapse;
+}
+
+.contentTitle {
+    font-family: LINESeedKR-Bd;
+    font-size: 1rem;
+    width: 100px;
+    margin-top: 60px;
+    text-align: left;
+    vertical-align: middle;
+    border-top: 1.5px solid #9BA4B5;
+    border-bottom: 1.5px solid #9BA4B5;
+    padding: 10px;
+}
+
+.contentText {
+    font-family: LINESeedKR-Bd;
+    font-size: 0.8rem;
+    width: 130px;
+    border-bottom: 1.5px solid #9BA4B5;
+    border-top: 1.5px solid #9BA4B5;
+    padding: 10px;
+}
+
+.dateStyle {
+    padding: .6em 18.5em .5em .8em;
+}
+
+/* button */
+.btnWrap {
+    display: flex;
+    margin: auto;
+}
+
+.modifyBtn {
+    font-family: 'LINESeedKR-Bd';
+    font-size: 0.8rem;
+    color: white;
+    background: #785ee0;
+    border-color: #785ee0;
+    width: 100px;
+    height: 25px;
+    margin-top: 25px;
+    margin-left: 30px;
+}
+
+.registBtn {
+    font-family: 'LINESeedKR-Bd';
+    font-size: 0.8rem;
+    color: white;
+    background: #4f5eeb;
+    border-color: #4f5eeb;
+    width: 100px;
+    height: 25px;
+    margin-top: 25px;
+    margin-left: 10px;
+}
+
+.cancelBtn {
+    font-family: 'LINESeedKR-Bd';
+    font-size: 0.8rem;
+    color: white;
+    background: #26199b;
+    border-color: #26199b;
+    width: 100px;
+    height: 25px;
+    margin-top: 25px;
+    margin-left: 10px;
+}

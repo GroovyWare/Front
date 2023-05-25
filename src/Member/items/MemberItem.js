@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import MemberCSS from "./MemberItem.module.css"
+import MemberListCSS from "../pages/MemberList.module.css";
 
 
 function MemberItem({ member : { memCode, memName, memPhone, memStartDate, memEndDate, 
@@ -14,29 +14,31 @@ function MemberItem({ member : { memCode, memName, memPhone, memStartDate, memEn
     return(
         <>
 
+
         <div
         onClick={ () => onClickMemberHandler(memCode) }
         >
-            <div className={ MemberCSS.listDiv }>
+            <table className={MemberListCSS.itemContentTb}>
                 <tr> 
-                <div className={ MemberCSS.contentWrap }>  
-                    <div><th>{ memCode }</th></div>
-                    <div><th>{ memName }</th></div>
-                    <div><th>{ memPhone }</th></div> 
-                    <div><th>{ history[0] && history[0].pass.passType }</th></div>
-                    <div><th>{ history[0] && history[0].pass.passAmount }</th></div>
-                    <div><th>{ memStartDate }</th></div>
-                    <div><th>{ memEndDate }</th></div>
-                </div>
+                    <td className={MemberListCSS.contentText}>{ memCode }</td>
+                    <td className={MemberListCSS.contentText}>{ memName }</td>
+                    <td className={MemberListCSS.contentText}>{ memPhone }</td>
+                    <td className={MemberListCSS.contentText}>{ history[0] && history[0].pass.passType }</td>
+                    <td className={MemberListCSS.contentText}>{ history[0] && history[0].pass.passAmount }</td>
+                    <td className={MemberListCSS.contentText}>{ memStartDate }</td>
+                    <td className={MemberListCSS.contentText}>{ memEndDate }</td>
                 </tr>
-            </div>
-        
+            </table>
+
         </div>
+            
         </>
             );
         }
     
         
 export default MemberItem;
+            
+        
             
      

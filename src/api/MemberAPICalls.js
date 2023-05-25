@@ -12,7 +12,7 @@ export const callMemberListAPI = ( {currentPage = 1} ) => {
 
     return async(dispatch, getState) => {
 
-        const result = await fetch(requestURL,{
+        const result = await fetch(requestURL, {
             method : 'GET',
             headers : {
                 "Content-Type" : "application/json",
@@ -75,7 +75,7 @@ export const callMemberRegistAPI = (formData) => {
 /* 회원 수정을 위한 정보 조회 */
 export const callMemberDetailReadModifyAPI = ({ memCode }) => {
 
-    const requestURL = `${PRE_URL}/member/modify/${memCode}`;
+    const requestURL = `${PRE_URL}/member/detail/${memCode}`;
     
     return async (dispatch, getState) => {
         
@@ -89,13 +89,11 @@ export const callMemberDetailReadModifyAPI = ({ memCode }) => {
         if(result.status === 200) {
             console.log("[MemberAPICalls] callMemberDetailReadModifyAPI result : ", result);
         }
-
     }
-
 }
 
 /* 회원 수정 */
-export const callMemberUpdateAPI = (formData) => {
+export const callMemberModifyAPI = (formData) => {
     
     const requestURL = `${PRE_URL}/member/modify`;
 
@@ -110,7 +108,7 @@ export const callMemberUpdateAPI = (formData) => {
         }).then(response => response.json());
 
         if(result.status === 200) {
-            console.log('[MemberAPICalls] callMemberUpdateAPI result :', result);
+            console.log('[MemberAPICalls] callMemberModifyAPI result :', result);
             dispatch(putMember(result));
         }
     }
