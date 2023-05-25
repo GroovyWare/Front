@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { callEmployeeDetailsAPI } from '../../api/EmployeeAPICalls';
 import { useEffect, useRef, useState } from 'react';
 import  profileDefaultImage  from '../../components/common/img/profile_default.svg';
-import DaumPostcode from 'react-daum-postcode';
 
 function EmployeeDetails({ setEmpDetailsOpen, emp }) {
     
