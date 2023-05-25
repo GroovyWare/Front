@@ -80,7 +80,7 @@ export const callAnnounceListForAdminAPI = ({ currentPage = 1 }) => {
 
 export const callAnnounceRegistAPI = (formData) => {
 
-    const requestURL = `${PRE_URL}/announce`;
+    const requestURL = `${PRE_URL}/announce/announce-registration`;
 
     return async (dispatch, getState) => {
 

@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { callAnnounceDetailAPI } from "../../../api/AnnounceAPICalls";
+import axios from "axios";
 
 function AnnounceDetail() {
 
@@ -11,6 +12,7 @@ function AnnounceDetail() {
     const navigate = useNavigate();
     const params = useParams();
     const announce = useSelector(state => state.announceReducer);
+    const currentUser = useSelector(state => state.loginReducer);
     const annCode = params.annCode;
 
     useEffect(() => {
@@ -60,13 +62,31 @@ function AnnounceDetail() {
         navigate("/announce");
     }
 
+    const handleDelete = () => {
+        if (window.confirm("게시글을 정말 삭제하시겠습니까?")) {
+          axios.delete(`http://localhost:8059/announce/${annCode}`)
+            .then(res => {
+              if(res.status === 200) {
+                alert("게시글이 삭제되었습니다.");
+                navigate('/announce');
+              } else {
+                alert("삭제할 수 없습니다. 다시 한 번 시도해주세요.");
+              }
+            })
+            .catch(err => {
+              console.error(err);
+              alert("삭제할 수 없습니다. 다시 한 번 시도해주세요.");
+            });
+        }
+    }
+
     return (
         <>
         <div>
             {userRole === '1' && (
                 <>
                 <button onClick={() => goToUpdate(annCode)}>수정</button>
-                <button>삭제</button>
+                <button onClick={handleDelete}>삭제</button>
                 </>
             )}
             <h2>{announce.annTitle}</h2>

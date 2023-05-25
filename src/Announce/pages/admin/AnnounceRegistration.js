@@ -58,7 +58,7 @@ const AnnounceRegistration = () => {
     };
   
     try {
-      const res = await axios.post("http://localhost:8059/announce-registration", data); // 게시글 등록 엔드포인트
+      const res = await axios.post("http://localhost:8059/annouonce/announce-registration", data); // 게시글 등록 엔드포인트
       if (res.status === 200) {
         navigate("/", { replace: true });
         return;
@@ -160,12 +160,11 @@ const AnnounceRegistration = () => {
         <div className="control-box">
           <div className="cancel-btn-wrapper">
             <button
-              text={"취소"}
               onClick={() => navigate(-1, { replace: true })}
             >취소</button>
           </div>
           <div className="submit-btn-wrapper">
-            <button text={"완료"} type="black" onClick={onClickAnnounceRegistrationHandler}>등록</button>
+            <button onClick={onClickAnnounceRegistrationHandler}>등록</button>
           </div>
         </div>
       </section>
