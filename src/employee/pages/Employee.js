@@ -4,15 +4,17 @@ import { useEffect, useState } from "react";
 import { callEmployeeListAPI } from "../../api/EmployeeAPICalls";
 import EmployeeList from "./EmployeeList";
 import PagingBar from "../../components/common/PagingBar";
+import EmployeeRegist from "./EmployeeRegist";
+import { useNavigate } from "react-router-dom";
 
 function Employee() {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const employees = useSelector(state => state.employeeReducer);
 
     const employeeList = employees.data;
     const pageInfo = employees.pageInfo;
-
 
     const [ currentPage, setCurrentPage ] = useState(1);
 
@@ -23,11 +25,19 @@ function Employee() {
         [currentPage]
     );
 
+    const moveToRegistPage = () => {
+        navigate("/employee/regist")
+    }
+    
     return (
         <div className={ EmpCSS.container }>
             <h3>직원관리</h3>
                 <div>{ employeeList && <EmployeeList employeeList={ employeeList }/>}</div>
                 <div>{ pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage }/> }</div>
+                <div>
+                    <button onClick={ moveToRegistPage }>등록</button>
+                </div>
+
         </div>
        
     )}

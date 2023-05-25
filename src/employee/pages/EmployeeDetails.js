@@ -30,7 +30,7 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
             }
         },
         [image]
-    );
+    )
 
     const onChangeHandler = (e) => {
         setForm({
@@ -47,7 +47,6 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
     const onChangeImageUpload = (e) => {
         setImage(e.target.files[0]);
     }
-
 
     return (
     <div className={ empDetailsCSS.modal }>
@@ -156,8 +155,10 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
                             <td><label>부서</label></td>
                             <td>
                                 <select 
-                                    name="emp.dept.deptCode"
-                                    value={ emp.dept.deptCode }>
+                                    name="deptCode"
+                                    defaultValue={ emp.dept.deptCode }
+                                    onChange={ onChangeHandler }
+                                >
                                     <option value="1">관리</option>
                                     <option value="2">피트니스</option>
                                     <option value="3">필라테스</option>
@@ -169,7 +170,7 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
                             <td><label>직급</label></td>
                             <td>
                                 <select 
-                                    name="emp.position.positionCode"
+                                    name="positionCode"
                                     value={ emp.position.positionCode }>
                                     <option value="1">대표</option>
                                     <option value="2">팀매니저</option>

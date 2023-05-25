@@ -23,11 +23,16 @@ import Document from './Approval/pages/document/Document';
 import 'react-toastify/dist/ReactToastify.css';
 import { createGlobalStyle } from 'styled-components';
 import AddDocument from './Approval/pages/document/AddDocument';
+
+import { EmployeeProvider } from './Approval/pages/employee/EmployeeProvider';
+import EmployeeRegist from './employee/pages/EmployeeRegist';
+
 import AnnounceUpdate from './Announce/pages/admin/AnnounceUpdate';
 import RequestList from './Approval/pages/getDocument/RequestList';
 import RequestDetail from './Approval/pages/getDocument/RequestDetail';
 import RequestWait from './Approval/pages/getDocument/RequestWait';
 import ReqeustWaitDetail from './Approval/pages/getDocument/RequestWaitDetail';
+
 
 export const GlobalStyle = createGlobalStyle`
 .Toastify__toast-container {
@@ -90,6 +95,7 @@ function App() {
 
           <Route path="employee">
             <Route index element={ <Employee/> }/>
+            <Route path="regist" element={ <EmployeeRegist/> }/>
           </Route>
 
         </Route>
