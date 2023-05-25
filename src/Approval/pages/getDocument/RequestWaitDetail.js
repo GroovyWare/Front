@@ -95,11 +95,11 @@ function ReqeustWaitDetail(){
                     <tr>
                         <th>열람권자</th>
                         {waitList && waitList.data.data.map((wait, index) => (
-                            <td key={index}>{wait.readerLine.map(
+                            <div key={index}>{wait.readerLine.map(
                                 (reader, index2) => (
-                                   apvCode === reader.apvCode ? <div key={index2}>{reader.empCode}</div> : null
+                                   apvCode === reader.apvCode ? <td key={index2}>{reader.empCode}</td> : null
                                 )
-                            )}</td>
+                            )}</div>
                         ))}
                         <td></td>
                     </tr>
