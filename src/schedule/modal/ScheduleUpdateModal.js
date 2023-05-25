@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ScheduleUpdateModalCSS from "./ScheduleUpdateModal.module.css";
-import { updateSchedule } from "../../api/CalendarAPICalls";
+import { updateSchedule, deleteOne } from "../../api/CalendarAPICalls";
 import { initSchedule } from "../../modules/CalendarModule";
 import { toast } from "react-toastify";
 
@@ -13,6 +13,7 @@ function ScheduleUpdateModal({  setScheduleUpdateModal , justSchedule}) {
  
   const dispatch = useDispatch();
   const { modify } = useSelector((state) => state.scheduleReducer);
+  const { deleteStatus } = useSelector((state) => state.scheduleReducer);
   
   console.log(form)
 
@@ -24,6 +25,14 @@ function ScheduleUpdateModal({  setScheduleUpdateModal , justSchedule}) {
       dispatch(initSchedule());
     }
   }, [modify, setScheduleUpdateModal]);
+
+  useEffect(() => {
+    if(deleteStatus?.status === 200 && setScheduleUpdateModal) {
+      setScheduleUpdateModal(false);
+      toast.warning("일정 삭제 완료")
+      dispatch(initSchedule());
+    }
+  }, [deleteStatus, setScheduleUpdateModal])
 
   const handleSubmit = () => {
     dispatch(updateSchedule(form));
@@ -40,6 +49,10 @@ function ScheduleUpdateModal({  setScheduleUpdateModal , justSchedule}) {
 
   console.log("form : ", form);
 
+  const deleteOneSchedule = () => {
+    dispatch(deleteOne(form));
+    
+  }
  
   return (
     <div className={ScheduleUpdateModalCSS.modal}>
@@ -95,6 +108,8 @@ function ScheduleUpdateModal({  setScheduleUpdateModal , justSchedule}) {
             value={form.textColor}
           />
           <button onClick={handleSubmit}>수정하기</button>
+
+          <button onClick={deleteOneSchedule}>삭제하기</button>
           <button
             style={{
               border: "none",

@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ScheduleInsertModalCSS from "./ScheduleInsertModal.module.css";
-import { AllSchedules, createSchedule, oneSchedule, searchingSchedule } from "../../api/CalendarAPICalls";
+import { AllSchedules, createSchedule, oneSchedule, searchingSchedule, deleteSchedule } from "../../api/CalendarAPICalls";
 import { getSchedule, getSchedules, initSchedule } from "../../modules/CalendarModule";
 
 import PagingBar from "../../components/common/PagingBar";
@@ -87,6 +87,8 @@ function ScheduleSearchModal({ searchSchedule, setScheduleSearchModal, setSchedu
               >
                 돌아가기
               </button>
+
+              
             </div>
           </div>
         </div>
