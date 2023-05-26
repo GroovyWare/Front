@@ -8,8 +8,6 @@ import PlayHistory from './play/PlayHistory';
 import AnnounceMain from "./Announce/pages/announces/AnnounceMain";
 import AnnounceDetail from "./Announce/pages/announces/AnnounceDetail";
 import AnnounceRegistration from './Announce/pages/admin/AnnounceRegistration';
-import AnnounceList from './Announce/pages/announces/AnnounceList';
-import AnnounceItem from './Announce/items/AnnounceItem';
 import MemberMain from './Member/pages/MemberMain';
 import MemberDetail from './Member/pages/MemberDetail';
 import MemberRegist from './Member/pages/MemberRegist';
@@ -34,6 +32,7 @@ import RequestList from './Approval/pages/getDocument/RequestList';
 import RequestDetail from './Approval/pages/getDocument/RequestDetail';
 import RequestWait from './Approval/pages/getDocument/RequestWait';
 import ReqeustWaitDetail from './Approval/pages/getDocument/RequestWaitDetail';
+import EquipmentMain from './Equipment/pages/EquipmentMain';
 
 
 export const GlobalStyle = createGlobalStyle`
@@ -76,17 +75,17 @@ function App() {
           </Route>
 
           <Route path="/announce">
-              <Route index element={<ProtectedRoute loginCheck={true}><AnnounceMain /></ProtectedRoute>} />
-              <Route path=":annCode" element={<ProtectedRoute loginCheck={true}><AnnounceDetail /></ProtectedRoute>} />
-              <Route path="announce-registration" element={<AnnounceRegistration />} />
-              <Route path="announce-update/:annCode" element={<AnnounceUpdate />} />
+            <Route index element={<ProtectedRoute loginCheck={true}><AnnounceMain /></ProtectedRoute>} />
+            <Route path=":annCode" element={<ProtectedRoute loginCheck={true}><AnnounceDetail /></ProtectedRoute>} />
+            <Route path="announce-registration" element={<AnnounceRegistration />} />
+            <Route path="announce-update/:annCode" element={<AnnounceUpdate />} />
           </Route>
 
-          {/* <Route path="/equipment">
+          <Route path="/equipment">
             <Route index element={<ProtectedRoute loginCheck={true}><EquipmentMain /></ProtectedRoute>} />
           </Route>
 
-          <Route path="/locker">
+          {/* <Route path="/locker">
             <Route index element={<ProtectedRoute loginCheck={true}><LockerMain /></ProtectedRoute>} />
           </Route> */}
 
