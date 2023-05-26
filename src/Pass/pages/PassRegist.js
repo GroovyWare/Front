@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { callPassRegistAPI } from "../../api/PassAPICalls";
 import PassCSS from "./Pass.module.css";
+import { toast } from "react-toastify";
 
 
 function PassRegist() {
@@ -10,16 +11,13 @@ function PassRegist() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { regist } = useSelector(state => state.passReducer);
-    const [form, setForm] = useState({
-        passAmount : null,
-        passEtc : null
-    });
+    const [form, setForm] = useState({});
 
     /* 회원권 등록 후 회원권 리스트로 이동 */
     useEffect(
         () => {
             if(regist?.status === 200){
-                alert('회원권 등록이 완료되었습니다.')
+                toast('회원권 등록이 완료되었습니다.')
                 navigate('/pass', { replace : true });
             }
         },
@@ -42,9 +40,9 @@ function PassRegist() {
         const formData = new FormData();
 
         formData.append("passType", form.passType);
-        formData.append("passEtc", form.passEtc);
         formData.append("passPrice", form.passPrice);
         formData.append("passAmount", form.passAmount);
+        formData.append("passEtc", form.passEtc);
 
         dispatch(callPassRegistAPI(formData));
     }

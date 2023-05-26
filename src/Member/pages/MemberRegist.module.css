@@ -20,7 +20,7 @@
 }
 
 /* select box */
-select {
+.contentText > select {
   -moz-appearance: none; 
   -webkit-appearance: none;
   appearance: none; 
@@ -40,11 +40,11 @@ select {
   border: 1px solid #999999;
 }
 
-select:hover {
+.contentText > select:hover {
   border-color: #5c58cf;
 }
 
-select:focus {
+.contentText > select:focus {
   border-color: #aaa;
   box-shadow: 0 0 1px 3px rgba(59, 153, 252, .7);
   box-shadow: 0 0 0 3px -moz-mac-focusring;
@@ -52,11 +52,11 @@ select:focus {
   outline: none;
 }
 
-select:disabled {
+.contentText > select:disabled {
   opacity: 0.5;
 }
 
-label {
+.contentText > label {
   font-family: LINESeedKR-Rg;
   font-size: 1rem;
   font-weight: 600;
@@ -67,19 +67,19 @@ label {
   margin-right: 0.5em;
 }
 
-form {
+.contentText > form {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
 }
 
-body {
+.contentText > body {
   margin: 0;
 }
 
 /* input box */
-input {
+.contentText > input {
     -moz-appearance: none;
     -webkit-appearance: none;
     appearance: none;
@@ -98,12 +98,12 @@ input {
     border: 1px solid #999999;
 }
 
-input:hover {
+.contentText > input:hover {
     border-color: #5c58cf;
   }
 
 .dateStyle {
-    padding: .6em 18.7em .5em .8em;
+    width: 150px;
 }
 
 
@@ -113,7 +113,7 @@ input:hover {
     width: 555px;
     height: 550px;
     margin-left: 30px;
-    margin-top: 15px;
+    margin-top: 15px; 
     padding-top: 3px;
     padding-bottom: 15px;
 }
@@ -156,7 +156,6 @@ input:hover {
 /* button */
 .btnWrap {
     display: flex;
-    margin: auto;
 }
 
 .registBtn {

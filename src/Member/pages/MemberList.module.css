@@ -23,6 +23,7 @@
 .contentTb {
     border-collapse: collapse;
     margin: auto;
+    margin-left: 30px;
 }
 
 .pageTitle {
@@ -53,6 +54,7 @@
     border-collapse: collapse;
     margin: auto;
     background-color: #f3f3f3;
+    margin-left: 30px;
 }
 
 .itemContentTb > tr:hover {
@@ -61,10 +63,6 @@
     background-color: rgba(173, 172, 192, 1);
     cursor: pointer;
 }
-
-
-
-
 
 .contentText {
     font-family: LINESeedKR-Rg;
