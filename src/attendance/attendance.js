@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { getOneAttendance } from "../modules/AttendanceModule";
+
 import { callGetUserAPI } from "../api/LoginAPICalls";
 import NavbarCSS from '../components/common/Navbar.module.css'
 import profileImg from '../components/common/img/profile_default.svg'
+import { AttendanceMain } from "../api/AttendanceAPICalls";
 
 /* 근태 테이블 작성 */
 const Attendance = () => {
@@ -23,11 +24,11 @@ const Attendance = () => {
         []
     );
 
-    // useEffect(
-    //     () => {
-    //         dispatch(getOneAttendance());
-    //     }
-    // )
+    useEffect(
+        () => {
+            dispatch(AttendanceMain());
+        }, []
+    )
 
 
 
