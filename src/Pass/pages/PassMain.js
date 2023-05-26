@@ -36,15 +36,15 @@ function PassMain() {
             <div>
                 { passLists && <PassList passLists={passLists}/> }
             </div>
-            <div>
-                { pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage }/> }
-            </div>
-
-            <div>
+            <div className={PassCSS.pagebottom}>
             <button 
                 className={PassCSS.registBtnRg}
                 onClick={ onClickRegistHandler }>등록하기</button>
             </div>
+            <div>
+                { pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage }/> }
+            </div>
+
         </>
     );  
 }

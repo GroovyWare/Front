@@ -36,7 +36,7 @@ function PassItem({ pass : { passCode, passAmount, passEtc, passType, passPrice}
                     <div className={PassCSS.textRg}>{ passEtc}</div>
                 </div>
                 <div className={PassCSS.modifyBtn}>
-                    <button type="button"><img src={ modifyBtn } alt={ modifyBtn } onClick={ () => onClickPassHandler(passCode) } />
+                    <button><img src={ modifyBtn } alt={ modifyBtn } onClick={ () => onClickPassHandler(passCode) } />
                     </button>
                 </div>
             </div>
