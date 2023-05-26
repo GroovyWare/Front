@@ -57,8 +57,8 @@ function Navbar() {
                             일정관리
                             <img src={ arrow } className = { NavbarCSS.arrowYes }/>
                             <ul className={ NavbarCSS.subMenu }>
-                                <li><NavLink to="/" className={ NavbarCSS.link }>캘린더</NavLink></li>
-                                <li><NavLink to="/" className={ NavbarCSS.link }>근태</NavLink></li>
+                                <li><NavLink to="/schedule" className={ NavbarCSS.link }>캘린더</NavLink></li>
+                                <li><NavLink to="/attendance" className={ NavbarCSS.link }>근태</NavLink></li>
                             </ul>
                             </NavLink>
                         </li>

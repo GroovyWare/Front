@@ -19,6 +19,7 @@
     font-style: normal;
 }
 
+
 /* select box */
 .contentText > select {
   -moz-appearance: none; 
@@ -101,6 +102,7 @@
 .contentText > input:hover {
     border-color: #5c58cf;
   }
+
 
 .dateStyle {
     width: 150px;
