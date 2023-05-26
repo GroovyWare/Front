@@ -9,6 +9,7 @@ import scheduleReducer from "./CalendarModule";
 import loginReducer from "./LoginModule";
 import employeeReducer from './EmployeeModule';
 import documentReducer from './DocumentModule';
+import equipmentReducer from "./EquipmentModule";
 
 
 const rootReducer = combineReducers({
@@ -21,8 +22,8 @@ const rootReducer = combineReducers({
     scheduleReducer,
     loginReducer,
     employeeReducer,
-    documentReducer
-
+    documentReducer,
+    equipmentReducer
 });
 
 export default rootReducer;
