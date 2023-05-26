@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { getOneAttendance } from "../modules/AttendanceModule";
 import { callGetUserAPI } from "../api/LoginAPICalls";
+import NavbarCSS from '../components/common/Navbar.module.css'
+import profileImg from '../components/common/img/profile_default.svg'
 
 /* 근태 테이블 작성 */
 const Attendance = () => {
@@ -10,9 +12,9 @@ const Attendance = () => {
     const { user } = useSelector(state => state.loginReducer);
     const times = useSelector(state => state.attendanceReducer);
     
-    const [ image, setImage] = useState(null);
-    const [ imageUrl, setImageUrl] = useState(employees.file?.fileSavedName);
-    const [ form, setForm] = useState(employees)
+  
+    
+    
     
     useEffect(
         () => {
@@ -21,11 +23,11 @@ const Attendance = () => {
         []
     );
 
-    useEffect(
-        () => {
-            dispatch(getOneAttendance());
-        }
-    )
+    // useEffect(
+    //     () => {
+    //         dispatch(getOneAttendance());
+    //     }
+    // )
 
 
 
@@ -50,7 +52,6 @@ return (
             </div>
             }
 
-        
         </div>
 
 
@@ -88,3 +89,5 @@ return (
 
 
 }
+
+export default Attendance;
