@@ -1,4 +1,4 @@
-import { getEmployee, getEmployees, postEmployee } from "../modules/EmployeeModule";
+import { getEmployee, getEmployees, postEmployee, putEmployee } from "../modules/EmployeeModule";
 
 const RESTAPI_SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const RESTAPI_SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
@@ -72,9 +72,32 @@ export const callEmployeeRegistAPI = (formData) => {
         }).then(response => response.json());
 
         if(result.status === 200) {
-            console.log('[ProductAPICalls] : callProductRegistAPI result : ', result);
+            console.log('[EmployeeAPICalls] : callEmployeeRegistAPI result : ', result);
             dispatch(postEmployee(result));
         }
     }
 }
 
+
+/* 직원 정보 수정 */
+export const callEmplopyeeUpdateAPI = (formData) => {
+    
+    const requestURL = `${PRE_URL}/auth/emp`;
+
+    return async (dispatch, getState) => {
+
+        const result = await fetch(requestURL, {
+            method : 'PUT',
+            headers : {
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            },
+            body : formData
+        }).then(response => response.json());
+
+        if(result.status === 200) {
+            console.log('[EmployeeAPICalls] callEmplopyeeUpdateAPI result :', result);
+            dispatch(putEmployee(result));
+        }
+    }
+
+}

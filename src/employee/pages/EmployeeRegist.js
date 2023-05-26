@@ -2,8 +2,9 @@ import { useNavigate } from 'react-router-dom';
 import RegistCSS from './EmployeeRegist.module.css';
 import { useEffect, useRef, useState } from 'react';
 import profileDefaultImage from '../../components/common/img/profile_default.svg'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { callEmployeeListAPI, callEmployeeRegistAPI } from '../../api/EmployeeAPICalls';
+import { toast } from 'react-toastify';
 
 function EmployeeRegist() {
 
@@ -11,6 +12,7 @@ function EmployeeRegist() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+    const { regist } = useSelector(state => state.employeeReducer);
     const [ image, setImage ] = useState(null);
     const [ imageUrl, setImageUrl ] = useState('');
     const [ checkedInputs, setCheckedInputs ] = useState([]);
@@ -32,6 +34,16 @@ function EmployeeRegist() {
         { value: "3", name: "시니어" },
         { value: "4", name: "일반" },
     ]
+
+    useEffect(
+        () => {
+            if(regist?.status === 200) {
+                toast.success('등록이 완료되었습니다.!');
+                navigate(-1);
+            }
+        },
+        [regist]
+    )
 
     useEffect(
         () => {
@@ -107,9 +119,8 @@ function EmployeeRegist() {
         }
 
         dispatch(callEmployeeRegistAPI(formData));
+
     }
-
-
 
     return (
         <div className={ RegistCSS.container }>
