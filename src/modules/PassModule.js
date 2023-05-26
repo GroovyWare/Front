@@ -11,7 +11,7 @@ const PUT_PASS = 'pass/PUT_PASS';
 
 
 export const { pass : { getPass, postPass, putPass, getPas } } = createActions ({
-    [GET_PASS] : res => res,
+    [GET_PASS] : res => res.data,
     [GET_PAS] : res => res.data,
     [POST_PASS] : res => res,
     [PUT_PASS] : res => res

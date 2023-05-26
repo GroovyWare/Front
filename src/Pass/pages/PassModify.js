@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { callPassDetailReadModifyAPI, callPassModifyAPI } from "../../api/PassAPICalls";
 import PassCSS from "./Pass.module.css";
+import { toast } from "react-toastify";
 
 function PassModify(){
     const{ passCode } = useParams();
@@ -25,20 +26,22 @@ function PassModify(){
     useEffect(
         () => {
             if(modify?.status === 200) {
-                alert('회원권 수정이 완료되었습니다.');
-                navigate(`/pass/modify/${passCode}`, { replace : true });
+                toast('회원권 수정이 완료되었습니다.');
+                navigate(`/pass`, { replace : true });
             }
-        },[modify]
+        },
+        [modify]
     );
 
     /* 수정 모드 변경 이벤트 */
     const onClickPassModifyHandler = () => {
         setForm({
-            ...info
-        });
+            ...info,
+        });        
         setModifyMode(true);
     }
-
+    
+    console.log('check Info pass modify',info);
 
     /* 입력 양식 값 변경될 때 */
     const onChangeHandler = (e) => {
@@ -48,8 +51,10 @@ function PassModify(){
         })
     }
 
+
     /* 회원권 수정 저장 버튼 이벤트 */
     const onClickPassUpdateHandler = () => {
+
         /* 서버로 전달할 form 행태의 객체 설정 */
         const formData = new FormData();
 
@@ -71,7 +76,7 @@ function PassModify(){
         <>
         
         <div className={PassCSS.pageTitle}>회원권 수정</div>
-        <div className={PassCSS.contentWrap}>
+        <div className={PassCSS.contentWrapMd}>
             <table className={PassCSS.contentTb}>
                     <tbody>
                     <tr>
@@ -79,7 +84,6 @@ function PassModify(){
                         <td className={PassCSS.contentText} colspan="3">
                             <input
                                 name='passCode'
-                                onChange={ onChangeHandler }
                                 value={ info.passCode }
                                 readOnly={ modifyMode }
                                 style={ inputStylePassCode }
@@ -95,7 +99,6 @@ function PassModify(){
                                 style={ inputStyle }
                                 value={ !modifyMode ? info.passType : form.passType }
                             >
-                                
                                 <option>선택하세요</option>
                                 <option value="3개월"
                                         readOnly={ !modifyMode }>3개월</option>
@@ -157,16 +160,16 @@ function PassModify(){
         <div className={PassCSS.btnWrap}>
             <div>
             <button
-                className={PassCSS.registBtn}
+                className={PassCSS.modifyBtnPage}
                 onClick={ onClickPassModifyHandler }
             >
                 수정모드
             </button>
             <button
-                className={PassCSS.registBtn}
+                className={PassCSS.registBtnMd}
                 onClick={ onClickPassUpdateHandler }
             >
-                수정하기
+                등록하기
             </button>
             </div>
 
@@ -175,7 +178,7 @@ function PassModify(){
                 className={PassCSS.cancelBtn}
                 onClick={ () => navigate(-1) }
             >
-                취소
+                취소하기
             </button>
             </div>
         </div>
