@@ -83,6 +83,18 @@
     margin-left: 30px;
 }
 
+.addPassBtn {
+    font-family: 'LINESeedKR-Bd';
+    font-size: 0.8rem;
+    color: white;
+    background: #5e87e0;
+    border-color: #5e87e0;
+    width: 100px;
+    height: 25px;
+    margin-top: 25px;
+    margin-left: 10px;
+}
+
 .cancelBtn {
     font-family: 'LINESeedKR-Bd';
     font-size: 0.8rem;
