@@ -75,6 +75,7 @@ export const leaveWork = (form) => {
         if (result.status === 200) {
             console.log('[AttendanceAPICalls] callleaveWork result:', result);
             dispatch(putOneAttendance(result));
+            dispatch(viewMain());
         }
     }
 
