@@ -1,5 +1,4 @@
 import PassItem from "../items/PassItem";
-import PassModify from "./PassModify";
 
 function PassList({passLists}) {
 
@@ -7,8 +6,8 @@ function PassList({passLists}) {
         <>
             <div>
                 {
-                    Array.isArray(passLists.data) 
-                    && passLists.data.map(pass => <PassItem key={ pass.passCode } pass={pass}/>)
+                    Array.isArray(passLists) 
+                    && passLists.map(pass => <PassItem key={ pass.passCode } pass={pass}/>)
                 }
             </div> 
 

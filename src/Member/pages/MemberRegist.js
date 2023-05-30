@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { callMemberRegistAPI } from "../../api/MemberAPICalls";
 import MemberRegistCSS from "./MemberRegist.module.css";
+import { toast } from "react-toastify";
 
 
 function MemberRegist() {
@@ -24,7 +25,7 @@ function MemberRegist() {
     useEffect(
         () => {
             if(regist?.status === 200) {
-                alert('회원 등록이 완료되었습니다.');
+                toast('회원 등록이 완료되었습니다.');
                 navigate('/member', { replace : true });
             }
         },

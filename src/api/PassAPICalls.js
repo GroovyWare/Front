@@ -16,7 +16,7 @@ export const callPassListAPI = ( {currentPage = 1} ) => {
             method : 'GET',
             headers : {
                 "Content-Type" : "application/json",
-                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+                Authorization : "Bearer " + window.localStorage.getItem('accessToken')
             }
         }).then(response => response.json());
         
@@ -38,7 +38,7 @@ export const callPassRegistAPI = (formData) => {
         const result = await fetch(requestURL, {
             method : 'POST',
             headers : {
-                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+                Authorization : "Bearer " + window.localStorage.getItem('accessToken')
             },
             body : formData
         }).then(response => response.json());
