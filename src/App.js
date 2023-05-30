@@ -32,7 +32,12 @@ import RequestList from './Approval/pages/getDocument/RequestList';
 import RequestDetail from './Approval/pages/getDocument/RequestDetail';
 import RequestWait from './Approval/pages/getDocument/RequestWait';
 import ReqeustWaitDetail from './Approval/pages/getDocument/RequestWaitDetail';
+
+import { AttendanceMain } from './api/AttendanceAPICalls';
+import Attendance from './attendance/attendance';
+
 import EquipmentMain from './Equipment/pages/EquipmentMain';
+
 
 
 export const GlobalStyle = createGlobalStyle`
@@ -90,6 +95,7 @@ function App() {
           </Route> */}
 
           <Route path="schedule" element={<Schedule />} />
+          <Route path='attendance' element={<Attendance/>}/>
 
           <Route path="member">
             <Route index element={<MemberMain />} />
