@@ -13,11 +13,10 @@ function MemberDetail() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const member = useSelector((state) => state.memberReducer);
-    const { history } = useSelector((state) => state.historyReducer);
+    const { history } = useSelector(state => state.historyReducer);
     const params = useParams();
     const memCode = params.memCode;
     const [memberHistoryModal, setMemberHistoryModal] = useState(false);
-
 
     useEffect(() => {
         dispatch(callMemberDetailAPI({ memCode }));
@@ -28,13 +27,12 @@ function MemberDetail() {
             if(history?.memCode){
                 setMemberHistoryModal(true);
             } else if(history) {
-                setMemberHistoryModal(true);
+                setMemberHistoryModal(false);
             }
         },
-        [history]);
+        []);
 
         
-
     /* 회원 이력 상세 보기 버튼 */
     const onClickHistoryHandler = ( memCode ) => {
         /* 이력 유무 확인 */

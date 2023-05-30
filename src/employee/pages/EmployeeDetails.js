@@ -1,44 +1,72 @@
-import { useParams } from 'react-router-dom';
 import empDetailsCSS from './EmployeeDetails.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { callEmployeeDetailsAPI } from '../../api/EmployeeAPICalls';
+import { callEmplopyeeUpdateAPI, callEmployeeListAPI } from '../../api/EmployeeAPICalls';
 import { useEffect, useRef, useState } from 'react';
 import  profileDefaultImage  from '../../components/common/img/profile_default.svg';
+import { toast } from 'react-toastify';
+
 
 function EmployeeDetails({ setEmpDetailsOpen, emp }) {
-    
+
+    const dispatch = useDispatch();
     const ImageInput = useRef();    
+    const { update } = useSelector(state => state.employeeReducer);
     const [ image, setImage ] = useState(null);
     const [ imageUrl, setImageUrl ] = useState(emp.file?.fileSavedName);
+    const [ checkedInputs, setCheckedInputs ] = useState([]);
     const [ form, setForm ] = useState(emp);
+
+    console.log('checkedInputs', checkedInputs);
+
+    const deptSelectList = [
+        { value : "", name : "선택"},
+        { value: "1", name: "관리" },
+        { value: "2", name: "피트니스" },
+        { value: "3", name: "필라테스" },
+        { value: "4", name: "GX" },
+    ]
+
+    const positionSelectList = [
+        { value: "", name : "선택" },
+        { value: "1", name: "대표" },
+        { value: "2", name: "팀매니저" },
+        { value: "3", name: "시니어" },
+        { value: "4", name: "일반" },
+    ]
+
+    useEffect(
+        () => {
+            const tempArr = [];
+            emp.auths.forEach((auth) => {tempArr.push(auth.auth.authCode)});
+            console.log('tempArr', tempArr);
+            setCheckedInputs(tempArr);
+            // emp.auths.forEach(auth => 
+            //     setCheckedInputs([...checkedInputs, auth.empAuthPK.authCode]))
+        },                           
+        []
+    )
+
+    useEffect(
+        () => { 
+            if(update?.status === 200) {
+                toast.success('정보 수정이 완료되었습니다.!');
+                setEmpDetailsOpen(false);
+            }
+        },
+        [update]
+    )
 
     const closeEmpDetails = () => {
         setEmpDetailsOpen(false);
     };
-
-    useEffect(
-        () => {
-            if(image) {
-                 const fileReader = new FileReader();
-                 fileReader.onload = (e) => {
-                    
-                    const { result } = e.target;
-                    console.log('result : ' , result);
-                    if(result) setImageUrl(result);
-                 }
-                 fileReader.readAsDataURL(image);
-            }
-        },
-        [image]
-    )
 
     const onChangeHandler = (e) => {
         setForm({
             ...form,
             [e.target.name] : e.target.value
         });
-        console.log(form);
     }
+    console.log(form);
 
     const onClickImageUpload = () => {
         ImageInput.current.click();
@@ -46,6 +74,60 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
 
     const onChangeImageUpload = (e) => {
         setImage(e.target.files[0]);
+    }
+
+    const checkedHandler = (checked, value) => {
+        if (checked) {
+            setCheckedInputs([...checkedInputs, value]);
+          } else {
+            setCheckedInputs(checkedInputs.filter((element) => element !== value));
+          }
+    }
+
+    const onClickEmployeeUpdate = () => {
+        const formData = new FormData();
+        formData.append("empCode", form.empCode);
+        formData.append("empId", form.empId);
+        formData.append("empPassword", form.empPassword);
+        formData.append("empName", form.empName);
+        formData.append("empPhone", form.empPhone);
+        formData.append("empEmail", form.empEmail);
+        formData.append("empAddress", form.empAddress);
+        formData.append("dept.deptCode", form.dept.deptCode);
+        formData.append("position.positionCode", form.position.positionCode);
+      
+        checkedInputs.forEach((authCode, i) =>
+             formData.append(`auths[${i}].auth.authCode`, authCode)
+        )
+
+        console.log('0번 권한', formData.get(`auths[0].authCode`));
+        console.log('1번 권한', formData.get(`auths[1].authCode`));
+
+        // for(let i=0; i < checkedInputs.length; i++) {
+        //     formData.append(`auths[${i}].empAuthPK.authCode`, checkedInputs[i])
+        //     console.log('체크박스 값', formData.get(`auths[${i}].empAuthPK.authCode`));
+        // }
+        
+        if(image) {
+            formData.append("imgUrl", image);
+        }
+        setEmpDetailsOpen(false);
+        dispatch(callEmplopyeeUpdateAPI(formData));
+
+    }
+
+    const deptHandler =(e) => {
+        setForm({
+            ...form,
+            dept : { deptCode : e.target.value }     
+        })
+    }
+
+    const positionHandler =(e) => {
+        setForm({
+            ...form,     
+            position : { positionCode : e.target.value }
+        })
     }
 
     return (
@@ -76,16 +158,11 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
                 </div>    
                 <div className={ empDetailsCSS.userInfo }>
                     <table>
+                      <tbody>
                         <tr>
-                            <td><label>아이디</label></td>
+                            <td>아이디</td>
                             <td>
-                                <input
-                                type="text"
-                                name="emp.empId"
-                                value={ emp.empId }
-                                onChange={ onChangeHandler }
-                                readOnly
-                                />
+                                { emp.empId }
                             </td>
                         </tr>
                         <tr>
@@ -93,7 +170,7 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
                             <td>
                                 <input
                                 type="password"
-                                value={ emp.empPassword }
+                                value={ form.empPassword }
                                 onChange={ onChangeHandler }
                                 />
                             </td>
@@ -113,7 +190,8 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
                             <td>
                                 <input
                                 type="text"
-                                defaultValue={ emp.empPhone }
+                                name="empPhone"
+                                value={ form.empPhone }
                                 onChange={ onChangeHandler }
                                 />
                             </td>
@@ -123,7 +201,8 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
                             <td>
                                 <input
                                 type="email"
-                                defaultValue={ emp.empEmail }
+                                name="empEmail"
+                                value={ form.empEmail }
                                 onChange={ onChangeHandler }
                                 />
                             </td>
@@ -133,8 +212,8 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
                             <td>
                                 <input
                                 type="text"
-                                name="emp.empAddress"
-                                defaultValue={ emp.empAddress }
+                                name="empAddress"
+                                value={ form.empAddress }
                                 onChange={ onChangeHandler }
                                 />
                             </td>
@@ -143,26 +222,27 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
                             <td><label>입사일</label></td>
                             <td>
                                 <input
-                                type="text"
-                                name="emp.empEntDate"
-                                defaultValue={ emp.empEntDate }
+                                type="date"
+                                name="empEntDate"
+                                value={ form.empEntDate }
                                 onChange={ onChangeHandler }
-                                readOnly
                                 />
                             </td>
                         </tr>
                         <tr>
                             <td><label>부서</label></td>
                             <td>
-                                <select 
-                                    name="deptCode"
-                                    defaultValue={ emp.dept.deptCode }
-                                    onChange={ onChangeHandler }
-                                >
-                                    <option value="1">관리</option>
-                                    <option value="2">피트니스</option>
-                                    <option value="3">필라테스</option>
-                                    <option value="4">GX</option>
+                                <select
+                                name="deptCode"
+                                value ={ form.dept.deptCode }
+                                onChange={ deptHandler }>
+                                    {deptSelectList.map(item => {
+                                        return (
+                                        <option value={item.value} key={item.value}>
+                                            {item.name}
+                                        </option>
+                                        )
+                                    })}
                                 </select>
                             </td>
                         </tr>
@@ -171,18 +251,50 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
                             <td>
                                 <select 
                                     name="positionCode"
-                                    value={ emp.position.positionCode }>
-                                    <option value="1">대표</option>
-                                    <option value="2">팀매니저</option>
-                                    <option value="3">시니어</option>
-                                    <option value="4">일반</option>
+                                    value ={ form.position.positionCode }
+                                    onChange={ positionHandler }
+                                >
+                                    {positionSelectList.map(item => {
+                                        return <option value={item.value} key={item.value}>
+                                            {item.name}
+                                        </option>
+                                    })}
                                 </select>
                             </td>
                         </tr>
-
+                        <tr>           
+                            <td><label>권한</label></td>
+                            <td>
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        value="1"
+                                        onChange={(e)=>{
+                                            checkedHandler(e.currentTarget.checked, 1)
+                                          }}
+                                        checked={ checkedInputs.includes(1) ? true : false }
+                                    />
+                                관리자
+                                </label>
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        value="2"
+                                        onChange={(e)=>{
+                                            checkedHandler(e.currentTarget.checked, 2)
+                                          }}
+                                        checked={checkedInputs.includes(2) ? true : false}
+                                    />
+                                일반
+                                </label>
+                            </td>
+                        </tr>
+                        </tbody>
                         </table>
                     <div className={ empDetailsCSS.btn }>
-                        <button>
+                        <button
+                            onClick={ onClickEmployeeUpdate }
+                        >
                             수정
                         </button>
                         <button
@@ -190,11 +302,9 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
                         >
                             취소
                         </button>
-
-
                     </div>
                 </div>
-            </div> {/* modalbody end */}
+            </div>
 
         </div>
     </div>
