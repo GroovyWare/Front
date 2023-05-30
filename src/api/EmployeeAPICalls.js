@@ -1,4 +1,4 @@
-import { getEmployee, getEmployees, postEmployee, putEmployee } from "../modules/EmployeeModule";
+import { getEmployeeIds, getEmployees, postEmployee, putEmployee } from "../modules/EmployeeModule";
 
 const RESTAPI_SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const RESTAPI_SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
@@ -20,22 +20,7 @@ export const callEmployeeListAPI = ({ currentPage=1}) => {
     }
 }
 
-// /* 직원 상세 조회 */
-// export const callEmployeeDetailsAPI = ({ empCode }) => {
-    
-//     const requestURL =`${PRE_URL}/auth/emp/${ empCode }`;
-
-//     return async (dispatch, getState) => {
-
-//         const result = await fetch(requestURL).then(res => res.json());
-        
-//         if(result.status === 200) {
-//             console.log('[EmployeeAPICalls] : callEmployeeDetailsAPI result : ', result);
-//             dispatch(getEmployee(result));
-//         }
-//     }
-// }
-/* 직원 아이디 조회 */
+/* 직원 아이디 리스트 조회 */
 export const callEmployeeIdListAPI = () => {
 
     const requestURL = `${PRE_URL}/auth/empidlist`;
@@ -51,7 +36,7 @@ export const callEmployeeIdListAPI = () => {
 
         if(result.status === 200) {
             console.log('[EmployeeAPICalls] : callEmployeeIdListAPI result : ', result);
-            dispatch(postEmployee(result));
+            dispatch(getEmployeeIds(result));
         }
     }
 }
@@ -101,3 +86,4 @@ export const callEmplopyeeUpdateAPI = (formData) => {
     }
 
 }
+

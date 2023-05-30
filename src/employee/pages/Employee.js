@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { callEmployeeListAPI } from "../../api/EmployeeAPICalls";
 import EmployeeList from "./EmployeeList";
 import PagingBar from "../../components/common/PagingBar";
-import EmployeeRegist from "./EmployeeRegist";
 import { useNavigate } from "react-router-dom";
 
 function Employee() {
@@ -34,8 +33,8 @@ function Employee() {
             <h3>직원관리</h3>
                 <div>{ employeeList && <EmployeeList employeeList={ employeeList }/>}</div>
                 <div>{ pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage }/> }</div>
-                <div>
-                    <button onClick={ moveToRegistPage }>등록</button>
+                <div className={ EmpCSS.btnDiv}>
+                    <button className={ EmpCSS.registBtn } onClick={ moveToRegistPage }>등록</button>
                 </div>
 
         </div>
