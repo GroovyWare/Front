@@ -11,3 +11,25 @@
     padding: 20px;
     font-family: 'LINESeedKR-Rg';
 }
+
+.btnDiv {
+    float: right;
+}
+
+.registBtn {
+        width: auto;
+        height: 25px;
+        border: none;
+        border-radius: 5px;
+        background-color: #1A1779;
+        color: #ffffff;
+        cursor: pointer;
+        font-family: 'esamanru';
+        padding: 0px 10px;
+        margin-right: 10px;
+        letter-spacing: 1px;
+}
+
+.registBtn:hover {
+    background-color: #94a9ff;
+}

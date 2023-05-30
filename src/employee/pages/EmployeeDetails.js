@@ -1,12 +1,13 @@
 import empDetailsCSS from './EmployeeDetails.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { callEmplopyeeUpdateAPI } from '../../api/EmployeeAPICalls';
+import { callEmplopyeeUpdateAPI, callEmployeeListAPI } from '../../api/EmployeeAPICalls';
 import { useEffect, useRef, useState } from 'react';
 import  profileDefaultImage  from '../../components/common/img/profile_default.svg';
 import { toast } from 'react-toastify';
 
+
 function EmployeeDetails({ setEmpDetailsOpen, emp }) {
-    
+
     const dispatch = useDispatch();
     const ImageInput = useRef();    
     const { update } = useSelector(state => state.employeeReducer);
@@ -16,22 +17,6 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
     const [ form, setForm ] = useState(emp);
 
     console.log('checkedInputs', checkedInputs);
-
-    const closeEmpDetails = () => {
-        setEmpDetailsOpen(false);
-    };
-
-    useEffect(
-        () => {
-            const tempArr = [];
-            emp.auths.forEach((auth) => {tempArr.push(auth.empAuthPK.authCode)});
-            console.log(tempArr)
-            setCheckedInputs(tempArr);
-            // emp.auths.forEach(auth => 
-            //     setCheckedInputs([...checkedInputs, auth.empAuthPK.authCode]))
-        },                           
-        []
-    )
 
     const deptSelectList = [
         { value : "", name : "선택"},
@@ -51,29 +36,29 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
 
     useEffect(
         () => {
-            if(image) {
-                 const fileReader = new FileReader();
-                 fileReader.onload = (e) => {
-                    
-                    const { result } = e.target;
-                    console.log('result : ' , result);
-                    if(result) setImageUrl(result);
-                 }
-                 fileReader.readAsDataURL(image);
-            }
-        },
-        [image]
+            const tempArr = [];
+            emp.auths.forEach((auth) => {tempArr.push(auth.auth.authCode)});
+            console.log('tempArr', tempArr);
+            setCheckedInputs(tempArr);
+            // emp.auths.forEach(auth => 
+            //     setCheckedInputs([...checkedInputs, auth.empAuthPK.authCode]))
+        },                           
+        []
     )
 
     useEffect(
-        () => {
+        () => { 
             if(update?.status === 200) {
-                setEmpDetailsOpen(false);
                 toast.success('정보 수정이 완료되었습니다.!');
+                setEmpDetailsOpen(false);
             }
         },
         [update]
     )
+
+    const closeEmpDetails = () => {
+        setEmpDetailsOpen(false);
+    };
 
     const onChangeHandler = (e) => {
         setForm({
@@ -112,11 +97,11 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
         formData.append("position.positionCode", form.position.positionCode);
       
         checkedInputs.forEach((authCode, i) =>
-             formData.append(`auths[${i}].empAuthPK.authCode`, authCode)
+             formData.append(`auths[${i}].auth.authCode`, authCode)
         )
 
-        console.log('0번 권한', formData.get(`auths[0].empAuthPK.authCode`));
-        console.log('1번 권한', formData.get(`auths[1].empAuthPK.authCode`));
+        console.log('0번 권한', formData.get(`auths[0].authCode`));
+        console.log('1번 권한', formData.get(`auths[1].authCode`));
 
         // for(let i=0; i < checkedInputs.length; i++) {
         //     formData.append(`auths[${i}].empAuthPK.authCode`, checkedInputs[i])
@@ -126,12 +111,10 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
         if(image) {
             formData.append("imgUrl", image);
         }
-
+        setEmpDetailsOpen(false);
         dispatch(callEmplopyeeUpdateAPI(formData));
 
     }
-    
-
 
     const deptHandler =(e) => {
         setForm({
@@ -146,9 +129,6 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
             position : { positionCode : e.target.value }
         })
     }
-
-
-    
 
     return (
     <div className={ empDetailsCSS.modal }>
@@ -322,11 +302,9 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
                         >
                             취소
                         </button>
-
-
                     </div>
                 </div>
-            </div> {/* modalbody end */}
+            </div>
 
         </div>
     </div>
