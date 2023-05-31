@@ -1,30 +1,46 @@
-import React, { useState } from 'react';
-import EquipmentModal from './EquipmentModal'; // 수정을 위한 모달 컴포넌트를 여기에 임포트 합니다.
+import { useNavigate } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
 
-const EquipmentItem = ({ equipment }) => {
-    const [showModal, setShowModal] = useState(false); // 모달을 보여줄지 말지를 결정하는 상태
+function EquipmentItem({ equipment }) {
+    const [showModal, setShowModal] = useState(false);
+    const modalRef = useRef();
 
-    const onClickHandler = () => {
-        setShowModal(true); // 아이템 클릭 시 모달을 보여주도록 설정
+    const onClickEquipmentHandler = () => {
+        setShowModal(true);
     };
 
-    const closeModal = () => {
-        setShowModal(false); // 모달 닫기 함수
-    };
+    // 모달 바깥 부분 클릭 시 모달 닫기
+    useEffect(() => {
+        const clickHandler = ({ target }) => {
+            if (!modalRef.current || modalRef.current.contains(target)) return;
+            setShowModal(false);
+        };
+        document.addEventListener('mousedown', clickHandler);
+        return () => document.removeEventListener('mousedown', clickHandler);
+    });
 
     return (
-        <>
-            <tr onClick={onClickHandler}>
-                <td>{equipment.eqpTitle}</td>
-                <td>{equipment.eqpPurchase}</td>
-                <td>{equipment.empCode}</td>
-                <td>{equipment.eqpDate}</td>
-                <td>{equipment.eqpStatus}</td>
-            </tr>
-            {showModal && <EquipmentModal equipment={equipment} closeModal={closeModal} />} 
-            {/* 만약 showModal이 true라면 EquipmentModal을 보여줍니다. */}
-        </>
+        <div onClick={onClickEquipmentHandler}>
+            {/* 기구 정보 출력 */}
+            <div>
+                <h3>{equipment.eqpName}</h3>
+                <p>{equipment.manufacturer}</p>
+            </div>
+            {/* 모달 창 */}
+            {showModal && (
+                <div ref={modalRef} style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', backgroundColor: 'white', padding: '1em', zIndex: 1000 }}>
+                    {/* 세부 정보 출력 */}
+                    <h2>{equipment.eqpName}</h2>
+                    <p>{equipment.manufacturer}</p>
+                    <p>{equipment.status}</p>
+                    <p>{equipment.regDate}</p>
+                    <button onClick={() => setShowModal(false)}>Close</button>
+                </div>
+            )}
+            {/* 모달 창 뒷 배경 */}
+            {showModal && <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', backgroundColor: 'rgba(0, 0, 0, 0.5)', zIndex: 1000 }}></div>}
+        </div>
     );
-};
+}
 
 export default EquipmentItem;
