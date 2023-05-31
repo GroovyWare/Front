@@ -84,6 +84,7 @@ function ScheduleUpdateModal({  setScheduleUpdateModal , justSchedule}) {
             onChange={onChangeHandler}
             value={form.start.toISOString}
           />
+          {/* isostring으로 반환값을 맞춰준다. */}
           <input
             placeholder="종료일 입력"
             type="datetime-local"

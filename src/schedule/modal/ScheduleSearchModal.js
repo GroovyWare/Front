@@ -13,9 +13,9 @@ function ScheduleSearchModal({ searchSchedule, setScheduleSearchModal, setSchedu
   const { searchvalues } = useSelector((state) => state.scheduleReducer);
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
+  const pageInfo = searchvalues && searchvalues.pageInfo;
 
-
- 
+ console.log(pageInfo);
 
   const searchData = searchvalues && searchvalues.data ? searchvalues.data : [];
 
@@ -33,8 +33,8 @@ function ScheduleSearchModal({ searchSchedule, setScheduleSearchModal, setSchedu
   // }, []);
 
   useEffect(() => {
-    dispatch(searchingSchedule({ searchSchedule }));
-  }, [searchSchedule]);
+    dispatch(searchingSchedule({ searchSchedule, currentPage }));
+  }, [searchSchedule, currentPage]);
 
   return (
     <div className={ScheduleInsertModalCSS.modal}>
@@ -74,6 +74,10 @@ function ScheduleSearchModal({ searchSchedule, setScheduleSearchModal, setSchedu
                 )}
               </tbody>
             </table>
+
+            <div>
+                { pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage}/> }
+            </div>
             <div className="button">
             
               <button

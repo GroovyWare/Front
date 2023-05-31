@@ -6,6 +6,7 @@ import NavbarCSS from '../components/common/Navbar.module.css';
 import profileImg from '../components/common/img/profile_default.svg';
 import { AttendanceMain, goWork, leaveWork } from "../api/AttendanceAPICalls";
 import { viewMain } from "../modules/AttendanceModule";
+import { toBeDisabled } from "@testing-library/jest-dom/matchers";
 
 /* 근태 테이블 작성 */
 const Attendance = () => {
@@ -16,15 +17,20 @@ const Attendance = () => {
     const { regist } = useSelector(state => state.attendanceReducer);
     const { update } = useSelector(state => state.attendanceReducer);
     const [time, setTime] = useState(new Date());
+    const [disableGoWorkButton, setDisableGoWorkButton] = useState(false);
 
     const goWorking = () => {
-        dispatch(goWork(form))
+        dispatch(goWork(form));
+        setDisableGoWorkButton(true);
     }
 
     const leavingWork = () => {
         dispatch(leaveWork(form))
     }
 
+    console.log(attendance)
+   
+ 
 
 
     useEffect(() => {
@@ -87,9 +93,11 @@ const Attendance = () => {
                                 time.toLocaleTimeString()
                             )}
                         </div>
-                        <button onClick={goWorking}>
-                            여기가 출근 버튼
-                        </button>
+                        {!attendance?.data?.attStart && (
+                            <button onClick={goWorking}>
+                                여기가 출근 버튼
+                            </button>
+                        )}
                     </div>
 
                 </div>
