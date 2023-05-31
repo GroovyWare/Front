@@ -12,7 +12,8 @@ function RequestWait(){
 
     const {waitList} = useSelector(state => state.approvalReducer);
     const {now} = useSelector(state => state.approvalReducer);
-    const pageInfo = waitList?.pageInfo;
+    const {requestList} = useSelector(state => state.approvalReducer);
+    const pageInfo = waitList?.data.data.pageInfo;
 
     const [ currentPage, setCurrentPage ] = useState(1);
 
@@ -32,10 +33,10 @@ function RequestWait(){
     const onRowClickHandler = (apvCode) => {
         navigate("/approval/waitDetail", {state : {apvCode : apvCode}});
     }
-
+    
     return (
         <>
-        <div>
+        <div className={RequestListCSS.numberDiv}>
             <table>
             <tr>
                 <th>결재 요청</th>
@@ -43,9 +44,9 @@ function RequestWait(){
                 <th>결재 완료</th>
             </tr>
             <tr>
-                <td>건</td>
-                <td>건</td>
-                <td>건</td>
+                <td>{requestList.data.approvalDtoContent.length}건</td>
+                <td>{waitList.data.data.length}건</td>
+                <td>3건</td>
             </tr>
             </table>
         </div>
