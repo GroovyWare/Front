@@ -33,11 +33,10 @@ import RequestList from './Approval/pages/getDocument/RequestList';
 import RequestDetail from './Approval/pages/getDocument/RequestDetail';
 import RequestWait from './Approval/pages/getDocument/RequestWait';
 import ReqeustWaitDetail from './Approval/pages/getDocument/RequestWaitDetail';
-
-import { AttendanceMain } from './api/AttendanceAPICalls';
 import Attendance from './attendance/attendance';
-
 import EquipmentMain from './Equipment/pages/EquipmentMain';
+import MemberList from './Member/pages/MemberList';
+
 
 
 
@@ -104,6 +103,7 @@ function App() {
             <Route path="regist" element={<ProtectedRoute loginCheck={true}><MemberRegist /></ProtectedRoute>} />
             <Route path="modify/:memCode" element={<ProtectedRoute loginCheck={true}><MemberModify /></ProtectedRoute>} />
             <Route path="add/:memCode" element={<ProtectedRoute loginCheck={true}><MemberAddPass /></ProtectedRoute>} />
+            <Route path="members/search" element={<ProtectedRoute loginCheck={true}><MemberMain /></ProtectedRoute>} />
           </Route>
 
           <Route path="pass">
@@ -116,6 +116,8 @@ function App() {
             <Route index element={ <Employee/> }/>
             <Route path="regist" element={ <EmployeeRegist/> }/>
           </Route>
+
+
 
         </Route>
       </Routes>

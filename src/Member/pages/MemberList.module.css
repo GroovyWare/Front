@@ -78,3 +78,42 @@
     background-color: #7777775e;
     cursor: pointer;
 }
+
+.searchBoxWarp {
+    display: flex;
+}
+
+.searchBox{
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+
+    font-family: LINESeedKR-Rg;
+    font-size: 0.8rem;
+    font-weight: 300;
+    line-height: 1.5;
+    
+    color: #444;
+    background-color: #EDEFF0;
+    
+    padding: 2px 0px 3px 18px;
+
+    margin: auto;
+    margin-left: 750px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    
+    border: 1px solid #999999;
+}
+
+.searchBtn {
+    font-family: 'LINESeedKR-Bd';
+    font-size: 0.8rem;
+    color: white;
+    background: #785ee0;
+    border-color: #785ee0;
+    width: 60px;
+    height: 25px;
+    margin-left: 10px;
+}
+

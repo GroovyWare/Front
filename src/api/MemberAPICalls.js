@@ -138,3 +138,21 @@ export const callMemberAddPassAPI = (formData) => {
 
 }
 
+/* 회원명 검색 목록 조회 */
+export const callMemberSearchListAPI = ({ search, currentPage = 1}) => {
+
+    const requestURL = `${PRE_URL}/member/members/search?search=${search}&page=${currentPage}`;
+
+    return async (dispatch, getState) => {
+
+        const result = await fetch(requestURL).then(response => response.json());
+
+        if(result.status === 200) {
+            console.log("[MemberAPICalls] callMemberSearchListAPI result : ", result);
+            dispatch(getMembers(result));
+        }
+    }
+}
+
+
+

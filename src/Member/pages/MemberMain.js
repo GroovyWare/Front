@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { callMemberListAPI } from "../../api/MemberAPICalls";
+import { callMemberListAPI, callMemberSearchListAPI } from "../../api/MemberAPICalls";
 import MemberList from "./MemberList";
 import PagingBar from "../../components/common/PagingBar";
+import { useParams, useSearchParams } from "react-router-dom";
 
 
 
@@ -15,10 +16,20 @@ function MemberMain() {
 
     const [currentPage, setCurrentPage] = useState(1);
 
+    /* 회원명 검색 요청 시 사용할 값 */
+    const [searchParams] = useSearchParams();
+    const search = searchParams.get('value');
+
     useEffect(
         () => {
-            /* 전체 메뉴 요청 */
+            if(search){
+            /* 회원명 검색에 대한 요청 */
+            dispatch(callMemberSearchListAPI({currentPage}));    
+        } else {
+            /* 전체 회원 요청 */
             dispatch(callMemberListAPI({ currentPage }));
+        }
+            
         },
         [currentPage]
     );
