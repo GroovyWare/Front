@@ -13,11 +13,10 @@ function MemberDetail() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const member = useSelector((state) => state.memberReducer);
-    const { history } = useSelector((state) => state.historyReducer);
+    const { history } = useSelector(state => state.historyReducer);
     const params = useParams();
     const memCode = params.memCode;
     const [memberHistoryModal, setMemberHistoryModal] = useState(false);
-
 
     useEffect(() => {
         dispatch(callMemberDetailAPI({ memCode }));
@@ -28,13 +27,12 @@ function MemberDetail() {
             if(history?.memCode){
                 setMemberHistoryModal(true);
             } else if(history) {
-                setMemberHistoryModal(true);
+                setMemberHistoryModal(false);
             }
         },
-        [history]);
+        []);
 
         
-
     /* 회원 이력 상세 보기 버튼 */
     const onClickHistoryHandler = ( memCode ) => {
         /* 이력 유무 확인 */
@@ -45,6 +43,11 @@ function MemberDetail() {
     /* 수정하기 버튼 */
     const onClickModifyHandler = () => {
         navigate(`/member/modify/${memCode}`)
+    }
+
+    /* 회원권 추가하기 버튼 */
+    const onClickAddPassHandler = () => {
+        navigate(`/member/add/${memCode}`)
     }
 
     /* 취소하기(페이지로 돌아가기) 버튼 */
@@ -122,7 +125,12 @@ function MemberDetail() {
                     <div>
                         <button 
                             className={MemberDetailCSS.modifyBtn}
-                            onClick={ onClickModifyHandler }>수정하기</button>
+                            onClick={ onClickModifyHandler }>회원정보수정</button>
+                    </div>
+                    <div>
+                        <button 
+                            className={MemberDetailCSS.addPassBtn}
+                            onClick={ onClickAddPassHandler }>회원권추가</button>
                     </div>
                     <div>
                         <button 

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { callMemberRegistAPI } from "../../api/MemberAPICalls";
 import MemberRegistCSS from "./MemberRegist.module.css";
+import { toast } from "react-toastify";
 
 
 function MemberRegist() {
@@ -11,9 +12,6 @@ function MemberRegist() {
     const navigate = useNavigate();
     const { regist } = useSelector(state => state.memberReducer);
     const [form, setForm] = useState({
-        memStartDate : getToday(),
-        memDeleteDate : getFiveYear(),
-        memEndDate: getThreeMonth(),
         passCode : 1,
         empcode : 1
     });
@@ -24,7 +22,7 @@ function MemberRegist() {
     useEffect(
         () => {
             if(regist?.status === 200) {
-                alert('회원 등록이 완료되었습니다.');
+                toast('회원 등록이 완료되었습니다.');
                 navigate('/member', { replace : true });
             }
         },
@@ -64,7 +62,6 @@ function MemberRegist() {
         const today = new Date();
         return today.getFullYear() + "-" + ((today.getMonth()+1)>9 ? (today.getMonth()+1) : "0"+(today.getMonth()+1)) + "-" + (today.getDate()>9 ? today.getDate() : "0"+today.getDate());
     }
-
 
     /* 5년 뒤 날짜 가져오기 */
     function getFiveYear() {     
@@ -114,7 +111,7 @@ function MemberRegist() {
                             <td className={MemberRegistCSS.contentText} colspan="3">
                                 <input
                                     name='memPhone'
-                                    placeholder='숫자만 입력하세요'
+                                    placeholder='전화번호'
                                     onChange={ onChangeHandler }
                                 />
                             </td>
@@ -216,7 +213,7 @@ function MemberRegist() {
                 <div>
                 <button
                     className={MemberRegistCSS.cancelBtn}
-                    onClick={ () => navigate(-1) }
+                    onClick={ () => navigate('/member') }
                 >
                     취소하기
                 </button>

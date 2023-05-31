@@ -8,12 +8,11 @@ import PlayHistory from './play/PlayHistory';
 import AnnounceMain from "./Announce/pages/announces/AnnounceMain";
 import AnnounceDetail from "./Announce/pages/announces/AnnounceDetail";
 import AnnounceRegistration from './Announce/pages/admin/AnnounceRegistration';
-import AnnounceList from './Announce/pages/announces/AnnounceList';
-import AnnounceItem from './Announce/items/AnnounceItem';
 import MemberMain from './Member/pages/MemberMain';
 import MemberDetail from './Member/pages/MemberDetail';
 import MemberRegist from './Member/pages/MemberRegist';
 import MemberModify from './Member/pages/MemberModify';
+import MemberAddPass from './Member/pages/MemberAddPass.js';
 import PassRegist from './Pass/pages/PassRegist';
 import PassModify from './Pass/pages/PassModify';
 import PassMain from './Pass/pages/PassMain';
@@ -34,6 +33,12 @@ import RequestList from './Approval/pages/getDocument/RequestList';
 import RequestDetail from './Approval/pages/getDocument/RequestDetail';
 import RequestWait from './Approval/pages/getDocument/RequestWait';
 import ReqeustWaitDetail from './Approval/pages/getDocument/RequestWaitDetail';
+
+import { AttendanceMain } from './api/AttendanceAPICalls';
+import Attendance from './attendance/attendance';
+
+import EquipmentMain from './Equipment/pages/EquipmentMain';
+
 
 
 export const GlobalStyle = createGlobalStyle`
@@ -76,33 +81,35 @@ function App() {
           </Route>
 
           <Route path="/announce">
-              <Route index element={<ProtectedRoute loginCheck={true}><AnnounceMain /></ProtectedRoute>} />
-              <Route path=":annCode" element={<ProtectedRoute loginCheck={true}><AnnounceDetail /></ProtectedRoute>} />
-              <Route path="announce-registration" element={<AnnounceRegistration />} />
-              <Route path="announce-update/:annCode" element={<AnnounceUpdate />} />
+            <Route index element={<ProtectedRoute loginCheck={true}><AnnounceMain /></ProtectedRoute>} />
+            <Route path=":annCode" element={<ProtectedRoute loginCheck={true}><AnnounceDetail /></ProtectedRoute>} />
+            <Route path="announce-registration" element={<AnnounceRegistration />} />
+            <Route path="announce-update/:annCode" element={<AnnounceUpdate />} />
           </Route>
 
-          {/* <Route path="/equipment">
+          <Route path="/equipment">
             <Route index element={<ProtectedRoute loginCheck={true}><EquipmentMain /></ProtectedRoute>} />
           </Route>
 
-          <Route path="/locker">
+          {/* <Route path="/locker">
             <Route index element={<ProtectedRoute loginCheck={true}><LockerMain /></ProtectedRoute>} />
           </Route> */}
 
           <Route path="schedule" element={<Schedule />} />
+          <Route path='attendance' element={<Attendance/>}/>
 
           <Route path="member">
-            <Route index element={<MemberMain />} />
-            <Route path="detail/:memCode" element={<MemberDetail />} />
-            <Route path="regist" element={<MemberRegist />} />
-            <Route path="modify/:memCode" element={<MemberModify />} />
+            <Route index element={<ProtectedRoute loginCheck={true}><MemberMain /></ProtectedRoute>} />
+            <Route path="detail/:memCode" element={<ProtectedRoute loginCheck={true}><MemberDetail /></ProtectedRoute>} />
+            <Route path="regist" element={<ProtectedRoute loginCheck={true}><MemberRegist /></ProtectedRoute>} />
+            <Route path="modify/:memCode" element={<ProtectedRoute loginCheck={true}><MemberModify /></ProtectedRoute>} />
+            <Route path="add/:memCode" element={<ProtectedRoute loginCheck={true}><MemberAddPass /></ProtectedRoute>} />
           </Route>
 
           <Route path="pass">
-            <Route index element={<PassMain />} />
-            <Route path="regist" element={<PassRegist />} />
-            <Route path="modify/:passCode" element={<PassModify />} />
+            <Route index element={<ProtectedRoute loginCheck={true}><PassMain /></ProtectedRoute>} />
+            <Route path="regist" element={<ProtectedRoute loginCheck={true}><PassRegist /></ProtectedRoute>} />
+            <Route path="modify/:passCode" element={<ProtectedRoute loginCheck={true}><PassModify /></ProtectedRoute>} />
           </Route>
 
           <Route path="employee">

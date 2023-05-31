@@ -1,6 +1,22 @@
+import { useEffect, useState } from "react";
 import MemberHistoryModalCSS from "./MemberHistoryModal.module.css";
+import { useDispatch } from "react-redux";
+import { callMemberHistoryCheckAPI } from "../../api/MemberHistoryAPICalls";
+import PagingBar from "../../components/common/PagingBar";
 
-function MemberHistoryModal({ history, setMemberHistoryModal }) {
+
+function MemberHistoryModal({ history, setMemberHistoryModal, pageInfo }) {
+
+    const dispatch = useDispatch();
+    const [currentPage, setCurrentPage] = useState(1);
+
+    useEffect(
+        () => {
+            dispatch(callMemberHistoryCheckAPI({currentPage}));
+        }, 
+        [currentPage] 
+    );
+
     const onClickHandler = () => {
         setMemberHistoryModal(false);
     };
@@ -27,25 +43,33 @@ function MemberHistoryModal({ history, setMemberHistoryModal }) {
                    </tr>
                    </thead>
                    <tbody>
-                   <tr>
+                    { history && history.data.map(h => 
+                    (<tr
+                        key={ h.resHistory }
+                     >
                     <td
                     className={MemberHistoryModalCSS.contentText}
-                    >{ history && history.data[0].pass.passType }</td>
+                    >{ h.pass.passType }</td>
                     <td
                     className={MemberHistoryModalCSS.contentText}
-                    >{ history && history.data[0].pass.passAmount }</td>
+                    >{ h.pass.passAmount }</td>
                     <td
                     className={MemberHistoryModalCSS.contentText}
-                    >{ history && history.data[0].employee.empName }</td>
+                    >{ h.employee.empName }</td>
                     <td
                     className={MemberHistoryModalCSS.contentText}
-                    >{ history && history.data[0].resStart }</td>
+                    >{ h.resStart }</td>
                     <td
                     className={MemberHistoryModalCSS.contentText}
-                    >{ history && history.data[0].resEnd }</td>
-                   </tr>
+                    >{ h.resEnd }</td>
+                   </tr>))
+                   }
                    </tbody>
                  </table>
+
+                 <div>
+                    { pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage }/> }
+                </div>
                 
                  <button
                     className={MemberHistoryModalCSS.confirmBtn}

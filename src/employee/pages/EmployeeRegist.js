@@ -2,8 +2,9 @@ import { useNavigate } from 'react-router-dom';
 import RegistCSS from './EmployeeRegist.module.css';
 import { useEffect, useRef, useState } from 'react';
 import profileDefaultImage from '../../components/common/img/profile_default.svg'
-import { useDispatch } from 'react-redux';
-import { callEmployeeListAPI, callEmployeeRegistAPI } from '../../api/EmployeeAPICalls';
+import { useDispatch, useSelector } from 'react-redux';
+import { callEmployeeIdListAPI, callEmployeeRegistAPI } from '../../api/EmployeeAPICalls';
+import { toast } from 'react-toastify';
 
 function EmployeeRegist() {
 
@@ -11,6 +12,11 @@ function EmployeeRegist() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+    const { check } = useSelector(state => state.employeeReducer);
+    const { regist } = useSelector(state => state.employeeReducer);
+
+    const [ idList, setIdList ] = useState([]);
+    // const [ errorMsg, setErrorMsg ] = useState(false);
     const [ image, setImage ] = useState(null);
     const [ imageUrl, setImageUrl ] = useState('');
     const [ checkedInputs, setCheckedInputs ] = useState([]);
@@ -35,6 +41,24 @@ function EmployeeRegist() {
 
     useEffect(
         () => {
+            if(regist?.status === 200) {
+                toast.success('등록이 완료되었습니다.!');
+                navigate(-1);
+            }
+        },
+        [regist]
+    )
+
+    useEffect(
+        () => {
+            setIdList(check);
+            console.log('idList', idList);
+        },
+        [check]
+    )
+
+    useEffect(
+        () => {
             if(image) {
                  const fileReader = new FileReader();
                  fileReader.onload = (e) => {
@@ -48,7 +72,7 @@ function EmployeeRegist() {
         },
         [image]
     )
-    
+
     /* 이미지 업로드 */
     const onClickImageUpload = () => {
         ImageInput.current.click();
@@ -59,7 +83,9 @@ function EmployeeRegist() {
     }
 
     const doubleCheck = (e) => {
-        const result = dispatch(callEmployeeListAPI())
+       dispatch(callEmployeeIdListAPI());
+    
+    //    check.forEach(id => id === form.empId ? errorMsg : successMsg);
     }
 
     const onChangeHandler = (e) => {
@@ -68,8 +94,6 @@ function EmployeeRegist() {
             [e.target.name] : e.target.value
         }) 
     }
-
-    console.log('[EmployeeRegist] form ', form);
 
     const checkedHandler = (checked, value) => {
         if (checked) {
@@ -92,10 +116,10 @@ function EmployeeRegist() {
         formData.append("position.positionCode", form.positionCode);
       
         checkedInputs.forEach((authCode, i) =>
-             formData.append(`auths[${i}].empAuthPK.authCode`, authCode)
+             formData.append(`auths[${i}].auth.authCode`, authCode)
         )
-        console.log(formData.get(`auths[0].empAuthPK.authCode`));
-        console.log(formData.get(`auths[1].empAuthPK.authCode`));
+        console.log(formData.get(`auths[0].auth.authCode`));
+        console.log(formData.get(`auths[1].auth.authCode`));
 
         // for(let i=0; i < checkedInputs.length; i++) {
         //     formData.append(`auths[${i}].empAuthPK.authCode`, checkedInputs[i])
@@ -106,10 +130,9 @@ function EmployeeRegist() {
             formData.append("imgUrl", image);
         }
 
-        dispatch(callEmployeeRegistAPI(formData));
+        dispatch(callEmployeeRegistAPI(formData)); 
+
     }
-
-
 
     return (
         <div className={ RegistCSS.container }>
@@ -144,9 +167,10 @@ function EmployeeRegist() {
                                     type="text"
                                     name="empId"
                                     onChange={ onChangeHandler }
-  
                                 />
+                                <button onClick={ doubleCheck }>중복 확인</button>
                             </td>
+                            
                         </tr>
                         <tr>
                             <td><label>비밀번호</label></td>
