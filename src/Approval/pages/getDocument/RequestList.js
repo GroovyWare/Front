@@ -24,6 +24,8 @@ function RequestList () {
         },[currentPage]
     )
 
+    console.log(requestList);
+
     const onRowClickHandler = (apvCode) => {
         navigate("/approval/detail", {state : {apvCode : apvCode}, replace : true});
     }
