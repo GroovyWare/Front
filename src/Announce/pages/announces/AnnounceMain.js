@@ -65,11 +65,10 @@ function AnnounceMain() {
 
     return (
         <>  
-            <SearchBar search={searchTerm} onSearch={onSearch} />
-            <div className={ AnnounceMainCSS.bodyDiv }>
-            <div className={ AnnounceMainCSS.buttonDiv }>
-                {userRole === '1' && <button onClick={ goToRegistration }>등록</button>}
+            <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "15px", marginRight: "20px" }}>
+                <SearchBar search={searchTerm} onSearch={onSearch} />
             </div>
+            <div className={ AnnounceMainCSS.bodyDiv }>
             <table className={ AnnounceMainCSS.productTable }>
                 <colgroup>
                     <col width="5%" />
@@ -102,6 +101,9 @@ function AnnounceMain() {
             </table>
             <div>
                 { announceList.length > 0 && <AnnounceList announceList={announceList} /> }
+            </div>
+            <div className={ AnnounceMainCSS.buttonDiv }>
+                {userRole === '1' && <button onClick={ goToRegistration }>등록</button>}
             </div>
             <div>
                 { pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage } /> }
