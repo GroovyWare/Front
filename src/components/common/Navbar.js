@@ -111,11 +111,25 @@ function Navbar() {
                         </NavLink>
                     </li>
 
-                    <li><Link to="/employee" className={ NavbarCSS.link }>
+                    {/* <li><Link to="/employee" className={ NavbarCSS.link }>
                         직원관리
                         <img src={ arrow } className = { NavbarCSS.arrowNo }/>
                         </Link>
+                    </li> */}
+
+                    <li><NavLink to="/employee" className={ NavbarCSS.link }>
+                        직원관리
+                        <img src={ arrow } className = { NavbarCSS.arrowYes }/>
+                            <ul className={ NavbarCSS.subMenu }>
+                                    <li><NavLink to="/attendance/list" className={ NavbarCSS.link }>근태관리</NavLink></li>
+                            </ul>
+                        </NavLink>
                     </li>
+
+
+
+
+
                 </ul>
             </div>
         </div>
