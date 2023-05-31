@@ -4,8 +4,6 @@ import { searchRequestAPI } from "../../../api/ApprovalAPICall";
 import RequestListCSS from "./RequestList.module.css";
 import PagingBar from "../../../components/common/PagingBar";
 import { useNavigate } from "react-router-dom";
-import { addCountAPI } from "../../../api/ApprovalAPICall";
-
 
 function RequestList () {
 

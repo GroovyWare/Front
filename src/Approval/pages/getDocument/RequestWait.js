@@ -34,6 +34,21 @@ function RequestWait(){
     }
 
     return (
+        <>
+        <div>
+            <table>
+            <tr>
+                <th>결재 요청</th>
+                <th>결재 대기</th>
+                <th>결재 완료</th>
+            </tr>
+            <tr>
+                <td>건</td>
+                <td>건</td>
+                <td>건</td>
+            </tr>
+            </table>
+        </div>
         <div className={RequestListCSS.tableDiv}>
             <table className={RequestListCSS.table}>
                 <tr>
@@ -44,32 +59,69 @@ function RequestWait(){
                     <th>상태</th>
                 </tr>
                 {waitList && waitList.data.data.map((wait, waitIndex) => {
-                    const approvedApvNumTwo = wait.approveLine.find(approve => approve.aplNum === '2')?.aplStatus === '승인';
-                    const approvedApvNumThree = wait.approveLine.find(approve => approve.aplNum === '3')?.aplStatus === '승인';
-                    const shouldDisplay = (wait.approveLine.find(approve => approve.aplNum === 1) && approvedApvNumTwo && approvedApvNumThree) ||
-                                          (wait.approveLine.find(approve => approve.aplNum === 2) && approvedApvNumThree);
-    
-                    if (!shouldDisplay) {
-                        return null;
+                    const aplNumOne = wait.approveLine.find(apl => apl.empCode === now?.data.empCode);
+
+                    if(aplNumOne.aplNum === '1'){
+                        const aplNumTwo = wait.approveLine.find(apl => apl.aplNum === '2');
+                        const aplNumThree = wait.approveLine.find(apl => apl.aplNum === '3');
+
+                        console.log(aplNumTwo.aplStatus);
+
+                        if(aplNumTwo?.aplStatus === '승인' && aplNumThree?.aplStatus === '승인'){
+                            return (
+                                <tr key={waitIndex} onClick={() => onRowClickHandler(wait.apvCode)}>
+                                    <td>{wait.employee.empName}</td>
+                                    <td>{wait.apvCreatedDate}</td>
+                                    <td>{wait.apvEndDate}</td>
+                                    <td>{wait.document.docTitle}</td>
+                                    <td style={{display: "flex", justifyContent: "center", flexDirection: "column"}}>
+                                        {wait.approveLine.map((apv, index2) => (
+                                            now?.data.empCode === apv.empCode ? <div key={index2}>{apv.aplStatus}</div> : null
+                                        ))}
+                                    </td>
+                                </tr>
+                            );
+                    }}
+
+                    if(aplNumOne?.aplNum === '2'){
+                        const aplNumThree = wait.approveLine.find(apl => apl.aplNum === '3');
+
+                        if(aplNumThree?.aplStatus === '승인'){
+                            return (
+                                <tr key={waitIndex} onClick={() => onRowClickHandler(wait.apvCode)}>
+                                    <td>{wait.employee.empName}</td>
+                                    <td>{wait.apvCreatedDate}</td>
+                                    <td>{wait.apvEndDate}</td>
+                                    <td>{wait.document.docTitle}</td>
+                                    <td style={{display: "flex", justifyContent: "center", flexDirection: "column"}}>
+                                        {wait.approveLine.map((apv, index2) => (
+                                            now?.data.empCode === apv.empCode ? <div key={index2}>{apv.aplStatus}</div> : null
+                                        ))}
+                                    </td>
+                                </tr>
+                            );
+                    }}
+
+                    if(aplNumOne?.aplNum === '3'){
+                            return (
+                                <tr key={waitIndex} onClick={() => onRowClickHandler(wait.apvCode)}>
+                                    <td>{wait.employee.empName}</td>
+                                    <td>{wait.apvCreatedDate}</td>
+                                    <td>{wait.apvEndDate}</td>
+                                    <td>{wait.document.docTitle}</td>
+                                    <td style={{display: "flex", justifyContent: "center", flexDirection: "column"}}>
+                                        {wait.approveLine.map((apv, index2) => (
+                                            now?.data.empCode === apv.empCode ? <div key={index2}>{apv.aplStatus}</div> : null
+                                        ))}
+                                    </td>
+                                </tr>
+                            );
                     }
-    
-                    return (
-                        <tr key={waitIndex} onClick={() => onRowClickHandler(wait.apvCode)}>
-                            <td>{wait.employee.empName}</td>
-                            <td>{wait.apvCreatedDate}</td>
-                            <td>{wait.apvEndDate}</td>
-                            <td>{wait.document.docTitle}</td>
-                            <td style={{display: "flex", justifyContent: "center", flexDirection: "column"}}>
-                                {wait.approveLine.map((apv, index2) => (
-                                    now?.data.empCode === apv.empCode ? <div key={index2}>{apv.aplStatus}</div> : null
-                                ))}
-                            </td>
-                        </tr>
-                    );
                 })}
             </table>
-            <div>{ pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage }/> }</div>
+            <div>{ pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage }/>}</div>
         </div>
+        </>
     )}
     
     export default RequestWait;
