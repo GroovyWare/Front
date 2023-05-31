@@ -8,7 +8,6 @@ import EquipmentMainCSS from './EquipmentMain.module.css';
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom/dist";
 import axios from "axios";
-import Modal from 'react-modal';
 
 function EquipmentMain() {
 
@@ -166,7 +165,7 @@ function EquipmentMain() {
             <div>
                 { pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage } /> }
             </div>
-            <Modal
+            {/* <Modal
                 className={ EquipmentMainCSS.modalDiv }
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
@@ -184,7 +183,7 @@ function EquipmentMain() {
                     </label>
                     <button type="submit">등록</button>
                 </form>
-            </Modal>
+            </Modal> */}
         </div>
         </>
     );
