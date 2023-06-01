@@ -29,7 +29,7 @@ export const { approval : { registApproval,selectEmployee, searchEmployee, searc
     [ADD_COUNT] : res => res,
     [SEARCH_WAIT] : res => res,
     [SEARCH_NOW] : res => res,
-    [SEARCH_APPROVELINE] : res => res.data
+    [SEARCH_APPROVELINE] : res => res
 });
 
 /* 리듀서 */
@@ -44,7 +44,7 @@ const approvalReducer = handleActions({
     [ADD_COUNT] : (state, {payload}) => ({count : payload}),
     [SEARCH_WAIT] : (state, {payload}) => ({...state, waitList : payload}),
     [SEARCH_NOW] : (state, {payload}) => ({...state, now : payload}),
-    [SEARCH_APPROVELINE] : (state, {payload}) => ({ approveLine : payload})
+    [SEARCH_APPROVELINE] : (state, {payload}) => ({ ...state, approveLine : payload})
 }, initialState) 
 
 export default approvalReducer;

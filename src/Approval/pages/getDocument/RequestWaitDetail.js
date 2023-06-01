@@ -80,14 +80,16 @@ function ReqeustWaitDetail(){
         },[context?.apvContext]
     )
 
-    useEffect(
-        () => {
-            dispatch(searchApproveLineAPI(waitList?.data.data.approveLine.empCode));
-        }, []
-    )
+    const empcodes = waitList?.data.data.flatMap(row => row.approveLine.map(row => row.empCode));
+    console.log(empcodes);
+
+    useEffect(() => {
+            dispatch(searchApproveLineAPI(empcodes));
+    }, [])
 
     return(
         <div className={RequestDetailCSS.wrap}>
+            <div className={RequestDetailCSS.title}>{context.document.docTitle}</div>
             <div className={RequestDetailCSS.content}>
                 <div className={RequestDetailCSS.editor2}>
                     <StyledQuill 
