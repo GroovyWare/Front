@@ -4,6 +4,7 @@ import { callEmplopyeeUpdateAPI, callEmployeeListAPI } from '../../api/EmployeeA
 import { useEffect, useRef, useState } from 'react';
 import  profileDefaultImage  from '../../components/common/img/profile_default.svg';
 import { toast } from 'react-toastify';
+import { initEmployee } from '../../modules/EmployeeModule'
 
 function EmployeeDetails({ setEmpDetailsOpen, emp }) {
 
@@ -51,6 +52,8 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
             if(update?.status === 200) {
                 setEmpDetailsOpen(false);
                 toast.success('정보 수정이 완료되었습니다.!');
+                dispatch(initEmployee());
+                dispatch(callEmployeeListAPI(1));
             }
         },
         [update]
@@ -112,7 +115,7 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
         if(image) {
             formData.append("imgUrl", image);
         }
-        setEmpDetailsOpen(false);
+
         dispatch(callEmplopyeeUpdateAPI(formData));
 
     }

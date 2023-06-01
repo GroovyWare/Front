@@ -92,8 +92,10 @@ function EmployeeRegist() {
         positionCode : "1",
     });
 
-    const [ idCheck, setIdCheck ] = useState(null); 
+    const [ idCheck, setIdCheck ] = useState(false); 
     const { check } = useSelector(state => state.employeeReducer);
+    const [ isClicked, setIsClicked ] = useState(false);
+    console.log('isClicked', isClicked)
 
     const deptSelectList = [
         { value: "1", name: "관리" },
@@ -111,7 +113,16 @@ function EmployeeRegist() {
 
     useEffect(
         () => {
-            check ? setIdCheck(true) : setIdCheck(false);
+        if(form.empId.length === 0) {
+            setIsClicked(false)
+        } 
+        },
+        [form]
+    )
+    
+    useEffect(
+        () => {
+            check ? setIdCheck(true) : setIdCheck(false); // 아이디 중복여부
         },
         [check]
     )
@@ -142,7 +153,6 @@ function EmployeeRegist() {
         [image]
     )
 
-
     /* 이미지 업로드 */
     const onClickImageUpload = () => {
         ImageInput.current.click();
@@ -154,9 +164,8 @@ function EmployeeRegist() {
 
     const doubleCheck = () => {
        dispatch(callEmployeeIdCheckAPI(form.empId));
-
+       setIsClicked(true);
     }
-    console.log('check', check);
 
     const onChangeHandler = (e) => {
         setForm({
@@ -188,8 +197,8 @@ function EmployeeRegist() {
              formData.append(`auths[${i}].auth.authCode`, authCode)
         )
 
-        console.log(formData.get(`auths[0].auth.authCode`));
-        console.log(formData.get(`auths[1].auth.authCode`));
+        // console.log(formData.get(`auths[0].auth.authCode`));
+        // console.log(formData.get(`auths[1].auth.authCode`));
 
         // for(let i=0; i < checkedInputs.length; i++) {
         //     formData.append(`auths[${i}].empAuthPK.authCode`, checkedInputs[i])
@@ -240,13 +249,10 @@ function EmployeeRegist() {
                                     onChange={ onChangeHandler }
                                 />
                                 <button onClick={ doubleCheck } disabled={ form.empId.length < 1 }>중복 확인</button>
-                                    {/* <div className={ form.empId.length < 1 ? 'idMessageDiv' : 'message'}>
-                                    {
-                                        check
-                                        ? '이미 존재하는 아이디입니다.'
-                                        : '사용가능한 아이디입니다.'
-                                    }
-                                    </div> */}
+                                {  isClicked && check ? <div>이미 사용 중인 아이디입니다.</div> 
+                                  : form.empId.length > 0 && isClicked && !check ? <div>사용가능한 아이디입니다.</div>
+                                  : null
+                                }
                             </td>
                             
                         </tr>

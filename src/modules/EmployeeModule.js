@@ -22,7 +22,7 @@ const employeeReducer = handleActions(
         [GET_EMPLOYEE_ID] : (state, { payload }) => ({ check : payload }),
         [POST_EMPLOYEE] : (state, { payload }) => ({ regist : payload }),
         [PUT_EMPLOYEE] : (state, { payload }) => ({ ...state, update : payload }),
-        [INIT_EMPLOYEE] : () => initialState
+        [INIT_EMPLOYEE] : (state, { payload }) => ({ ...state, update : initialState })
     }
     ,initialState);
 
