@@ -81,7 +81,10 @@ function ReqeustWaitDetail(){
     )
 
     const empcodes = waitList?.data.data.flatMap(row => row.approveLine.map(row => row.empCode));
-    console.log(empcodes);
+
+    const person = [...context.approveLine.map(row => row.empCode)];
+    const lines = [...line?.data.map(row => row.empCode)];
+    const matchingElements = person.filter(element => lines.includes(element));
 
     useEffect(() => {
             dispatch(searchApproveLineAPI(empcodes));
@@ -89,11 +92,15 @@ function ReqeustWaitDetail(){
 
     return(
         <>
-        {waitList && waitList.data.data.map((row) => (
-            <div key={row.empCode}>
-                {row.approveLine.map(approveItem => line?.data.map(lineItem => lineItem.empCode === approveItem.empCode))}
+            <div>
+                {
+                    line?.data.map(row => (
+                        matchingElements.includes(row.empCode) ? row.empName : null
+                    ))
+                }
             </div>
-        ))}
+            
+        
             
             <div className={RequestDetailCSS.wrap}>
                     <div className={RequestDetailCSS.content}>
