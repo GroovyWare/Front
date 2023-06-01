@@ -50,6 +50,7 @@ const modules = {
   }
   .ql-container {
     height: 550px;
+    background-color : white;
   }
 `;
 

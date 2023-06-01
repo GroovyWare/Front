@@ -7,13 +7,14 @@ import { searchWaitAPI } from "../../../api/ApprovalAPICall";
 import { searchNowAPI } from "../../../api/ApprovalAPICall";
 
 function RequestWait(){
+    let visibleRowCount = 0;
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const {waitList} = useSelector(state => state.approvalReducer);
     const {now} = useSelector(state => state.approvalReducer);
-    const {requestList} = useSelector(state => state.approvalReducer);
-    const pageInfo = waitList?.data.data.pageInfo;
+    const pageInfo = waitList?.data.pageInfo;
 
     const [ currentPage, setCurrentPage ] = useState(1);
 
@@ -33,23 +34,11 @@ function RequestWait(){
     const onRowClickHandler = (apvCode) => {
         navigate("/approval/waitDetail", {state : {apvCode : apvCode}});
     }
-    
+
     return (
         <>
-        <div className={RequestListCSS.numberDiv}>
-            <table>
-            <tr>
-                <th>결재 요청</th>
-                <th>결재 대기</th>
-                <th>결재 완료</th>
-            </tr>
-            <tr>
-                <td>{requestList.data.approvalDtoContent.length}건</td>
-                <td>{waitList.data.data.length}건</td>
-                <td>3건</td>
-            </tr>
-            </table>
-        </div>
+        <div>
+            <h3 className={RequestListCSS.container}>결재 대기</h3>
         <div className={RequestListCSS.tableDiv}>
             <table className={RequestListCSS.table}>
                 <tr>
@@ -60,15 +49,15 @@ function RequestWait(){
                     <th>상태</th>
                 </tr>
                 {waitList && waitList.data.data.map((wait, waitIndex) => {
-                    const aplNumOne = wait.approveLine.find(apl => apl.empCode === now?.data.empCode);
+                    const aplNumOne = wait.approveLine.find(apl => apl.empCode === now.data.empCode);
 
-                    if(aplNumOne.aplNum === '1'){
+                    if(aplNumOne?.aplNum === '1'){
                         const aplNumTwo = wait.approveLine.find(apl => apl.aplNum === '2');
                         const aplNumThree = wait.approveLine.find(apl => apl.aplNum === '3');
 
-                        console.log(aplNumTwo.aplStatus);
 
                         if(aplNumTwo?.aplStatus === '승인' && aplNumThree?.aplStatus === '승인'){
+                            visibleRowCount++;
                             return (
                                 <tr key={waitIndex} onClick={() => onRowClickHandler(wait.apvCode)}>
                                     <td>{wait.employee.empName}</td>
@@ -76,9 +65,7 @@ function RequestWait(){
                                     <td>{wait.apvEndDate}</td>
                                     <td>{wait.document.docTitle}</td>
                                     <td style={{display: "flex", justifyContent: "center", flexDirection: "column"}}>
-                                        {wait.approveLine.map((apv, index2) => (
-                                            now?.data.empCode === apv.empCode ? <div key={index2}>{apv.aplStatus}</div> : null
-                                        ))}
+                                       {aplNumOne.aplStatus}
                                     </td>
                                 </tr>
                             );
@@ -88,6 +75,7 @@ function RequestWait(){
                         const aplNumThree = wait.approveLine.find(apl => apl.aplNum === '3');
 
                         if(aplNumThree?.aplStatus === '승인'){
+                            visibleRowCount++;
                             return (
                                 <tr key={waitIndex} onClick={() => onRowClickHandler(wait.apvCode)}>
                                     <td>{wait.employee.empName}</td>
@@ -95,15 +83,14 @@ function RequestWait(){
                                     <td>{wait.apvEndDate}</td>
                                     <td>{wait.document.docTitle}</td>
                                     <td style={{display: "flex", justifyContent: "center", flexDirection: "column"}}>
-                                        {wait.approveLine.map((apv, index2) => (
-                                            now?.data.empCode === apv.empCode ? <div key={index2}>{apv.aplStatus}</div> : null
-                                        ))}
+                                        {aplNumOne.aplStus}
                                     </td>
                                 </tr>
                             );
                     }}
 
                     if(aplNumOne?.aplNum === '3'){
+                        visibleRowCount++;
                             return (
                                 <tr key={waitIndex} onClick={() => onRowClickHandler(wait.apvCode)}>
                                     <td>{wait.employee.empName}</td>
@@ -111,16 +98,16 @@ function RequestWait(){
                                     <td>{wait.apvEndDate}</td>
                                     <td>{wait.document.docTitle}</td>
                                     <td style={{display: "flex", justifyContent: "center", flexDirection: "column"}}>
-                                        {wait.approveLine.map((apv, index2) => (
-                                            now?.data.empCode === apv.empCode ? <div key={index2}>{apv.aplStatus}</div> : null
-                                        ))}
+                                       {aplNumOne.aplStatus} 
                                     </td>
                                 </tr>
                             );
                     }
                 })}
             </table>
-            <div>{ pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage }/>}</div>
+            
+                <div>{ pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage }/>}</div>
+            </div>
         </div>
         </>
     )}
