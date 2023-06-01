@@ -1,19 +1,16 @@
 import { createActions, handleActions } from "redux-actions";
 
 
-const initialState = {
-
-};
-
+const initialState = {};
 /* 액션 */
-const GET_ONEATTENDANCE = 'attendance/GET_ONEATTENDANCE'
-const POST_ONEATTENDANCE = 'attendance/POST_ONEATTENDANCE'
-const PUT_ONEATTENDANCE = 'attendance/PUT_ONEATTENDANCE'
+const VIEW_MAIN = 'attendance/VIEW_MAIN'
+const POST_ONEATTENDANCE = 'attendance/POST_ONE_ATTENDANCE'
+const PUT_ONEATTENDANCE = 'attendance/PUT_ONE_ATTENDANCE'
 const INIT_ONEATTENDANCE = 'attendance/INIT_ONEATTENDANCE'
 
-export const { attendance : { getOneAttendance, postOneAttendance, putOneAttendance}}
+export const { attendance : { viewMain, postOneAttendance, putOneAttendance}}
 = createActions({
-    [GET_ONEATTENDANCE] : res => res,
+    [VIEW_MAIN] : res => res,
     [POST_ONEATTENDANCE] : res => res,
     [PUT_ONEATTENDANCE] : res => res,
     [INIT_ONEATTENDANCE] : () => {}
@@ -25,7 +22,7 @@ export const { attendance : { getOneAttendance, postOneAttendance, putOneAttenda
 const attendanceReducer = handleActions( 
 
     {
-        [GET_ONEATTENDANCE]: (state, { payload }) => payload,
+        [VIEW_MAIN]: (state, { payload }) => ({ ...state, attendance: payload}),
         [POST_ONEATTENDANCE]: (state, { payload }) => ({ regist : payload}),
         [PUT_ONEATTENDANCE]: (state, { payload }) => ({ update : payload}),
         [INIT_ONEATTENDANCE]: () => initialState,

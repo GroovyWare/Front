@@ -11,6 +11,7 @@ import { Navigate, useNavigate, useParams, useSearchParams } from "react-router-
 import ScheduleInsertModal from "./modal/ScheduleInsertmodal";
 import ScheduleSearchModal from "./modal/ScheduleSearchModal";
 import ScheduleUpdateModal from "./modal/ScheduleUpdateModal";
+import VacationInsertModal from "./modal/VacationInsertmodal";
 
 
 const Schedule = () => {
@@ -19,6 +20,7 @@ const Schedule = () => {
   const [filterType, setFilterType] = useState("전체");
   const navigate = useNavigate();
   const [scheduleInsertModal, setScheduleInsertModal] = useState(false);
+  const [vacationInsertModal, setVacationInsertModal] = useState(false);
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [searchSchedule, setSearchSchedule] = useState("");
   const [scheduleSearchModal, setScheduleSearchModal] = useState(false);
@@ -33,6 +35,12 @@ const Schedule = () => {
     dispatch(AllSchedules());
   }, []);
 
+  useEffect(() => {
+    if(vacationInsertModal == false) 
+    dispatch(AllSchedules());
+  }
+
+  , [vacationInsertModal])
 
   useEffect(() => {
     if (scheduleInsertModal == false) {

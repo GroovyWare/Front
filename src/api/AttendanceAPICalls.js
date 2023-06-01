@@ -1,4 +1,4 @@
-import { getOneAttendance, postOneAttendance, putOneAttendance } from "../modules/AttendanceModule";
+import { viewMain, postOneAttendance, putOneAttendance } from "../modules/AttendanceModule";
 
 const RESTAPI_SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const RESTAPI_SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
@@ -18,13 +18,13 @@ export const AttendanceMain = () => {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
+                Authorization: "Bearer " + window.localStorage.getItem('accessToken')
             }
         }).then(response => response.json());
 
         if (result.status === 200) {
             console.log('[AttendanceAPICalls] : callAttendanceAPI result,', result);
-            dispatch(getOneAttendance(result));
+            dispatch(viewMain(result));
         }
 
     }
@@ -50,7 +50,7 @@ export const goWork = (form) => {
         if(result.status === 200) {
             console.log('[AttendanceAPICalls] : callgoWorkAPI result : ', result);
             dispatch(postOneAttendance(result));
-            dispatch(getOneAttendance());
+            dispatch(viewMain());
         }
     }
 
@@ -75,6 +75,7 @@ export const leaveWork = (form) => {
         if (result.status === 200) {
             console.log('[AttendanceAPICalls] callleaveWork result:', result);
             dispatch(putOneAttendance(result));
+            dispatch(viewMain());
         }
     }
 

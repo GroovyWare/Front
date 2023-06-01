@@ -146,3 +146,27 @@ export const deleteOne = (form) => {
   }
   
 
+/* 휴가신청 */
+export const createVacation = (form) => {
+
+    const requestURL = `${PRE_URL}/calendar/schedule/vacation/${form.id}`;
+
+    return async (dispatch, getState) => {
+       
+        const result = await fetch(requestURL, {
+            method : 'POST',
+            headers : {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + window.localStorage.getItem("accessToken")
+            },
+            body : JSON.stringify(form)
+        }).then(response => response.json());
+
+        if(result.status === 200) {
+            console.log('[CalendarAPICalls] : callcreateAPI result : ', result);
+            dispatch(postSchedule(result));
+            dispatch(AllSchedules());
+        }
+    }
+}
+
