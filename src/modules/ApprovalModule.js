@@ -44,7 +44,7 @@ const approvalReducer = handleActions({
     [ADD_COUNT] : (state, {payload}) => ({count : payload}),
     [SEARCH_WAIT] : (state, {payload}) => ({...state, waitList : payload}),
     [SEARCH_NOW] : (state, {payload}) => ({...state, now : payload}),
-    [SEARCH_APPROVELINE] : (state, {payload}) => ({ ...state, approveLine : payload})
+    [SEARCH_APPROVELINE] : (state, {payload}) => ({ ...state, line : payload})
 }, initialState) 
 
 export default approvalReducer;

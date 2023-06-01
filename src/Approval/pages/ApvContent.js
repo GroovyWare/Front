@@ -29,8 +29,8 @@ function ApvContent(){
 
     /* 확인 버튼 클릭 시 양식에 맞는 페이지로 이동 */
     const onClickDocHandler = () => {
-        if(docTitles && startDate && endDate){
-            navigate(`/approval/document`, {state : { docTitle: docTitles, startDate : startDate, endDate : endDate}});
+        if(docTitles){
+            navigate(`/approval/document`, {state : { docTitle: docTitles, startDate : startDate, endDate : endDate }});
         }
     }
 
@@ -91,22 +91,33 @@ function ApvContent(){
                                     {modalOpen && <ApvEmployee setModalOpen={setModalOpen}/>}
                                 </div>
                             </div>
-                            <div className={ApvContentCSS.docTitle}>
-                                <div>시작일</div> <div className={ApvContentCSS.common}>
-                                    <input 
-                                        type="Date"
-                                        onChange={onChangeStartHandler}
-                                    ></input>
-                                </div>
-                            </div>
-                            <div className={ApvContentCSS.docTitle}>
-                                <div>종결일</div> <div className={ApvContentCSS.common}>
-                                    <input 
-                                    type="Date"
-                                    onChange={onChangeEndHandler}
-                                    ></input>
-                                </div>
-                            </div>
+                           
+                            {
+                                docTitles === '휴가신청서' ? 
+                                (
+                                    <>
+                                        <div className={ApvContentCSS.docTitle}>
+                                            <div>시작일</div> 
+                                            <div className={ApvContentCSS.common}>
+                                                <input 
+                                                    type="Date"
+                                                    onChange={onChangeStartHandler}
+                                                ></input>
+                                            </div>
+                                        </div>
+                                        <div className={ApvContentCSS.docTitle}>
+                                            <div>종료일</div> 
+                                            <div className={ApvContentCSS.common}>
+                                                <input 
+                                                    type="Date"
+                                                    onChange={onChangeEndHandler}
+                                                ></input>
+                                            </div>
+                                        </div>
+                                    </>
+                                ) 
+                                : null
+                            }
                         </div>  
                     </div> 
                     <button 
