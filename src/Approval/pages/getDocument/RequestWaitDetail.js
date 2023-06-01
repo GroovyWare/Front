@@ -80,11 +80,11 @@ function ReqeustWaitDetail(){
         },[context?.apvContext]
     )
 
-    useEffect(
-        () => {
-            dispatch(searchApproveLineAPI(waitList?.data.data.approveLine.empCode));
-        }, []
-    )
+    // useEffect(
+    //     () => {
+    //         dispatch(searchApproveLineAPI(waitList?.data.data.approveLine.empCode));
+    //     }, []
+    // )
 
     return(
         <div className={RequestDetailCSS.wrap}>
