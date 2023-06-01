@@ -48,3 +48,13 @@
 .btn {
     text-align: center;
 }
+
+
+.message {
+    color : #ff3737;
+    font-size : 12px;
+}
+
+.idMessageDiv {
+    display: none;
+}

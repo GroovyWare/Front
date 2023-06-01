@@ -4,13 +4,14 @@ import { callEmplopyeeUpdateAPI, callEmployeeListAPI } from '../../api/EmployeeA
 import { useEffect, useRef, useState } from 'react';
 import  profileDefaultImage  from '../../components/common/img/profile_default.svg';
 import { toast } from 'react-toastify';
-
+import { initEmployee } from '../../modules/EmployeeModule'
 
 function EmployeeDetails({ setEmpDetailsOpen, emp }) {
 
     const dispatch = useDispatch();
     const ImageInput = useRef();    
     const { update } = useSelector(state => state.employeeReducer);
+
     const [ image, setImage ] = useState(null);
     const [ imageUrl, setImageUrl ] = useState(emp.file?.fileSavedName);
     const [ checkedInputs, setCheckedInputs ] = useState([]);
@@ -49,12 +50,15 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
     useEffect(
         () => { 
             if(update?.status === 200) {
-                toast.success('정보 수정이 완료되었습니다.!');
                 setEmpDetailsOpen(false);
+                toast.success('정보 수정이 완료되었습니다.!');
+                dispatch(initEmployee());
+                dispatch(callEmployeeListAPI(1));
             }
         },
         [update]
     )
+
 
     const closeEmpDetails = () => {
         setEmpDetailsOpen(false);
@@ -111,7 +115,7 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
         if(image) {
             formData.append("imgUrl", image);
         }
-        setEmpDetailsOpen(false);
+
         dispatch(callEmplopyeeUpdateAPI(formData));
 
     }
