@@ -165,20 +165,21 @@ export const searchNowAPI = () => {
 }
 
 /* 결재권자 이름 찾기 */
-export const searchApproveLineAPI = ({empCode}) => {
-    const requestURL = `${PRE_URL}/approva/searchApproveLine`
+export const searchApproveLineAPI = (empCodes) => {
+    const requestURL = `${PRE_URL}/approval/searchApproveLine`;
 
     return async (dispatch, getState) => {
         const result = await fetch(requestURL, {
-            method : "GET",
+            method : "POST",
             headers : {
-                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken'),
+                "Content-Type" : "application/json"
             },
-            body : JSON.stringify(empCode)
+            body: JSON.stringify(empCodes)
         }).then(response => response.json());
 
         if(result.status === 200){
-            dispatch(searchApproveline());
+            dispatch(searchApproveline(result));
         }
     }
 }
