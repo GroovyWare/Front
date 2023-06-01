@@ -92,16 +92,25 @@ function ReqeustWaitDetail(){
 
     return(
         <>
-            <div>
+            <div style={{display : "flex"}}>
+                <div className={RequestDetailCSS.ok}>결재</div>
+                <div className={RequestDetailCSS.no}>반려</div>
+            </div>
+            <table className={RequestDetailCSS.approveLine}>
+                <tr>
                 {
                     line?.data.map(row => (
-                        matchingElements.includes(row.empCode) ? row.empName : null
+                        matchingElements.includes(row.empCode) ? <th>{row.empName}<hr/></th> : null
                     ))
                 }
-            </div>
-            
+                </tr>
+                <tr className={RequestDetailCSS.approve}>
+                    {
+                        context?.approveLine.map(row => <td>{row.aplStatus}</td>)
+                    }
+                </tr>
+            </table>
         
-            
             <div className={RequestDetailCSS.wrap}>
                     <div className={RequestDetailCSS.content}>
                         <div className={RequestDetailCSS.editor2}>
