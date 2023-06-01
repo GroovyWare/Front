@@ -9,19 +9,16 @@
     background: white;
     width: 800px;
     height: 400px;
-    margin-left: 500px;
+    /* margin-left: 500px;
     margin-bottom: 40px;
-    margin-top: 40px;
-    border-radius: 20px;
+    margin-top: 40px; */
+    /* border-radius: 20px; */
     font-family: "LINESeedKR-Bd";
     font-size: 18px;
     color: #505050;
-    
-    z-index:999;
+
     position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-162%,-63%);
+    margin: -190px -515px;
 
     border: 1px solid black;
 }

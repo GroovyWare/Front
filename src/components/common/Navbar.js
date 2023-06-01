@@ -95,7 +95,7 @@ function Navbar() {
                         <img src={ arrow } className = { NavbarCSS.arrowYes }/>
                             <ul className={ NavbarCSS.subMenu }>
 
-                                    <li><NavLink to="/approval/add" className={NavbarCSS.link}>결재 양식 추가</NavLink></li>
+                                    <li><Link to="/approval/add" className={NavbarCSS.link}>결재 양식 추가</Link></li>
                                     <li><Link to="/approval/request" className={NavbarCSS.link}>결재 요청</Link></li>
                                     <li><Link to="/approval/wait" className={NavbarCSS.link}>결재 대기</Link></li>
                                     <li>회수함</li>

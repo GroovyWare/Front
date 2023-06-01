@@ -22,13 +22,13 @@ function RequestList () {
         },[currentPage]
     )
 
-    console.log(requestList);
-
     const onRowClickHandler = (apvCode) => {
         navigate("/approval/detail", {state : {apvCode : apvCode}, replace : true});
     }
 
     return(
+        <div>
+            <h3 className={RequestListCSS.container}>결재 요청</h3>
         <div className={RequestListCSS.tableDiv}>
             <table className={RequestListCSS.table}>
                 <tr>
@@ -60,6 +60,7 @@ function RequestList () {
                 ))}
             </table>
             <div>{ pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage }/> }</div>
+        </div>
         </div>
     )
 }

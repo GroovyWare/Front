@@ -107,15 +107,15 @@ function ApvContent(){
                                     ></input>
                                 </div>
                             </div>
-                        </div>
-                    </div>    
-                </div>  
-                 <button 
+                        </div>  
+                    </div> 
+                    <button 
                     className={ApvContentCSS.centerDivButton}
                     onClick={onClickDocHandler}
                 >
                     확인
-                </button>
+                </button> 
+                </div> 
             </div>
         </div>
     )

@@ -51,7 +51,7 @@ export const GlobalStyle = createGlobalStyle`
   color: #fff;
   top: 0;
   left: 53%;
-  transform: translateX(-50%);
+  margin : auto;
 }
 `;
 
