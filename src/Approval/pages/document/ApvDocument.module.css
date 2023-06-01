@@ -107,11 +107,11 @@
 }
 
 .wrap{
-    background-color: white;
     width: 1000px;
     height: 700px;
-    transform: translate(22.5%, 2%);
+    /* transform: translate(22.5%, 2%); */
     border-radius: 20px;
+    margin: auto;
 }
 
 .editor{

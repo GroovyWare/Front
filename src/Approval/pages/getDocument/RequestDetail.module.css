@@ -1,10 +1,8 @@
-.wrap{
-    background-color: white;
-    width: 1000px;
-    height: 700px;
-    margin: auto;
-    margin-top: 30px;
-    border-radius: 20px;
+@font-face {
+    font-family: 'LINESeedKR-Rg';
+    src: url('https://cdn.jsdelivr.net/gh/wizfile/font/LINESeedKR-Rg.eot');
+    src:url('https://cdn.jsdelivr.net/gh/wizfile/font/LINESeedKR-Rg.woff') format('woff');
+    font-style: normal;
 }
 
 .editor{
@@ -26,8 +24,8 @@
 .editor2{
     width: 400px;
     height: 550px;
-    margin-left: 200px;
-    padding-top: 80px;
+    /* margin-left: 200px;*/
+    padding-top: 40px;
 }
 
 .detail2{
@@ -41,11 +39,16 @@
 
 .info{
     background-color:white;
-    width:180px;
+    width:150px;
     height:550px;
     background-color: #667eea;
-    margin-top: -550px;
-    margin-left: 600px;
+    margin-right: 300px;
+    margin-top: 40px;
+}
+
+.content{
+    display: flex;
+    margin-left: 400px;
 }
 
 .confirm{
@@ -62,4 +65,16 @@
     /* margin-left: 10px; */
     margin-top: 30px;
     background-color: white;
+}
+
+.buttonDiv{
+    float: right;
+}
+
+.title{
+    height: auto;
+    margin-top: 10px;
+    padding: 20px;
+    font-family: 'LINESeedKR-Rg';
+    font-size: 20px;
 }

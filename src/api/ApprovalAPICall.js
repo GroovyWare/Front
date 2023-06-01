@@ -1,5 +1,5 @@
 import RequestWait from "../Approval/pages/getDocument/RequestWait";
-import { registApproval } from "../modules/ApprovalModule";
+import { registApproval, searchApproveline } from "../modules/ApprovalModule";
 import { selectEmployee, searchEmployee, searchDepartment } from "../modules/ApprovalModule";
 import { selectPerson, searchRequest, searchContext, searchWait, searchNow } from "../modules/ApprovalModule";
 
@@ -160,6 +160,26 @@ export const searchNowAPI = () => {
 
         if(result.status === 200){
             dispatch(searchNow(result));
+        }
+    }
+}
+
+/* 결재권자 이름 찾기 */
+export const searchApproveLineAPI = (empCodes) => {
+    const requestURL = `${PRE_URL}/approval/searchApproveLine`;
+
+    return async (dispatch, getState) => {
+        const result = await fetch(requestURL, {
+            method : "POST",
+            headers : {
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken'),
+                "Content-Type" : "application/json"
+            },
+            body: JSON.stringify(empCodes)
+        }).then(response => response.json());
+
+        if(result.status === 200){
+            dispatch(searchApproveline(result));
         }
     }
 }

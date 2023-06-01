@@ -13,11 +13,12 @@ const SEARCH_REQUEST = 'approval/SEARCH_REQUEST';
 const SEARCH_CONTEXT = 'approval/SEARCH_CONTEXT';
 const ADD_COUNT = 'approval/ADD_COUNT';
 const SEARCH_WAIT = 'approval/SEARCH_WAIT';
-const SEARCH_NOW = 'approval/SEARCH_NOW'
+const SEARCH_NOW = 'approval/SEARCH_NOW';
+const SEARCH_APPROVELINE = 'approval/SEARCH_APPROVELINE';
 
 export const { approval : { registApproval,selectEmployee, searchEmployee, searchDepartment, selectPerson
                             , searchRequest, searchContext, addCount, searchWait
-                            , searchNow} } = createActions({
+                            , searchNow, searchApproveline} } = createActions({
     [REGIST_APPROVAL] : res => res,
     [SELECT_EMPLOYEE] : res => res,
     [SEARCH_EMPLOYEE] : res => res,
@@ -27,7 +28,8 @@ export const { approval : { registApproval,selectEmployee, searchEmployee, searc
     [SEARCH_CONTEXT] : res => res.data,
     [ADD_COUNT] : res => res,
     [SEARCH_WAIT] : res => res,
-    [SEARCH_NOW] : res => res
+    [SEARCH_NOW] : res => res,
+    [SEARCH_APPROVELINE] : res => res
 });
 
 /* 리듀서 */
@@ -41,7 +43,8 @@ const approvalReducer = handleActions({
     [SEARCH_CONTEXT] : (state, {payload}) => ({...state, context : payload}),
     [ADD_COUNT] : (state, {payload}) => ({count : payload}),
     [SEARCH_WAIT] : (state, {payload}) => ({...state, waitList : payload}),
-    [SEARCH_NOW] : (state, {payload}) => ({...state, now : payload})
+    [SEARCH_NOW] : (state, {payload}) => ({...state, now : payload}),
+    [SEARCH_APPROVELINE] : (state, {payload}) => ({ ...state, approveLine : payload})
 }, initialState) 
 
 export default approvalReducer;

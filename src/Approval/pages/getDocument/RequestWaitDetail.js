@@ -7,6 +7,7 @@ import RequestDetailCSS from "./RequestDetail.module.css";
 import { useDispatch, useSelector } from 'react-redux';
 import { searchContextAPI } from '../../../api/ApprovalAPICall';
 import { useLocation } from 'react-router-dom';
+import { searchApproveLineAPI } from '../../../api/ApprovalAPICall';
 
 const Parchment = Quill.import('parchment');
 
@@ -49,11 +50,12 @@ const modules = {
   }
   .ql-container {
     height: 550px;
+    background-color : white;
   }
 `;
 
 function ReqeustWaitDetail(){
-    
+
     const dispatch = useDispatch();
     const location = useLocation();
     const {apvCode} = location.state;
@@ -78,33 +80,35 @@ function ReqeustWaitDetail(){
         },[context?.apvContext]
     )
 
-    console.log('wait', waitList)
+    const empcodes = waitList?.data.data.flatMap(row => row.approveLine.map(row => row.empCode));
+    console.log(empcodes);
+
+    useEffect(() => {
+            dispatch(searchApproveLineAPI(empcodes));
+    }, [])
 
     return(
         <div className={RequestDetailCSS.wrap}>
-            <div className={RequestDetailCSS.editor2}>
-                <StyledQuill 
-                    value={html} 
-                    theme="snow"
-                    modules={{toolbar:false}}
-                    readOnly = "true"
-                />
+            <div className={RequestDetailCSS.title}>{context.document.docTitle}</div>
+            <div className={RequestDetailCSS.content}>
+                <div className={RequestDetailCSS.editor2}>
+                    <StyledQuill 
+                        value={html} 
+                        theme="snow"
+                        modules={{toolbar:false}}
+                        readOnly = "true"
+                    />
+                </div>
+                <div className={RequestDetailCSS.info}>
+                    
+                </div>
             </div>
-            <div className={RequestDetailCSS.info}>
-                <table>
-                    <tr>
-                        <th>열람권자</th>
-                        {waitList && waitList.data.data.map((wait, index) => (
-                            <div key={index}>{wait.readerLine.map(
-                                (reader, index2) => (
-                                   apvCode === reader.apvCode ? <td key={index2}>{reader.empCode}</td> : null
-                                )
-                            )}</div>
-                        ))}
-                        <td></td>
-                    </tr>
-                </table>
-            </div>
+                <div className={RequestDetailCSS.buttonDiv}>
+                    <button
+                        className={RequestDetailCSS.button}
+                    >승인</button>
+                    <button>반려</button>
+                </div>
         </div>
     )
 }

@@ -7,12 +7,14 @@ import { searchWaitAPI } from "../../../api/ApprovalAPICall";
 import { searchNowAPI } from "../../../api/ApprovalAPICall";
 
 function RequestWait(){
+    let visibleRowCount = 0;
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const {waitList} = useSelector(state => state.approvalReducer);
     const {now} = useSelector(state => state.approvalReducer);
-    const pageInfo = waitList?.pageInfo;
+    const pageInfo = waitList?.data.pageInfo;
 
     const [ currentPage, setCurrentPage ] = useState(1);
 
@@ -33,7 +35,10 @@ function RequestWait(){
         navigate("/approval/waitDetail", {state : {apvCode : apvCode}});
     }
 
-    return(
+    return (
+        <>
+        <div>
+            <h3 className={RequestListCSS.container}>결재 대기</h3>
         <div className={RequestListCSS.tableDiv}>
             <table className={RequestListCSS.table}>
                 <tr>
@@ -43,23 +48,68 @@ function RequestWait(){
                     <th>기안서명</th>
                     <th>상태</th>
                 </tr>
-                {waitList && waitList.data.data.map((wait, waitIndex) => (
-                    <tr key={waitIndex} onClick={() => onRowClickHandler(wait.apvCode)}>
-                        <td>{wait.employee.empName}</td>
-                        <td>{wait.apvCreatedDate}</td>
-                        <td>{wait.apvEndDate}</td>
-                        <td>{wait.document.docTitle}</td>
-                        <td style={{display: "flex", justifyContent: "center", flexDirection: "column"}}>
-                            {wait.approveLine.map((apv, index2) => (
-                                now?.data.empCode === apv.empCode ? <div key={index2}>{apv.aplStatus}</div> : null
-                            ))}
-                        </td>
-                    </tr>
-                ))}
-            </table>
-            <div>{ pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage }/> }</div>
-        </div>
-    )
-}
+                {waitList && waitList.data.data.map((wait, waitIndex) => {
+                    const aplNumOne = wait.approveLine.find(apl => apl.empCode === now.data.empCode);
 
-export default RequestWait;
+                    if(aplNumOne?.aplNum === '1'){
+                        const aplNumTwo = wait.approveLine.find(apl => apl.aplNum === '2');
+                        const aplNumThree = wait.approveLine.find(apl => apl.aplNum === '3');
+
+
+                        if(aplNumTwo?.aplStatus === '승인' && aplNumThree?.aplStatus === '승인'){
+                            visibleRowCount++;
+                            return (
+                                <tr key={waitIndex} onClick={() => onRowClickHandler(wait.apvCode)}>
+                                    <td>{wait.employee.empName}</td>
+                                    <td>{wait.apvCreatedDate}</td>
+                                    <td>{wait.apvEndDate}</td>
+                                    <td>{wait.document.docTitle}</td>
+                                    <td style={{display: "flex", justifyContent: "center", flexDirection: "column"}}>
+                                       {aplNumOne.aplStatus}
+                                    </td>
+                                </tr>
+                            );
+                    }}
+
+                    if(aplNumOne?.aplNum === '2'){
+                        const aplNumThree = wait.approveLine.find(apl => apl.aplNum === '3');
+
+                        if(aplNumThree?.aplStatus === '승인'){
+                            visibleRowCount++;
+                            return (
+                                <tr key={waitIndex} onClick={() => onRowClickHandler(wait.apvCode)}>
+                                    <td>{wait.employee.empName}</td>
+                                    <td>{wait.apvCreatedDate}</td>
+                                    <td>{wait.apvEndDate}</td>
+                                    <td>{wait.document.docTitle}</td>
+                                    <td style={{display: "flex", justifyContent: "center", flexDirection: "column"}}>
+                                        {aplNumOne.aplStus}
+                                    </td>
+                                </tr>
+                            );
+                    }}
+
+                    if(aplNumOne?.aplNum === '3'){
+                        visibleRowCount++;
+                            return (
+                                <tr key={waitIndex} onClick={() => onRowClickHandler(wait.apvCode)}>
+                                    <td>{wait.employee.empName}</td>
+                                    <td>{wait.apvCreatedDate}</td>
+                                    <td>{wait.apvEndDate}</td>
+                                    <td>{wait.document.docTitle}</td>
+                                    <td style={{display: "flex", justifyContent: "center", flexDirection: "column"}}>
+                                       {aplNumOne.aplStatus} 
+                                    </td>
+                                </tr>
+                            );
+                    }
+                })}
+            </table>
+            
+                <div>{ pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage }/>}</div>
+            </div>
+        </div>
+        </>
+    )}
+    
+    export default RequestWait;

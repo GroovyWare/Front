@@ -50,6 +50,7 @@ const modules = {
   }
   .ql-container {
     height: 550px;
+    background-color : white;
   }
 `;
 
@@ -83,18 +84,12 @@ function Document() {
   /* 결재 요청 보내기 */
   const onClickDocHandler = () => {
     if (quillRef.current) {
-      const quillInstance = quillRef.current.getEditor();
-      const html = quillInstance.root.innerHTML;
+      var quillInstance = quillRef.current.getEditor();
+      var html = quillInstance.root.innerHTML;
   
       const formData = new FormData();
       formData.append("apvCreatedDate", new Date(startDate));
-
-      if(startDate = new Date()){
-        formData.append("apvStatus", '진행중');
-      }else if(endDate < new Date()){
-        formData.append('apvStatus', '기한마감')
-      }
-      
+      formData.append("apvStatus", '진행중')
       formData.append("apvEndDate", new Date(endDate));
       formData.append("apvContext", html);
 

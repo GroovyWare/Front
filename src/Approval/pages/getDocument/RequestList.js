@@ -4,8 +4,6 @@ import { searchRequestAPI } from "../../../api/ApprovalAPICall";
 import RequestListCSS from "./RequestList.module.css";
 import PagingBar from "../../../components/common/PagingBar";
 import { useNavigate } from "react-router-dom";
-import { addCountAPI } from "../../../api/ApprovalAPICall";
-
 
 function RequestList () {
 
@@ -29,6 +27,8 @@ function RequestList () {
     }
 
     return(
+        <div>
+            <h3 className={RequestListCSS.container}>결재 요청</h3>
         <div className={RequestListCSS.tableDiv}>
             <table className={RequestListCSS.table}>
                 <tr>
@@ -60,6 +60,7 @@ function RequestList () {
                 ))}
             </table>
             <div>{ pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage }/> }</div>
+        </div>
         </div>
     )
 }

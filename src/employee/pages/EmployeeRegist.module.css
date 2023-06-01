@@ -1,8 +1,18 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
+
+.container {
+    margin-top: 10px;
+    padding: 20px;
+    font-family: 'Raleway', sans-serif;
+}
+
 
 /* 프로필 이미지 */
 .profileDiv {
-    width: 300px;
-    margin-top: 20px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 .profileDiv > img {
@@ -12,18 +22,28 @@
     overflow: hidden;
     border: 5px solid #716dff;
     display: block;
-    margin: auto;
+}
+
+.empInfo input {
+    border: 0px;
+    border-bottom: 1px solid #1A1779;
+    background-color: transparent;
+    margin-right: 10px;
+    height: 20px;
+    font-size: 16px;
+    padding: 3px;
+
 }
 
 .profileDiv > button {
     width: 80px;
-    height: 25px;
+    height: 30px;
     border: none;
     border-radius: 7px;
     background-color: #1A1779;
     color: #ffffff;
     cursor: pointer;
-    font-family: 'esamanru';
+    /* font-family: 'esamanru'; */
     letter-spacing: 1px;
     margin: auto;
     margin-top: 10px;
@@ -40,21 +60,122 @@
 /* 직원 정보 */
 .content {
     display: flex;
+    justify-content: center;
+    font-size: 16px;
+    height: 700px;
+}
+
+.empInfo {
+    min-width: 500px;
+    padding-left: 20px;
+    
+}
+
+.empInfo td {
+    width: auto;
+}
+
+.row {
+    height: 45px;
+    position: relative;
+    top: 7px; /* 음수 값으로 높이에 따른 위쪽 이동 설정 */
+}
+
+.inputTitle {
+    text-align: right;
+    margin-right: 10px;
+}
+
+.inputTitle label {
+    margin-right: 5px;
 }
 
 
 
 /* 버튼 */
+.checkBtn {
+    width: 60px;
+    height: 25px;
+    border: none;
+    border-radius: 7px;
+    background-color: #1A1779;
+    color: #ffffff;
+    cursor: pointer;
+    /* font-family: 'esamanru'; */
+    margin: auto;
+}
+
 .btn {
     text-align: center;
+    
 }
 
 
 .message {
     color : #ff3737;
+    font-size : 14px;
+}
+
+
+.successMsg {
+    color : #12c012;
     font-size : 12px;
 }
 
+
+.errorMsg {
+    color : #ff3737;
+    font-size : 12px;
+}
+
+
 .idMessageDiv {
     display: none;
+}
+
+/* 셀렉트 박스 */
+.selectDiv select {
+    position: relative;
+    width: 100px;
+    height: 30px;
+    border-radius: 4px;
+}
+
+.selectDiv select:focus {
+    border: 2px solid crimson;
+    outline: none; /* 선택 시 기본적으로 나타나는 아웃라인 제거 */
+}
+
+/* 체크 박스 */
+@import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+
+.checkboxDiv input[type=checkbox] {
+    display: none;
+  }
+
+.checkboxDiv label::before {
+    content: '\f00c';
+    font-family: 'Fontawesome';
+    border: 1px solid #333;
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    margin-right: 5px;
+    font-size: 13px;
+    vertical-align: middle;
+    display: inline-block;
+    text-align: center;
+    line-height: 14px;
+    color: transparent;
+    transition: 0.2s;
+}
+
+.checkboxDiv input[type=checkbox]:checked + label::before {
+    background-color: crimson;
+    color: #fff;
+    border-color: transparent;
+}
+
+.checkboxDiv input[type=checkbox] + label:active::before {
+    transform: scale(0);
 }
