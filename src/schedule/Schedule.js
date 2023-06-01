@@ -97,6 +97,10 @@ const Schedule = () => {
     setScheduleInsertModal(true);
   };
 
+  const onClickVacationHandler = () => {
+    setVacationInsertModal(true);
+  }
+
   const onEventClickHandler = (info) => {
 
     console.log(info)
@@ -199,6 +203,10 @@ const Schedule = () => {
         <button className={styles.inserting} onClick={onClickHandler}>
           일정 생성
         </button>
+        
+        <button className={styles.inserting} onClick={onClickVacationHandler}>
+          휴가 생성
+        </button>
 
       </div>
 
@@ -215,6 +223,9 @@ const Schedule = () => {
         {scheduleUpdateModal && (
           <ScheduleUpdateModal setScheduleUpdateModal={setScheduleUpdateModal}
             justSchedule={justSchedule} />
+        )}
+        {vacationInsertModal && (
+          <VacationInsertModal setVacationInsertModal={setVacationInsertModal}/>
         )}
       </div>
       <div className="calendarMain" style={{ maxWidth: '1680px', minWidth: '1100px' }}>
