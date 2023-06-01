@@ -1,4 +1,4 @@
-import { getEmployeeIds, getEmployees, postEmployee, putEmployee } from "../modules/EmployeeModule";
+import { getEmployeeId, getEmployeeIds, getEmployees, postEmployee, putEmployee } from "../modules/EmployeeModule";
 
 const RESTAPI_SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const RESTAPI_SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
@@ -20,10 +20,10 @@ export const callEmployeeListAPI = ({ currentPage=1}) => {
     }
 }
 
-/* 직원 아이디 리스트 조회 */
-export const callEmployeeIdListAPI = () => {
+/* 아이디 중복 검사 */
+export const callEmployeeIdCheckAPI = (empId) => {
 
-    const requestURL = `${PRE_URL}/auth/empidlist`;
+    const requestURL = `${PRE_URL}/auth/idCheck/${empId}`;
   
     return async (dispatch, getState) => {
 
@@ -34,10 +34,9 @@ export const callEmployeeIdListAPI = () => {
             },
         }).then(res => res.json());
 
-        if(result.status === 200) {
-            console.log('[EmployeeAPICalls] : callEmployeeIdListAPI result : ', result);
-            dispatch(getEmployeeIds(result));
-        }
+        console.log(result);
+
+        dispatch(getEmployeeId(result));
     }
 }
 

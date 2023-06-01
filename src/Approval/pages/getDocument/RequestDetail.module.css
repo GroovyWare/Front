@@ -1,33 +1,35 @@
-/* .wrap{
-    background-color: white;
-    width: 1000px;
-    height: 700px;
-    margin: auto;
-    margin-top: 30px;
-    border-radius: 20px;
-} */
+@font-face {
+    font-family: 'LINESeedKR-Rg';
+    src: url('https://cdn.jsdelivr.net/gh/wizfile/font/LINESeedKR-Rg.eot');
+    src:url('https://cdn.jsdelivr.net/gh/wizfile/font/LINESeedKR-Rg.woff') format('woff');
+    font-style: normal;
+}
+
+.wrap{
+    display: flex;
+    justify-content: center;
+}
 
 .editor{
-    width: 400px;
-    height: 550px;
-    margin-left: 380px;
-    padding-top: 80px;
+    width: 800px;
+    height: 100px;
+    margin: 80px 0px 0 0px;
 }
 
 .detail{
+    margin: 80px 0px 0px 0px;
     background-color:white;
-    width:100px;
-    height:550px;
+    width:150px;
+    height:350px;
     background-color: #667eea;
-    margin-top: -550px;
-    margin-left: 280px;
 }
 
 .editor2{
-    width: 400px;
-    height: 550px;
-    /* margin-left: 200px;*/
-    padding-top: 40px;
+    width: 800px;
+    height: 100px;
+    margin: 150px 30px 0 0px;
+    /* margin-left: 200px; */
+    /* padding-top: 40px; */
 }
 
 .detail2{
@@ -40,23 +42,23 @@
 }
 
 .info{
+    margin: 150px 0px 0px -30px;
     background-color:white;
     width:150px;
-    height:550px;
+    height:350px;
     background-color: #667eea;
-    margin-right: 300px;
-    margin-top: 40px;
+    /* margin-right: 300px; */
 }
 
 .content{
     display: flex;
-    margin-left: 400px;
+    justify-content: center;
 }
 
 .confirm{
     width: 80px;
     /* margin-left: 10px; */
-    margin-right: 30px;
+    /* margin-right: 30px; */
     margin-top: 30px;
     background-color: #9b83fa;
     color: white;
@@ -71,4 +73,12 @@
 
 .buttonDiv{
     float: right;
+}
+
+.title{
+    height: auto;
+    margin-top: 10px;
+    padding: 20px;
+    font-family: 'LINESeedKR-Rg';
+    font-size: 20px;
 }

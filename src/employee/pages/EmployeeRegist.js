@@ -3,27 +3,99 @@ import RegistCSS from './EmployeeRegist.module.css';
 import { useEffect, useRef, useState } from 'react';
 import profileDefaultImage from '../../components/common/img/profile_default.svg'
 import { useDispatch, useSelector } from 'react-redux';
-import { callEmployeeIdListAPI, callEmployeeRegistAPI } from '../../api/EmployeeAPICalls';
+import { callEmployeeIdCheckAPI, callEmployeeRegistAPI } from '../../api/EmployeeAPICalls';
 import { toast } from 'react-toastify';
+import useInput from './UseInput';
 
 function EmployeeRegist() {
+
+    // 비밀번호 유효성 검사
+    const passwordValidator = (value) => {
+        const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+        if (!regex.test(value)) {
+        return {
+            isValid: false,
+            error: '문자, 숫자, 특수문자를 포함한 최소 8자리 이상 입력해주세요.'
+        };
+        }
+        return { isValid: true, success: '사용가능한 비밀번호입니다.' };
+    };
+
+    // 비밀번호 일치 여부
+    const passwordConfirmValidator = (value) => {
+        if(value !== password.value) {
+        return {
+            isValid: false,
+            error: '비밀번호가 일치하지 않습니다.'
+        };
+        }
+        return { isValid: true, success: '비밀번호가 일치합니다.', };
+    };
+
+    const nameValidator = (value) => {
+        const regex = /^[가-힣]{2,5}$/;
+        if (!regex.test(value)) {
+        return {
+            isValid: false,
+            error: '한글 2~5자만 가능합니다.'
+        };
+        }
+        return { isValid: true, success: '사용가능한 이름입니다.' };
+    };
+    // 휴대폰 유효성 검사
+    const phoneValidator = (value) => {
+        const regex =  /^\d{3}\d{3,4}\d{4}$/;
+        if (!regex.test(value)) {
+        return {
+            isValid: false,
+            error: "'-'를 제외하고 입력해주세요"
+        };
+        }
+        return { isValid: true, success: '사용가능한 전화번호입니다.' };
+    };
+
+    // 이메일 유효성 검사
+    const emailValidator = (value) => {
+        const regex =  /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+        if (!regex.test(value)) {
+        return {
+            isValid: false,
+            error: '유효한 이메일 형식이 아닙니다.'
+        };
+        }
+        return { isValid: true, success: '사용가능한 이메일입니다.' };
+    };
+
+
+    const password = useInput('', passwordValidator);
+    const passwordConfirm = useInput('', passwordConfirmValidator);
+    const email = useInput('', emailValidator);
+    const name = useInput('', nameValidator);
+    const phone = useInput('', phoneValidator);
+
+    // console.log('passwordConfrim', passwordConfirm.value)
+    // console.log('name', name.value);
+    // console.log('email', email.value);
+    // console.log('phone', phone.value);
+
 
     const ImageInput = useRef();
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
-    const { check } = useSelector(state => state.employeeReducer);
     const { regist } = useSelector(state => state.employeeReducer);
-
-    const [ idList, setIdList ] = useState([]);
-    // const [ errorMsg, setErrorMsg ] = useState(false);
     const [ image, setImage ] = useState(null);
     const [ imageUrl, setImageUrl ] = useState('');
-    const [ checkedInputs, setCheckedInputs ] = useState([]);
+    const [ checkedInputs, setCheckedInputs ] = useState([2]);
     const [ form, setForm ] = useState({
+        empId : "",
         deptCode : "1",
         positionCode : "1",
     });
+
+    const [ idCheck, setIdCheck ] = useState(false); 
+    const { check } = useSelector(state => state.employeeReducer);
+    const [ isClicked, setIsClicked ] = useState(false);
+    console.log('isClicked', isClicked)
 
     const deptSelectList = [
         { value: "1", name: "관리" },
@@ -41,20 +113,28 @@ function EmployeeRegist() {
 
     useEffect(
         () => {
+        if(form.empId.length === 0) {
+            setIsClicked(false)
+        } 
+        },
+        [form]
+    )
+    
+    useEffect(
+        () => {
+            check ? setIdCheck(true) : setIdCheck(false); // 아이디 중복여부
+        },
+        [check]
+    )
+    
+    useEffect(
+        () => {
             if(regist?.status === 200) {
                 toast.success('등록이 완료되었습니다.!');
                 navigate(-1);
             }
         },
         [regist]
-    )
-
-    useEffect(
-        () => {
-            setIdList(check);
-            console.log('idList', idList);
-        },
-        [check]
     )
 
     useEffect(
@@ -82,10 +162,9 @@ function EmployeeRegist() {
         setImage(e.target.files[0]);
     }
 
-    const doubleCheck = (e) => {
-       dispatch(callEmployeeIdListAPI());
-    
-    //    check.forEach(id => id === form.empId ? errorMsg : successMsg);
+    const doubleCheck = () => {
+       dispatch(callEmployeeIdCheckAPI(form.empId));
+       setIsClicked(true);
     }
 
     const onChangeHandler = (e) => {
@@ -102,15 +181,14 @@ function EmployeeRegist() {
             setCheckedInputs(checkedInputs.filter((el) => el !== value));
           }
     }
-    console.log(checkedInputs);
 
     const onClickEmployeeRegist = () => {
         const formData = new FormData();
         formData.append("empId", form.empId);
-        formData.append("empPassword", form.empPassword);
-        formData.append("empName", form.empName);
-        formData.append("empPhone", form.empPhone);
-        formData.append("empEmail", form.empEmail);
+        formData.append("empPassword", passwordConfirm.value);
+        formData.append("empName", name.value);
+        formData.append("empPhone", phone.value);
+        formData.append("empEmail", email.value);
         formData.append("empAddress", form.empAddress);
         formData.append("dept.deptCode", form.deptCode);
         formData.append("position.positionCode", form.positionCode);
@@ -118,8 +196,9 @@ function EmployeeRegist() {
         checkedInputs.forEach((authCode, i) =>
              formData.append(`auths[${i}].auth.authCode`, authCode)
         )
-        console.log(formData.get(`auths[0].auth.authCode`));
-        console.log(formData.get(`auths[1].auth.authCode`));
+
+        // console.log(formData.get(`auths[0].auth.authCode`));
+        // console.log(formData.get(`auths[1].auth.authCode`));
 
         // for(let i=0; i < checkedInputs.length; i++) {
         //     formData.append(`auths[${i}].empAuthPK.authCode`, checkedInputs[i])
@@ -143,8 +222,8 @@ function EmployeeRegist() {
 
             <div className={ RegistCSS.content }>              
                 <div className={ RegistCSS.profileDiv }>
-                    { imageUrl && <img src={ imageUrl }/> }
-                    { !imageUrl && <img src={ profileDefaultImage }/> }
+                    { imageUrl ? 
+                     <img src={ imageUrl } alt=""/> : <img src={ profileDefaultImage } alt=""/> }
                     <input
                         className={ RegistCSS.imgInput }
                         type="file"
@@ -166,9 +245,14 @@ function EmployeeRegist() {
                                 <input
                                     type="text"
                                     name="empId"
+                                    value = { form.empId }
                                     onChange={ onChangeHandler }
                                 />
-                                <button onClick={ doubleCheck }>중복 확인</button>
+                                <button onClick={ doubleCheck } disabled={ form.empId.length < 1 }>중복 확인</button>
+                                {  isClicked && check ? <div>이미 사용 중인 아이디입니다.</div> 
+                                  : form.empId.length > 0 && isClicked && !check ? <div>사용가능한 아이디입니다.</div>
+                                  : null
+                                }
                             </td>
                             
                         </tr>
@@ -178,8 +262,25 @@ function EmployeeRegist() {
                                 <input
                                     type="password"
                                     name="empPassword"
-                                    onChange={ onChangeHandler }
+                                    value={password.value}
+                                    onChange={password.onChange}
                                 />
+                                { password.value.length > 0 &&
+                                  <div className={RegistCSS.message}>{password.message}</div>}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label>비밀번호 확인</label></td>
+                            <td>
+                                <input
+                                    type="password"
+                                    value={passwordConfirm.value}
+                                    onChange={passwordConfirm.onChange}
+                                />
+                                { 
+                                 passwordConfirm.value.length > 0 &&
+                                <div className={RegistCSS.message}>{passwordConfirm.message}</div>
+                                }
                             </td>
                         </tr>
                         <tr>
@@ -188,8 +289,11 @@ function EmployeeRegist() {
                                 <input
                                     type="text"
                                     name="empName"
-                                    onChange={ onChangeHandler }
+                                    value={name.value}
+                                    onChange={name.onChange}
                                 />
+                                { name.value.length > 0 &&
+                                    <div className={RegistCSS.message}>{name.message}</div>}                            
                             </td>
                         </tr>
                         <tr>
@@ -198,8 +302,13 @@ function EmployeeRegist() {
                                 <input
                                     type="text"
                                     name="empPhone"
-                                    onChange={ onChangeHandler }
+                                    value={
+                                        phone.value
+                                    }
+                                    onChange={phone.onChange}
                                 />
+                                { phone.value.length > 0 &&
+                                    <div className={RegistCSS.message}>{phone.message}</div>} 
                             </td>
                         </tr>
                         <tr>
@@ -208,8 +317,11 @@ function EmployeeRegist() {
                                 <input
                                     type="text"
                                     name="empEmail"
-                                    onChange={ onChangeHandler }
+                                    value={email.value}
+                                    onChange={email.onChange}
                                 />
+                                { email.value.length > 0 &&
+                                    <div className={RegistCSS.message}>{email.message}</div>}
                             </td>
                         </tr>
                         <tr>
@@ -295,3 +407,4 @@ function EmployeeRegist() {
 }
 
 export default EmployeeRegist;
+
