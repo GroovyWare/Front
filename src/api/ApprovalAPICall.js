@@ -1,7 +1,7 @@
-import RequestWait from "../Approval/pages/getDocument/RequestWait";
+import RequestWait from "../Approval/pages/lists/RequestWait";
 import { registApproval, searchApproveline } from "../modules/ApprovalModule";
 import { selectEmployee, searchEmployee, searchDepartment } from "../modules/ApprovalModule";
-import { selectPerson, searchRequest, searchContext, searchWait, searchNow } from "../modules/ApprovalModule";
+import { selectPerson, searchRequest, searchContext, searchWait, searchNow, acceptApproval } from "../modules/ApprovalModule";
 
 const RESTAPI_SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const RESTAPI_SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
@@ -183,6 +183,27 @@ export const searchApproveLineAPI = (empCodes) => {
         }
     }
 }
+
+/* 승인 , 반려 반영하기 */
+export const acceptApprovalAPI = (form) => {
+    const requestURL = `${PRE_URL}/approval/status`;
+
+    return async(dispatch, getState) => {
+        const result = await fetch(requestURL, {
+            method : "POST",
+            headers : {
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken'),
+                "Content-Type" : "application/json"
+            },
+            body : JSON.stringify(form)
+        }).then(response => response.json());
+
+        if(result.status===200){
+            dispatch(acceptApproval(result));
+        }
+    }
+}
+
 
 // /* 상태 변경 */
 // export const addCountAPI = (apvCode, count) => {

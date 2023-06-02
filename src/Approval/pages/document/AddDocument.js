@@ -3,10 +3,10 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import styled from 'styled-components';
 import Quill from 'quill';
-import ApvDocumentCSS from './ApvDocument.module.css';
+import ApvVacationCSS from './ApvVacation.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { addDocumentAPI } from '../../../api/DocumentAPICalls';
+import { useNavigate } from 'react-router-dom';
 
 const Parchment = Quill.import('parchment');
 
@@ -98,11 +98,11 @@ function AddDocument(){
     }
 
     return(
-        <div className={ApvDocumentCSS.container}>
+        <div className={ApvVacationCSS.container}>
             <div>
             <input
                 type="text"
-                className={ApvDocumentCSS.text}
+                className={ApvVacationCSS.text}
                 placeholder='양식명을 입력해주세요.'
                 onChange={onChangeHandler}
             />
@@ -119,11 +119,11 @@ function AddDocument(){
             </div>
             {/* 확인 버튼 */}
             <button 
-                className={ApvDocumentCSS.confirm2}
+                className={ApvVacationCSS.confirm2}
                 onClick={onClickHandler}
             >제출</button>
             <button 
-                className={ApvDocumentCSS.cancel2}
+                className={ApvVacationCSS.cancel2}
                 onClick={onClickCancelHandler}
                 >취소</button>
             </div>

@@ -6,19 +6,19 @@
 }
 
 .wrap{
-    width: 300px;
-    height: 150px;
+    width: 450px;
+    height: 230px;
     background-color: white;
     margin-left: 500px;
     margin-bottom: 640px;
     margin-top: -631px;
     border: #4A5CFF solid 1px;
-    transform:translate(-30%, 200%);
+    transform:translateY(55%);
 }
 
 .title{
     background-color: #4A5CFF;
-    width: 300px;
+    width: 450px;
     height: 30px;
     font-family: "LINESeedKR-Bd";
     font-size : 22px;
@@ -30,9 +30,7 @@
     padding-left: 10px;
     font-family: "LINESeedKR-Bd";
     font-size : 18px;
-    /* transform: translate(30%, 70%); */
-    /* width: 100px; */
-    height: 10px;
+    transform: translate(-10%, -50%);
 }
 
 .context{
@@ -40,7 +38,5 @@
     /* padding-right: 17px; */
     font-family: "LINESeedKR-Bd";
     font-size: 14px;
-    /* transform: translate(120%, 70%); */
-    /* width: 70px; */
-    /* height: 20px; */
+    transform: translate(-10%, -50%);
 }
