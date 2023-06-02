@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Layout from './components/layouts/Layout';
 import Schedule from './schedule/Schedule';
 import ApvContent from './Approval/pages/ApvContent';
-import ApvEmployee from './Approval/pages/employee/ApvEmployee';
+import ApvEmployee from './Approval/employee/ApvEmployee';
 import PlayMemberList from './play/PlayMemberList';
 import PlayHistory from './play/PlayHistory';
 import AnnounceMain from "./Announce/pages/announces/AnnounceMain";
@@ -25,14 +25,14 @@ import 'react-toastify/dist/ReactToastify.css';
 import { createGlobalStyle } from 'styled-components';
 import AddDocument from './Approval/pages/document/AddDocument';
 
-import { EmployeeProvider } from './Approval/pages/employee/EmployeeProvider';
+
 import EmployeeRegist from './employee/pages/EmployeeRegist';
 
 import AnnounceUpdate from './Announce/pages/admin/AnnounceUpdate';
-import RequestList from './Approval/pages/getDocument/RequestList';
-import RequestDetail from './Approval/pages/getDocument/RequestDetail';
-import RequestWait from './Approval/pages/getDocument/RequestWait';
-import ReqeustWaitDetail from './Approval/pages/getDocument/RequestWaitDetail';
+import RequestList from './Approval/pages/lists/RequestList';
+import RequestDetail from './Approval/pages/lists/RequestDetail';
+import RequestWait from './Approval/pages/lists/RequestWait';
+import ReqeustWaitDetail from './Approval/pages/lists/RequestWaitDetail';
 import Attendance from './attendance/attendance';
 import EquipmentMain from './Equipment/pages/EquipmentMain';
 import AttendanceMain from './attendance/admin/AttendanceMain';

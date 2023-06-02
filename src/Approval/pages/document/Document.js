@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import styled from 'styled-components';
 import Quill from 'quill';
-import ApvDocumentCSS from './ApvDocument.module.css';
+import ApvVacationCSS from './ApvVacation.module.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { registDoc, selectPersonAPICall } from '../../../api/ApprovalAPICall';
-import { EmployeeContext } from '../employee/EmployeeProvider';
+import { RichUtils } from 'draft-js';
 
 const Parchment = Quill.import('parchment');
 
@@ -49,24 +49,26 @@ const modules = {
     height: 50px;
   }
   .ql-container {
-    height: 550px;
-    background-color : white;
+    height: 700px;
+  }
+  
+  .ql-editor{
+    background-color : white
   }
 `;
 
 function Document() {
-  const {approvedEmployees, readEmployees, setApprovedEmployees, setReadEmployees} = useContext(EmployeeContext);
-
   const quillRef = useRef(null);
 
   const location = useLocation();
-  const {docTitle, startDate, endDate } = location.state;
+  const {docTitle, startDate, endDate } = location.state;  
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const {regist} = useSelector(state => state.approvalReducer);
   const {employee} = useSelector(state => state.approvalReducer);
-  const {setDocument} = useSelector(state => state.documentReducer);
 
+  const {setDocument} = useSelector(state => state.documentReducer);
   const [html, setHtml] = useState(setDocument?.data?.docContext);
 
   /* html 내용이 변할 때 마다 새로 세팅 */
@@ -84,29 +86,21 @@ function Document() {
   /* 결재 요청 보내기 */
   const onClickDocHandler = () => {
     if (quillRef.current) {
-      var quillInstance = quillRef.current.getEditor();
-      var html = quillInstance.root.innerHTML;
+      const quillInstance = quillRef.current.getEditor();
+      const html = quillInstance.root.innerHTML;
   
-      const formData = new FormData();
-      formData.append("apvCreatedDate", new Date(startDate));
-      formData.append("apvStatus", '진행중')
-      formData.append("apvEndDate", new Date(endDate));
-      formData.append("apvContext", html);
+      const data = {
+        apvStatus : '미열람',
+        apvCreatedDate : startDate,
+        apvEndDate : endDate,
+        apvContext : html
+      };
+  
+      dispatch(registDoc(data, docTitle));
 
-      approvedEmployees.forEach((employee, index) => {
-        formData.append(`approveLine[${index}].apvCode`, 0);
-        formData.append(`approveLine[${index}].empCode`, employee.code);
-        formData.append(`approveLine[${index}].aplNum`, index + 1);
-      });
-
-      readEmployees.forEach((reader, index) => {
-        formData.append(`readerLine[${index}].apvCode`, 0);
-        formData.append(`readerLine[${index}].empCode`, reader.code);
-      });
-
-      dispatch(registDoc(formData, docTitle));
-
-      navigate('/approval', {replace : true});
+      if (regist?.status === 200) {
+        navigate("/approval/new", {replace: true});
+      }
     }
   }
 
@@ -116,97 +110,81 @@ function Document() {
   }
 
   return (
-    <div className={ApvDocumentCSS.container}>
-      <div className={ApvDocumentCSS.wrap}>
-        <div className={ApvDocumentCSS.editor}>
+    <div className={ApvVacationCSS.container}>
+        <div style={{width:600, height: 600, marginLeft : 140}}>
           <StyledQuill 
               ref={quillRef}
               value={html} 
               theme="snow"
-              modules={{toolbar:false}}
+              modules={{toolbar:false}} 
           />
           {/* 확인 버튼 */}
           <button 
-              className={ApvDocumentCSS.confirm}
+              className={ApvVacationCSS.confirm}
               onClick={onClickDocHandler}
           >제출</button>
           <button 
-            className={ApvDocumentCSS.cancel}
+            className={ApvVacationCSS.cancel}
             onClick={onClickCancelHandler}
             >취소</button>
-        </div>
+      </div>
 
-          <div>
-            {/* 결재권자 표시 */}
-              {
-                approvedEmployees && approvedEmployees.map((approvedEmployee) => (
-                  <div className={ApvDocumentCSS.authors}>
-                    <div className={ApvDocumentCSS.author}>
-                      <div className={ApvDocumentCSS.authorPosition}>
-                        {approvedEmployee.position}
-                        <hr/>
-                      </div>
-                      <div className={ApvDocumentCSS.authorName}>
-                        {approvedEmployee.name}
-                      </div>
-                    </div>
-                  </div>
-                ))
-              } 
-          </div>
+        <div>
+                {/* 결재권자 표시 */}
+                <div className={ApvVacationCSS.authors}>
+                    <div className={ApvVacationCSS.author}></div>
+                    <div className={ApvVacationCSS.author}></div>
+                    <div className={ApvVacationCSS.author}></div>
+                </div>
+            </div>
 
             {/* 상세 정보 */}
-            <div className={ApvDocumentCSS.detail}>
+            <div className={ApvVacationCSS.detail}>
+                <div className={ApvVacationCSS.detail2}>상세 정보</div>
                     <div style={{display:"flex"}}>
                       <table style={{fontFamily:"LINESeedKR-Bd",fontSize: 22, color:"#505050"}}>
                         <tbody>
                           <tr>
-                            <th className={ApvDocumentCSS.details}>제목</th>
-                            <td className={ApvDocumentCSS.details2}>{docTitle}</td>
+                            <th className={ApvVacationCSS.details}>제목</th>
+                            <td className={ApvVacationCSS.details2}>{docTitle}</td>
                           </tr>
                           <tr style={{marginBottom : 30}}>
-                            <th className={ApvDocumentCSS.details}>보존일</th>
-                            <td className={ApvDocumentCSS.details2}>90일</td>
+                            <th className={ApvVacationCSS.details}>보존일</th>
+                            <td className={ApvVacationCSS.details2}>90일</td>
                           </tr>
                           {employee && employee.data.map((row) => (
                             <tr>
-                              <th className={ApvDocumentCSS.details}>기안자</th>
-                                <td className={ApvDocumentCSS.details2}>
+                              <th className={ApvVacationCSS.details}>기안자</th>
+                                <td className={ApvVacationCSS.details2}>
                                   {row.empName}
                                 </td>
                             </tr>
                           ))}
                           {employee && employee.data.map((row) => (
                             <tr>
-                              <th className={ApvDocumentCSS.details}>부서</th>
-                                <td className={ApvDocumentCSS.details2}>
+                              <th className={ApvVacationCSS.details}>부서</th>
+                                <td className={ApvVacationCSS.details2}>
                                   {row.dept.deptTitle}
                                 </td>
                             </tr>
                           ))}
-                          {
-                            docTitle === '휴가신청서' ?
-                            <tr>
-                              <th className={ApvDocumentCSS.details}>기간</th>
-                              <td className={ApvDocumentCSS.details2}>[{startDate}] ~ [{endDate}]</td>
-                            </tr> : null
-                          }
-                            <tr>
-                              <th className={ApvDocumentCSS.details}>열람권자</th>
-                              <div className={ApvDocumentCSS.details2}>
-                            {
-                              readEmployees && readEmployees.map(reader => (
-                                  <div style={{marginRight : 10}}>{reader.name}</div>
-                              ))
-                            }
-                            </div>
-                           </tr>
+                          <tr>
+                            <th className={ApvVacationCSS.details}>기안일</th>
+                            <td className={ApvVacationCSS.details2}>[{startDate}] ~ [{endDate}]</td>
+                          </tr>
+                          <tr>
+                            <th className={ApvVacationCSS.details}>열람권자</th>
+                            <td className={ApvVacationCSS.details2}>xxx</td>
+                          </tr>
+                          <tr>
+                            <th className={ApvVacationCSS.details}>부서</th>
+                            <td className={ApvVacationCSS.details2}>xxx</td>
+                          </tr>
                         </tbody>
                       </table>
                     </div>
-                  </div>
-       </div>
-    </div>
+                </div>
+        </div>
   );
 }
 

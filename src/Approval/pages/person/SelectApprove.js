@@ -1,23 +1,32 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SelectCSS from "./Select.module.css";
 import { useDrop } from 'react-dnd';
 import { toast } from 'react-toastify';
-import { EmployeeContext } from '../employee/EmployeeProvider';
-import { useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addApproveLineAPI } from '../../../api/ApprovalAPICall';
 
 function SelectApprove(){
-    const {approvedEmployees, setApprovedEmployees} = useContext(EmployeeContext);
 
+    const [approvedEmployees, setApprovedEmployees] = useState([]);
     const positionWeight = { '대표': 1, '팀매니저': 2, '시니어': 3, '일반': 4 };
-    const location = useLocation();
+    const dispatch = useDispatch();
 
     const [, drop] = useDrop({
         accept: 'employee',
-        drop: (item) => {
-            if (approvedEmployees.length >= 3) {
-               toast.warning('3명 이상 선택하실 수 없습니다.');
-                return;
-            }
+        drop: 
+        
+        (item) => {
+          // 결재권자를 3명 이상 선택할 수 없도록 합니다.
+          if (approvedEmployees.length >= 3) {
+            toast.warning('3명 이상 선택하실 수 없습니다.');
+            return;
+          }
+    
+          // 이미 승인된 목록에 직원이 있는지 확인합니다.
+          if (approvedEmployees.find(emp => emp.name === item.name)) {
+            toast.warning('동일인은 추가 할 수 없습니다.')
+            return;
+          }
 
           // 이미 승인된 목록에 동일 직급이 있는지 확인합니다.
           if(approvedEmployees.find(emp => emp.position === item.position)){
@@ -33,19 +42,12 @@ function SelectApprove(){
     
           // 직급에 따라 정렬하여 추가합니다.
           setApprovedEmployees(prev => {
-            const newList = [...prev];
-            newList.push(item);
+            const newList = [item, ...prev];
             newList.sort((a, b) => positionWeight[a.position] - positionWeight[b.position]);
             return newList;
           });
         },
-    });
-
-      useEffect(() => {
-        if (location.pathname !== '/approval/document') {
-            setApprovedEmployees([]);
-        }
-      }, [location, setApprovedEmployees]);
+      });
 
     return(
         <>
@@ -53,9 +55,9 @@ function SelectApprove(){
                 <div className={SelectCSS.title}>
                     결재권자
                 </div>
-                <table style={{width:300, marginTop : 10, marginLeft : 8}}>
-                {approvedEmployees.map(employee => (
-                        <tr>
+                <table style={{marginLeft : 120, marginTop : 55}}>
+                {approvedEmployees.map((employee, index) => (
+                        <tr key={index}>
                             <td className={SelectCSS.contextTitle}>{employee.dept}</td>
                             <td className={SelectCSS.contextTitle}>{employee.position}</td>
                             <td className={SelectCSS.context}>{employee.name}</td>

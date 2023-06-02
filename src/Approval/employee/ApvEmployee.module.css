@@ -1,0 +1,101 @@
+@font-face {
+    font-family: 'LINESeedKR-Bd';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 100;
+    font-style: normal;
+}
+
+.wrap{
+    background: white;
+    width: 1000px;
+    height: 600px;
+    margin-left: 500px;
+    margin-bottom: 40px;
+    margin-top: 40px;
+    border-radius: 20px;
+    font-family: "LINESeedKR-Bd";
+    font-size: 18px;
+    color: #505050;
+    
+    z-index:999;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-99.1%,-55%);
+}
+
+.emp{
+    height: 500px;
+    width: 400px;
+    border: solid black 1px;
+    margin-left: 80px;
+    margin-top: 50px;
+}
+
+.textbox{
+    height: 30px;
+    width: 150px;
+    text-align: center;
+    margin-left: 120px;
+    margin-top: 16px;
+    font-family: "LINESeedKR-Bd";
+    font-size: 14px;
+    color: #505050;
+}
+
+.title{
+    margin-left: 30px;
+    margin-top: 14px;
+}
+
+.titleimg{
+    margin-left: 10px;
+    margin-top: 16px;
+    width: 20px;
+    height: 20px;
+}
+
+.subTitle{
+    margin-left: 40px;
+    display: flex;
+}
+
+.name1{
+    margin-right: 10px;
+    font-family: "LINESeedKR-Bd";
+    font-size : 14px;
+    color: #505050;
+}
+
+.name2{
+    margin-right: 10px;
+    font-family: "LINESeedKR-Bd";
+    font-size : 14px;
+    color: #505050;
+}
+
+.confirm{
+    font-family: "LINESeedKR-Bd";
+    font-size : 14px;
+    background-color: #4A5CFF;
+    color: white;
+    width: 20px;
+   
+    transform: translate(0, -2800%);
+}
+
+.close{
+    font-family: "LINESeedKR-Bd";
+    font-size : 14px;
+    background-color: #4A5CFF;
+    color: white;
+    margin-right: 60px;
+    width: 20px;
+    margin-bottom: 20px;
+
+    transform: translate(0, -2800%);
+}
+
+.line{
+    width: 300px;
+}
