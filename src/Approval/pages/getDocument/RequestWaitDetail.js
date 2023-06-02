@@ -2,13 +2,12 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import styled from 'styled-components';
 import Quill from 'quill';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import RequestDetailCSS from "./RequestDetail.module.css";
 import { useDispatch, useSelector } from 'react-redux';
 import { searchContextAPI } from '../../../api/ApprovalAPICall';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { searchApproveLineAPI } from '../../../api/ApprovalAPICall';
-import { acceptApprovalAPI } from '../../../api/ApprovalAPICall';
 
 const Parchment = Quill.import('parchment');
 
@@ -57,18 +56,13 @@ const modules = {
 
 function ReqeustWaitDetail(){
 
-    const navigate = useNavigate();
     const dispatch = useDispatch();
     const location = useLocation();
     const {apvCode} = location.state;
 
-    const {context, waitList, line, accept} = useSelector(state => state.approvalReducer);
+    const {context, waitList, line} = useSelector(state => state.approvalReducer);
     const [html, setHtml] = useState(context?.apvContext);
-    const empcodes = waitList?.data.data.flatMap(row => row.approveLine.map(row => row.empCode));
-    const person = context?.approveLine.map(row => row.empCode);
-    const lines = line?.data.map(row => row.empCode);
-    const matchingElements = person?.filter(element => lines?.includes(element));
-
+   
     /* html 내용이 변할 때 마다 새로 세팅 */
     useEffect(() => {
         setHtml(html);
@@ -86,38 +80,27 @@ function ReqeustWaitDetail(){
         },[context?.apvContext]
     )
 
+    const empcodes = waitList?.data.data.flatMap(row => row.approveLine.map(row => row.empCode));
+
+    const person = [...context.approveLine.map(row => row.empCode)];
+    const lines = [...line?.data.map(row => row.empCode)];
+    const matchingElements = person.filter(element => lines.includes(element));
+
     useEffect(() => {
-        dispatch(searchApproveLineAPI(empcodes));
+            dispatch(searchApproveLineAPI(empcodes));
     }, [])
-
-    const onClickOkHandler = (e) => {
-
-        const form = {
-            'apvCode' : apvCode,
-            'approveLine' : [{
-                'aplStatus' : e.target.dataset.value,
-                'aplDate' : new Date
-            }]
-        }
-
-        dispatch(acceptApprovalAPI(form));
-
-        if(accept?.status === 200){
-            navigate('/approval/wait', {replace : true});
-        }
-    }
 
     return(
         <>
-            <div className={RequestDetailCSS.button}>
-                <div className={RequestDetailCSS.ok} onClick={onClickOkHandler} data-value="승인"><img src='../images/ok.png'></img>승인</div>
-                <div className={RequestDetailCSS.no} onClick={onClickOkHandler} data-value="반려"><img src='../images/no.png'></img>반려</div>
-
-                <table className={RequestDetailCSS.approveLinecss}>
+            <div style={{display : "flex"}}>
+                <div className={RequestDetailCSS.ok}>결재</div>
+                <div className={RequestDetailCSS.no}>반려</div>
+            </div>
+            <table className={RequestDetailCSS.approveLine}>
                 <tr>
                 {
                     line?.data.map(row => (
-                       matchingElements.includes(row.empCode) ? <th>{row.empName}<hr/></th> : null
+                        matchingElements.includes(row.empCode) ? <th>{row.empName}<hr/></th> : null
                     ))
                 }
                 </tr>
@@ -127,8 +110,6 @@ function ReqeustWaitDetail(){
                     }
                 </tr>
             </table>
-            </div>
-           
         
             <div className={RequestDetailCSS.wrap}>
                     <div className={RequestDetailCSS.content}>

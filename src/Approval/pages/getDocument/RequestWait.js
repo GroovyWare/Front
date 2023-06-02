@@ -49,8 +49,6 @@ function RequestWait(){
                     <th>상태</th>
                 </tr>
                 {waitList && waitList.data.data.map((wait, waitIndex) => {
-
-                    if(!(wait.apvStatus === '승인' || wait.apvStatus === '반려')){
                     const aplNumOne = wait.approveLine.find(apl => apl.empCode === now.data.empCode);
 
                     if(aplNumOne?.aplNum === '1'){
@@ -105,7 +103,7 @@ function RequestWait(){
                                 </tr>
                             );
                     }
-            }})}
+                })}
             </table>
             
                 <div>{ pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage }/>}</div>
