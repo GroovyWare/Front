@@ -37,17 +37,18 @@ function PassModify(){
     const onClickPassModifyHandler = () => {
         setForm({
             ...info,
+            passAmount : info.passAmount || '',
+            passEtc : info.passEtc || '',
         });        
         setModifyMode(true);
     }
-    
-    console.log('check Info pass modify',info);
+
 
     /* 입력 양식 값 변경될 때 */
     const onChangeHandler = (e) => {
         setForm({
             ...form,
-            [e.target.name] : e.target.value
+            [e.target.name]: e.target.value || '',
         })
     }
 

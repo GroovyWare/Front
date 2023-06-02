@@ -29,7 +29,6 @@ function MemberList({memberList}) {
         navigate(`/member/members/search?search=${search}`);
     }
 
-
     return(
         <>
         <div className={ MemberListCSS.searchBoxWarp}>
