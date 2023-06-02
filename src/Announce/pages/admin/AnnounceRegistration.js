@@ -77,7 +77,7 @@ const AnnounceRegistration = () => {
   useEffect(
     () => {
         if(regist?.status === 200) {
-            alert('게시글 등록이 완료 되었습니다.');
+            alert('게시글 등록이 완료되었습니다.');
             navigate('/announce', { replace : true });
         }
     },
