@@ -53,9 +53,10 @@ function ScheduleInsertModal({ schedule, setScheduleInsertModal }) {
                     />
                     <br />
                     <textarea className={ScheduleInsertModalCSS.textareas}
-                        placeholder="일정내용을 입력해주시기 바랍니다."
+                        placeholder=" 일정내용을 입력해주시기 바랍니다."
                         name="context"
                         onChange={onChangeHandler}
+                        
                     ></textarea>
                     <br/>
                     <label>시작일을 입력해주세요 : </label>
@@ -93,17 +94,12 @@ function ScheduleInsertModal({ schedule, setScheduleInsertModal }) {
                         onChange={onChangeHandler}
                     />
                     <br />
-                    <button onClick={handleSubmit}>
+                    <button onClick={handleSubmit} className={ScheduleInsertModalCSS.buttons}>
                         등록하기
                     </button>
 
                     <button
-                        style={{
-                            border: "none",
-                            margin: 0,
-                            fontSize: "10px",
-                            height: "10px",
-                        }}
+                       className={ScheduleInsertModalCSS.buttons}
                         onClick={() => setScheduleInsertModal(false)}
                     >
                         돌아가기
