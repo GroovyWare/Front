@@ -49,7 +49,8 @@ const modules = {
     height: 50px;
   }
   .ql-container {
-    height: 550px;
+    height: 350px;
+    background-color : white;
   }
 `;
 

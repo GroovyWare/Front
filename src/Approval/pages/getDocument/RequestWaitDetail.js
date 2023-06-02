@@ -49,7 +49,7 @@ const modules = {
     height: 50px;
   }
   .ql-container {
-    height: 550px;
+    height: 350px;
     background-color : white;
   }
 `;
@@ -60,7 +60,7 @@ function ReqeustWaitDetail(){
     const location = useLocation();
     const {apvCode} = location.state;
 
-    const {context, waitList} = useSelector(state => state.approvalReducer);
+    const {context, waitList, line} = useSelector(state => state.approvalReducer);
     const [html, setHtml] = useState(context?.apvContext);
    
     /* html 내용이 변할 때 마다 새로 세팅 */
@@ -80,34 +80,54 @@ function ReqeustWaitDetail(){
         },[context?.apvContext]
     )
 
-    useEffect(
-        () => {
-            dispatch(searchApproveLineAPI(waitList?.data.data.approveLine.empCode));
-        }, []
-    )
+    const empcodes = waitList?.data.data.flatMap(row => row.approveLine.map(row => row.empCode));
+
+    const person = [...context.approveLine.map(row => row.empCode)];
+    const lines = [...line?.data.map(row => row.empCode)];
+    const matchingElements = person.filter(element => lines.includes(element));
+
+    useEffect(() => {
+            dispatch(searchApproveLineAPI(empcodes));
+    }, [])
+
 
     return(
-        <div className={RequestDetailCSS.wrap}>
-            <div className={RequestDetailCSS.content}>
-                <div className={RequestDetailCSS.editor2}>
-                    <StyledQuill 
-                        value={html} 
-                        theme="snow"
-                        modules={{toolbar:false}}
-                        readOnly = "true"
-                    />
-                </div>
-                <div className={RequestDetailCSS.info}>
-                    
-                </div>
+        <>
+            <div style={{display : "flex"}}>
+                <div className={RequestDetailCSS.ok}>결재</div>
+                <div className={RequestDetailCSS.no}>반려</div>
             </div>
-                <div className={RequestDetailCSS.buttonDiv}>
-                    <button
-                        className={RequestDetailCSS.button}
-                    >승인</button>
-                    <button>반려</button>
-                </div>
-        </div>
+            <table className={RequestDetailCSS.approveLine}>
+                <tr>
+                {
+                    line?.data.map(row => (
+                        matchingElements.includes(row.empCode) ? <th>{row.empName}<hr/></th> : null
+                    ))
+                }
+                </tr>
+                <tr className={RequestDetailCSS.approve}>
+                    {
+                        context?.approveLine.map(row => <td>{row.aplStatus}</td>)
+                    }
+                </tr>
+            </table>
+        
+            <div className={RequestDetailCSS.wrap}>
+                    <div className={RequestDetailCSS.content}>
+                        <div className={RequestDetailCSS.editor2}>
+                            <StyledQuill 
+                                value={html} 
+                                theme="snow"
+                                modules={{toolbar:false}}
+                                readOnly = "true"
+                            />
+                        </div>
+                        <div className={RequestDetailCSS.info}>
+                            
+                        </div>
+                    </div>
+            </div>
+        </>
     )
 }
 

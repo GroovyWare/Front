@@ -184,10 +184,13 @@ function Document() {
                                 </td>
                             </tr>
                           ))}
-                          <tr>
-                            <th className={ApvDocumentCSS.details}>기안일</th>
-                            <td className={ApvDocumentCSS.details2}>[{startDate}] ~ [{endDate}]</td>
-                          </tr>
+                          {
+                            docTitle === '휴가신청서' ?
+                            <tr>
+                              <th className={ApvDocumentCSS.details}>기간</th>
+                              <td className={ApvDocumentCSS.details2}>[{startDate}] ~ [{endDate}]</td>
+                            </tr> : null
+                          }
                             <tr>
                               <th className={ApvDocumentCSS.details}>열람권자</th>
                               <div className={ApvDocumentCSS.details2}>

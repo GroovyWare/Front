@@ -58,41 +58,49 @@ function ScheduleUpdateModal({  setScheduleUpdateModal , justSchedule}) {
     <div className={ScheduleUpdateModalCSS.modal}>
       <div className={ScheduleUpdateModalCSS.modalContainer}>
         <div className={ScheduleUpdateModalCSS.updatingformDiv}>
-          <h1>일정 수정</h1>
+          <h1>상세 일정</h1>
           <select name="schDiv" onChange={onChangeHandler}>
             <option value="선택">선택</option>
             <option value="부서">부서</option>
             <option value="개인">개인</option>
           </select>
           <input
+          className={ScheduleUpdateModalCSS.titles}
             type="text"
             name="title"
             placeholder="일정 제목을 입력해주세요!"
             onChange={onChangeHandler}
             value={form.title}
           />
+          <br/>
           <textarea
+            className={ScheduleUpdateModalCSS.textareas}
             placeholder="일정 내용을 입력해주세요."
             name="context"
             onChange={onChangeHandler}
             value={form.context}
           ></textarea>
+          <br/>
           <input
-            placeholder="시작일 입력"
+          className={ScheduleUpdateModalCSS.datearea}
+            placeholder="시작일"
             type="datetime-local"
             name="start"
             onChange={onChangeHandler}
             value={form.start.toISOString}
           />
+          <br/>
           {/* isostring으로 반환값을 맞춰준다. */}
           <input
-            placeholder="종료일 입력"
+          className={ScheduleUpdateModalCSS.datearea}
+            placeholder="종료일"
             type="datetime-local"
             name="end"
             onChange={onChangeHandler}
             value={form.end.toISOString}
           />
-          <label>이벤트 색상 입력</label>
+          <br/>
+          <label>이벤트 색상</label>
           <input
             type="color"
             name="color"
@@ -100,7 +108,8 @@ function ScheduleUpdateModal({  setScheduleUpdateModal , justSchedule}) {
             onChange={onChangeHandler}
             value={form.color}
           />
-          <label>글 색상 입력</label>
+          <br/>
+          <label>글 색상</label>
           <input
             type="color"
             name="textColor"
@@ -108,16 +117,12 @@ function ScheduleUpdateModal({  setScheduleUpdateModal , justSchedule}) {
             onChange={onChangeHandler}
             value={form.textColor}
           />
+          <br/>
           <button onClick={handleSubmit}>수정하기</button>
 
           <button onClick={deleteOneSchedule}>삭제하기</button>
           <button
-            style={{
-              border: "none",
-              margin: 0,
-              fontSize: "10px",
-              height: "10px",
-            }}
+           
             onClick={() => setScheduleUpdateModal(false)}
           >
             돌아가기

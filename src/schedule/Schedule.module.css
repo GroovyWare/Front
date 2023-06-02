@@ -54,8 +54,8 @@
     cursor: pointer;
     float: right;
   
-    transform: translateX(-130%) translateY(-50%);
-  
+    transform: translateX(-90%) translateY(-50%);
+    margin-left: 15px;
 
     /* box-shadow: 2px 3px 3px rgb(44, 41, 41); */
   }
@@ -66,14 +66,60 @@
 }
  
 .radioOptions {
+  block-size: 20px;
+  width: 300px;
   position: relative;
-  margin-left: 390px;
+  margin-left: 480px;
   font-family: "LINESeedKR-Regular";
   margin-top : 25px;
+ 
 }
-.radioOptions input{ margin-left: 15px;}
+
+
+.radioOptions label {
+  display: inline-block;
+  cursor: pointer;
+  padding-left: 25px; /* 필요에 따라 조정하세요 */
+  position: relative;
+  font-family:  "LINESeedKR-Bold", sans-serif;
+}
+
+
+
 
 .searching {
-  position: absolute;
-  margin-left: 360;
+  font-family: "LINESeedKR";
+  position: relative;
+ 
+  margin-left: 3vw;
+  border-color: 1px solid black;
+  transform: translateX(-00%) translateY(170%);
+  margin-right: 20px;
+}
+
+.insertingbutton {
+  position: relative;
+  margin-bottom: 20px;
+
+}
+
+.searching input {
+  margin-right: 3px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 2px solid black;
+  background-color: rgba(0, 0, 0, 0);
+
+}
+
+.searching button {
+    width: 120px;
+    height: 30px;
+    border-radius: 7%;
+    border: 3px solid rgba(173, 76, 76, 0.986);
+    background-color: rgb(65, 65, 65);
+    font-size: normal;
+    font-weight: bold;
+    color: white;
 }

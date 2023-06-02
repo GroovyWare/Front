@@ -1,3 +1,11 @@
+@font-face {
+    font-family: "LINESeedKR-Bold";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2")
+      format("woff2");
+    font-weight: normal;
+    font-style: normal;
+}
+
 .modal{
     position: fixed;
     top: 0;
@@ -13,8 +21,8 @@
 
 .modalContainer{
     position: absolute;
-    width: 400px;
-    height: 500px;
+    width: 500px;
+    height: 550px;
     padding: 10px;
     text-align: center;
     background-color: rgb(255, 255, 255);
@@ -23,5 +31,61 @@
     z-index: 1000;
 }
 
+.datearea{
+    border: none;
+    border-bottom: 1px solid rgba(85, 138, 190, 0.9);
+    font-family: "LINESeedKR";
+}
 
+.selects{
+    margin-right: 25px;
+    width: 60px;
+    height: 30px;
+    font-size: small;
+    border: none;
 
+}
+
+.selects:focus {
+    outline: none;
+}
+
+.colorinputs {
+    border: none;
+    padding: 0;
+    background-color: rgb(255, 255, 255);
+    border-radius: 20%;
+}
+
+.textareas {
+    width: 280px;
+    height: 250px;
+    border-radius: 2%;
+    overflow: auto;
+    outline: 3px solid rgb(158, 82, 82);
+
+}
+
+.titles {
+    border: none;
+    border-bottom: 1px solid rgba(85, 138, 190, 0.9);
+}
+
+.buttons {
+    border: none;
+    margin: 20px;
+    width: 70px;
+    height: 40px;
+    background-color: green;
+    font-family: "LINESeedKR";
+    border-radius: 20%;
+    color: white;
+    font-size: medium;
+    
+}
+
+.buttons + button {
+    background-color: red;
+}
+
+/* .buttons  */
