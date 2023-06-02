@@ -29,13 +29,15 @@ import { EmployeeProvider } from './Approval/pages/employee/EmployeeProvider';
 import EmployeeRegist from './employee/pages/EmployeeRegist';
 
 import AnnounceUpdate from './Announce/pages/admin/AnnounceUpdate';
-import RequestList from './Approval/pages/getDocument/RequestList';
-import RequestDetail from './Approval/pages/getDocument/RequestDetail';
-import RequestWait from './Approval/pages/getDocument/RequestWait';
-import ReqeustWaitDetail from './Approval/pages/getDocument/RequestWaitDetail';
+import RequestList from './Approval/pages/lists/RequestList';
+import RequestDetail from './Approval/pages/lists/RequestDetail';
+import RequestWait from './Approval/pages/lists/RequestWait';
+import ReqeustWaitDetail from './Approval/pages/lists/RequestWaitDetail';
 import Attendance from './attendance/attendance';
 import EquipmentMain from './Equipment/pages/EquipmentMain';
 import MemberList from './Member/pages/MemberList';
+
+import Confirm from './Approval/pages/lists/Confirm';
 
 
 
@@ -72,6 +74,7 @@ function App() {
             <Route path="detail" element={<ProtectedRoute loginCheck={true}><RequestDetail/></ProtectedRoute>}/>
             <Route path="wait" element={<ProtectedRoute loginCheck={true}><RequestWait/></ProtectedRoute>}/>
             <Route path="waitDetail" element={<ProtectedRoute loginCheck={true}><ReqeustWaitDetail/></ProtectedRoute>}/>
+            <Route path="confirm"  element={<ProtectedRoute loginCheck={true}><Confirm/></ProtectedRoute>}/>
           </Route>
 
           <Route path="play" element={<PlayMemberList />}>

@@ -1,5 +1,5 @@
-import RequestWait from "../Approval/pages/getDocument/RequestWait";
-import { registApproval, searchApproveline } from "../modules/ApprovalModule";
+import RequestWait from "../Approval/pages/lists/RequestWait"
+import { acceptApproval, registApproval, searchApproveline } from "../modules/ApprovalModule";
 import { selectEmployee, searchEmployee, searchDepartment } from "../modules/ApprovalModule";
 import { selectPerson, searchRequest, searchContext, searchWait, searchNow } from "../modules/ApprovalModule";
 
@@ -184,7 +184,27 @@ export const searchApproveLineAPI = (empCodes) => {
     }
 }
 
-// /* 상태 변경 */
+/* 승인 , 반려 반영하기 */
+export const acceptApprovalAPI = (form) => {
+    const requestURL = `${PRE_URL}/approval/status`;
+
+    return async(dispatch, getState) => {
+        const result = await fetch(requestURL, {
+            method : "POST",
+            headers : {
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken'),
+                "Content-Type" : "application/json"
+            },
+            body : JSON.stringify(form)
+        }).then(response => response.json());
+
+        if(result.status===200){
+            dispatch(acceptApproval(result));
+        }
+    }
+}
+
+/* 상태 변경 */
 // export const addCountAPI = (apvCode, count) => {
 //     const requestURL = `${PRE_URL}/approval/count?apvCode=${apvCode}`
 

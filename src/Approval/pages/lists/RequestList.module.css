@@ -1,0 +1,51 @@
+@font-face {
+    font-family: 'LINESeedKR-Rg';
+    src: url('https://cdn.jsdelivr.net/gh/wizfile/font/LINESeedKR-Rg.eot');
+    src:url('https://cdn.jsdelivr.net/gh/wizfile/font/LINESeedKR-Rg.woff') format('woff');
+    font-style: normal;
+}
+
+.container {
+    height: auto;
+    margin-top: 10px;
+    padding: 20px;
+    font-family: 'LINESeedKR-Rg';
+}
+
+.wrap{
+    margin-top: -160px;
+    padding:20px;
+}
+
+.tableDiv{
+    width: 1200px;
+    margin: auto;
+}
+
+.table{
+    text-align: center;
+    width: 100%;
+    min-width: 80px;
+    margin-top: 20px;
+    border-collapse: collapse;
+    box-shadow: 0px 0.05px 2px 0px rgba(0, 0, 0, 0.5);
+    font-size: 14px;
+}
+
+.table > tr{
+    background-color: #f3f3f3;
+    line-height: 40px;
+    border-bottom: 1px solid #c0b4f0;
+}
+
+.table > tr:hover {
+    color: #fff;
+    background-color: #7777775e;
+    cursor: pointer;
+}
+
+.table > tr > th {
+    /* background-color: #c0b4f0; */
+    background-color: #9b83fa;
+    color: #fff;
+}

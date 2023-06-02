@@ -18,7 +18,8 @@
 }
 
 .contentBg {
-    background:  rgba( 255, 255, 255 , 0.65 );
+    /* background:  rgba( 255, 255, 255 , 0.65 ); */
+    background: white;
     border-radius: 10px;
     border: 1px solid rgba( 255, 255, 255, 0.18 );
     width: auto;

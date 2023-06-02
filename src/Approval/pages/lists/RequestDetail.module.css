@@ -79,14 +79,38 @@
     font-size: 20px;
 }
 
-.approveLine{
+.approveLinecss{
     background-color: white;
     width: 300px;
     border: solid black 1px;
-    margin-top: 40px;
-    margin-left: 680px;
+    margin-left: 350px;
 }
 
 .approve{
     text-align: center;
+}
+
+.button{
+    display: flex;
+    margin: 50px 0px 0px 200px;
+}
+
+.ok{
+    margin: 30px 10px 0px 0;
+}
+
+.no{
+    margin: 30px 10px 0px 0;
+}
+
+.no > img{
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+.ok > img{
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
 }
