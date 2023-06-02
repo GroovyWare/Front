@@ -44,7 +44,6 @@ function RequestWait(){
                 <tr>
                     <th>기안자</th>
                     <th>기안일</th>
-                    <th>마감일</th>
                     <th>기안서명</th>
                     <th>상태</th>
                 </tr>
@@ -64,7 +63,6 @@ function RequestWait(){
                                 <tr key={waitIndex} onClick={() => onRowClickHandler(wait.apvCode)}>
                                     <td>{wait.employee.empName}</td>
                                     <td>{wait.apvCreatedDate}</td>
-                                    <td>{wait.apvEndDate}</td>
                                     <td>{wait.document.docTitle}</td>
                                     <td style={{display: "flex", justifyContent: "center", flexDirection: "column"}}>
                                        {aplNumOne.aplStatus}
@@ -82,7 +80,6 @@ function RequestWait(){
                                 <tr key={waitIndex} onClick={() => onRowClickHandler(wait.apvCode)}>
                                     <td>{wait.employee.empName}</td>
                                     <td>{wait.apvCreatedDate}</td>
-                                    <td>{wait.apvEndDate}</td>
                                     <td>{wait.document.docTitle}</td>
                                     <td style={{display: "flex", justifyContent: "center", flexDirection: "column"}}>
                                         {aplNumOne.aplStus}
@@ -97,7 +94,6 @@ function RequestWait(){
                                 <tr key={waitIndex} onClick={() => onRowClickHandler(wait.apvCode)}>
                                     <td>{wait.employee.empName}</td>
                                     <td>{wait.apvCreatedDate}</td>
-                                    <td>{wait.apvEndDate}</td>
                                     <td>{wait.document.docTitle}</td>
                                     <td style={{display: "flex", justifyContent: "center", flexDirection: "column"}}>
                                        {aplNumOne.aplStatus} 
@@ -107,7 +103,6 @@ function RequestWait(){
                     }
             }})}
             </table>
-            
                 <div>{ pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage }/>}</div>
             </div>
         </div>

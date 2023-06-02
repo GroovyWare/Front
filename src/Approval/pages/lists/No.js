@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import PagingBar from '../../../components/common/PagingBar';
 import { searchWaitAPI, searchNowAPI } from '../../../api/ApprovalAPICall';
 
-function Confirm(){
+function No(){
     
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -44,7 +44,7 @@ function Confirm(){
                 {waitList && waitList.data.data.map((wait, waitIndex) => {
                     const aplNumOne = wait.approveLine.find(apl => apl.empCode === now.data.empCode);
 
-                    if(aplNumOne.empCode === wait.employee.empCode && wait.apvStatus === '승인'){
+                        if(aplNumOne.empCode === wait.employee.empCode && wait.apvStatus === '반려'){
                             return (
                                 <tr key={waitIndex} onClick={() => onRowClickHandler(wait.apvCode)}>
                                     <td>{wait.employee.empName}</td>
@@ -62,4 +62,4 @@ function Confirm(){
     )
 }
 
-export default Confirm;
+export default No;
