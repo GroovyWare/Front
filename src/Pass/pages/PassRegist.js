@@ -11,7 +11,10 @@ function PassRegist() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { regist } = useSelector(state => state.passReducer);
-    const [form, setForm] = useState({});
+    const [form, setForm] = useState({
+        passAmount : '',
+        passEtc : '',
+    });
 
     /* 회원권 등록 후 회원권 리스트로 이동 */
     useEffect(
@@ -24,12 +27,11 @@ function PassRegist() {
         [regist]
     );
 
-
     /* 입력 양식 값이 변경될 때 */
     const onChangeHandler = (e) => {
         setForm({
             ...form,
-            [e.target.name] : e.target.value
+            [e.target.name]: e.target.value,
         });
     }
 

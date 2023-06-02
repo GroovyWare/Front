@@ -35,7 +35,8 @@ import RequestWait from './Approval/pages/getDocument/RequestWait';
 import ReqeustWaitDetail from './Approval/pages/getDocument/RequestWaitDetail';
 import Attendance from './attendance/attendance';
 import EquipmentMain from './Equipment/pages/EquipmentMain';
-import MemberList from './Member/pages/MemberList';
+import AttendanceMain from './attendance/admin/AttendanceMain';
+import AttendanceDetail from './attendance/admin/AttendanceDetail';
 
 
 
@@ -95,14 +96,17 @@ function App() {
           </Route> */}
 
           <Route path="schedule" element={<Schedule />} />
-          <Route path='attendance' element={<Attendance/>}/>
+          <Route path="attendance">
+            <Route index element={<Attendance/>} />
+            <Route path="list" element={ <AttendanceMain/> } />
+            <Route path="detail/:empCode" element={ <AttendanceDetail/> } />
+          </Route>
 
           <Route path="member">
             <Route index element={<ProtectedRoute loginCheck={true}><MemberMain /></ProtectedRoute>} />
             <Route path="detail/:memCode" element={<ProtectedRoute loginCheck={true}><MemberDetail /></ProtectedRoute>} />
             <Route path="regist" element={<ProtectedRoute loginCheck={true}><MemberRegist /></ProtectedRoute>} />
             <Route path="modify/:memCode" element={<ProtectedRoute loginCheck={true}><MemberModify /></ProtectedRoute>} />
-            <Route path="add/:memCode" element={<ProtectedRoute loginCheck={true}><MemberAddPass /></ProtectedRoute>} />
             <Route path="members/search" element={<ProtectedRoute loginCheck={true}><MemberMain /></ProtectedRoute>} />
           </Route>
 
@@ -110,6 +114,10 @@ function App() {
             <Route index element={<ProtectedRoute loginCheck={true}><PassMain /></ProtectedRoute>} />
             <Route path="regist" element={<ProtectedRoute loginCheck={true}><PassRegist /></ProtectedRoute>} />
             <Route path="modify/:passCode" element={<ProtectedRoute loginCheck={true}><PassModify /></ProtectedRoute>} />
+          </Route>
+
+          <Route path="history">
+            <Route path="add/:memCode" element={<ProtectedRoute loginCheck={true}><MemberAddPass /></ProtectedRoute>} />
           </Route>
 
           <Route path="employee">

@@ -1,4 +1,4 @@
-import { getHistory } from "../modules/HistoryModule";
+import { getHistory, postHistory } from "../modules/HistoryModule";
 
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
@@ -28,3 +28,25 @@ export const callMemberHistoryCheckAPI = ({ memCode }) => {
       
 
 };
+
+/* 회원의 회원권 추가 */
+export const callMemberAddPassAPI = (formData) => {
+    
+  const requestURL = `${PRE_URL}/history/add`;
+
+  return async (dispatch, getState) => {
+
+      const result = await fetch(requestURL, {
+          method : 'POST',
+          headers : {
+              "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+          },
+          body : formData
+      }).then(response => response.json());
+
+      if(result.status === 200) {
+          console.log('[MemberHistoryAPICalls] callMemberAddPassAPI result :', result);
+          dispatch(postHistory(result));
+      }
+  }
+}
