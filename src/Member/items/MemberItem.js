@@ -13,8 +13,6 @@ function MemberItem({ member : { memCode, memName, memPhone, memStartDate, memEn
 
     return(
         <>
-
-
         <div
         onClick={ () => onClickMemberHandler(memCode) }
         >
