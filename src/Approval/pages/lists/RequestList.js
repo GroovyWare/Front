@@ -33,15 +33,13 @@ function RequestList () {
             <table className={RequestListCSS.table}>
                 <tr>
                     <th>기안일</th>
-                    <th>마감일</th>
                     <th>기안서명</th>
                     <th>결재권자</th>
                     <th>상태</th>
                 </tr>
-                {requestList && requestList.data.approvalDtoContent.map((request, requestIndex) => (
+                {requestList && requestList.data.approvalDtoContent.map((request, requestIndex) => {
                  <tr key={requestIndex} onClick={() => onRowClickHandler(request.apvCode)}>
                     <td>{request.apvCreatedDate}</td>
-                    <td>{request.apvEndDate}</td>
                     <td>{request.document.docTitle}</td>
                     <td style={{display: "flex", justifyContent: "center", flexDirection: "column"}}>
                         {requestList && requestList.data.employeeDtoList.map((employee, employeeIndex) => (
@@ -57,7 +55,7 @@ function RequestList () {
                         ))}
                     </td>
                     </tr>
-                ))}
+            })}
             </table>
             <div>{ pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage }/> }</div>
         </div>

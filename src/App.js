@@ -36,6 +36,8 @@ import Attendance from './attendance/attendance';
 import EquipmentMain from './Equipment/pages/EquipmentMain';
 import AttendanceMain from './attendance/admin/AttendanceMain';
 import AttendanceDetail from './attendance/admin/AttendanceDetail';
+import Confirm from './Approval/pages/lists/Confirm';
+import No from './Approval/pages/lists/No';
 
 
 
@@ -72,6 +74,8 @@ function App() {
             <Route path="detail" element={<ProtectedRoute loginCheck={true}><RequestDetail/></ProtectedRoute>}/>
             <Route path="wait" element={<ProtectedRoute loginCheck={true}><RequestWait/></ProtectedRoute>}/>
             <Route path="waitDetail" element={<ProtectedRoute loginCheck={true}><ReqeustWaitDetail/></ProtectedRoute>}/>
+            <Route path="confirm" element={<ProtectedRoute loginCheck={true}><Confirm/></ProtectedRoute>}/>
+            <Route path="no" element={<ProtectedRoute loginCheck={true}><No/></ProtectedRoute>}/>
           </Route>
 
           <Route path="play" element={<PlayMemberList />}>

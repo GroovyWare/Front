@@ -99,6 +99,7 @@ function Document() {
         formData.append(`approveLine[${index}].apvCode`, 0);
         formData.append(`approveLine[${index}].empCode`, employee.code);
         formData.append(`approveLine[${index}].aplNum`, index + 1);
+        formData.append(`approveLine[${index}].aplStatus`, '진행중')
       });
 
       readEmployees.forEach((reader, index) => {
