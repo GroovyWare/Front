@@ -8,6 +8,7 @@ import LayoutCSS from "../layouts/Layout.module.css";
 function Layout(){
     return(
             <div className={ LayoutCSS.container }>
+                <div className={LayoutCSS.inCon}>
                 <div className={ LayoutCSS.wrap }>
                         <Header/>
                     <div className={ LayoutCSS.content}>
@@ -16,6 +17,7 @@ function Layout(){
                             <Outlet/>
                         </div>
                     </div>
+                </div>
                 </div>
             </div>
 
