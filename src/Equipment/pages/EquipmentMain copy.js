@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { callEquipmentListAPI, callEquipmentSearchListAPI } from "../../api/EquipmentAPICalls";
 import PagingBar from "../../components/common/PagingBar";
 import SearchBar from "../../components/common/SearchBar";
-import { useSearchParams } from "react-router-dom";
+import { Navigate, useParams, useSearchParams } from "react-router-dom";
 import EquipmentMainCSS from './EquipmentMain.module.css';
+import { useNavigate } from "react-router-dom/dist";
 import axios from "axios";
 import EquipmentRegist from "./EquipmentRegist";
 import EquipmentUpdate from "./EquipmentUpdate";
@@ -12,23 +13,25 @@ import EquipmentUpdate from "./EquipmentUpdate";
 function EquipmentMain() {
 
     // const userRole = useSelector('state => state.authCode'); // 이 부분은 실제 authCode를 가져오는 Redux Selector로 변경해야 합니다.
-    const [userRole] = useState('1'); // 임의의 userRole 상태 생성
+    const [userRole, setUserRole] = useState('1'); // 임의의 userRole 상태 생성
     const dispatch = useDispatch();
     const equipments = useSelector(state => state.equipmentReducer);
+    const navigate = useNavigate();
+    const params = useParams();
     const equipmentList = equipments?.data || [];
     const pageInfo = equipments?.pageInfo || null;
+    const eqpCode = params.eqpCode;
 
     const [selectAll, setSelectAll] = useState(false);
     const [checkedEquipments, setCheckedEquipments] = useState([]);
-    const [selectedEquipment, setSelectedEquipment] = useState(null); // 선택된 기구 상태
 
     const [currentPage, setCurrentPage] = useState(1);
     const [searchParams] = useSearchParams();
     const search = searchParams.get('search');
     const [searchTerm, setSearchTerm] = useState(search || '');
 
-    const [isRegistModalOpen, setRegistModalOpen] = useState(false);
-    const [isUpdateModalOpen, setUpdateModalOpen] = useState(false);
+    const [isModalOpen, setModalOpen] = useState(false);
+
 
     useEffect(() => {
         if (selectAll) {
@@ -87,23 +90,13 @@ function EquipmentMain() {
         }
     }
 
-    const openRegistModal = () => {
-        setRegistModalOpen(true);
-    }
-
-    const closeRegistModal = () => {
-        setRegistModalOpen(false);
-    }
-
-    const openUpdateModal = (equipment) => {
-        setSelectedEquipment(equipment);
-        setUpdateModalOpen(true);
-    }
-
-    const closeUpdateModal = () => {
-        setSelectedEquipment(null);
-        setUpdateModalOpen(false);
-    }
+    const openModal = () => {
+        setModalOpen(true);
+      }
+    
+    const closeModal = () => {
+        setModalOpen(false);
+      }
 
     const tdStyles = {
         wordBreak: "break-all"
@@ -136,7 +129,7 @@ function EquipmentMain() {
                 </thead>
                 <tbody>
                     {equipmentList.map((p) => (
-                        <tr key={p.eqpCode} onClick={() => openUpdateModal(p)}>
+                        <tr key={p.eqpCode}>
                             <td style={{textAlign: "center"}}>
                                 <input 
                                     type="checkbox" 
@@ -146,7 +139,7 @@ function EquipmentMain() {
                             </td>
                             <td>{p.eqpTitle}</td>
                             <td>{new Date(p.eqpPurchase).toLocaleDateString('ko-KR', { year: '2-digit', month: '2-digit', day: '2-digit' })}</td>
-                            <td>{p.eqpInspector}</td> {/* 'employee' 대신 'eqpInspector' 필드 사용 */}
+                            <td>{p.employee.empName}</td>
                             <td>{new Date(p.eqpDate).toLocaleDateString('ko-KR', { year: '2-digit', month: '2-digit', day: '2-digit' })}</td>
                             <td style={tdStyles}>{p.eqpStatus}</td>
                         </tr>
@@ -154,15 +147,8 @@ function EquipmentMain() {
                 </tbody>
             </table>
             <div className={ EquipmentMainCSS.buttonDiv }>
-            {userRole === '1' && <button onClick={openRegistModal}>등록</button>}
-            <EquipmentRegist isOpen={isRegistModalOpen} onRequestClose={closeRegistModal}/>
-            {selectedEquipment && 
-                <EquipmentUpdate 
-                    isOpen={isUpdateModalOpen} 
-                    onRequestClose={closeUpdateModal} 
-                    equipment={selectedEquipment}
-                />
-            }
+            {userRole === '1' && <button onClick={openModal}>등록</button>}
+            <EquipmentRegist isOpen={isModalOpen} onRequestClose={closeModal}/>
             {userRole === '1' && <button onClick={handleDelete}>삭제</button>}
             </div>
             <div>

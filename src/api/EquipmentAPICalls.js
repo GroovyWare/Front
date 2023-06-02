@@ -1,4 +1,4 @@
-import { getEquipment, getEquipments, postEquipment, putEquipment, deleteEquipment } from "../modules/EquipmentModule";
+import { getEquipment, getEquipments, postEquipment, putEquipment } from "../modules/EquipmentModule";
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
@@ -34,16 +34,17 @@ export const callEquipmentSearchListAPI = ({ search, currentPage = 1}) => {
     }
 }
 
-export const callEquipmentRegistAPI = (formData) => {
+export const callEquipmentRegistAPI = (data) => {
     const requestURL = `${PRE_URL}/equipment`;
 
     return async (dispatch, getState) => {
         const result = await fetch(requestURL, {
             method : 'POST',
             headers : {
-                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken'),
+                "Content-Type": "application/json"
             },
-            body : formData
+            body : JSON.stringify(data)
         }).then(response => response.json());
 
         if(result.status === 200) {
@@ -53,16 +54,18 @@ export const callEquipmentRegistAPI = (formData) => {
     }
 }
 
-export const callEquipmentUpdateAPI = (formData) => {
-    const requestURL = `${PRE_URL}/equipment`;
+
+export const callEquipmentUpdateAPI = (eqpCode, formData) => {
+    const requestURL = `${PRE_URL}/equipment/${eqpCode}`;
 
     return async (dispatch, getState) => {
         const result = await fetch(requestURL, {
             method : 'PUT',
             headers : {
-                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken'),
+                "Content-Type": "application/json"
             },
-            body : formData
+            body : JSON.stringify(formData)
         }).then(response => response.json());
 
         if(result.status === 200) {
@@ -72,22 +75,3 @@ export const callEquipmentUpdateAPI = (formData) => {
     }
 }
 
-export const callEquipmentDeleteAPI = (formData) => {
-    
-    const requestURL = `${PRE_URL}/equipment`;
-
-    return async (dispatch, getState) => {
-        const result = await fetch(requestURL, {
-            method : 'DELETE',
-            headers : {
-                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
-            },
-            body : formData
-        }).then(response => response.json());
-
-        if(result.status === 200) {
-            console.log("[EquipmentAPICalls] callEquipmentDeleteAPI result : ", result);
-            dispatch(deleteEquipment(result));
-        }
-    }
-}
