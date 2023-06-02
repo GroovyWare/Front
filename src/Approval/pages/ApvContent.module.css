@@ -1,42 +1,32 @@
-.centerDiv{
-    width: 1000px;
-    height: 700px;
-    margin-top: 80px;
-    margin-bottom: 30px;
-    border-radius: 30px;
-    transform: translate(22%, -11.7%);
-}
-
 .docDiv{
-    width: 500px;
-    height: 400px;
-    margin-top: 81px;
-    padding-top: 38px;
+    /* margin-top: 81px; */
+    /* padding-top: 38px; */
     /* border-radius: 30px; */
     /* margin-right: 30px; */
     background-color: white;
+    width: 500px;
+    /* padding-bottom: 38px; */
 }
 
 
-.favorite{
+/* .favorite{
     float:right;
     margin-top: 15px;
     font-family: "LINESeedKR-Bd";
     font-size : 14px;
     color: #505050;
     margin-right: 30px;
-}
+} */
 
 .docChooseDiv{
     font-family: "LineSeedKR-Bd";
-    width: 300px;
+    width: 200px;
     font-size: 22px;
     color: white;
-    text-align:center;
-    margin-top:81px;
-    margin-left:110px;
+    text-align: center;
+    /* margin-top: 81px; */
+    /* margin-left: 110px; */
     background-color: #667eea;
-    border-radius: 20px;
 }
 
 .docChooseDiv li{
@@ -47,10 +37,20 @@
 
 .centerDiv button{
     width: 50px;
-    float: right;
-    margin-top: 137px;
+    /* float: right; */
+    /* margin-top: 137px; */
     font-size: 14px;
     font-family: "LineSeedKR-Bd";
+}
+
+.centerDivButton{
+    width: 50px;
+    font-size: 14px;
+    font-family: "LineSeedKR-Bd";
+    background-color: #667eea;
+    color: white;
+    /* transform: translate(1680%, -150%); */
+    border: none;
 }
 
 .docTitle{
@@ -58,7 +58,7 @@
     font-size: 22px;
     color: #505050;
     margin-left: 100px;
-    margin-top: 30px;
+    /* margin-top: 30px; */
     padding-bottom: 20px;
     display: flex;
     margin-top: 10px;
@@ -77,15 +77,7 @@
     /*%20margin-right:%2085px;%20*/
 }
 
-.container {
-    background:  rgba(253, 253, 253, 0.8);
-    backdrop-filter: blur( 20px );
-    border-radius: 10px;
-    border: 1px solid rgba( 255, 255, 255, 0.18 );
-    width: 100vw;
-    height: 700px;   
-    margin-right: 10px;
-    margin-top: 10px;
-    padding: 20px;
-    font-family: 'LINESeedKR-Rg';
+.container{
+    padding: 100px;
+    margin-left: 200px;
 }
