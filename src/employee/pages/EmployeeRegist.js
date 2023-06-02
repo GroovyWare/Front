@@ -217,7 +217,7 @@ function EmployeeRegist() {
         <div className={ RegistCSS.container }>
 
             <div className={ RegistCSS.pageTitle }>
-                <h3>직원등록</h3>
+                <div>직원등록</div>
             </div>
 
             <div className={ RegistCSS.content }>

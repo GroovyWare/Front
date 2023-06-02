@@ -1,15 +1,32 @@
-@import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
-
 .container {
     margin-top: 10px;
     padding: 20px;
-    font-family: 'Raleway', sans-serif;
 }
 
+/* 페이지 제목 */
+.pageTitle > div {
+    font-size: 22px;
+    font-weight: 700;
+    position: relative;
+    left: 20px;
+}
+
+/* 내용 컨테이너 */
+.content {
+    display: flex;
+    justify-content: center;
+    font-size: 16px;
+    height: 600px;
+    margin: 10px 0px;
+    border-top: 2px solid #5a5a5a1a;
+    border-bottom: 2px solid #5a5a5a1a;
+    padding: 60px 0px;
+    font-family: 'LINESeedKR-Rg';
+}
 
 /* 프로필 이미지 */
 .profileDiv {
-    width: 200px;
+    width: 300px;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -26,31 +43,32 @@
 
 .empInfo input {
     border: 0px;
-    border-bottom: 1px solid #1A1779;
+    border-bottom: 1px solid #5a5a5a42;
     background-color: transparent;
     margin-right: 10px;
     height: 20px;
     font-size: 16px;
     padding: 3px;
+}
 
+.empInfo input:focus {
+    border-bottom: 1.5px solid #5a5a5a;
 }
 
 .profileDiv > button {
-    width: 80px;
-    height: 30px;
-    border: none;
-    border-radius: 7px;
-    background-color: #1A1779;
-    color: #ffffff;
     cursor: pointer;
-    /* font-family: 'esamanru'; */
+    margin-top: 15px;
+    color: #fff;
+    background-color: #716dff;
+    border: none;
+    border-radius: 3px;  
+    width: 70px;
+    padding: 3px 7px;
+    padding-top: 5px;
+    font-family: 'LINESeedKR-Rg';
+    font-size: 13px;
+    font-weight: 700;
     letter-spacing: 1px;
-    margin: auto;
-    margin-top: 10px;
-}
-
-.profileDiv > button:hover {
-    background-color: #94a9ff;
 }
 
 .imgInput {
@@ -58,17 +76,9 @@
 }
 
 /* 직원 정보 */
-.content {
-    display: flex;
-    justify-content: center;
-    font-size: 16px;
-    height: 700px;
-}
-
 .empInfo {
     min-width: 500px;
     padding-left: 20px;
-    
 }
 
 .empInfo td {
@@ -87,27 +97,44 @@
 }
 
 .inputTitle label {
-    margin-right: 5px;
+    margin-right: 10px;
 }
-
-
 
 /* 버튼 */
 .checkBtn {
-    width: 60px;
-    height: 25px;
     border: none;
-    border-radius: 7px;
-    background-color: #1A1779;
-    color: #ffffff;
+    border-radius: 3px;
+    background-color: #716dff;
+    color: #fff;
     cursor: pointer;
-    /* font-family: 'esamanru'; */
-    margin: auto;
+    letter-spacing: 1px;
+    padding: 3px 7px;
+    padding-top: 5px;
+    font-family: 'LINESeedKR-Rg';
+    font-size: 13px;
+    font-weight: 700;
 }
 
 .btn {
-    text-align: center;
-    
+    text-align: right;
+    position: relative;
+    right: 20px;
+}
+
+.btn button {
+    cursor: pointer;
+    margin: 0px 10px;
+    color: #fff;
+    background-color: #716dff;
+    border: none;
+    width: 70px;
+    border-radius: 3px;  
+    padding: 3px 7px;
+    padding-top: 5px;
+    font-family: 'LINESeedKR-Rg';
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 
 
@@ -136,29 +163,33 @@
 /* 셀렉트 박스 */
 .selectDiv select {
     position: relative;
-    width: 100px;
-    height: 30px;
+    width: 90px;
+    height: 25px;
     border-radius: 4px;
+    font-family: 'LINESeedKR-Rg';
 }
 
 .selectDiv select:focus {
-    border: 2px solid crimson;
-    outline: none; /* 선택 시 기본적으로 나타나는 아웃라인 제거 */
+    outline: none;
 }
 
 /* 체크 박스 */
 @import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 
+.checkboxDiv label {
+    margin-right: 15px;
+}
+
 .checkboxDiv input[type=checkbox] {
     display: none;
-  }
+}
 
 .checkboxDiv label::before {
     content: '\f00c';
     font-family: 'Fontawesome';
-    border: 1px solid #333;
-    width: 14px;
-    height: 14px;
+    border: 1px solid #5a5a5a;
+    width: 15px;
+    height: 15px;
     border-radius: 3px;
     margin-right: 5px;
     font-size: 13px;
@@ -168,6 +199,8 @@
     line-height: 14px;
     color: transparent;
     transition: 0.2s;
+    position: relative;
+    top: -2px;
 }
 
 .checkboxDiv input[type=checkbox]:checked + label::before {
