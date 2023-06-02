@@ -6,7 +6,7 @@
 }
 
 @font-face {
-    font-family: 'LINESeedKR-Bd';
+    font-family: 'LINESeedKR';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
@@ -16,15 +16,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-   /* background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%); */
-   /* background-image: linear-gradient(45deg, #ee9ca7 0%, #ffdde1 100%); */
-    background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+    background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
+    background-size: cover;
+    min-height: 100vh;
+    min-width: 100vw;
 }
 .loginBg {
     width: 700px;
     height: 700px;
-   /* background-color: #4A5CFF; */
     background:  rgba( 255, 255, 255, 0.65 );
     backdrop-filter: blur( 20px );
     border-radius: 10px;

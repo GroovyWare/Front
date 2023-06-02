@@ -13,7 +13,8 @@
 }
 
 .container {
-    width: 200px;  
+    width: 200px;
+
 }
 
 /* profile */
@@ -22,13 +23,15 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background:  rgba( 255, 255, 255, 0.65 );
+    background:  rgba( 255, 255, 255, 0.85 );
     backdrop-filter: blur( 20px );
     border-radius: 10px;
     border: 1px solid rgba( 255, 255, 255, 0.18 );
     width: auto;
     height: 200px;
     margin: 10px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.05), 0 6px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
 }
 
 .profileBox {
@@ -49,15 +52,14 @@
     font-family: 20px;
     font-family: 'esamanru';
     line-height: 40px;
-    text-align: center;
-    
+    text-align: center;   
 }
 
 .logoutBtn {
     width: 80px;
     height: 25px;
-    border: 0px solid #1A1779;
-    border-radius: 10px;
+    border: none;
+    border-radius: 5px;
     background-color: #1A1779;
     color: #ffffff;
     cursor: pointer;
@@ -71,13 +73,17 @@
 
 /* navbar */
 .navDiv {
-    background:  rgba( 255, 255, 255, 0.65 );
+    background:  rgba( 255, 255, 255, 0.85 );
     backdrop-filter: blur( 20px );
     border-radius: 10px;
     width: auto;
+    height: 660px;
     min-width: 180px;
     margin: 10px;
     cursor: pointer;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.05), 0 6px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px 0px;
+
 }
 
 .navDiv ul {
@@ -96,14 +102,13 @@
 
 .menu > li {
     width: 100%;
-    line-height: 40px;
+    line-height: 50px;
     text-indent: 1.5em;
 }
 
 .subMenu > li {
-    font-size: 20px;
+    font-size: 18px;
     line-height: 32px;
-    background-color: #94a9ff;
     text-align: left;
 }
   
@@ -114,27 +119,28 @@
 
 .menu > li:hover {
     border-radius: 10px;
-    background-color: #94a9ff;
-    color : #1A1779;
     overflow: hidden;
+    color: #2b2b2b;
 }
 
 .menu > li:hover .arrowYes {
     transform: rotateZ(90deg);
     transition-duration: .5s;
-    filter: invert(100%) sepia(100%) saturate(1%) hue-rotate(249deg) brightness(101%) contrast(101%);
+    /* filter: invert(100%) sepia(100%) saturate(1%) hue-rotate(249deg) brightness(101%) contrast(101%); */
 }
   
 .menu > li:hover .subMenu {
     height: auto;
-    border-radius: 10px;
     transition-duration: 0.5s;
 }
 
+.menu > li:hover .subMenu > li:hover {
+    text-decoration: 2px underline #2b2b2b;
+    text-underline-position: under;
+}
+
 .subMenu > li:hover {
-    border-radius: 10px;
-    background-color: #627ef1;
-    transition-duration: 0.5s;
+    transition-duration: 1s;
 }
 
 .link {
@@ -143,17 +149,12 @@
     color: #2b2b2b;
 }
 
-.link:hover {
-    color: #fff;
-}
-
 .arrowYes {
     position: relative;
     top: 7px;
     width: 38px;
     height: 100%;
     filter: invert(13%) sepia(3%) saturate(84%) hue-rotate(78deg) brightness(103%) contrast(91%);
-
 }
 
 .arrowNo {

@@ -15,10 +15,10 @@ function EmployeeRegist() {
         if (!regex.test(value)) {
         return {
             isValid: false,
-            error: '문자, 숫자, 특수문자를 포함한 최소 8자리 이상 입력해주세요.'
+            error: '문자, 숫자, 특수문자를 포함한 최소 8자리 이상 입력해주세요.',
         };
         }
-        return { isValid: true, success: '사용가능한 비밀번호입니다.' };
+        return { isValid: true, success: '사용가능한 비밀번호입니다.' }; ;
     };
 
     // 비밀번호 일치 여부
@@ -32,6 +32,7 @@ function EmployeeRegist() {
         return { isValid: true, success: '비밀번호가 일치합니다.', };
     };
 
+    // 이름 유효성 검사
     const nameValidator = (value) => {
         const regex = /^[가-힣]{2,5}$/;
         if (!regex.test(value)) {
@@ -65,7 +66,6 @@ function EmployeeRegist() {
         }
         return { isValid: true, success: '사용가능한 이메일입니다.' };
     };
-
 
     const password = useInput('', passwordValidator);
     const passwordConfirm = useInput('', passwordConfirmValidator);
@@ -119,7 +119,7 @@ function EmployeeRegist() {
         },
         [form]
     )
-    
+
     useEffect(
         () => {
             check ? setIdCheck(true) : setIdCheck(false); // 아이디 중복여부
@@ -217,10 +217,11 @@ function EmployeeRegist() {
         <div className={ RegistCSS.container }>
 
             <div className={ RegistCSS.pageTitle }>
-                <h3>직원등록</h3>
+                <div>직원등록</div>
             </div>
 
-            <div className={ RegistCSS.content }>              
+            <div className={ RegistCSS.content }>
+                
                 <div className={ RegistCSS.profileDiv }>
                     { imageUrl ? 
                      <img src={ imageUrl } alt=""/> : <img src={ profileDefaultImage } alt=""/> }
@@ -239,8 +240,8 @@ function EmployeeRegist() {
                 <div className={ RegistCSS.empInfo }>
                 <table>
                     <tbody>
-                        <tr>
-                            <td><label>아이디</label></td>
+                        <tr className={ RegistCSS.row}>
+                            <th className={RegistCSS.inputTitle}><label>아이디</label></th>
                             <td>
                                 <input
                                     type="text"
@@ -248,43 +249,57 @@ function EmployeeRegist() {
                                     value = { form.empId }
                                     onChange={ onChangeHandler }
                                 />
-                                <button onClick={ doubleCheck } disabled={ form.empId.length < 1 }>중복 확인</button>
-                                {  isClicked && check ? <div>이미 사용 중인 아이디입니다.</div> 
-                                  : form.empId.length > 0 && isClicked && !check ? <div>사용가능한 아이디입니다.</div>
+                                <button className={ RegistCSS.checkBtn } onClick={ doubleCheck } disabled={ form.empId.length < 1 }>중복 확인</button><br/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                            {  isClicked && check ? <div className={RegistCSS.message}>이미 사용 중인 아이디입니다.</div> 
+                                  : form.empId.length > 0 && isClicked && !check ? <div className={RegistCSS.message}>사용가능한 아이디입니다.</div>
                                   : null
                                 }
                             </td>
-                            
                         </tr>
-                        <tr>
-                            <td><label>비밀번호</label></td>
+                        <tr className={ RegistCSS.row}>
+                            <th className={RegistCSS.inputTitle}><label>비밀번호</label></th>
                             <td>
                                 <input
                                     type="password"
                                     name="empPassword"
                                     value={password.value}
                                     onChange={password.onChange}
-                                />
-                                { password.value.length > 0 &&
-                                  <div className={RegistCSS.message}>{password.message}</div>}
+                                />              
                             </td>
                         </tr>
                         <tr>
-                            <td><label>비밀번호 확인</label></td>
+                            <td></td>
+                            <td>
+                            { password.value.length > 0 &&
+                                  <div className={ RegistCSS.message }>{password.message}</div>}
+                            </td>
+                        </tr>
+                        <tr className={ RegistCSS.row}>
+                            <th className={RegistCSS.inputTitle}><label>비밀번호 확인</label></th>
                             <td>
                                 <input
                                     type="password"
                                     value={passwordConfirm.value}
                                     onChange={passwordConfirm.onChange}
                                 />
-                                { 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                            { 
                                  passwordConfirm.value.length > 0 &&
                                 <div className={RegistCSS.message}>{passwordConfirm.message}</div>
                                 }
                             </td>
                         </tr>
-                        <tr>
-                            <td><label>이름</label></td>
+                        <tr className={ RegistCSS.row}>
+                            <th className={RegistCSS.inputTitle}><label>이름</label></th>
                             <td>
                                 <input
                                     type="text"
@@ -292,12 +307,17 @@ function EmployeeRegist() {
                                     value={name.value}
                                     onChange={name.onChange}
                                 />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
                                 { name.value.length > 0 &&
                                     <div className={RegistCSS.message}>{name.message}</div>}                            
                             </td>
                         </tr>
-                        <tr>
-                            <td><label>휴대폰번호</label></td>
+                        <tr className={ RegistCSS.row}>
+                            <th className={RegistCSS.inputTitle}><label>휴대폰번호</label></th>
                             <td>
                                 <input
                                     type="text"
@@ -307,12 +327,17 @@ function EmployeeRegist() {
                                     }
                                     onChange={phone.onChange}
                                 />
-                                { phone.value.length > 0 &&
-                                    <div className={RegistCSS.message}>{phone.message}</div>} 
                             </td>
                         </tr>
                         <tr>
-                            <td><label>이메일</label></td>
+                            <td></td>
+                            <td>
+                            { phone.value.length > 0 &&
+                                    <div className={RegistCSS.message}>{phone.message}</div>} 
+                            </td>
+                        </tr>
+                        <tr className={ RegistCSS.row}>
+                            <th className={RegistCSS.inputTitle}><label>이메일</label></th>
                             <td>
                                 <input
                                     type="text"
@@ -320,12 +345,17 @@ function EmployeeRegist() {
                                     value={email.value}
                                     onChange={email.onChange}
                                 />
-                                { email.value.length > 0 &&
-                                    <div className={RegistCSS.message}>{email.message}</div>}
                             </td>
                         </tr>
                         <tr>
-                            <td><label>주소</label></td>
+                            <td></td>
+                            <td>
+                            { email.value.length > 0 &&
+                                    <div className={RegistCSS.message}>{email.message}</div>}
+                            </td>
+                        </tr>
+                        <tr className={ RegistCSS.row}>
+                            <th className={RegistCSS.inputTitle}><label>주소</label></th>
                             <td>
                                 <input
                                     type="text"
@@ -334,9 +364,9 @@ function EmployeeRegist() {
                                 />
                             </td>
                         </tr>
-                        <tr>
-                            <td><label>부서</label></td>
-                            <td>
+                        <tr className={ RegistCSS.row}>
+                            <th className={RegistCSS.inputTitle}><label>부서</label></th>
+                            <td className={ RegistCSS.selectDiv}>
                                 <select
                                 name="deptCode"
                                 onChange={ onChangeHandler }>
@@ -350,9 +380,9 @@ function EmployeeRegist() {
                                 </select>
                             </td>
                         </tr>
-                        <tr>
-                            <td><label>직급</label></td>
-                            <td>
+                        <tr className={ RegistCSS.row}>
+                            <th className={RegistCSS.inputTitle}><label>직급</label></th>
+                            <td className={ RegistCSS.selectDiv}>
                                 <select 
                                     name="positionCode"
                                     onChange={ onChangeHandler }
@@ -365,35 +395,33 @@ function EmployeeRegist() {
                                 </select>
                             </td>
                         </tr>
-                        <tr>
-                            <td><label>권한</label></td>
-                            <td>
-                                <label>
-                                    <input
-                                        type="checkbox"
-                                        value="1"
-                                        onChange={(e)=>{
-                                            checkedHandler(e.currentTarget.checked, 1)
-                                          }}
-                                          checked={checkedInputs.includes(1) ? true : false}
-                                    />
-                                관리자
-                                </label>
-                                <label>
-                                    <input
-                                        type="checkbox"
-                                        value="2"
-                                        onChange={(e)=>{
-                                            checkedHandler(e.currentTarget.checked, 2)
-                                          }}
-                                          checked={checkedInputs.includes(2) ? true : false}
-                                    />
-                                일반
-                                </label>
+                        <tr className={ RegistCSS.row}>
+                            <th className={RegistCSS.inputTitle}><label>권한</label></th>
+                            <td className={ RegistCSS.checkboxDiv }>
+                                <input
+                                    type="checkbox"
+                                    id="checkbox1"
+                                    value="1"
+                                    onChange={(e)=>{
+                                        checkedHandler(e.currentTarget.checked, 1)
+                                        }}
+                                        checked={checkedInputs.includes(1) ? true : false}
+                                />
+                                <label for="checkbox1">관리자</label>
+                                <input
+                                    type="checkbox"
+                                    id="checkbox2"
+                                    value="2"
+                                    onChange={(e)=>{
+                                        checkedHandler(e.currentTarget.checked, 2)
+                                        }}
+                                        checked={checkedInputs.includes(2) ? true : false}
+                                />
+                                <label for="checkbox2">일반</label>
                             </td>
                         </tr>
                     </tbody>
-                    </table>
+                    </table>      
                 </div>
 
 
