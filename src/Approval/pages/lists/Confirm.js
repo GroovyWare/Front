@@ -11,7 +11,7 @@ function Confirm(){
     const dispatch = useDispatch();
 
     const {waitList, now} = useSelector(state => state.approvalReducer);
-    const pageInfo = waitList?.pageInfo;
+    const pageInfo = waitList?.data.pageInfo;
 
     const [ currentPage, setCurrentPage ] = useState(1);
 
@@ -32,11 +32,14 @@ function Confirm(){
     )
 
     return(
-        <div className={ConfirmCSS.container}>
+        <>
+            <h3 className={ConfirmCSS.container}>종결함</h3>
+        <div className={ConfirmCSS.tableDiv}>
             <table className={ConfirmCSS.table}>
                 <tr>
                     <th>기안자</th>
                     <th>기안일</th>
+                    <th>마감일</th>
                     <th>기안서명</th>
                     <th>상태</th>
                 </tr>
@@ -49,6 +52,7 @@ function Confirm(){
                                 <tr key={waitIndex} onClick={() => onRowClickHandler(wait.apvCode)}>
                                     <td>{wait.employee.empName}</td>
                                     <td>{wait.apvCreatedDate}</td>
+                                    <td>{wait.apvEndDate}</td>
                                     <td>{wait.document.docTitle}</td>
                                     <td style={{display: "flex", justifyContent: "center", flexDirection: "column"}}>
                                     {wait.apvStatus}
@@ -58,7 +62,8 @@ function Confirm(){
                 }})}
             </table>
             <div>{ pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage }/> }</div>
-        </div>
+            </div>
+        </>
     )
 }
 
