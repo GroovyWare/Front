@@ -59,6 +59,23 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
         [update]
     )
 
+    useEffect(
+        () => {
+            if(image) {
+                 const fileReader = new FileReader();
+                 fileReader.onload = (e) => {
+                    
+                    const { result } = e.target;
+                    console.log('result : ' , result);
+                    if(result) setImageUrl(result);
+                 }
+                 fileReader.readAsDataURL(image);
+            }
+        },
+        [image]
+    )
+
+
 
     const closeEmpDetails = () => {
         setEmpDetailsOpen(false);
@@ -138,14 +155,14 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
     <div className={ empDetailsCSS.modal }>
         <div className={ empDetailsCSS.container }>
 
-            <div className={ empDetailsCSS.modalHeader }>
-                <h3 className={ empDetailsCSS.modalTitle }>직원 상세 정보</h3>
+            <div className={ empDetailsCSS.pageTitle }>
+                <div>직원 상세 정보</div>
             </div>
 
-            <div className={ empDetailsCSS.modalBody }>
+            <div className={ empDetailsCSS.content }>
                 <div className={ empDetailsCSS.profileDiv }>
-                    { imageUrl && <img src={ imageUrl }/> }
-                    { !imageUrl && <img src={ profileDefaultImage }/> }
+                    { imageUrl ? 
+                    <img src={ imageUrl } alt=""/> : <img src={ profileDefaultImage } alt=""/> }
                     <input
                         className={ empDetailsCSS.imgInput }
                         type="file"
@@ -156,21 +173,25 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
                     />
                 <button
                     onClick={ onClickImageUpload }
-                >  
+                >
                     사진 첨부
                 </button>
                 </div>    
-                <div className={ empDetailsCSS.userInfo }>
+                <div className={ empDetailsCSS.empInfo }>
                     <table>
                       <tbody>
-                        <tr>
-                            <td>아이디</td>
+                        <tr className={ empDetailsCSS.row }>
+                            <th className={empDetailsCSS.inputTitle}><label>아이디</label></th>
                             <td>
-                                { emp.empId }
+                                <input
+                                    type="text"
+                                    value={ emp.empId }
+                                    readOnly
+                                />
                             </td>
                         </tr>
-                        <tr>
-                            <td><label>패스워드</label></td>
+                        <tr className={ empDetailsCSS.row }>
+                            <th className={empDetailsCSS.inputTitle}><label>패스워드</label></th>
                             <td>
                                 <input
                                 type="password"
@@ -179,8 +200,8 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
                                 />
                             </td>
                         </tr>
-                        <tr>
-                            <td><label>이름</label></td>
+                        <tr className={ empDetailsCSS.row }>
+                            <th className={empDetailsCSS.inputTitle}><label>이름</label></th>
                             <td>
                                 <input
                                 type="text"
@@ -189,8 +210,8 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
                                 />
                             </td>
                         </tr>
-                        <tr>
-                            <td><label>휴대폰번호</label></td>
+                        <tr className={ empDetailsCSS.row }>
+                            <th className={empDetailsCSS.inputTitle}><label>휴대폰번호</label></th>
                             <td>
                                 <input
                                 type="text"
@@ -200,8 +221,8 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
                                 />
                             </td>
                         </tr>
-                        <tr>
-                            <td><label>이메일</label></td>
+                        <tr className={ empDetailsCSS.row }>
+                            <th className={empDetailsCSS.inputTitle}><label>이메일</label></th>
                             <td>
                                 <input
                                 type="email"
@@ -211,8 +232,8 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
                                 />
                             </td>
                         </tr>
-                        <tr>
-                            <td><label>주소</label></td>
+                        <tr className={ empDetailsCSS.row }>
+                            <th className={empDetailsCSS.inputTitle}><label>주소</label></th>
                             <td>
                                 <input
                                 type="text"
@@ -222,8 +243,8 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
                                 />
                             </td>
                         </tr>
-                        <tr>
-                            <td><label>입사일</label></td>
+                        <tr className={ empDetailsCSS.row }>
+                            <th className={empDetailsCSS.inputTitle}><label>입사일</label></th>
                             <td>
                                 <input
                                 type="date"
@@ -233,9 +254,9 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
                                 />
                             </td>
                         </tr>
-                        <tr>
-                            <td><label>부서</label></td>
-                            <td>
+                        <tr className={ empDetailsCSS.row }>
+                            <th className={empDetailsCSS.inputTitle}><label>부서</label></th>
+                            <td className={ empDetailsCSS.selectDiv}>
                                 <select
                                 name="deptCode"
                                 value ={ form.dept.deptCode }
@@ -250,9 +271,9 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
                                 </select>
                             </td>
                         </tr>
-                        <tr>
-                            <td><label>직급</label></td>
-                            <td>
+                        <tr className={ empDetailsCSS.row }>
+                            <th className={empDetailsCSS.inputTitle}><label>직급</label></th>
+                            <td className={ empDetailsCSS.selectDiv}>
                                 <select 
                                     name="positionCode"
                                     value ={ form.position.positionCode }
@@ -266,52 +287,42 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
                                 </select>
                             </td>
                         </tr>
-                        <tr>           
-                            <td><label>권한</label></td>
-                            <td>
-                                <label>
-                                    <input
-                                        type="checkbox"
-                                        value="1"
-                                        onChange={(e)=>{
-                                            checkedHandler(e.currentTarget.checked, 1)
-                                          }}
-                                        checked={ checkedInputs.includes(1) ? true : false }
-                                    />
-                                관리자
-                                </label>
-                                <label>
-                                    <input
-                                        type="checkbox"
-                                        value="2"
-                                        onChange={(e)=>{
-                                            checkedHandler(e.currentTarget.checked, 2)
-                                          }}
+                        <tr className={ empDetailsCSS.row }>           
+                        <th className={empDetailsCSS.inputTitle}><label>권한</label></th>
+                        <td className={ empDetailsCSS.checkboxDiv }>
+                                <input
+                                    type="checkbox"
+                                    id="checkbox1"
+                                    value="1"
+                                    onChange={(e)=>{
+                                        checkedHandler(e.currentTarget.checked, 1)
+                                        }}
+                                        checked={checkedInputs.includes(1) ? true : false}
+                                />
+                                <label for="checkbox1">관리자</label>
+                                <input
+                                    type="checkbox"
+                                    id="checkbox2"
+                                    value="2"
+                                    onChange={(e)=>{
+                                        checkedHandler(e.currentTarget.checked, 2)
+                                        }}
                                         checked={checkedInputs.includes(2) ? true : false}
-                                    />
-                                일반
-                                </label>
+                                />
+                                <label for="checkbox2">일반</label>
                             </td>
-                        </tr>
+                         </tr>
                         </tbody>
                         </table>
-                    <div className={ empDetailsCSS.btn }>
-                        <button
-                            onClick={ onClickEmployeeUpdate }
-                        >
-                            수정
-                        </button>
-                        <button
-                            onClick={ closeEmpDetails }
-                        >
-                            취소
-                        </button>
                     </div>
+                 </div>
+
+                <div className={ empDetailsCSS.btn }>
+                    <button onClick={ onClickEmployeeUpdate }>수정</button>
+                    <button onClick={ closeEmpDetails }>취소</button>
                 </div>
             </div>
-
         </div>
-    </div>
     )
 }
 
