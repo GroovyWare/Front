@@ -12,7 +12,7 @@
 }
 
 /* 페이지 제목 */
-.pageTitle > div {
+.pageTitle {
     font-size: 20px;
     font-weight: 700;
     position: relative;
@@ -22,24 +22,34 @@
 }
 
 .searchbar {
-    display: none;
-    float: right;
     position: relative;
-    top: 15px;
-    border: 1px solid #5a5a5a;
-    border-radius: 10px;
-    width: 300px;
-    background-color: #a7a7a7;
+    float: right;
+    top: 30px;
+    right: 10px;
+    border: none;
+    width: 230px;
+    height: 30px;
+    border-bottom: 1.5px solid #5a5a5a;
 }
 
-.searchbar > input{
-    border:none;
-    border-bottom: 1px solid #5a5a5a;
+.searchbar > input {
+    border: none;
     background-color: transparent;
-    font-size: 14px;
+    font-size: 15px;
+    height: 30px;
+    margin-left: 8px;
+}
+
+.searchbar > button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
 }
 
 .search {
+    position: absolute;
+    top: 0px;
+    right: 0px;
     width: 30px;
     height: 30px;
 }
