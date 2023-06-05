@@ -86,8 +86,8 @@ function RequestDetail(){
         <div className={RequestDetailCSS.container}>
             <div className={RequestDetailCSS.pageTitle}>
                 <div>문서 번호 {apvCode}</div>
-                <hr/>
             </div>
+            <div className={RequestDetailCSS.content}>
         <div className={RequestDetailCSS.wrap}>
             <div className={RequestDetailCSS.editor}>
                 <StyledQuill 
@@ -99,6 +99,7 @@ function RequestDetail(){
             </div>
             <div className={RequestDetailCSS.detail}>
             </div>
+        </div>
         </div>
         </div>
     )
