@@ -9,6 +9,9 @@ import { searchContextAPI } from '../../../api/ApprovalAPICall';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { searchApproveLineAPI } from '../../../api/ApprovalAPICall';
 import { acceptApprovalAPI } from '../../../api/ApprovalAPICall';
+import { toast } from 'react-toastify';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import { confirmAlert } from 'react-confirm-alert';
 
 const Parchment = Quill.import('parchment');
 
@@ -92,19 +95,33 @@ function ReqeustWaitDetail(){
 
     const onClickOkHandler = (e) => {
 
-        const form = {
-            'apvCode' : apvCode,
-            'approveLine' : [{
-                'aplStatus' : e.target.dataset.value,
-                'aplDate' : new Date
-            }]
-        }
+       
 
-        dispatch(acceptApprovalAPI(form));
+            confirmAlert({
+                title: `${e.target.dataset.value} 하시겠습니까?`,
+                buttons: [
+                  {
+                    label: '네',
+                    onClick: () => {
+                        const form = {
+                            'apvCode' : apvCode,
+                            'approveLine' : [{
+                                'aplStatus' : e.target.dataset.value,
+                                'aplDate' : new Date
+                            }]
+                        }
+                
+                        dispatch(acceptApprovalAPI(form));
 
-        if(accept?.status === 200){
-            navigate('/approval/wait', {replace : true});
-        }
+                        navigate('/approval', {replace : true})
+                    }  
+                  },
+                  {
+                    label: '아니오',
+                    onClick: () => navigate('/approval/wait', {replace : true})
+                  }
+                ]
+              });
     }
 
     return(
