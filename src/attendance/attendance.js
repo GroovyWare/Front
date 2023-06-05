@@ -98,7 +98,7 @@ const Attendance = () => {
                         {!attendance?.data?.attStart && (
                             <button onClick={goWorking}
                                 className={attendanceCSS.buttons}>
-                                여기가 출근 버튼
+                                출근
                             </button>
                         )}
                     </div>
@@ -113,10 +113,12 @@ const Attendance = () => {
                             ) : (
                                 time.toLocaleTimeString()
                             )}
-
-                            <button onClick={leavingWork} className={attendanceCSS.buttons}>
-                                여기가 퇴근 버튼
-                            </button>
+                            {!attendance?.data?.attEnd &&(
+                                <button onClick={leavingWork} className={attendanceCSS.buttons}>
+                                퇴근
+                             </button>
+                            )}
+                            
                         </div>
                     </div>
                 </div>
