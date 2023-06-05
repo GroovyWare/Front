@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { callAnnounceDetailAPI } from "../../../api/AnnounceAPICalls";
@@ -12,7 +12,6 @@ function AnnounceDetail() {
     const navigate = useNavigate();
     const params = useParams();
     const announce = useSelector(state => state.announceReducer);
-    const currentUser = useSelector(state => state.loginReducer);
     const annCode = params.annCode;
 
     useEffect(() => {

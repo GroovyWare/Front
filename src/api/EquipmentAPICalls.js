@@ -46,14 +46,10 @@ export const callEquipmentRegistAPI = (data) => {
             },
             body : JSON.stringify(data)
         }).then(response => response.json());
-
-        if(result.status === 200) {
-            console.log("[EquipmentAPICalls] callEquipmentRegistAPI result : ", result);
-            dispatch(postEquipment(result));
-        }
+        console.log("[EquipmentAPICalls] callEquipmentRegistAPI result : ", result);
+        dispatch(postEquipment(result));  // Always dispatch an action, regardless of the status
     }
 }
-
 
 export const callEquipmentUpdateAPI = (eqpCode, formData) => {
     const requestURL = `${PRE_URL}/equipment/${eqpCode}`;
@@ -68,10 +64,7 @@ export const callEquipmentUpdateAPI = (eqpCode, formData) => {
             body : JSON.stringify(formData)
         }).then(response => response.json());
 
-        if(result.status === 200) {
-            console.log("[EquipmentAPICalls] callEquipmentUpdateAPI result : ", result);
-            dispatch(putEquipment(result));
-        }
+        dispatch(putEquipment(result));  // Always dispatch an action, regardless of the status
     }
 }
 
