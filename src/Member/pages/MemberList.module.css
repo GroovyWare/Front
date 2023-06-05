@@ -24,28 +24,53 @@
     border-collapse: collapse;
     margin: auto;
     margin-left: 30px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.05), 0 6px 6px rgba(0, 0, 0, 0.1);
+    font-size: 15px;
+    border-radius: 5px;
+    overflow: hidden;
 }
 
 .pageTitle {
     font-family: LINESeedKR-Bd;
-    font-size: 1.2rem;
-    width: 130px;
+    font-size: 20px;
+    width: 100px;
     margin-top: 30px;
-    margin-left: 30px;
-    margin-bottom: 20px;
+    margin-left: 33px;
+    margin-bottom: 10px;
+}
+
+.titleLine {
+    margin: auto;
+    border : 0;
+    border-top : 2px solid #dbdbdbde;
+    width: 92%;
+    margin-bottom: 30px;
+}
+
+.bottonLine {
+    position : relative;
+    margin: auto;
+    border : 0;
+    border-top : 2px solid #dbdbdbde;
+    width: 92%;
+    margin-top: 35px;
+}
+
+.paging {
+    position : relative;
+    margin: auto;
 }
 
 .contentTitle {
     font-family: LINESeedKR-Bd;
-    font-size: 14px;
+    font-size: 16px;
     color: white;
-    width: 140px;
+    min-width: 105px;
     margin-top: 60px;
     text-align: center;
     vertical-align: middle;
-    border-top: 1.5px solid #9BA4B5;
-    border-bottom: 1.5px solid #9BA4B5;
-    padding: 10px;
+
+    padding: 13px 0px 13px 0px;
     background-color: #9b83fa;
 }
 
@@ -55,6 +80,9 @@
     margin: auto;
     background-color: #f3f3f3;
     margin-left: 30px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.05), 0 6px 6px rgba(0, 0, 0, 0.1);
+    font-size: 15px;
+    overflow: hidden;
 }
 
 .itemContentTb > tr:hover {
@@ -68,9 +96,9 @@
     font-family: LINESeedKR-Rg;
     font-size: 14px;
     text-align: center;
-    width: 140px;
-    border-bottom: 1px solid #9BA4B5;
-    padding: 10px;
+    min-width: 105px;
+    border-bottom: 1px solid #c0b4f0;
+    padding: 12px 0px 12px 0px;
 }
 
 .contentHover > tr:hover {
@@ -79,41 +107,4 @@
     cursor: pointer;
 }
 
-.searchBoxWarp {
-    display: flex;
-}
-
-.searchBox{
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    appearance: none;
-
-    font-family: LINESeedKR-Rg;
-    font-size: 0.8rem;
-    font-weight: 300;
-    line-height: 1.5;
-    
-    color: #444;
-    background-color: #EDEFF0;
-    
-    padding: 2px 0px 3px 18px;
-
-    margin: auto;
-    margin-left: 750px;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    
-    border: 1px solid #999999;
-}
-
-.searchBtn {
-    font-family: 'LINESeedKR-Bd';
-    font-size: 0.8rem;
-    color: white;
-    background: #785ee0;
-    border-color: #785ee0;
-    width: 60px;
-    height: 25px;
-    margin-left: 10px;
-}
 

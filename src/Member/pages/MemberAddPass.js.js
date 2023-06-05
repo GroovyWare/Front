@@ -91,6 +91,16 @@ function MemberAddPass() {
     /* 회원 수정 저장 버튼 클릭 이벤트 */
     const onClickMemberUpdateHandler = () => {
 
+        if (!form.resStart || !form.resEnd || !form.passCode) {
+            toast('모든 필드를 입력해주세요.');
+            return;
+        }
+
+        if (form.passCode > 3 && !form.empCode) {
+            toast('담당자를 입력해주세요');
+            return;
+        }
+
         /* 서버로 전달할 formData 형태의 객체 설정 */
         const formData = new FormData();    
 
@@ -98,8 +108,11 @@ function MemberAddPass() {
         formData.append("resStart", form.resStart);
         formData.append("resEnd", form.resEnd);
         formData.append("pass.passCode", form.passCode);
-        formData.append("employee.empCode", form.empCode);
+        formData.append("memEtc", form.memEtc);
 
+        if (form.empCode) {
+            formData.append("employee.empCode", form.empCode);
+        }
 
         dispatch(callMemberAddPassAPI(formData));
     }
@@ -131,22 +144,6 @@ function MemberAddPass() {
                     </tr>
 
                     <tr>
-                        <td className={MemberModifyCSS.contentTitle} colspan="3"><label>회원권</label></td>
-                        <td className={MemberModifyCSS.contentText} colspan="3">
-                            <select
-                                name='passCode'
-                                onChange={ onChangeHandler }
-                            >
-                                <option>선택하세요</option>
-                                <option value="1">3개월</option>
-                                <option value="2">6개월</option>
-                                <option value="3">12개월</option>
-                                <option value="4">PT</option>
-                            </select>
-                        </td>
-                    </tr>
-
-                    <tr>
                         <td className={MemberModifyCSS.contentTitle} colspan="3"><label>시작일</label></td>
                         <td className={MemberModifyCSS.contentText} colspan="3">
                             <input 
@@ -158,6 +155,22 @@ function MemberAddPass() {
                                 onChange={ onChangeHandler }
 
                             />
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td className={MemberModifyCSS.contentTitle} colspan="3"><label>회원권</label></td>
+                        <td className={MemberModifyCSS.contentText} colspan="3">
+                            <select
+                                name='passCode'
+                                onChange={ onChangeHandler }
+                            >
+                                <option>선택하세요</option>
+                                <option value={1}>3개월</option>
+                                <option value={2}>6개월</option>
+                                <option value={3}>12개월</option>
+                                <option value={4}>PT</option>
+                            </select>
                         </td>
                     </tr>
 
@@ -195,17 +208,17 @@ function MemberAddPass() {
         
         <div>
             <button
-                className={MemberModifyCSS.registBtn}
+                className={MemberModifyCSS.registBtnAddPass}
                 onClick={ onClickMemberUpdateHandler }
             >
-                등록하기
+                등록
             </button>
 
             <button
                 className={MemberModifyCSS.cancelBtn}
                 onClick={ () => navigate(-1) }
             >
-                취소하기
+                취소
             </button>
         </div>
         </div>

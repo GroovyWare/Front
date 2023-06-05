@@ -71,6 +71,7 @@ function PassModify(){
 
     const inputStylePassCode = !modifyMode ? { backgroundColor : 'rgb(145, 146, 155)'} : { backgroundColor : 'rgb(145, 146, 155)'};
     const inputStyle = !modifyMode ? { backgroundColor : 'rgb(145, 146, 155)'} : null;
+    const modifyState = !modifyMode ? null : { backgroundColor : 'gray', border : 'gray'};
 
 
     return(
@@ -163,6 +164,8 @@ function PassModify(){
             <button
                 className={PassCSS.modifyBtnPage}
                 onClick={ onClickPassModifyHandler }
+                disabled={ modifyMode }
+                style={modifyState}
             >
                 수정모드
             </button>
@@ -170,16 +173,16 @@ function PassModify(){
                 className={PassCSS.registBtnMd}
                 onClick={ onClickPassUpdateHandler }
             >
-                등록하기
+                등록
             </button>
             </div>
 
             <div>
             <button
-                className={PassCSS.cancelBtn}
+                className={PassCSS.cancelBtnMd}
                 onClick={ () => navigate(-1) }
             >
-                취소하기
+                취소
             </button>
             </div>
         </div>
