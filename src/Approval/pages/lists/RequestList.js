@@ -26,11 +26,12 @@ function RequestList () {
     }
 
     return(
+        <>
         <div className={RequestListCSS.container}>
             <div className={RequestListCSS.pageTitle}>
                 <div>결재 요청</div>
-                <hr/>
             </div>
+            <div className={RequestListCSS.content}>
             <div className={RequestListCSS.tableDiv}>
                 <table className={RequestListCSS.table}>
                     <tr>
@@ -65,9 +66,11 @@ function RequestList () {
                         )
                     })}
                 </table>
-                <div>{ pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage }/> }</div>
             </div>
         </div>
+        </div>
+        <div>{ pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage }/> }</div>
+        </>
     )
 }
     

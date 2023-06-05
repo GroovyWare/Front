@@ -35,8 +35,8 @@ function No(){
         <div className={NoCSS.container}>
             <div className={NoCSS.pageTitle}>
                 <div>반려함</div>
-                <hr/>
             </div>
+            <div className={NoCSS.content}>
             <table className={NoCSS.table}>
                 <tr>
                     <th>기안자</th>
@@ -64,6 +64,7 @@ function No(){
                 }})}
             </table>
             <div>{ pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage }/> }</div>
+        </div>
         </div>
     )
 }
