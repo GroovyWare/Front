@@ -111,19 +111,19 @@
 .contentWrapRg {
     display: inline-grid;
     margin-bottom: 25px;
-    margin-left: 30px;
+    margin-left: 33px;
 } 
 
 .contentDivTitle {
     font-family: LINESeedKR-Bd;
-    font-size: 1rem;
+    font-size: 13px;
     background-color: white;
-    width: 230px;
-    height: 230px;
+    width: 200px;
+    height: 215px;
     margin: auto;
     border: 1px solid #26199b;
     box-shadow: 2px 2px #26199b;
-    padding: 20px;
+    padding: 10px;
 }
 
 .pageTitleRg {
@@ -137,7 +137,7 @@
 
 .contentTextRg {
     display: flex;
-    border-bottom: 1.5px solid #9BA4B5;
+    border-bottom: 1.5px solid #bcc3cfe1;
 }
 
 
@@ -151,19 +151,43 @@
 }
 
 .registBtnRg {
-    font-family: 'LINESeedKR-Bd';
-    font-size: 0.8rem;
-    color: white;
-    background: #26199b;
-    border-color: #26199b;
-    width: 100px;
-    height: 25px;
-    margin-left: 30px;
+    border: none;
+    border-radius: 3px;
+    background-color: #716dff;
+    color: #fff;
+    cursor: pointer;
+    letter-spacing: 1px;
+    padding: 3px 7px;
+    padding-top: 5px;
+    font-family: 'LINESeedKR-Rg';
+    font-size: 16px;
+    font-weight: 700;
+    width: 70px;
+    margin-top: 15px;
+    margin-right: 30px;
+    float: right;
 }
 
 .modifyBtn {
-    margin-top: 15px;
-    margin-left: 200px;
+    margin-top: 13px;
+    margin-left: 170px;
+}
+
+.titleLine {
+    margin: auto;
+    border : 0;
+    border-top : 2px solid #dbdbdbde;
+    width: 92%;
+    margin-bottom: 30px;
+}
+
+.bottonLine {
+    position : relative;
+    margin: auto;
+    border : 0;
+    border-top : 2px solid #dbdbdbde;
+    width: 92%;
+    margin-top: 10px;
 }
 
 
@@ -214,21 +238,25 @@
 }
 
 
-
 /* button */
 .btnWrap {
     display: flex;
 }
 
 .registBtn {
-    font-family: 'LINESeedKR-Bd';
-    font-size: 0.8rem;
-    color: white;
-    background: #4f5eeb;
-    border-color: #4f5eeb;
-    width: 100px;
-    height: 25px;
-    margin-top: 25px;
+    border: none;
+    border-radius: 3px;
+    background-color: #716dff;
+    color: #fff;
+    cursor: pointer;
+    letter-spacing: 1px;
+    padding: 3px 7px;
+    padding-top: 5px;
+    font-family: 'LINESeedKR-Rg';
+    font-size: 16px;
+    font-weight: 700;
+    width: 70px;
+    margin-top: 15px;
     margin-left: 30px;
 }
 
@@ -245,14 +273,19 @@
 }
 
 .cancelBtn {
-    font-family: 'LINESeedKR-Bd';
-    font-size: 0.8rem;
-    color: white;
-    background: #26199b;
-    border-color: #26199b;
-    width: 100px;
-    height: 25px;
-    margin-top: 25px;
+    border: none;
+    border-radius: 3px;
+    background-color: #716dff;
+    color: #fff;
+    cursor: pointer;
+    letter-spacing: 1px;
+    padding: 3px 7px;
+    padding-top: 5px;
+    font-family: 'LINESeedKR-Rg';
+    font-size: 16px;
+    font-weight: 700;
+    width: 70px;
+    margin-top: 15px;
     margin-left: 10px;
 }
 
@@ -268,16 +301,56 @@
 }
 
 .registBtnMd {
-    font-family: 'LINESeedKR-Bd';
-    font-size: 0.8rem;
-    color: white;
-    background: #4f5eeb;
-    border-color: #4f5eeb;
-    width: 100px;
-    height: 25px;
-    margin-top: 25px;
+    border: none;
+    border-radius: 3px;
+    background-color: #716dff;
+    color: #fff;
+    cursor: pointer;
+    letter-spacing: 1px;
+    padding: 3px 7px;
+    padding-top: 5px;
+    font-family: 'LINESeedKR-Rg';
+    font-size: 13px;
+    font-weight: 700;
+    width: 110px;
+    margin-top: 15px;
     margin-left: 10px;
 }
+
+.cancelBtnMd {
+    border: none;
+    border-radius: 3px;
+    background-color: #716dff;
+    color: #fff;
+    cursor: pointer;
+    letter-spacing: 1px;
+    padding: 3px 7px;
+    padding-top: 5px;
+    font-family: 'LINESeedKR-Rg';
+    font-size: 13px;
+    font-weight: 700;
+    width: 110px;
+    margin-top: 15px;
+    margin-left: 10px;
+}
+
+.modifyBtnPage {
+    border: none;
+    border-radius: 3px;
+    background-color: #716dff;
+    color: #fff;
+    cursor: pointer;
+    letter-spacing: 1px;
+    padding: 3px 7px;
+    padding-top: 5px;
+    font-family: 'LINESeedKR-Rg';
+    font-size: 13px;
+    font-weight: 700;
+    width: 110px;
+    margin-top: 15px;
+    margin-left: 30px;
+}
+
 
 
 

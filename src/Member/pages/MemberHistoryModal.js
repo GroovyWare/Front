@@ -55,7 +55,7 @@ function MemberHistoryModal({ history, setMemberHistoryModal, pageInfo }) {
                     >{ h.pass.passAmount }</td>
                     <td
                     className={MemberHistoryModalCSS.contentText}
-                    >{ h.employee.empName }</td>
+                    >{ h.employee && h.employee.empName}</td>
                     <td
                     className={MemberHistoryModalCSS.contentText}
                     >{ h.resStart }</td>
