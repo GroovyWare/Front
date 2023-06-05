@@ -50,7 +50,7 @@ const modules = {
     height: 50px;
   }
   .ql-container {
-    height: 350px;
+    height: 600px;
     background-color : white;
   }
 `;
@@ -108,7 +108,11 @@ function ReqeustWaitDetail(){
     }
 
     return(
-        <>
+        <div className={RequestDetailCSS.container}>
+        <div className={RequestDetailCSS.pageTitle}>
+            <div>문서 번호 {apvCode}</div>
+            <hr/>
+        </div>
             <div className={RequestDetailCSS.button}>
                 <div className={RequestDetailCSS.ok} onClick={onClickOkHandler} data-value="승인"><img src='../images/ok.png'></img>승인</div>
                 <div className={RequestDetailCSS.no} onClick={onClickOkHandler} data-value="반려"><img src='../images/no.png'></img>반려</div>
@@ -128,8 +132,6 @@ function ReqeustWaitDetail(){
                 </tr>
             </table>
             </div>
-           
-        
             <div className={RequestDetailCSS.wrap}>
                     <div className={RequestDetailCSS.content}>
                         <div className={RequestDetailCSS.editor2}>
@@ -145,7 +147,7 @@ function ReqeustWaitDetail(){
                         </div>
                     </div>
             </div>
-        </>
+        </div>
     )
 }
 
