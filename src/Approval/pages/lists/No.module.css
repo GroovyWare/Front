@@ -1,8 +1,12 @@
-@font-face {
+.content{
+    font-size: 16px;
+    height: 500px;
+    margin: 10px 0px;
+    border-top: 2px solid #5a5a5a1a;
+    border-bottom: 2px solid #5a5a5a1a;
+    padding-top: 20px;
+    padding-bottom: 200px;
     font-family: 'LINESeedKR-Rg';
-    src: url('https://cdn.jsdelivr.net/gh/wizfile/font/LINESeedKR-Rg.eot');
-    src:url('https://cdn.jsdelivr.net/gh/wizfile/font/LINESeedKR-Rg.woff') format('woff');
-    font-style: normal;
 }
 
 .container {
@@ -65,15 +69,4 @@
     background-color: #9b83fa;
     color: #fff;
     cursor:initial;
-}
-
-.content{
-    font-size: 16px;
-    height: 500px;
-    margin: 10px 0px;
-    border-top: 2px solid #5a5a5a1a;
-    border-bottom: 2px solid #5a5a5a1a;
-    padding-top: 20px;
-    padding-bottom: 200px;
-    font-family: 'LINESeedKR-Rg';
 }

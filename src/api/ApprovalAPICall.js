@@ -1,7 +1,7 @@
 import RequestWait from "../Approval/pages/lists/RequestWait";
 import { registApproval, searchApproveline } from "../modules/ApprovalModule";
 import { selectEmployee, searchEmployee, searchDepartment } from "../modules/ApprovalModule";
-import { selectPerson, searchRequest, searchContext, searchWait, searchNow, acceptApproval } from "../modules/ApprovalModule";
+import { selectPerson, searchRequest, searchContext, searchWait, searchNow, acceptApproval, searchList } from "../modules/ApprovalModule";
 
 const RESTAPI_SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const RESTAPI_SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
@@ -200,6 +200,24 @@ export const acceptApprovalAPI = (form) => {
 
         if(result.status===200){
             dispatch(acceptApproval(result));
+        }
+    }
+}
+
+/* 종결함, 반려함 목록 */
+export const searchListAPI = ({currentPage}) => {
+    const requestURL = `${PRE_URL}/approval/list`;
+
+    return async(dispatch, getState) => {
+        const result = await fetch(requestURL,{
+            method : "GET",
+            headers : {
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken'),
+            }
+        }).then(response => response.json());
+
+        if(result.status === 200){
+            dispatch(searchList(result));
         }
     }
 }
