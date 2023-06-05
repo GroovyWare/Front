@@ -1,3 +1,12 @@
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
+function AttendanceDetail() {
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const attendance = useSelector((state) => state.attendanceReducer);
+
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -14,6 +23,7 @@ function AttendanceDetail() {
     useEffect(() => {
         dispatch(callAttendanceDetailAPI({empCode}));
     }, []);
+
 
 
     return(

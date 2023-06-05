@@ -7,6 +7,20 @@ function AttendanceList({attendanceList}) {
     
     return(
         <>
+            <div>
+                근태관리
+            </div>
+            <div>
+                정상출근
+                <div></div>
+            </div>
+            <div>
+                연차
+            </div>
+            <div>
+                지각
+            </div>
+
         {/* 상태 표시 */}
 
         <div className={AttendanceAdminCSS.pageTitle}>근태관리</div>
