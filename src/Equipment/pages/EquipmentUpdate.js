@@ -50,10 +50,10 @@ const EquipmentUpdate = ({isOpen, onRequestClose, equipment}) => {
     useEffect(
         () => {
             if(update?.status === 200) {
-                alert('기구 수정이 완료되었습니다.');
+                alert('기구 정보 수정이 완료되었습니다.');
                 window.location.reload();
             } else if (update?.status) {
-                alert('기구 수정에 실패했습니다. 다시 한 번 시도해주세요.');
+                alert('수정에 실패했습니다. 다시 한 번 시도해주세요.');
             }
         },
         [update]

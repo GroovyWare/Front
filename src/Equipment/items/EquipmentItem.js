@@ -1,8 +1,9 @@
-import { useNavigate } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
 
 function EquipmentItem({ equipment }) {
     const [showModal, setShowModal] = useState(false);
+    const { empCode } = useSelector(state => state.employeeReducer);
     const modalRef = useRef();
 
     const onClickEquipmentHandler = () => {
