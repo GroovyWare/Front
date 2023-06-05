@@ -27,7 +27,7 @@
 .editor2{
     width: 800px;
     height: 100px;
-    margin: 150px 30px 0 0px;
+    margin: 10px 30px 0 0px;
     /* margin-left: 200px; */
     /* padding-top: 40px; */
 }
@@ -42,7 +42,7 @@
 }
 
 .info{
-    margin: 150px 0px 0px -30px;
+    margin: 10px 0px 0px -30px;
     background-color:white;
     width:150px;
     height:350px;
@@ -71,14 +71,46 @@
     background-color: white;
 }
 
-.buttonDiv{
-    float: right;
-}
-
 .title{
     height: auto;
     margin-top: 10px;
     padding: 20px;
     font-family: 'LINESeedKR-Rg';
     font-size: 20px;
+}
+
+.approveLinecss{
+    background-color: white;
+    width: 300px;
+    border: solid black 1px;
+    margin-left: 350px;
+}
+
+.approve{
+    text-align: center;
+}
+
+.button{
+    display: flex;
+    margin: 50px 0px 0px 200px;
+}
+
+.ok{
+    margin: 30px 10px 0px 0;
+}
+
+.no{
+    margin: 30px 10px 0px 0;
+}
+
+.no > img{
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+.ok > img{
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
 }

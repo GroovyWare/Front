@@ -44,11 +44,12 @@ function RequestWait(){
                 <tr>
                     <th>기안자</th>
                     <th>기안일</th>
-                    <th>마감일</th>
                     <th>기안서명</th>
                     <th>상태</th>
                 </tr>
                 {waitList && waitList.data.data.map((wait, waitIndex) => {
+
+                    if(!(wait.apvStatus === '승인' || wait.apvStatus === '반려')){
                     const aplNumOne = wait.approveLine.find(apl => apl.empCode === now.data.empCode);
 
                     if(aplNumOne?.aplNum === '1'){
@@ -62,7 +63,6 @@ function RequestWait(){
                                 <tr key={waitIndex} onClick={() => onRowClickHandler(wait.apvCode)}>
                                     <td>{wait.employee.empName}</td>
                                     <td>{wait.apvCreatedDate}</td>
-                                    <td>{wait.apvEndDate}</td>
                                     <td>{wait.document.docTitle}</td>
                                     <td style={{display: "flex", justifyContent: "center", flexDirection: "column"}}>
                                        {aplNumOne.aplStatus}
@@ -80,7 +80,6 @@ function RequestWait(){
                                 <tr key={waitIndex} onClick={() => onRowClickHandler(wait.apvCode)}>
                                     <td>{wait.employee.empName}</td>
                                     <td>{wait.apvCreatedDate}</td>
-                                    <td>{wait.apvEndDate}</td>
                                     <td>{wait.document.docTitle}</td>
                                     <td style={{display: "flex", justifyContent: "center", flexDirection: "column"}}>
                                         {aplNumOne.aplStus}
@@ -95,7 +94,6 @@ function RequestWait(){
                                 <tr key={waitIndex} onClick={() => onRowClickHandler(wait.apvCode)}>
                                     <td>{wait.employee.empName}</td>
                                     <td>{wait.apvCreatedDate}</td>
-                                    <td>{wait.apvEndDate}</td>
                                     <td>{wait.document.docTitle}</td>
                                     <td style={{display: "flex", justifyContent: "center", flexDirection: "column"}}>
                                        {aplNumOne.aplStatus} 
@@ -103,9 +101,8 @@ function RequestWait(){
                                 </tr>
                             );
                     }
-                })}
+            }})}
             </table>
-            
                 <div>{ pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage }/>}</div>
             </div>
         </div>
