@@ -31,6 +31,9 @@ const Attendance = () => {
 
     console.log(attendance)
 
+    const workingTimes = (start, end) => {
+        const gettingTimes = attendance.data.attStart
+    }
 
 
 
@@ -113,12 +116,12 @@ const Attendance = () => {
                             ) : (
                                 time.toLocaleTimeString()
                             )}
-                            {!attendance?.data?.attEnd &&(
+                            {!attendance?.data?.attEnd && (
                                 <button onClick={leavingWork} className={attendanceCSS.buttons}>
-                                퇴근
-                             </button>
+                                    퇴근
+                                </button>
                             )}
-                            
+
                         </div>
                     </div>
                 </div>
@@ -128,6 +131,13 @@ const Attendance = () => {
                     <label>오늘날짜 : </label>
                     {time.toLocaleDateString()}
 
+                </div>
+
+                <div className={attendanceCSS.nowtime}>
+                    <label>근무시간:</label>
+                    {attendance?.data?.attEnd && attendance?.data?.attStart ? (
+                    (new Date(attendance.data.attEnd) - new Date(attendance.data.attStart))
+                    ) : null}
                 </div>
 
             </div>
