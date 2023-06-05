@@ -12,15 +12,15 @@
 
 .editor{
     width: 800px;
-    height: 100px;
-    margin: 80px 0px 0 0px;
+    height: 600px;
+    margin: 120px 0px 0 0px;
 }
 
 .detail{
-    margin: 80px 0px 0px 0px;
+    margin: 120px 0px 0px 0px;
     background-color:white;
     width:150px;
-    height:350px;
+    height:600px;
     background-color: #667eea;
 }
 
@@ -45,7 +45,7 @@
     margin: 10px 0px 0px -30px;
     background-color:white;
     width:150px;
-    height:350px;
+    height:600px;
     background-color: #667eea;
     /* margin-right: 300px; */
 }
@@ -113,4 +113,21 @@
     width: 20px;
     height: 20px;
     margin-right: 5px;
+}
+
+.container {
+    margin-top: 10px;
+    padding: 20px 30px;;
+    font-family: 'LINESeedKR-Rg';
+}
+
+/* 페이지 제목 */
+.pageTitle > div {
+    font-size: 20px;
+    font-weight: 700;
+    position: relative;
+    left: 20px;
+    text-align: left;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
 }

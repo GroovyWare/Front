@@ -40,7 +40,7 @@ function RequestList () {
                         <th>상태</th>
                     </tr>
                     {requestList && requestList.data.approvalDtoContent.map((request, requestIndex) => {
-                        return (  // 이 부분에 return 추가
+                        return ( 
                             <tr key={requestIndex} onClick={() => onRowClickHandler(request.apvCode)}>
                                 {request.apvStatus === '진행중' ? 
                                     <>
