@@ -1,15 +1,16 @@
 
 
-function AttendanceDetail() {
 
 
 
 
 
-    return(
-        <>
-        </>
-    );
-}
 
-export default AttendanceDetail;
+
+//     return(
+//         <>
+//         </>
+//     );
+// }
+
+// export default AttendanceDetail;
