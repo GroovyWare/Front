@@ -7,6 +7,7 @@ import profileImg from '../components/common/img/profile_default.svg';
 import { AttendanceMain, goWork, leaveWork } from "../api/AttendanceAPICalls";
 import { viewMain } from "../modules/AttendanceModule";
 import { toBeDisabled } from "@testing-library/jest-dom/matchers";
+import attendanceCSS from "./attendance.module.css"
 
 /* 근태 테이블 작성 */
 const Attendance = () => {
@@ -29,8 +30,8 @@ const Attendance = () => {
     }
 
     console.log(attendance)
-   
- 
+
+
 
 
     useEffect(() => {
@@ -65,9 +66,9 @@ const Attendance = () => {
 
     return (
         <div>
-            <div> 이곳이 감싸주는 div 입니다.
+            <div>
                 <div>
-                    {/* 여기에 멤버의 정보를 모두 나타낼겁니다. */}
+                    {/* 유저 정보 표시 */}
                     {user && (
                         <div className={NavbarCSS.profileDiv}>
                             <div className={NavbarCSS.profileBox}>
@@ -83,10 +84,11 @@ const Attendance = () => {
                         </div>
                     )}
                 </div>
-                <div>
-                    <div>
-                        <div>
-                            출근 시간 표시
+                <div className={attendanceCSS.whole}>
+                    <div className={attendanceCSS.working}>
+
+                        <div className={attendanceCSS.gowork}>
+                            <label>  출근 시간 : </label>
                             {attendance && attendance.data && attendance.data.attStart ? (
                                 attendance.data.attStart
                             ) : (
@@ -94,35 +96,38 @@ const Attendance = () => {
                             )}
                         </div>
                         {!attendance?.data?.attStart && (
-                            <button onClick={goWorking}>
+                            <button onClick={goWorking}
+                                className={attendanceCSS.buttons}>
                                 여기가 출근 버튼
                             </button>
                         )}
                     </div>
 
-                </div>
 
-                <div>
+
                     <div>
-                        퇴근시간 표시
-                        {attendance && attendance.data && attendance.data.attEnd ? (
-                            attendance.data.attEnd
-                        ) : (
-                            time.toLocaleTimeString()
-                        )}
+                        <div className={attendanceCSS.leaving}>
+                            퇴근시간 표시
+                            {attendance && attendance.data && attendance.data.attEnd ? (
+                                attendance.data.attEnd
+                            ) : (
+                                time.toLocaleTimeString()
+                            )}
+
+                            <button onClick={leavingWork} className={attendanceCSS.buttons}>
+                                여기가 퇴근 버튼
+                            </button>
+                        </div>
                     </div>
-                    <button onClick={leavingWork}>
-                        여기가 퇴근 버튼
-                    </button>
                 </div>
-                <div>
-                    현재시간 <br></br>
+                <div className={attendanceCSS.nowtime}>
+                    <label>현재시간 : </label>
                     {time.toLocaleTimeString()}
+                    <label>오늘날짜 : </label>
+                    {time.toLocaleDateString()}
 
                 </div>
-                <div>
-                    퇴근시간 표시부
-                </div>
+
             </div>
         </div>
     );
