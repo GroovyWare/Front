@@ -1,31 +1,247 @@
 import { useNavigate } from "react-router-dom";
+import AttendanceAdminCSS from "./AttendanceAdmin.module.css";
 
-function AttendanceItem({ attendance : { attCode, employee, attStart, attEnd, attDate, attLate } }) {
+function AttendanceItem({ attendance }) {
 
     const navigate = useNavigate();
     const onClickAttendanceHandler = () => {
-        navigate(`/attendance/detail/${employee.empCode}`)
+        navigate(`/attendance/detail/${attendance.employee.empCode}`)
     }
+
+    const isLate = attendance.attStart > "10:00:00";
 
     return(
         <>
-        {attCode && attCode > 0 &&( 
-            <div
-            onClick={ () => onClickAttendanceHandler(employee.empCode) }
-            >
-            <table> 
-                <tr>
-                    <td>{ attCode }</td>
-                    <td>{ employee.empCode }</td>
-                    <td>{ attStart }</td>
-                    <td>{ attEnd }</td>
-                    <td>{ attDate }</td>
-                    <td>{ attLate }</td>
-                </tr>
+        {attendance.attCode && attendance.attCode > 0 && (
+          <div onClick={() => onClickAttendanceHandler(attendance.employee.empCode)}>
+            <table className={AttendanceAdminCSS.tableWarp}>
+              <tr>
+                <td className={AttendanceAdminCSS.contentText}>
+                  {attendance.employee.empName}
+                </td>
+
+                <td className={AttendanceAdminCSS.contentBox}>
+                  <div 
+                  className={`${AttendanceAdminCSS.contentTextBox} ${
+                    isLate ? AttendanceAdminCSS.redBox : AttendanceAdminCSS.blueBox}`}
+                  >{/* AttStart value is not displayed */}</div>
+                </td>
+
+                <td className={AttendanceAdminCSS.contentBox}>
+                  <div 
+                  className={`${AttendanceAdminCSS.contentTextBox} ${
+                    isLate ? AttendanceAdminCSS.redBox : AttendanceAdminCSS.blueBox}`}
+                  >{/* AttStart value is not displayed */}</div>
+                </td>
+
+                <td className={AttendanceAdminCSS.contentBox}>
+                  <div 
+                  className={`${AttendanceAdminCSS.contentTextBox} ${
+                    isLate ? AttendanceAdminCSS.redBox : AttendanceAdminCSS.blueBox}`}
+                  >{/* AttStart value is not displayed */}</div>
+                </td>
+
+                <td className={AttendanceAdminCSS.contentBox}>
+                  <div 
+                  className={`${AttendanceAdminCSS.contentTextBox} ${
+                    isLate ? AttendanceAdminCSS.redBox : AttendanceAdminCSS.blueBox}`}
+                  >{/* AttStart value is not displayed */}</div>
+                </td>
+
+                <td className={AttendanceAdminCSS.contentBox}>
+                  <div 
+                  className={`${AttendanceAdminCSS.contentTextBox} ${
+                    isLate ? AttendanceAdminCSS.redBox : AttendanceAdminCSS.blueBox}`}
+                  >{/* AttStart value is not displayed */}</div>
+                </td>
+
+                <td className={AttendanceAdminCSS.contentBox}>
+                  <div 
+                  className={`${AttendanceAdminCSS.contentTextBox} ${
+                    isLate ? AttendanceAdminCSS.redBox : AttendanceAdminCSS.blueBox}`}
+                  >{/* AttStart value is not displayed */}</div>
+                </td>
+
+                <td className={AttendanceAdminCSS.contentBox}>
+                  <div 
+                  className={`${AttendanceAdminCSS.contentTextBox} ${
+                    isLate ? AttendanceAdminCSS.redBox : AttendanceAdminCSS.blueBox}`}
+                  >{/* AttStart value is not displayed */}</div>
+                </td>
+
+                <td className={AttendanceAdminCSS.contentBox}>
+                  <div 
+                  className={`${AttendanceAdminCSS.contentTextBox} ${
+                    isLate ? AttendanceAdminCSS.redBox : AttendanceAdminCSS.blueBox}`}
+                  >{/* AttStart value is not displayed */}</div>
+                </td>
+
+                <td className={AttendanceAdminCSS.contentBox}>
+                  <div 
+                  className={`${AttendanceAdminCSS.contentTextBox} ${
+                    isLate ? AttendanceAdminCSS.redBox : AttendanceAdminCSS.blueBox}`}
+                  >{/* AttStart value is not displayed */}</div>
+                </td>
+
+                <td className={AttendanceAdminCSS.contentBox}>
+                  <div 
+                  className={`${AttendanceAdminCSS.contentTextBox} ${
+                    isLate ? AttendanceAdminCSS.redBox : AttendanceAdminCSS.blueBox}`}
+                  >{/* AttStart value is not displayed */}</div>
+                </td>
+
+                <td className={AttendanceAdminCSS.contentBox}>
+                  <div 
+                  className={`${AttendanceAdminCSS.contentTextBox} ${
+                    isLate ? AttendanceAdminCSS.redBox : AttendanceAdminCSS.blueBox}`}
+                  >{/* AttStart value is not displayed */}</div>
+                </td>
+
+                <td className={AttendanceAdminCSS.contentBox}>
+                  <div 
+                  className={`${AttendanceAdminCSS.contentTextBox} ${
+                    isLate ? AttendanceAdminCSS.redBox : AttendanceAdminCSS.blueBox}`}
+                  >{/* AttStart value is not displayed */}</div>
+                </td>
+
+                <td className={AttendanceAdminCSS.contentBox}>
+                  <div 
+                  className={`${AttendanceAdminCSS.contentTextBox} ${
+                    isLate ? AttendanceAdminCSS.redBox : AttendanceAdminCSS.blueBox}`}
+                  >{/* AttStart value is not displayed */}</div>
+                </td>
+
+                <td className={AttendanceAdminCSS.contentBox}>
+                  <div 
+                  className={`${AttendanceAdminCSS.contentTextBox} ${
+                    isLate ? AttendanceAdminCSS.redBox : AttendanceAdminCSS.blueBox}`}
+                  >{/* AttStart value is not displayed */}</div>
+                </td>
+
+                <td className={AttendanceAdminCSS.contentBox}>
+                  <div 
+                  className={`${AttendanceAdminCSS.contentTextBox} ${
+                    isLate ? AttendanceAdminCSS.redBox : AttendanceAdminCSS.blueBox}`}
+                  >{/* AttStart value is not displayed */}</div>
+                </td>
+
+                <td className={AttendanceAdminCSS.contentBox}>
+                  <div 
+                  className={`${AttendanceAdminCSS.contentTextBox} ${
+                    isLate ? AttendanceAdminCSS.redBox : AttendanceAdminCSS.blueBox}`}
+                  >{/* AttStart value is not displayed */}</div>
+                </td>
+
+                <td className={AttendanceAdminCSS.contentBox}>
+                  <div 
+                  className={`${AttendanceAdminCSS.contentTextBox} ${
+                    isLate ? AttendanceAdminCSS.redBox : AttendanceAdminCSS.blueBox}`}
+                  >{/* AttStart value is not displayed */}</div>
+                </td>
+
+                <td className={AttendanceAdminCSS.contentBox}>
+                  <div 
+                  className={`${AttendanceAdminCSS.contentTextBox} ${
+                    isLate ? AttendanceAdminCSS.redBox : AttendanceAdminCSS.blueBox}`}
+                  >{/* AttStart value is not displayed */}</div>
+                </td>
+
+                <td className={AttendanceAdminCSS.contentBox}>
+                  <div 
+                  className={`${AttendanceAdminCSS.contentTextBox} ${
+                    isLate ? AttendanceAdminCSS.redBox : AttendanceAdminCSS.blueBox}`}
+                  >{/* AttStart value is not displayed */}</div>
+                </td>
+
+                <td className={AttendanceAdminCSS.contentBox}>
+                  <div 
+                  className={`${AttendanceAdminCSS.contentTextBox} ${
+                    isLate ? AttendanceAdminCSS.redBox : AttendanceAdminCSS.blueBox}`}
+                  >{/* AttStart value is not displayed */}</div>
+                </td>
+
+                <td className={AttendanceAdminCSS.contentBox}>
+                  <div 
+                  className={`${AttendanceAdminCSS.contentTextBox} ${
+                    isLate ? AttendanceAdminCSS.redBox : AttendanceAdminCSS.blueBox}`}
+                  >{/* AttStart value is not displayed */}</div>
+                </td>
+
+                <td className={AttendanceAdminCSS.contentBox}>
+                  <div 
+                  className={`${AttendanceAdminCSS.contentTextBox} ${
+                    isLate ? AttendanceAdminCSS.redBox : AttendanceAdminCSS.blueBox}`}
+                  >{/* AttStart value is not displayed */}</div>
+                </td>
+
+                <td className={AttendanceAdminCSS.contentBox}>
+                  <div 
+                  className={`${AttendanceAdminCSS.contentTextBox} ${
+                    isLate ? AttendanceAdminCSS.redBox : AttendanceAdminCSS.blueBox}`}
+                  >{/* AttStart value is not displayed */}</div>
+                </td>
+
+                <td className={AttendanceAdminCSS.contentBox}>
+                  <div 
+                  className={`${AttendanceAdminCSS.contentTextBox} ${
+                    isLate ? AttendanceAdminCSS.redBox : AttendanceAdminCSS.blueBox}`}
+                  >{/* AttStart value is not displayed */}</div>
+                </td>
+
+                <td className={AttendanceAdminCSS.contentBox}>
+                  <div 
+                  className={`${AttendanceAdminCSS.contentTextBox} ${
+                    isLate ? AttendanceAdminCSS.redBox : AttendanceAdminCSS.blueBox}`}
+                  >{/* AttStart value is not displayed */}</div>
+                </td>
+
+                <td className={AttendanceAdminCSS.contentBox}>
+                  <div 
+                  className={`${AttendanceAdminCSS.contentTextBox} ${
+                    isLate ? AttendanceAdminCSS.redBox : AttendanceAdminCSS.blueBox}`}
+                  >{/* AttStart value is not displayed */}</div>
+                </td>
+
+                <td className={AttendanceAdminCSS.contentBox}>
+                  <div 
+                  className={`${AttendanceAdminCSS.contentTextBox} ${
+                    isLate ? AttendanceAdminCSS.redBox : AttendanceAdminCSS.blueBox}`}
+                  >{/* AttStart value is not displayed */}</div>
+                </td>
+
+                <td className={AttendanceAdminCSS.contentBox}>
+                  <div 
+                  className={`${AttendanceAdminCSS.contentTextBox} ${
+                    isLate ? AttendanceAdminCSS.redBox : AttendanceAdminCSS.blueBox}`}
+                  >{/* AttStart value is not displayed */}</div>
+                </td>
+
+                <td className={AttendanceAdminCSS.contentBox}>
+                  <div 
+                  className={`${AttendanceAdminCSS.contentTextBox} ${
+                    isLate ? AttendanceAdminCSS.redBox : AttendanceAdminCSS.blueBox}`}
+                  >{/* AttStart value is not displayed */}</div>
+                </td>
+
+                <td className={AttendanceAdminCSS.contentBox}>
+                  <div 
+                  className={`${AttendanceAdminCSS.contentTextBox} ${
+                    isLate ? AttendanceAdminCSS.redBox : AttendanceAdminCSS.blueBox}`}
+                  >{/* AttStart value is not displayed */}</div>
+                </td>
+
+                <td className={AttendanceAdminCSS.contentBox}>
+                  <div 
+                  className={`${AttendanceAdminCSS.contentTextBox} ${
+                    isLate ? AttendanceAdminCSS.redBox : AttendanceAdminCSS.blueBox}`}
+                  >{/* AttStart value is not displayed */}</div>
+                </td>
+
+              </tr>
             </table>
-            </div>
-            )}
-        </>
+          </div>
+        )}
+      </>
     );
 }
 

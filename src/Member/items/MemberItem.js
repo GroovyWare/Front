@@ -13,8 +13,6 @@ function MemberItem({ member : { memCode, memName, memPhone, memStartDate, memEn
 
     return(
         <>
-
-
         <div
         onClick={ () => onClickMemberHandler(memCode) }
         >
@@ -28,10 +26,11 @@ function MemberItem({ member : { memCode, memName, memPhone, memStartDate, memEn
                     <td className={MemberListCSS.contentText}>{ memStartDate }</td>
                     <td className={MemberListCSS.contentText}>{ memEndDate }</td>
                 </tr>
-            </table>
 
-        </div>
+            </table>
             
+        </div>
+  
         </>
             );
         }

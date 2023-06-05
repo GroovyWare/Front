@@ -1,19 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
 import EmpCSS from "./Employee.module.css";
 import { useEffect, useState } from "react";
-import { callEmployeeListAPI } from "../../api/EmployeeAPICalls";
+import { callEmployeeListAPI, callEmployeeSearchListAPI } from "../../api/EmployeeAPICalls";
 import EmployeeList from "./EmployeeList";
 import PagingBar from "../../components/common/PagingBar";
-import { useNavigate } from "react-router-dom";
+import search from "../../components/common/img/search.svg"
 
 function Employee() {
 
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     const employees = useSelector(state => state.employeeReducer);
-
-    const employeeList = employees.data;
     const pageInfo = employees.pageInfo;
+    const employeeList = employees.data;
+
 
     const [ currentPage, setCurrentPage ] = useState(1);
 
@@ -23,20 +22,27 @@ function Employee() {
         },
         [currentPage]
     );
-
-    const moveToRegistPage = () => {
-        navigate("/employee/regist")
-    }
     
+    const searchHandler = () => {
+        dispatch(callEmployeeSearchListAPI({ search, currentPage }));
+    }
+
     return (
         <div className={ EmpCSS.container }>
-            <h3>직원관리</h3>
-                <div>{ employeeList && <EmployeeList employeeList={ employeeList }/>}</div>
-                <div>{ pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage }/> }</div>
-                <div className={ EmpCSS.btnDiv}>
-                    <button className={ EmpCSS.registBtn } onClick={ moveToRegistPage }>등록</button>
-                </div>
-
+            <div className={ EmpCSS.pageTitle }>
+                <div>직원관리</div>
+            </div>
+            <div className={ EmpCSS.searchbar}>
+                <input
+                    type="text"
+                    placeholder="이름을 입력해주세요."
+                />
+                <button onclick={ searchHandler }>
+                    <img src={ search } alt="검색" className={ EmpCSS.search }/>
+                </button>
+            </div>
+            <div>{ employeeList && <EmployeeList employeeList={ employeeList } employees ={ employees }/>}</div>
+            <div>{ pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage }/> }</div>
         </div>
        
     )}

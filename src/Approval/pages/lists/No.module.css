@@ -1,0 +1,68 @@
+@font-face {
+    font-family: 'LINESeedKR-Rg';
+    src: url('https://cdn.jsdelivr.net/gh/wizfile/font/LINESeedKR-Rg.eot');
+    src:url('https://cdn.jsdelivr.net/gh/wizfile/font/LINESeedKR-Rg.woff') format('woff');
+    font-style: normal;
+}
+
+.container {
+    margin-top: 10px;
+    padding: 20px 30px;;
+    font-family: 'LINESeedKR-Rg';
+}
+
+/* 페이지 제목 */
+.pageTitle > div {
+    font-size: 20px;
+    font-weight: 700;
+    position: relative;
+    left: 20px;
+    text-align: left;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.wrap{
+    margin-top: -160px;
+    padding:20px;
+}
+
+.tableDiv{
+    width: 1200px;
+    margin: auto;
+}
+
+.table{
+    text-align: center;
+    width: 100%;
+    min-width: 80px;
+    margin-top: 20px;
+    border-collapse: collapse;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.05), 0 6px 6px rgba(0, 0, 0, 0.1);
+    font-size: 15px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.table > tr{
+    background-color: #f3f3f3;
+    line-height: 50px;
+    border-bottom: 1px solid #c0b4f0;
+    box-sizing: border-box;
+}
+
+.table > tr:last-of-type {
+    border: none;
+}
+
+.table > tr:hover {
+    color: #fff;
+    background-color: #a2a2a277;
+    cursor: pointer;
+}
+
+.table > tr > th {
+    background-color: #9b83fa;
+    color: #fff;
+    cursor:initial;
+}

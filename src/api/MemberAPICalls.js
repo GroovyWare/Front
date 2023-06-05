@@ -1,4 +1,4 @@
-import { getMember, getMembers, postMember, putMember, putPass } from "../modules/MemberModule";
+import { getMember, getMembers, postMember, putMember, postPass } from "../modules/MemberModule";
 
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
@@ -115,28 +115,6 @@ export const callMemberModifyAPI = (formData) => {
 
 }
 
-/* 회원권 추가 */
-export const callMemberAddPassAPI = (formData) => {
-    
-    const requestURL = `${PRE_URL}/member/add`;
-
-    return async (dispatch, getState) => {
-
-        const result = await fetch(requestURL, {
-            method : 'PUT',
-            headers : {
-                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
-            },
-            body : formData
-        }).then(response => response.json());
-
-        if(result.status === 200) {
-            console.log('[MemberAPICalls] callMemberAddPassAPI result :', result);
-            dispatch(putPass(result));
-        }
-    }
-
-}
 
 /* 회원명 검색 목록 조회 */
 export const callMemberSearchListAPI = ({ search, currentPage = 1}) => {

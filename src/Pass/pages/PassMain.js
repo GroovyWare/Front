@@ -33,14 +33,25 @@ function PassMain() {
         <div>
             <div className={PassCSS.pageTitleRg}>회원권 조회</div>
         </div>
+        <div>
+            <hr className={PassCSS.titleLine}></hr>
+        </div>    
             <div>
                 { passLists && <PassList passLists={passLists}/> }
             </div>
             <div className={PassCSS.pagebottom}>
+
+            <div>
+            <hr className={PassCSS.bottonLine}></hr>
+            </div>
+
+
             <button 
                 className={PassCSS.registBtnRg}
-                onClick={ onClickRegistHandler }>등록하기</button>
+                onClick={ onClickRegistHandler }>등록</button>
             </div>
+
+
             <div>
                 { pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage }/> }
             </div>

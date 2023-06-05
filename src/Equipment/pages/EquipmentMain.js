@@ -1,46 +1,34 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { callEquipmentListAPI, callEquipmentSearchListAPI, callEquipmentRegistAPI, callEquipmentDeleteAPI } from "../../api/EquipmentAPICalls";
+import { callEquipmentListAPI, callEquipmentSearchListAPI } from "../../api/EquipmentAPICalls";
 import PagingBar from "../../components/common/PagingBar";
 import SearchBar from "../../components/common/SearchBar";
-import { Navigate, useParams, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import EquipmentMainCSS from './EquipmentMain.module.css';
-import { NavLink } from "react-router-dom";
-import { useNavigate } from "react-router-dom/dist";
 import axios from "axios";
+import EquipmentRegist from "./EquipmentRegist";
+import EquipmentUpdate from "./EquipmentUpdate";
 
 function EquipmentMain() {
 
     // const userRole = useSelector('state => state.authCode'); // 이 부분은 실제 authCode를 가져오는 Redux Selector로 변경해야 합니다.
-    const [userRole, setUserRole] = useState('1'); // 임의의 userRole 상태 생성
+    const [userRole] = useState('1'); // 임의의 userRole 상태 생성
     const dispatch = useDispatch();
     const equipments = useSelector(state => state.equipmentReducer);
-    const navigate = useNavigate();
-    const params = useParams();
     const equipmentList = equipments?.data || [];
     const pageInfo = equipments?.pageInfo || null;
-    const eqpCode = params.eqpCode;
 
     const [selectAll, setSelectAll] = useState(false);
     const [checkedEquipments, setCheckedEquipments] = useState([]);
+    const [selectedEquipment, setSelectedEquipment] = useState(null); // 선택된 기구 상태
 
     const [currentPage, setCurrentPage] = useState(1);
     const [searchParams] = useSearchParams();
     const search = searchParams.get('search');
-
     const [searchTerm, setSearchTerm] = useState(search || '');
 
-    const [modalIsOpen, setModalIsOpen] = useState(false);
-    const [equipmentTitle, setequipmentTitle] = useState("");
-    const [purchaseDate, setPurchaseDate] = useState("");
-
-    const closeModal = () => {
-        setModalIsOpen(false);
-    }
-
-    const openModal = () => {
-        setModalIsOpen(true);
-    }
+    const [isRegistModalOpen, setRegistModalOpen] = useState(false);
+    const [isUpdateModalOpen, setUpdateModalOpen] = useState(false);
 
     useEffect(() => {
         if (selectAll) {
@@ -49,7 +37,7 @@ function EquipmentMain() {
         } else {
             setCheckedEquipments([]);
         }
-    }, [selectAll, equipmentList]);
+    }, [selectAll]);
 
     useEffect(
         () => {
@@ -74,16 +62,6 @@ function EquipmentMain() {
         setSearchTerm(searchValue);
     }
 
-    const handleRegister = (event) => {
-        event.preventDefault();
-    
-        // 실제로 등록 로직을 수행합니다
-        // 이곳에 등록 로직을 작성하세요
-        dispatch(callEquipmentRegistAPI({ name: equipmentTitle, purchaseDate }));
-    
-        closeModal();
-    };
-
     const handleDelete = () => {
         if (window.confirm("선택한 기구를 삭제하시겠습니까?")) {
             // 모든 삭제 요청을 생성하고 실행
@@ -96,7 +74,7 @@ function EquipmentMain() {
                     
                     if(allSuccessful) {
                         alert("선택한 기구가 모두 삭제되었습니다.");
-                        // UI 업데이트
+                        
                         window.location.href = "http://localhost:3000/equipment";  // 특정 URL로 리디렉션
                     } else {
                         alert("하나 이상의 기구를 삭제할 수 없습니다. 다시 시도해주세요.");
@@ -108,7 +86,24 @@ function EquipmentMain() {
                 });
         }
     }
-    
+
+    const openRegistModal = () => {
+        setRegistModalOpen(true);
+    }
+
+    const closeRegistModal = () => {
+        setRegistModalOpen(false);
+    }
+
+    const openUpdateModal = (equipment) => {
+        setSelectedEquipment(equipment);
+        setUpdateModalOpen(true);
+    }
+
+    const closeUpdateModal = () => {
+        setSelectedEquipment(null);
+        setUpdateModalOpen(false);
+    }
 
     const tdStyles = {
         wordBreak: "break-all"
@@ -122,7 +117,7 @@ function EquipmentMain() {
             <div className={ EquipmentMainCSS.bodyDiv }>
             <table className={ EquipmentMainCSS.productTable }>
                 <colgroup>
-                    <col width="2%" /> {/* 체크박스 열 */}
+                    <col width="2%" />
                     <col width="20%" />
                     <col width="8%" />
                     <col width="6%" />
@@ -141,7 +136,7 @@ function EquipmentMain() {
                 </thead>
                 <tbody>
                     {equipmentList.map((p) => (
-                        <tr key={p.eqpCode}>
+                        <tr key={p.eqpCode} onClick={() => openUpdateModal(p)}>
                             <td style={{textAlign: "center"}}>
                                 <input 
                                     type="checkbox" 
@@ -151,7 +146,7 @@ function EquipmentMain() {
                             </td>
                             <td>{p.eqpTitle}</td>
                             <td>{new Date(p.eqpPurchase).toLocaleDateString('ko-KR', { year: '2-digit', month: '2-digit', day: '2-digit' })}</td>
-                            <td>{p.employee.empName}</td>
+                            <td>{p.eqpInspector}</td> {/* 'employee' 대신 'eqpInspector' 필드 사용 */}
                             <td>{new Date(p.eqpDate).toLocaleDateString('ko-KR', { year: '2-digit', month: '2-digit', day: '2-digit' })}</td>
                             <td style={tdStyles}>{p.eqpStatus}</td>
                         </tr>
@@ -159,31 +154,20 @@ function EquipmentMain() {
                 </tbody>
             </table>
             <div className={ EquipmentMainCSS.buttonDiv }>
-                {userRole === '1' && <button onClick={openModal}>등록</button>}
-                {userRole === '1' && <button onClick={handleDelete}>삭제</button>}
+            {userRole === '1' && <button onClick={openRegistModal}>등록</button>}
+            <EquipmentRegist isOpen={isRegistModalOpen} onRequestClose={closeRegistModal}/>
+            {selectedEquipment && 
+                <EquipmentUpdate 
+                    isOpen={isUpdateModalOpen} 
+                    onRequestClose={closeUpdateModal} 
+                    equipment={selectedEquipment}
+                />
+            }
+            {userRole === '1' && <button onClick={handleDelete}>삭제</button>}
             </div>
             <div>
                 { pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage } /> }
             </div>
-            {/* <Modal
-                className={ EquipmentMainCSS.modalDiv }
-                isOpen={modalIsOpen}
-                onRequestClose={closeModal}
-                contentLabel="Equipment Registration Modal"
-            >
-                <h4>기구 등록</h4>
-                <form onSubmit={handleRegister} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                    <label>
-                        기구명:
-                        <input type="text" name="equipmentTitle" value={equipmentTitle} onChange={(e) => setequipmentTitle(e.target.value)} />
-                    </label>
-                    <label>
-                        구매일자:
-                        <input type="date" name="purchaseDate" value={purchaseDate} onChange={(e) => setPurchaseDate(e.target.value)} />
-                    </label>
-                    <button type="submit">등록</button>
-                </form>
-            </Modal> */}
         </div>
         </>
     );

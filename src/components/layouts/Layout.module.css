@@ -1,11 +1,4 @@
 @font-face {
-    font-family: 'LINESeedKR-Th';
-    src: url('https://cdn.jsdelivr.net/gh/wizfile/font/LINESeedKR-Th.eot');
-    src:url('https://cdn.jsdelivr.net/gh/wizfile/font/LINESeedKR-Th.woff') format('woff');
-    font-style: normal;
-}
-
-@font-face {
     font-family: 'LINESeedKR-Rg';
     src: url('https://cdn.jsdelivr.net/gh/wizfile/font/LINESeedKR-Rg.eot');
     src:url('https://cdn.jsdelivr.net/gh/wizfile/font/LINESeedKR-Rg.woff') format('woff');
@@ -32,24 +25,25 @@
 }
 
 .wrap{
-    margin: 0 200px;
+    margin: auto;
 }
 
 .content {
     display: flex;
+    justify-content: center;
 }
 
 .contentBg {
     background:  rgba( 255, 255, 255 , 0.85 );
     border-radius: 10px;
     border: 1px solid rgba( 255, 255, 255, 0.18 );
-    width: auto;
+    width: 1300px;
     min-height: 900px;
     margin-right: 20px;
     margin-top: 10px;
     margin-bottom: 100px;
     padding-bottom: 30px;
-    flex: 1;
     box-shadow: 0 10px 35px rgba(0, 0, 0, 0.05), 0 6px 6px rgba(0, 0, 0, 0.1);
 
 }
+

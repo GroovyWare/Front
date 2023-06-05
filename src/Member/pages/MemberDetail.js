@@ -5,8 +5,7 @@ import { callMemberHistoryCheckAPI } from "../../api/MemberHistoryAPICalls";
 import { useNavigate, useParams } from "react-router-dom";
 import MemberHistoryModal from "./MemberHistoryModal";
 import MemberDetailCSS from "./MemberDetail.module.css";
-
-
+import { addYears, format } from "date-fns";
 
 
 function MemberDetail() {
@@ -18,9 +17,11 @@ function MemberDetail() {
     const memCode = params.memCode;
     const [memberHistoryModal, setMemberHistoryModal] = useState(false);
 
+
     useEffect(() => {
         dispatch(callMemberDetailAPI({ memCode }));
     },[]);
+
 
     /* 이력 유무에 따라 Modal 띄우기 */
     useEffect(() => {
@@ -47,13 +48,18 @@ function MemberDetail() {
 
     /* 회원권 추가하기 버튼 */
     const onClickAddPassHandler = () => {
-        navigate(`/member/add/${memCode}`)
+        navigate(`/history/add/${memCode}`)
     }
 
     /* 취소하기(페이지로 돌아가기) 버튼 */
     const onClickCancelHandler = () => {
         navigate(`/member`)
     }
+
+    const resEndDate = member.memCode && member.history[0]?.resEnd;
+    const memDeleteDate = resEndDate ? format(addYears(new Date(resEndDate), 5), 'yyyy-MM-dd') : '';
+
+    
     return(
         <>
         <div className={MemberDetailCSS.pageTitle}>회원 상세조회</div>
@@ -66,8 +72,8 @@ function MemberDetail() {
             />
         ) : true}
 
-            
-                {member.memCode && (
+                {member.memCode && member.history && member.history.length > 0 && (
+                        
                   <>
                     <table className={MemberDetailCSS.contentTb}>
                         <tr>
@@ -101,17 +107,17 @@ function MemberDetail() {
 
                         <tr>
                             <td className={MemberDetailCSS.contentTitle}>시작일</td>
-                            <td className={MemberDetailCSS.contentText} colspan="3">{ member.memStartDate }</td>
+                            <td className={MemberDetailCSS.contentText} colspan="3">{ member.history[0].resStart }</td>
                         </tr>
 
                         <tr>
                             <td className={MemberDetailCSS.contentTitle}>종료일</td> 
-                            <td className={MemberDetailCSS.contentText} colspan="3">{ member.memEndDate }</td>
+                            <td className={MemberDetailCSS.contentText} colspan="3">{ member.history[0].resEnd }</td>
                         </tr>
 
                         <tr>
                             <td className={MemberDetailCSS.contentTitle}>삭제일</td> 
-                            <td className={MemberDetailCSS.contentText} colspan="3">{ member.memDeleteDate }</td>
+                            <td className={MemberDetailCSS.contentText} colspan="3">{ memDeleteDate }</td>
                         </tr>
 
                         <tr>
@@ -135,7 +141,7 @@ function MemberDetail() {
                     <div>
                         <button 
                             className={MemberDetailCSS.cancelBtn}
-                            onClick={ onClickCancelHandler }>취소하기</button>
+                            onClick={ onClickCancelHandler }>취소</button>
                     </div>
                     </div>
 
@@ -149,10 +155,4 @@ function MemberDetail() {
 }
 
 
-                     
-
 export default MemberDetail;
-
-
-
-

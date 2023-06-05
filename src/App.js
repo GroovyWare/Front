@@ -2,7 +2,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Layout from './components/layouts/Layout';
 import Schedule from './schedule/Schedule';
 import ApvContent from './Approval/pages/ApvContent';
-import ApvEmployee from './Approval/pages/employee/ApvEmployee';
 import PlayMemberList from './play/PlayMemberList';
 import PlayHistory from './play/PlayHistory';
 import AnnounceMain from "./Announce/pages/announces/AnnounceMain";
@@ -25,17 +24,20 @@ import 'react-toastify/dist/ReactToastify.css';
 import { createGlobalStyle } from 'styled-components';
 import AddDocument from './Approval/pages/document/AddDocument';
 
-import { EmployeeProvider } from './Approval/pages/employee/EmployeeProvider';
+import ApvEmployee from "./Approval/pages/employee/ApvEmployee";
 import EmployeeRegist from './employee/pages/EmployeeRegist';
 
 import AnnounceUpdate from './Announce/pages/admin/AnnounceUpdate';
-import RequestList from './Approval/pages/getDocument/RequestList';
-import RequestDetail from './Approval/pages/getDocument/RequestDetail';
-import RequestWait from './Approval/pages/getDocument/RequestWait';
-import ReqeustWaitDetail from './Approval/pages/getDocument/RequestWaitDetail';
+import RequestList from './Approval/pages/lists/RequestList';
+import RequestDetail from './Approval/pages/lists/RequestDetail';
+import RequestWait from './Approval/pages/lists/RequestWait';
+import ReqeustWaitDetail from './Approval/pages/lists/RequestWaitDetail';
 import Attendance from './attendance/attendance';
 import EquipmentMain from './Equipment/pages/EquipmentMain';
-import MemberList from './Member/pages/MemberList';
+import AttendanceMain from './attendance/admin/AttendanceMain';
+import AttendanceDetail from './attendance/admin/AttendanceDetail';
+import Confirm from './Approval/pages/lists/Confirm';
+import No from './Approval/pages/lists/No';
 
 
 
@@ -72,12 +74,14 @@ function App() {
             <Route path="detail" element={<ProtectedRoute loginCheck={true}><RequestDetail/></ProtectedRoute>}/>
             <Route path="wait" element={<ProtectedRoute loginCheck={true}><RequestWait/></ProtectedRoute>}/>
             <Route path="waitDetail" element={<ProtectedRoute loginCheck={true}><ReqeustWaitDetail/></ProtectedRoute>}/>
+            <Route path="confirm" element={<ProtectedRoute loginCheck={true}><Confirm/></ProtectedRoute>}/>
+            <Route path="no" element={<ProtectedRoute loginCheck={true}><No/></ProtectedRoute>}/>
           </Route>
 
-          <Route path="play" element={<PlayMemberList />}>
+          {/* <Route path="play" element={<PlayMemberList />}>
             <Route index element={<ProtectedRoute loginCheck={true}><PlayMemberList /></ProtectedRoute>} />
             <Route path="history" element={<PlayHistory />} />
-          </Route>
+          </Route> */}
 
           <Route path="/announce">
             <Route index element={<ProtectedRoute loginCheck={true}><AnnounceMain /></ProtectedRoute>} />
@@ -95,14 +99,17 @@ function App() {
           </Route> */}
 
           <Route path="schedule" element={<Schedule />} />
-          <Route path='attendance' element={<Attendance/>}/>
+          <Route path="attendance">
+            <Route index element={<Attendance/>} />
+            <Route path="list" element={ <AttendanceMain/> } />
+            <Route path="detail/:empCode" element={ <AttendanceDetail/> } />
+          </Route>
 
           <Route path="member">
             <Route index element={<ProtectedRoute loginCheck={true}><MemberMain /></ProtectedRoute>} />
             <Route path="detail/:memCode" element={<ProtectedRoute loginCheck={true}><MemberDetail /></ProtectedRoute>} />
             <Route path="regist" element={<ProtectedRoute loginCheck={true}><MemberRegist /></ProtectedRoute>} />
             <Route path="modify/:memCode" element={<ProtectedRoute loginCheck={true}><MemberModify /></ProtectedRoute>} />
-            <Route path="add/:memCode" element={<ProtectedRoute loginCheck={true}><MemberAddPass /></ProtectedRoute>} />
             <Route path="members/search" element={<ProtectedRoute loginCheck={true}><MemberMain /></ProtectedRoute>} />
           </Route>
 
@@ -110,6 +117,10 @@ function App() {
             <Route index element={<ProtectedRoute loginCheck={true}><PassMain /></ProtectedRoute>} />
             <Route path="regist" element={<ProtectedRoute loginCheck={true}><PassRegist /></ProtectedRoute>} />
             <Route path="modify/:passCode" element={<ProtectedRoute loginCheck={true}><PassModify /></ProtectedRoute>} />
+          </Route>
+
+          <Route path="history">
+            <Route path="add/:memCode" element={<ProtectedRoute loginCheck={true}><MemberAddPass /></ProtectedRoute>} />
           </Route>
 
           <Route path="employee">

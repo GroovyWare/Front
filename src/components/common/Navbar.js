@@ -98,18 +98,17 @@ function Navbar() {
                                     <li><Link to="/approval/add" className={NavbarCSS.link}>결재 양식 추가</Link></li>
                                     <li><Link to="/approval/request" className={NavbarCSS.link}>결재 요청</Link></li>
                                     <li><Link to="/approval/wait" className={NavbarCSS.link}>결재 대기</Link></li>
-                                    <li>회수함</li>
-                                    <li>종결함</li>
-                                    <li>반려함</li>
+                                    <li><Link to="/approval/confirm" className={NavbarCSS.link}>종결함</Link></li>
+                                    <li><Link to="approval/no" className={NavbarCSS.link}>반려함</Link></li>
                             </ul>
                         </NavLink>
                     </li>
                         
-                    <li><NavLink to="/play" className={ NavbarCSS.link }>
+                    {/* <li><NavLink to="/play" className={ NavbarCSS.link }>
                         운동량
                         <img src={ arrow } className = { NavbarCSS.arrowNo }/>
                         </NavLink>
-                    </li>
+                    </li> */}
 
                     {/* <li><Link to="/employee" className={ NavbarCSS.link }>
                         직원관리
