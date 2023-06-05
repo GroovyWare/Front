@@ -104,11 +104,11 @@ function Navbar() {
                         </NavLink>
                     </li>
                         
-                    <li><NavLink to="/play" className={ NavbarCSS.link }>
+                    {/* <li><NavLink to="/play" className={ NavbarCSS.link }>
                         운동량
                         <img src={ arrow } className = { NavbarCSS.arrowNo }/>
                         </NavLink>
-                    </li>
+                    </li> */}
 
                     {/* <li><Link to="/employee" className={ NavbarCSS.link }>
                         직원관리
