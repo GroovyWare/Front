@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { callEquipmentListAPI, callEquipmentSearchListAPI } from "../../api/EquipmentAPICalls";
 import PagingBar from "../../components/common/PagingBar";
-import SearchBar from "../../components/common/SearchBar";
+import EquipmentSearchBar from "../../components/common/EquipmentSearchBar";
 import { useSearchParams } from "react-router-dom";
 import EquipmentMainCSS from './EquipmentMain.module.css';
 import axios from "axios";
@@ -18,9 +18,13 @@ function EquipmentMain() {
     const equipmentList = equipments?.data || [];
     const pageInfo = equipments?.pageInfo || null;
 
+    const [sortConfig, setSortConfig] = useState(null);
+    const [sortedEquipmentList, setSortedEquipmentList] = useState([]);
     const [selectAll, setSelectAll] = useState(false);
     const [checkedEquipments, setCheckedEquipments] = useState([]);
     const [selectedEquipment, setSelectedEquipment] = useState(null); // 선택된 기구 상태
+
+    const [searchCondition, setSearchCondition] = useState('eqpTitle');
 
     const [currentPage, setCurrentPage] = useState(1);
     const [searchParams] = useSearchParams();
@@ -41,16 +45,51 @@ function EquipmentMain() {
 
     useEffect(
         () => {
-            if(searchTerm) {
-                dispatch(callEquipmentSearchListAPI({ search: searchTerm, currentPage }));
-            } else {
-                dispatch(callEquipmentListAPI({ currentPage }));
-            }
+          if(searchTerm) {
+            dispatch(callEquipmentSearchListAPI({ condition: searchCondition, keyword: searchTerm, currentPage }));
+          } else {
+            dispatch(callEquipmentListAPI({ currentPage }));
+          }
         },
-        [dispatch, currentPage, searchTerm]
-    );
+        [dispatch, currentPage, searchTerm, searchCondition]
+      );
 
-    const handleCheckChange = (eqpCode, isChecked) => {
+    useEffect(() => {
+        let sortableItems = [...equipmentList];
+        if (sortConfig !== null) {
+            sortableItems.sort((a, b) => {
+                if (sortConfig.key === 'eqpPurchase' || sortConfig.key === 'eqpDate') {
+                    // 날짜에 대한 정렬 처리
+                    const dateA = Date.parse(a[sortConfig.key]);
+                    const dateB = Date.parse(b[sortConfig.key]);
+                    return sortConfig.direction === 'ascending' ? dateA - dateB : dateB - dateA;
+                } else {
+                    // 문자열에 대한 정렬 처리
+                    if (a[sortConfig.key] < b[sortConfig.key]) {
+                        return sortConfig.direction === 'ascending' ? -1 : 1;
+                    }
+                    if (a[sortConfig.key] > b[sortConfig.key]) {
+                        return sortConfig.direction === 'ascending' ? 1 : -1;
+                    }
+                    return 0;
+                }
+            });
+        }
+        setSortedEquipmentList(sortableItems); // 상태 업데이트
+    }, [equipmentList, sortConfig]);
+
+    const handleSort = (key) => {
+        let direction = 'ascending';
+        if (sortConfig && sortConfig.key === key && sortConfig.direction === 'ascending') {
+            direction = 'descending';
+        }
+        setSortConfig({ key, direction });
+    }
+
+    const handleCheckChange = (e, eqpCode) => {
+        e.stopPropagation();
+        const isChecked = e.target.checked;
+    
         if (isChecked) {
             setCheckedEquipments(prev => [...prev, eqpCode]);
         } else {
@@ -58,11 +97,18 @@ function EquipmentMain() {
         }
     }
 
-    const onSearch = (searchValue) => {
+    const onSearch = (searchValue, searchCondition) => {
         setSearchTerm(searchValue);
-    }
+        setSearchCondition(searchCondition);
+        // dispatch(callEquipmentSearchListAPI({ condition: searchCondition, keyword: searchValue, currentPage }));
+    }    
 
     const handleDelete = () => {
+        if (checkedEquipments.length === 0) {
+            alert("삭제할 기구를 선택해주세요.");
+            return;
+        }
+        
         if (window.confirm("선택한 기구를 삭제하시겠습니까?")) {
             // 모든 삭제 요청을 생성하고 실행
             const deleteRequests = checkedEquipments.map(eqpCode => axios.delete(`http://localhost:8059/equipment/${eqpCode}`));
@@ -73,7 +119,7 @@ function EquipmentMain() {
                     const allSuccessful = responses.every(res => res.status === 200);
                     
                     if(allSuccessful) {
-                        alert("선택한 기구가 모두 삭제되었습니다.");
+                        alert("선택한 기구가 삭제되었습니다.");
                         
                         window.location.href = "http://localhost:3000/equipment";  // 특정 URL로 리디렉션
                     } else {
@@ -111,8 +157,8 @@ function EquipmentMain() {
 
     return (
         <>  
-            <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "15px", marginRight: "20px" }}>
-                <SearchBar search={searchTerm} onSearch={onSearch} />
+            <div>
+                <EquipmentSearchBar onSearch={onSearch} />
             </div>
             <div className={ EquipmentMainCSS.bodyDiv }>
             <table className={ EquipmentMainCSS.productTable }>
@@ -127,21 +173,22 @@ function EquipmentMain() {
                 <thead>
                     <tr>
                         <th><input type="checkbox" checked={selectAll} onChange={(e) => setSelectAll(e.target.checked)} /></th>
-                        <th>기구명</th>
-                        <th>구매일자</th>
-                        <th>점검자</th>
-                        <th>최근점검일자</th>
+                        <th onClick={() => handleSort('eqpTitle')}>기구명</th>
+                        <th onClick={() => handleSort('eqpPurchase')}>구매일자</th>
+                        <th onClick={() => handleSort('eqpInspector')}>점검자</th>
+                        <th onClick={() => handleSort('eqpDate')}>최근점검일자</th>
                         <th>점검내용</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {equipmentList.map((p) => (
+                    {sortedEquipmentList.map(p => (
                         <tr key={p.eqpCode} onClick={() => openUpdateModal(p)}>
                             <td style={{textAlign: "center"}}>
                                 <input 
                                     type="checkbox" 
                                     checked={checkedEquipments.includes(p.eqpCode)}
-                                    onChange={(e) => handleCheckChange(p.eqpCode, e.target.checked)}
+                                    onClick={(e) => e.stopPropagation()}
+                                    onChange={(e) => handleCheckChange(e, p.eqpCode)}
                                 />
                             </td>
                             <td>{p.eqpTitle}</td>

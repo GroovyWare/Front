@@ -7,6 +7,7 @@ import EquipmentModalCSS from './EquipmentModal.module.css'
 const EquipmentRegist = ({isOpen, onRequestClose}) => {
     const dispatch = useDispatch();
     const { regist } = useSelector(state => state.equipmentReducer);
+    const { employee } = useSelector(state => state.employeeReducer);
 
     const today = new Date();
     const currentDate = today.toISOString().substring(0,10);
@@ -17,16 +18,17 @@ const EquipmentRegist = ({isOpen, onRequestClose}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
+        
         const data = {
-            'eqpTitle': eqpTitle,
-            'eqpInspector': eqpInspector,
-            'eqpPurchase': eqpPurchase,
+          'eqpTitle': eqpTitle,
+          'eqpInspector': eqpInspector,
+          'eqpPurchase': eqpPurchase,
+          'employee': employee
         };
-    
+        
         dispatch(callEquipmentRegistAPI(data));
         console.log("data: ", data);
-    }
+    }  
 
     const handleDateChange = (e) => {
         const value = e.target.value;
@@ -45,7 +47,7 @@ const EquipmentRegist = ({isOpen, onRequestClose}) => {
                 alert('기구 등록이 완료되었습니다.');
                 window.location.reload();
             } else if (regist?.status) {
-                alert('기구 등록에 실패했습니다. 다시 한 번 시도해주세요.');
+                alert('등록에 실패했습니다. 다시 한 번 시도해주세요.');
             }
         },
         [regist]

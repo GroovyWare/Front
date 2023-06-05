@@ -5,7 +5,9 @@
     /* margin-right: 30px; */
     background-color: white;
     width: 600px;
-    height: 300px;
+    height: 500px;
+    padding-top: 100px;
+    margin-top: 80px;
     /* padding-bottom: 38px; */
 }
 
@@ -22,13 +24,14 @@
 .docChooseDiv{
     font-family: "LineSeedKR-Bd";
     width: 200px;
-    height: 300px;
+    height: 600px;
     font-size: 22px;
     color: white;
     text-align: center;
     /* margin-top: 81px; */
     /* margin-left: 110px; */
     background-color: #667eea;
+    margin-top: 80px;
 }
 
 .docChooseDiv li{
@@ -38,21 +41,37 @@
 }
 
 .centerDiv button{
-    width: 50px;
-    /* float: right; */
-    /* margin-top: 137px; */
-    font-size: 14px;
-    font-family: "LineSeedKR-Bd";
+    cursor: pointer;
+    /* margin-top: 15px; */
+    color: #fff;
+    background-color: #716dff;
+    border: none;
+    border-radius: 3px;  
+    width: 70px;
+    padding: 3px 7px;
+    padding-top: 5px;
+    font-family: 'LINESeedKR-Rg';
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 
 .centerDivButton{
-    width: 50px;
-    font-size: 14px;
-    font-family: "LineSeedKR-Bd";
-    background-color: #667eea;
-    color: white;
-    /* transform: translate(1680%, -150%); */
+    cursor: pointer;
+    /* margin-top: 15px; */
+    color: #fff;
+    background-color: #716dff;
     border: none;
+    border-radius: 3px;  
+    width: 70px;
+    padding: 3px 7px;
+    padding-top: 5px;
+    font-family: 'LINESeedKR-Rg';
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    height: 600px;
+    margin-top: 80px;
 }
 
 .docTitle{
@@ -80,7 +99,7 @@
 }
 
 .container{
-    margin: 0 0 100px 120px;
+    margin: 0 0 100px 193px;
 }
 
 .table{

@@ -56,7 +56,6 @@ function ApvEmployee({setModalOpen}){
                             className={ApvEmployeeCSS.textbox}
                             onKeyPress={onKeyPressHandler}
                         />
-                         
                         <div>
                             <Head empName = {empName}/>
                         </div>
