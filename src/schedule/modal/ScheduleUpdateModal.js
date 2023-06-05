@@ -59,7 +59,9 @@ function ScheduleUpdateModal({  setScheduleUpdateModal , justSchedule}) {
       <div className={ScheduleUpdateModalCSS.modalContainer}>
         <div className={ScheduleUpdateModalCSS.updatingformDiv}>
           <h1>상세 일정</h1>
-          <select name="schDiv" onChange={onChangeHandler}>
+          <select name="schDiv"
+           className={ScheduleUpdateModalCSS.selects}
+          onChange={onChangeHandler}>
             <option value="선택">선택</option>
             <option value="부서">부서</option>
             <option value="개인">개인</option>
@@ -81,6 +83,7 @@ function ScheduleUpdateModal({  setScheduleUpdateModal , justSchedule}) {
             value={form.context}
           ></textarea>
           <br/>
+          <label> 시작일 : </label>
           <input
           className={ScheduleUpdateModalCSS.datearea}
             placeholder="시작일"
@@ -91,6 +94,7 @@ function ScheduleUpdateModal({  setScheduleUpdateModal , justSchedule}) {
           />
           <br/>
           {/* isostring으로 반환값을 맞춰준다. */}
+          <label> 종료일 : </label>
           <input
           className={ScheduleUpdateModalCSS.datearea}
             placeholder="종료일"
@@ -118,11 +122,14 @@ function ScheduleUpdateModal({  setScheduleUpdateModal , justSchedule}) {
             value={form.textColor}
           />
           <br/>
-          <button onClick={handleSubmit}>수정하기</button>
+          <button 
+          className={ScheduleUpdateModalCSS.buttons}
+          onClick={handleSubmit}>수정하기</button>
 
-          <button onClick={deleteOneSchedule}>삭제하기</button>
+          <button onClick={deleteOneSchedule}
+          className={ScheduleUpdateModalCSS.buttons}>삭제하기</button>
           <button
-           
+           className={ScheduleUpdateModalCSS.buttons}
             onClick={() => setScheduleUpdateModal(false)}
           >
             돌아가기

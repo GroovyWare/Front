@@ -1,12 +1,13 @@
 
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ScheduleInsertModalCSS from "./ScheduleInsertModal.module.css";
+
 import { AllSchedules, createSchedule, oneSchedule, searchingSchedule, deleteSchedule } from "../../api/CalendarAPICalls";
 import { getSchedule, getSchedules, initSchedule } from "../../modules/CalendarModule";
 
 import PagingBar from "../../components/common/PagingBar";
-import ScheduleUpdateModal from "./ScheduleUpdateModal";
+import ScheduleSearchModalCSS from "./ScheduleSearhModal.module.css"
+
 
 function ScheduleSearchModal({ searchSchedule, setScheduleSearchModal, setScheduleUpdateModal, setJustSchedule }) {
   // const [schCode, setschCode] = useState(0);
@@ -37,19 +38,19 @@ function ScheduleSearchModal({ searchSchedule, setScheduleSearchModal, setSchedu
   }, [searchSchedule, currentPage]);
 
   return (
-    <div className={ScheduleInsertModalCSS.modal}>
-      <div className={ScheduleInsertModalCSS.modalContainer}>
-        <div className={ScheduleInsertModalCSS.insertingformDiv}>
-          <div>
+    <div className={ScheduleSearchModalCSS.modal}>
+      <div className={ScheduleSearchModalCSS.modalContainer}>
+        <div className={ScheduleSearchModalCSS.insertingformDiv}>
+          <div className={ScheduleSearchModalCSS.results}>
             <h1>검색 결과</h1>
-            <table>
+            <table className={ScheduleSearchModalCSS.tables}>
               <colgroup>
-                <col width="20%" />
+                <col width="35%" />
                 <col width="30%" />
                 <col width="30%" />
                 <col width="20%" />
               </colgroup>
-              <thead>
+              <thead className={ScheduleSearchModalCSS.tableHeader}>
                 <tr>
                   <th>시작일</th>
                   <th>종료일</th>
@@ -75,18 +76,14 @@ function ScheduleSearchModal({ searchSchedule, setScheduleSearchModal, setSchedu
               </tbody>
             </table>
 
-            <div>
+            <div className={ScheduleSearchModalCSS.pagings}>
                 { pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage}/> }
             </div>
             <div className="button">
             
               <button
-                style={{
-                  border: "none",
-                  margin: 0,
-                  fontSize: "10px",
-                  height: "10px",
-                }}
+               className={ScheduleSearchModalCSS.buttons}
+                
                 onClick={() => setScheduleSearchModal(false)}
               >
                 돌아가기

@@ -36,11 +36,11 @@ const Schedule = () => {
   }, []);
 
   useEffect(() => {
-    if (vacationInsertModal == false)
-      dispatch(AllSchedules());
+    if(vacationInsertModal == false) 
+    dispatch(AllSchedules());
   }
 
-    , [vacationInsertModal])
+  , [vacationInsertModal])
 
   useEffect(() => {
     if (scheduleInsertModal == false) {
@@ -165,7 +165,7 @@ const Schedule = () => {
   return (
     <div>
       <div className={styles.searching}>
-        <label>제목으로 검색 :   </label>
+        <label>제목으로 검색</label>
         <input type="text" name="title" value={searchSchedule} onChange={(e) => setSearchSchedule(e.target.value)}></input>
         <button onClick={searchingTitleHandler}>검색</button>
       </div>
@@ -198,16 +198,16 @@ const Schedule = () => {
           />
           개인일정
         </label>
-      </div>
 
-      <div className={styles.insertingbutton}>
+
         <button className={styles.inserting} onClick={onClickHandler}>
           일정 생성
         </button>
-
+        
         <button className={styles.inserting} onClick={onClickVacationHandler}>
           휴가 생성
         </button>
+
       </div>
 
       <div className={styles.allview}>
@@ -225,7 +225,7 @@ const Schedule = () => {
             justSchedule={justSchedule} />
         )}
         {vacationInsertModal && (
-          <VacationInsertModal setVacationInsertModal={setVacationInsertModal} />
+          <VacationInsertModal setVacationInsertModal={setVacationInsertModal}/>
         )}
       </div>
       <div className="calendarMain" style={{ maxWidth: '1680px', minWidth: '1100px' }}>
