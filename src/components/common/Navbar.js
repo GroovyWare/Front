@@ -70,15 +70,11 @@ function Navbar() {
                             </NavLink>
                         </li>
 
-
-                    <li className={ NavbarCSS.link }>
-                        시설관리
-                        <img src={ arrow } className = { NavbarCSS.arrowYes }/>
-                            <ul className={ NavbarCSS.subMenu }>
-                                    <li><NavLink to="/equipment" className={ NavbarCSS.link }>기구관리</NavLink></li>
-                                    <li><NavLink to="/locker" className={ NavbarCSS.link }>로커관리</NavLink></li>
-                            </ul>
-                    </li>
+                        <li><NavLink to="/equipment" className={ NavbarCSS.link }>
+                            시설관리
+                            <img src={ arrow } className = { NavbarCSS.arrowNo }/>
+                            </NavLink>
+                        </li>
 
                     <li><NavLink to="/member" className={ NavbarCSS.link }>
                         회원관리

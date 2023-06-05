@@ -13,7 +13,6 @@ export const callEquipmentListAPI = ({ currentPage = 1 }) => {
         }).then(response => response.json());        
 
         if(result.status === 200) {
-            console.log('[EquipmentAPICalls] : callEquipmentListAPI result : ', result);
             dispatch(getEquipments(result));
         }
     }
@@ -28,7 +27,6 @@ export const callEquipmentSearchListAPI = ({ search, currentPage = 1}) => {
         }).then(response => response.json());
 
         if(result.status === 200) {
-            console.log("[EquipmentAPICalls] callEquipmentSearchAPI result : ", result);
             dispatch(getEquipments(result));
         }
     }
@@ -38,16 +36,21 @@ export const callEquipmentRegistAPI = (data) => {
     const requestURL = `${PRE_URL}/equipment`;
 
     return async (dispatch, getState) => {
-        const result = await fetch(requestURL, {
+        const response = await fetch(requestURL, {
             method : 'POST',
             headers : {
                 "Authorization" : "Bearer " + window.localStorage.getItem('accessToken'),
                 "Content-Type": "application/json"
             },
             body : JSON.stringify(data)
-        }).then(response => response.json());
-        console.log("[EquipmentAPICalls] callEquipmentRegistAPI result : ", result);
-        dispatch(postEquipment(result));  // Always dispatch an action, regardless of the status
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            dispatch(postEquipment(result));
+        } else {
+            dispatch(postEquipment({ status: response.status }));
+        }
     }
 }
 
@@ -55,16 +58,20 @@ export const callEquipmentUpdateAPI = (eqpCode, formData) => {
     const requestURL = `${PRE_URL}/equipment/${eqpCode}`;
 
     return async (dispatch, getState) => {
-        const result = await fetch(requestURL, {
+        const response = await fetch(requestURL, {
             method : 'PUT',
             headers : {
                 "Authorization" : "Bearer " + window.localStorage.getItem('accessToken'),
                 "Content-Type": "application/json"
             },
             body : JSON.stringify(formData)
-        }).then(response => response.json());
+        });
 
-        dispatch(putEquipment(result));  // Always dispatch an action, regardless of the status
+        if (response.ok) {
+            const result = await response.json();
+            dispatch(postEquipment(result));
+        } else {
+            dispatch(postEquipment({ status: response.status }));
+        }        
     }
 }
-
