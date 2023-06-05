@@ -7,7 +7,7 @@ import RequestDetailCSS from "./RequestDetail.module.css";
 import { useDispatch, useSelector } from 'react-redux';
 import { searchContextAPI } from '../../../api/ApprovalAPICall';
 import { EmployeeContext } from '../employee/EmployeeProvider';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { searchRequestAPI } from '../../../api/ApprovalAPICall';
 
 const Parchment = Quill.import('parchment');
@@ -56,6 +56,7 @@ const modules = {
 `;
 
 function RequestDetail(){
+    const navigate = useNavigate();
     
     const dispatch = useDispatch();
     const location = useLocation();

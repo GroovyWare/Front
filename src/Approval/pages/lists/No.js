@@ -3,15 +3,15 @@ import NoCSS from './No.module.css';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import PagingBar from '../../../components/common/PagingBar';
-import { searchWaitAPI, searchNowAPI } from '../../../api/ApprovalAPICall';
+import { searchListAPI, searchNowAPI } from '../../../api/ApprovalAPICall';
 
 function No(){
     
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const {waitList, now} = useSelector(state => state.approvalReducer);
-    const pageInfo = waitList?.data.pageInfo;
+    const {list, now} = useSelector(state => state.approvalReducer);
+    const pageInfo = list?.data.pageInfo;
 
     const [ currentPage, setCurrentPage ] = useState(1);
 
@@ -21,7 +21,7 @@ function No(){
 
     useEffect(
         () => {
-            dispatch(searchWaitAPI({currentPage}));
+            dispatch(searchListAPI({currentPage}));
         },[currentPage]
     )
 
@@ -32,6 +32,7 @@ function No(){
     )
 
     return(
+        <>
         <div className={NoCSS.container}>
             <div className={NoCSS.pageTitle}>
                 <div>반려함</div>
@@ -46,10 +47,9 @@ function No(){
                     <th>상태</th>
                 </tr>
 
-                {waitList && waitList.data.data.map((wait, waitIndex) => {
-                    const aplNumOne = wait.approveLine.find(apl => apl.empCode === now.data.empCode);
+                {list && list.data.data.map((wait, waitIndex) => {
 
-                        if(aplNumOne.empCode === wait.employee.empCode && wait.apvStatus === '반려'){
+                        if(wait.apvStatus === '반려'){
                             return (
                                 <tr key={waitIndex} onClick={() => onRowClickHandler(wait.apvCode)}>
                                     <td>{wait.employee.empName}</td>
@@ -63,9 +63,10 @@ function No(){
                             );
                 }})}
             </table>
-            <div>{ pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage }/> }</div>
         </div>
         </div>
+        <div>{ pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage }/> }</div>
+        </>
     )
 }
 
