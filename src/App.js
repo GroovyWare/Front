@@ -34,8 +34,6 @@ import RequestWait from './Approval/pages/lists/RequestWait';
 import ReqeustWaitDetail from './Approval/pages/lists/RequestWaitDetail';
 import Attendance from './attendance/attendance';
 import EquipmentMain from './Equipment/pages/EquipmentMain';
-import AttendanceMain from './attendance/admin/AttendanceMain';
-import AttendanceDetail from './attendance/admin/AttendanceDetail';
 import Confirm from './Approval/pages/lists/Confirm';
 import No from './Approval/pages/lists/No';
 
@@ -99,11 +97,7 @@ function App() {
           </Route> */}
 
           <Route path="schedule" element={<Schedule />} />
-          <Route path="attendance">
-            <Route index element={<Attendance/>} />
-            <Route path="list" element={ <AttendanceMain/> } />
-            <Route path="detail/:empCode" element={ <AttendanceDetail/> } />
-          </Route>
+          <Route path="attendance" element={<Attendance/>} />
 
           <Route path="member">
             <Route index element={<ProtectedRoute loginCheck={true}><MemberMain /></ProtectedRoute>} />
