@@ -7,28 +7,39 @@
 
 .container {
     margin-top: 10px;
-    padding: 20px;
+    padding: 20px 30px;;
     font-family: 'LINESeedKR-Rg';
 }
 
-.btnDiv {
+/* 페이지 제목 */
+.pageTitle > div {
+    font-size: 20px;
+    font-weight: 700;
+    position: relative;
+    left: 20px;
+    text-align: left;
+    letter-spacing: 1px;
+}
+
+.searchbar {
+    display: none;
     float: right;
+    position: relative;
+    top: 15px;
+    border: 1px solid #5a5a5a;
+    border-radius: 10px;
+    width: 300px;
+    background-color: #a7a7a7;
 }
 
-.registBtn {
-        width: auto;
-        height: 25px;
-        border: none;
-        border-radius: 5px;
-        background-color: #1A1779;
-        color: #ffffff;
-        cursor: pointer;
-        font-family: 'esamanru';
-        padding: 0px 10px;
-        margin-right: 10px;
-        letter-spacing: 1px;
+.searchbar > input{
+    border:none;
+    border-bottom: 1px solid #5a5a5a;
+    background-color: transparent;
+    font-size: 14px;
 }
 
-.registBtn:hover {
-    background-color: #94a9ff;
+.search {
+    width: 30px;
+    height: 30px;
 }

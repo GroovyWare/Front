@@ -26,7 +26,7 @@ function PagingBar({pageInfo, setCurrentPage}){
                 <li key={num} onClick={ () => setCurrentPage(num)}>
                     <button 
                     className={PagingBarCSS.pagingBtn}
-                    style={pageInfo.currentPage === num? {backgroundColor : '#627ef1', color: '#ffffff'} : null}>{num}</button>
+                    style={pageInfo.currentPage === num? {backgroundColor : '#716dff', color: '#fff'} : null}>{num}</button>
                 </li>
             ))}
             <button 

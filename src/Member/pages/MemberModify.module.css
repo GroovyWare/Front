@@ -165,37 +165,69 @@
 }
 
 .modifyBtn {
-    font-family: 'LINESeedKR-Bd';
-    font-size: 0.8rem;
-    color: white;
-    background: #785ee0;
-    border-color: #785ee0;
-    width: 100px;
-    height: 25px;
-    margin-top: 25px;
-    margin-left: 30px;
+  border: none;
+  border-radius: 3px;
+  background-color: #716dff;
+  color: #fff;
+  cursor: pointer;
+  letter-spacing: 1px;
+  padding: 3px 7px;
+  padding-top: 5px;
+  font-family: 'LINESeedKR-Rg';
+  font-size: 13px;
+  font-weight: 700;
+  width: 110px;
+  margin-top: 15px;
+  margin-left: 30px;
 }
 
 .registBtn {
-    font-family: 'LINESeedKR-Bd';
-    font-size: 0.8rem;
-    color: white;
-    background: #4f5eeb;
-    border-color: #4f5eeb;
-    width: 100px;
-    height: 25px;
-    margin-top: 25px;
-    margin-left: 10px;
+  border: none;
+  border-radius: 3px;
+  background-color: #716dff;
+  color: #fff;
+  cursor: pointer;
+  letter-spacing: 1px;
+  padding: 3px 7px;
+  padding-top: 5px;
+  font-family: 'LINESeedKR-Rg';
+  font-size: 13px;
+  font-weight: 700;
+  width: 110px;
+  margin-top: 15px;
+  margin-left: 10px;
+}
+
+.registBtnAddPass {
+  border: none;
+  border-radius: 3px;
+  background-color: #716dff;
+  color: #fff;
+  cursor: pointer;
+  letter-spacing: 1px;
+  padding: 3px 7px;
+  padding-top: 5px;
+  font-family: 'LINESeedKR-Rg';
+  font-size: 13px;
+  font-weight: 700;
+  width: 110px;
+  margin-top: 15px;
+  margin-left: 30px;
 }
 
 .cancelBtn {
-    font-family: 'LINESeedKR-Bd';
-    font-size: 0.8rem;
-    color: white;
-    background: #26199b;
-    border-color: #26199b;
-    width: 100px;
-    height: 25px;
-    margin-top: 25px;
-    margin-left: 10px;
+  border: none;
+  border-radius: 3px;
+  background-color: #716dff;
+  color: #fff;
+  cursor: pointer;
+  letter-spacing: 1px;
+  padding: 3px 7px;
+  padding-top: 5px;
+  font-family: 'LINESeedKR-Rg';
+  font-size: 13px;
+  font-weight: 700;
+  width: 110px;
+  margin-top: 15px;
+  margin-left: 10px;
 }

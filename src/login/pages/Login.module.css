@@ -20,6 +20,7 @@
     background-size: cover;
     min-height: 100vh;
     min-width: 100vw;
+    font-family: 'LineSeedKR-Rg';
 }
 .loginBg {
     width: 700px;

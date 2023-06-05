@@ -88,15 +88,18 @@ function Document() {
       var html = quillInstance.root.innerHTML;
   
       const formData = new FormData();
-      formData.append("apvCreatedDate", new Date(startDate));
+      if(startDate){
+      formData.append("apvCreatedDate", new Date(startDate));}
       formData.append("apvStatus", '진행중')
-      formData.append("apvEndDate", new Date(endDate));
+      if(endDate){
+      formData.append("apvEndDate", new Date(endDate));}
       formData.append("apvContext", html);
 
       approvedEmployees.forEach((employee, index) => {
         formData.append(`approveLine[${index}].apvCode`, 0);
         formData.append(`approveLine[${index}].empCode`, employee.code);
         formData.append(`approveLine[${index}].aplNum`, index + 1);
+        formData.append(`approveLine[${index}].aplStatus`, '진행중')
       });
 
       readEmployees.forEach((reader, index) => {
