@@ -61,7 +61,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<ProtectedRoute loginCheck={true}><Layout /></ProtectedRoute>}>
-
+        <Route index element={<Attendance/>}></Route>
           <Route path="approval">
             <Route index element={<ApvContent />}/>
             <Route path="new" element={<ProtectedRoute loginCheck={true}><ApvContent /></ProtectedRoute>} />
