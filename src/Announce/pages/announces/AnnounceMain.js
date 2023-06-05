@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { callAnnounceListAPI, callAnnounceSearchListAPI } from "../../../api/AnnounceAPICalls";
 import AnnounceList from "./AnnounceList";
 import PagingBar from "../../../components/common/PagingBar";
-import { Navigate, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import SearchBar from "../../../components/common/SearchBar";
 import AnnounceMainCSS from './AnnounceMain.module.css';
 import { NavLink } from "react-router-dom";

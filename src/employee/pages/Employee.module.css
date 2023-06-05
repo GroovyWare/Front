@@ -20,3 +20,26 @@
     text-align: left;
     letter-spacing: 1px;
 }
+
+.searchbar {
+    display: none;
+    float: right;
+    position: relative;
+    top: 15px;
+    border: 1px solid #5a5a5a;
+    border-radius: 10px;
+    width: 300px;
+    background-color: #a7a7a7;
+}
+
+.searchbar > input{
+    border:none;
+    border-bottom: 1px solid #5a5a5a;
+    background-color: transparent;
+    font-size: 14px;
+}
+
+.search {
+    width: 30px;
+    height: 30px;
+}

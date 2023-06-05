@@ -5,6 +5,7 @@ import ApvEmployee from "./employee/ApvEmployee";
 import { useDispatch, useSelector } from "react-redux";
 import { searchDocTitleAPI, searchDocumentList } from "../../api/DocumentAPICalls";
 import React from "react";
+import { searchWaitAPI, searchRequestAPI } from "../../api/ApprovalAPICall";
 
 function ApvContent(){
     const navigate = useNavigate();
@@ -59,6 +60,13 @@ function ApvContent(){
       );
 
     return(
+        <>
+        <div className={ApvContentCSS.content}>
+        <div className={ApvContentCSS.pageTitle}>
+            <div>결재</div>
+            <hr/>
+        </div>
+        </div>
         <div className={ApvContentCSS.container}>
              <div className={ApvContentCSS.centerDiv}>
                 <div style={{display:"flex"}}>
@@ -73,8 +81,7 @@ function ApvContent(){
                             ))}
                      </div>
 
-                    <div className={ApvContentCSS.docDiv}>
-                        
+                    <div className={ApvContentCSS.docDiv}>  
                         <div>
                             <div className={ApvContentCSS.docTitle} style={{display:"flex"}}>
                                 <div>제목</div> {docTitles && <div style={{marginLeft: 100, fontSize: 18}}>{docTitles}</div>}
@@ -129,6 +136,7 @@ function ApvContent(){
                 </div> 
             </div>
         </div>
+        </>
     )
 }
 

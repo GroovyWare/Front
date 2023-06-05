@@ -1,0 +1,82 @@
+@font-face {
+    font-family: "LINESeedKR-Bold";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2")
+      format("woff2");
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+.buttons {
+    cursor: pointer;
+    position: relative;
+    font-size: 14px;
+    font-family: "LineSeedKR-Bd";
+    background-color: #716dff;
+    color: #fff;
+    border-radius: 3px;  
+    width: 70px;
+    padding: 3px 7px;
+    padding-top: 5px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    /* transform: translate(1680%, -150%); */
+    border: none;
+}
+
+.working {
+    background-color: white;
+    border-radius: 5%;
+    outline: 1px black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 3px 2px 5px rgba(0, 0, 0, 0.2);
+    width: 500px;
+    height : 250px;
+    margin-left: 30px;
+    font-size: xx-large;
+}
+
+.leaving {
+    background-color: white;
+    border-radius: 5%;
+    outline: 1px black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 3px 2px 5px rgba(0, 0, 0, 0.2);
+    width: 500px;
+    height : 250px;
+    margin-left: 30px;
+    font-size: xx-large;
+}
+
+.whole {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.nowtime{
+    margin-top: 20px;
+    background-color: white;
+    border-radius: 5%;
+    outline: 1px black;
+    box-shadow: 3px 2px 5px rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-size: xx-large;
+    font-weight: 500;
+    width: 1000px;
+    margin-left: 370px;
+
+}
+
+.nowtime label {
+    margin-right: 20px;
+    margin-left: 20px;
+    
+}

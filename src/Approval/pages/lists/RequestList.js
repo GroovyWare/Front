@@ -14,7 +14,6 @@ function RequestList () {
     const pageInfo = requestList?.pageInfo;
 
     const [ currentPage, setCurrentPage ] = useState(1);
-    const [ count, setCount ] = useState(0);
 
     useEffect(
         () => {
@@ -27,40 +26,49 @@ function RequestList () {
     }
 
     return(
-        <div>
-            <h3 className={RequestListCSS.container}>결재 요청</h3>
-        <div className={RequestListCSS.tableDiv}>
-            <table className={RequestListCSS.table}>
-                <tr>
-                    <th>기안일</th>
-                    <th>기안서명</th>
-                    <th>결재권자</th>
-                    <th>상태</th>
-                </tr>
-                {requestList && requestList.data.approvalDtoContent.map((request, requestIndex) => {
-                 <tr key={requestIndex} onClick={() => onRowClickHandler(request.apvCode)}>
-                    <td>{request.apvCreatedDate}</td>
-                    <td>{request.document.docTitle}</td>
-                    <td style={{display: "flex", justifyContent: "center", flexDirection: "column"}}>
-                        {requestList && requestList.data.employeeDtoList.map((employee, employeeIndex) => (
-                            request.approveLine.map((approve, approveIndex) => (
-                                (approve.empCode === employee.empCode) ? 
-                                <div key={`${requestIndex}-${employeeIndex}-${approveIndex}`}>{employee.empName}</div> : null
-                            ))
-                        ))}
-                    </td>
-                    <td style={{justifyContent: "center", flexDirection: "column"}}>
-                        {request.approveLine.map((approve2, approveIndex2) => (
-                            <div key={approveIndex2}>{approve2.aplStatus}</div>
-                        ))}
-                    </td>
+        <div className={RequestListCSS.container}>
+            <div className={RequestListCSS.pageTitle}>
+                <div>결재 요청</div>
+                <hr/>
+            </div>
+            <div className={RequestListCSS.tableDiv}>
+                <table className={RequestListCSS.table}>
+                    <tr>
+                        <th>기안일</th>
+                        <th>기안서명</th>
+                        <th>결재권자</th>
+                        <th>상태</th>
                     </tr>
-            })}
-            </table>
-            <div>{ pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage }/> }</div>
-        </div>
+                    {requestList && requestList.data.approvalDtoContent.map((request, requestIndex) => {
+                        return (  // 이 부분에 return 추가
+                            <tr key={requestIndex} onClick={() => onRowClickHandler(request.apvCode)}>
+                                {request.apvStatus === '진행중' ? 
+                                    <>
+                                        <td>{request.apvCreatedDate}</td>
+                                        <td>{request.document.docTitle}</td>
+                                        <td style={{display: "flex", justifyContent: "center", flexDirection: "column"}}>
+                                            {requestList && requestList.data.employeeDtoList.map((employee, employeeIndex) => (
+                                                request.approveLine.map((approve, approveIndex) => (
+                                                    (approve.empCode === employee.empCode) ? 
+                                                    <div key={`${requestIndex}-${employeeIndex}-${approveIndex}`}>{employee.empName}</div> : null
+                                                ))
+                                            ))}
+                                        </td>
+                                        <td style={{justifyContent: "center", flexDirection: "column"}}>
+                                            {request.approveLine.map((approve2, approveIndex2) => (
+                                                <div key={approveIndex2}>{approve2.aplStatus}</div>
+                                            ))}
+                                        </td>
+                                    </> : null
+                                }
+                            </tr>
+                        )
+                    })}
+                </table>
+                <div>{ pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage }/> }</div>
+            </div>
         </div>
     )
 }
-
-export default RequestList;
+    
+    export default RequestList;

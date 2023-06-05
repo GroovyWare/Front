@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import ConfirmCSS from './Confirm.module.css';
+import NoCSS from './No.module.css';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import PagingBar from '../../../components/common/PagingBar';
@@ -32,8 +32,12 @@ function No(){
     )
 
     return(
-        <div className={ConfirmCSS.container}>
-            <table className={ConfirmCSS.table}>
+        <div className={NoCSS.container}>
+            <div className={NoCSS.pageTitle}>
+                <div>반려함</div>
+                <hr/>
+            </div>
+            <table className={NoCSS.table}>
                 <tr>
                     <th>기안자</th>
                     <th>기안일</th>
