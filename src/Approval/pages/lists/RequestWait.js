@@ -40,8 +40,8 @@ function RequestWait(){
         <div className={RequestListCSS.container}>
             <div className={RequestListCSS.pageTitle}>
                 <div>결재 대기</div>
-                <hr/>
             </div>
+            <div className={RequestListCSS.content}>
         <div className={RequestListCSS.tableDiv}>
             <table className={RequestListCSS.table}>
                 <tr>
@@ -96,7 +96,7 @@ function RequestWait(){
                         const aplNumThree = wait.approveLine.find(apl => apl.aplNum === '3');
                         visibleRowCount++;
 
-                        if(!aplNumThree?.aplStatus === "승인"){
+                       
                             return (
                                 <tr key={waitIndex} onClick={() => onRowClickHandler(wait.apvCode)}>
                                     <td>{wait.employee.empName}</td>
@@ -108,11 +108,12 @@ function RequestWait(){
                                 </tr>
                             );
                     }}
-            }})}
+            })}
             </table>
-                <div>{ pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage }/>}</div>
             </div>
         </div>
+        </div>
+        <div>{ pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage }/>}</div>
         </>
     )}
     
