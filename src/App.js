@@ -78,10 +78,10 @@ function App() {
             <Route path="no" element={<ProtectedRoute loginCheck={true}><No/></ProtectedRoute>}/>
           </Route>
 
-          <Route path="play" element={<PlayMemberList />}>
+          {/* <Route path="play" element={<PlayMemberList />}>
             <Route index element={<ProtectedRoute loginCheck={true}><PlayMemberList /></ProtectedRoute>} />
             <Route path="history" element={<PlayHistory />} />
-          </Route>
+          </Route> */}
 
           <Route path="/announce">
             <Route index element={<ProtectedRoute loginCheck={true}><AnnounceMain /></ProtectedRoute>} />

@@ -37,8 +37,11 @@ function RequestWait(){
 
     return (
         <>
-        <div>
-            <h3 className={RequestListCSS.container}>결재 대기</h3>
+        <div className={RequestListCSS.container}>
+            <div className={RequestListCSS.pageTitle}>
+                <div>결재 대기</div>
+                <hr/>
+            </div>
         <div className={RequestListCSS.tableDiv}>
             <table className={RequestListCSS.table}>
                 <tr>
@@ -73,8 +76,9 @@ function RequestWait(){
 
                     if(aplNumOne?.aplNum === '2'){
                         const aplNumThree = wait.approveLine.find(apl => apl.aplNum === '3');
+                        const aplNumTwo = wait.approveLine.find(apl => apl.aplNum === '2');
 
-                        if(aplNumThree?.aplStatus === '승인'){
+                        if(aplNumThree?.aplStatus === '승인' && !aplNumTwo?.aplStatus==='승인'){
                             visibleRowCount++;
                             return (
                                 <tr key={waitIndex} onClick={() => onRowClickHandler(wait.apvCode)}>
@@ -89,7 +93,10 @@ function RequestWait(){
                     }}
 
                     if(aplNumOne?.aplNum === '3'){
+                        const aplNumThree = wait.approveLine.find(apl => apl.aplNum === '3');
                         visibleRowCount++;
+
+                        if(!aplNumThree?.aplStatus === "승인"){
                             return (
                                 <tr key={waitIndex} onClick={() => onRowClickHandler(wait.apvCode)}>
                                     <td>{wait.employee.empName}</td>
@@ -100,7 +107,7 @@ function RequestWait(){
                                     </td>
                                 </tr>
                             );
-                    }
+                    }}
             }})}
             </table>
                 <div>{ pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage }/>}</div>

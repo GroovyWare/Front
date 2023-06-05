@@ -32,8 +32,11 @@ function Confirm(){
     )
 
     return(
-        <>
-            <h3 className={ConfirmCSS.container}>종결함</h3>
+        <div className={ConfirmCSS.container}>
+            <div className={ConfirmCSS.pageTitle}>
+                <div>종결함</div>
+                <hr/>
+            </div>
         <div className={ConfirmCSS.tableDiv}>
             <table className={ConfirmCSS.table}>
                 <tr>
@@ -63,7 +66,7 @@ function Confirm(){
             </table>
             <div>{ pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage }/> }</div>
             </div>
-        </>
+            </div>
     )
 }
 

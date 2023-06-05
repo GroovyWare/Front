@@ -82,6 +82,10 @@ function RequestDetail(){
     )
 
     return(
+        <>
+        <table>
+
+        </table>
         <div className={RequestDetailCSS.wrap}>
             <div className={RequestDetailCSS.editor}>
                 <StyledQuill 
@@ -94,6 +98,7 @@ function RequestDetail(){
             <div className={RequestDetailCSS.detail}>
             </div>
         </div>
+        </>
     )
 }
 
