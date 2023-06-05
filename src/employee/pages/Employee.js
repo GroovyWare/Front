@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import EmpCSS from "./Employee.module.css";
 import { useEffect, useState } from "react";
-import { callEmployeeListAPI } from "../../api/EmployeeAPICalls";
+import { callEmployeeListAPI, callEmployeeSearchListAPI } from "../../api/EmployeeAPICalls";
 import EmployeeList from "./EmployeeList";
 import PagingBar from "../../components/common/PagingBar";
+import search from "../../components/common/img/search.svg"
 
 function Employee() {
 
@@ -22,6 +23,10 @@ function Employee() {
         [currentPage]
     );
     
+    const searchHandler = () => {
+        dispatch(callEmployeeSearchListAPI({ search, currentPage }));
+    }
+
     return (
         <div className={ EmpCSS.container }>
             <div className={ EmpCSS.pageTitle }>
@@ -32,6 +37,9 @@ function Employee() {
                     type="text"
                     placeholder="이름을 입력해주세요."
                 />
+                <button onclick={ searchHandler }>
+                    <img src={ search } alt="검색" className={ EmpCSS.search }/>
+                </button>
             </div>
             <div>{ employeeList && <EmployeeList employeeList={ employeeList } employees ={ employees }/>}</div>
             <div>{ pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage }/> }</div>
