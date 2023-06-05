@@ -71,7 +71,7 @@ function ApvContent(){
              <div className={ApvContentCSS.centerDiv}>
                 <div style={{display:"flex"}}>
                     <div className={ApvContentCSS.docChooseDiv}>
-                        <div style={{marginBottom: 100, marginTop: 30}}>
+                        <div style={{marginBottom: 30, marginTop: 30}}>
                             결재 양식 선택
                         </div>
                             {search && search.data.map((search) => (
