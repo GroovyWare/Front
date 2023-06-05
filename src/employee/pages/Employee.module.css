@@ -20,3 +20,8 @@
     text-align: left;
     letter-spacing: 1px;
 }
+
+.searchbar {
+    float: right;
+    position: relative;
+}

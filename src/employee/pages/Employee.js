@@ -27,6 +27,12 @@ function Employee() {
             <div className={ EmpCSS.pageTitle }>
                 <div>직원관리</div>
             </div>
+            <div className={ EmpCSS.searchbar}>
+                <input
+                    type="text"
+                    placeholder="이름을 입력해주세요."
+                />
+            </div>
             <div>{ employeeList && <EmployeeList employeeList={ employeeList } employees ={ employees }/>}</div>
             <div>{ pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage }/> }</div>
         </div>
