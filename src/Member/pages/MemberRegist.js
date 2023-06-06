@@ -136,6 +136,7 @@ const onChangeHandler = (e) => {
     return (
         <>
         <div className={MemberRegistCSS.pageTitle}>회원 등록</div>
+        
             <div className={MemberRegistCSS.contentWrap}>
             
                 <table className={MemberRegistCSS.contentTb}>
@@ -257,7 +258,6 @@ const onChangeHandler = (e) => {
                     등록
                 </button>
                 </div>
-
                 <div>
                 <button
                     className={MemberRegistCSS.cancelBtn}
@@ -266,6 +266,7 @@ const onChangeHandler = (e) => {
                     취소
                 </button>
                 </div>
+
             </div>
         </div>
             </>

@@ -26,7 +26,6 @@ function MemberHistoryModal({ history, setMemberHistoryModal, pageInfo }) {
         <>
             <div className={MemberHistoryModalCSS.modal}>
               
-               
                 <div className={MemberHistoryModalCSS.modalContainer}>
                 <div className={MemberHistoryModalCSS.modalTitle}>
                     회원 활동이력 상세조회
@@ -42,6 +41,7 @@ function MemberHistoryModal({ history, setMemberHistoryModal, pageInfo }) {
                       <td className={MemberHistoryModalCSS.titleTd}>종료일</td>
                    </tr>
                    </thead>
+
                    <tbody>
                     { history && history.data.map(h => 
                     (<tr
@@ -66,19 +66,14 @@ function MemberHistoryModal({ history, setMemberHistoryModal, pageInfo }) {
                    }
                    </tbody>
                  </table>
-
-                 <div>
-                    { pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage }/> }
                 </div>
-                
-                 <button
+           
+                <button
                     className={MemberHistoryModalCSS.confirmBtn}
                     onClick={onClickHandler}
                 >돌아가기</button>
-                </div>
+
             </div>
-
-
 
         </>
     );
