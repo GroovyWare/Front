@@ -31,9 +31,33 @@ const Attendance = () => {
 
     console.log(attendance)
 
-    const workingTimes = (start, end) => {
-        const gettingTimes = attendance.data.attStart
-    }
+    
+    const convertToValidDate = (timeString) => {
+        const today = new Date().toLocaleDateString(); // 현재 날짜를 YYYY-MM-DD 형식으로 가져옴
+        const validDateTimeString = `${today} ${timeString}`; // 현재 날짜와 시간을 결합하여 유효한 날짜 형식 생성
+        return new Date(validDateTimeString); // 유효한 날짜 형식으로 변환한 날짜 객체 반환
+      };
+      
+      const workingTimes = (start, end) => {
+        if (start && end) {
+          const startTime = convertToValidDate(start);
+          const endTime = convertToValidDate(end);
+      
+          if (isNaN(startTime.getTime()) || isNaN(endTime.getTime())) {
+            return null; // 잘못된 날짜 형식
+          }
+      
+          const diff = endTime.getTime() - startTime.getTime();
+          const hours = Math.floor(diff / (1000 * 60 * 60));
+          const minutes = Math.floor((diff / (1000 * 60)) % 60);
+          return `${hours}시간 ${minutes}분`;
+        }
+        return null;
+      };
+      
+      console.log(workingTimes(attendance?.data?.attStart, attendance?.data?.attEnd));
+      
+      
 
 
 
@@ -136,8 +160,9 @@ const Attendance = () => {
                 <div className={attendanceCSS.nowtime}>
                     <label>근무시간:</label>
                     {attendance?.data?.attEnd && attendance?.data?.attStart ? (
-                    (new Date(attendance.data.attEnd) - new Date(attendance.data.attStart))
+                        workingTimes(attendance.data.attStart, attendance.data.attEnd)
                     ) : null}
+
                 </div>
 
             </div>
