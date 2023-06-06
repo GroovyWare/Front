@@ -99,6 +99,9 @@ const onChangeHandler = (e) => {
         } else if (!form.passCode) {
             toast('회원권을 입력해주세요');
             return;
+        } else if (!form.empCode) {
+            toast('담당자를 입력해주세요');
+            return;
         }
     
         if (form.passCode > 3 && !form.empCode) {
