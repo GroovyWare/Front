@@ -1,7 +1,6 @@
-import { useState } from "react";
+
 import MemberItem from "../items/MemberItem";
 import MemberListCSS from "./MemberList.module.css";
-
 
 
 
@@ -25,15 +24,15 @@ function MemberList({memberList}) {
                <td className={MemberListCSS.contentTitle}>시작일</td>
                <td className={MemberListCSS.contentTitle}>종료일</td>
            </tr>
+
            </table>
-
-
             <div>
                 {
                     Array.isArray(memberList) 
                     && memberList.map(member => <MemberItem key={member.memCode} member={member}/>)
                 }
             </div>
+
         </>
 
     );

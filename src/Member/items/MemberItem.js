@@ -16,6 +16,7 @@ function MemberItem({ member : { memCode, memName, memPhone, memStartDate, memEn
         <div
         onClick={ () => onClickMemberHandler(memCode) }
         >
+
             <table className={MemberListCSS.itemContentTb}>
                 <tr> 
                     <td className={MemberListCSS.contentText}>{ memCode }</td>

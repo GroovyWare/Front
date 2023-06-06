@@ -12,6 +12,36 @@
     font-style: normal;
 }
 
+  /* 모달 */
+.modal{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.modalContainer{
+    position: relative;
+    width: 550px;
+    height: 550px;
+    padding: 10px;
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    z-index: 1000;
+}
+
+.modalTitle{
+    margin-top: 40px;
+    font-family: LINESeedKR-Bd;
+    font-size: xx-large; 
+}
+
   /* 돌아가기 버튼 */
   .confirmBtn {
     border: none;
@@ -26,38 +56,12 @@
     font-size: 13px;
     font-weight: 700;
     width: 110px;
-    margin-top: 15px;
-    margin-left: 10px;
+    margin-top: 450px;
+    z-index: 1300;
+
+    position: absolute;
+    left: 657px;
   }
-
-  /* 모달 */
-.modal{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 100;
-}
-
-.modalContainer{
-    width: 550px;
-    height: 550px;
-    padding: 10px;
-    text-align: center;
-    background-color: rgb(255, 255, 255);
-    z-index: 1000;
-}
-
-.modalTitle{
-    margin-top: 40px;
-    font-family: LINESeedKR-Bd;
-    font-size: xx-large; 
-}
 
 /* 컨텐츠 테이블 */
 .contentTb {

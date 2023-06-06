@@ -20,6 +20,10 @@
 }
 
 /* list CSS*/
+.mainTableWarp{
+    height: 500px;
+}
+
 .contentTb {
     border-collapse: collapse;
     margin: auto;
@@ -28,6 +32,7 @@
     font-size: 15px;
     border-radius: 5px;
     overflow: hidden;
+    width: 95%;
 }
 
 .pageTitle {
@@ -43,21 +48,19 @@
     margin: auto;
     border : 0;
     border-top : 2px solid #dbdbdbde;
-    width: 92%;
+    width: 96%;
     margin-bottom: 30px;
 }
 
 .bottonLine {
-    position : relative;
     margin: auto;
     border : 0;
     border-top : 2px solid #dbdbdbde;
-    width: 92%;
-    margin-top: 35px;
+    width: 96%;
+    margin-top: 300px;
 }
 
 .paging {
-    position : relative;
     margin: auto;
 }
 
@@ -69,9 +72,9 @@
     margin-top: 60px;
     text-align: center;
     vertical-align: middle;
-
     padding: 13px 0px 13px 0px;
     background-color: #9b83fa;
+    height: 26px;
 }
 
 /* item CSS*/
@@ -83,6 +86,8 @@
     box-shadow: 0 10px 35px rgba(0, 0, 0, 0.05), 0 6px 6px rgba(0, 0, 0, 0.1);
     font-size: 15px;
     overflow: hidden;
+    width: 95%;
+    margin-top: -3px;
 }
 
 .itemContentTb > tr:hover {
@@ -99,6 +104,7 @@
     min-width: 105px;
     border-bottom: 1px solid #c0b4f0;
     padding: 12px 0px 12px 0px;
+    height: 25px;
 }
 
 .contentHover > tr:hover {
