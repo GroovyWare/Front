@@ -48,7 +48,7 @@ export const GlobalStyle = createGlobalStyle`
   z-index: 9999;
   box-sizing: border-box;
   color: #fff;
-  top: 0;
+  top: 0;   
   left: 53%;
   margin : auto;
 }
