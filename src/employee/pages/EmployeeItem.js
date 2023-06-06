@@ -1,5 +1,7 @@
 import { useState } from "react";
 import EmplyoeeDetails from "./EmployeeDetails";
+import { isAdmin } from "../../utils/TokenUtils";
+
 
 function EmployeeItem({ emp }) {
 
@@ -11,7 +13,7 @@ function EmployeeItem({ emp }) {
 
     return (
         <>
-            <tr onClick={ () => openEmpDetails() }>
+            <tr onClick={ isAdmin() ? () => openEmpDetails() : null }>
                 <td>{ emp.empCode }</td>
                 <td>{ emp.empName }</td>
                 <td>{ emp.empPhone }</td>
