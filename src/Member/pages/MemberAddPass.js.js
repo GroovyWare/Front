@@ -91,7 +91,7 @@ function MemberAddPass() {
     /* 회원 수정 저장 버튼 클릭 이벤트 */
     const onClickMemberUpdateHandler = () => {
 
-        if (!form.resStart || !form.resEnd || !form.passCode) {
+        if (!form.resStart || !form.resEnd || !form.passCode || !form.empCode) {
             toast('모든 필드를 입력해주세요.');
             return;
         }
