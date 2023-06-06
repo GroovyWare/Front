@@ -99,6 +99,9 @@ const onChangeHandler = (e) => {
         } else if (!form.passCode) {
             toast('회원권을 입력해주세요');
             return;
+        } else if (!form.empCode) {
+            toast('담당자를 입력해주세요');
+            return;
         }
     
         if (form.passCode > 3 && !form.empCode) {
@@ -136,6 +139,7 @@ const onChangeHandler = (e) => {
     return (
         <>
         <div className={MemberRegistCSS.pageTitle}>회원 등록</div>
+        
             <div className={MemberRegistCSS.contentWrap}>
             
                 <table className={MemberRegistCSS.contentTb}>
@@ -257,7 +261,6 @@ const onChangeHandler = (e) => {
                     등록
                 </button>
                 </div>
-
                 <div>
                 <button
                     className={MemberRegistCSS.cancelBtn}
@@ -266,6 +269,7 @@ const onChangeHandler = (e) => {
                     취소
                 </button>
                 </div>
+
             </div>
         </div>
             </>

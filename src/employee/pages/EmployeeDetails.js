@@ -114,6 +114,7 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
         formData.append("empPhone", form.empPhone);
         formData.append("empEmail", form.empEmail);
         formData.append("empAddress", form.empAddress);
+        formData.append("empEntDate", new Date(form.empEntDate));
         formData.append("dept.deptCode", form.dept.deptCode);
         formData.append("position.positionCode", form.position.positionCode);
       

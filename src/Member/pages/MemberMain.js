@@ -38,7 +38,7 @@ function MemberMain() {
 
     return(
         <>
-            <div>
+            <div className={MemberListCSS.mainTableWarp}>
                 { memberList && <MemberList memberList={memberList}/> }
             </div>
 
@@ -49,6 +49,7 @@ function MemberMain() {
             <div className={MemberListCSS.paging}>
                 { pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage}/> }
             </div>
+
                 
         </>
     );

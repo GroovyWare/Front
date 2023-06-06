@@ -108,6 +108,10 @@
 
 
 /* 회원권 조회 */
+.mainTableWarp{
+    height: 500px;
+}
+
 .contentWrapRg {
     display: inline-grid;
     margin-bottom: 25px;
@@ -118,18 +122,18 @@
     font-family: LINESeedKR-Bd;
     font-size: 13px;
     background-color: white;
-    width: 200px;
-    height: 215px;
+    width: 210px;
+    height: 208px;
     margin: auto;
     border: 1px solid #26199b;
     box-shadow: 2px 2px #26199b;
-    padding: 10px;
+    padding: 25px;
 }
 
 .pageTitleRg {
     font-family: "LINESeedKR-Bd";
     font-size: 1.2rem;
-    margin-top: 30px;
+    margin-top: 25px;
     margin-left: 30px; 
     margin-right: 30px;
     margin-bottom: 20px;
@@ -139,8 +143,6 @@
     display: flex;
     border-bottom: 1.5px solid #bcc3cfe1;
 }
-
-
 
 .textRg {
     text-align: center;
@@ -170,26 +172,28 @@
 
 .modifyBtn {
     margin-top: 13px;
-    margin-left: 170px;
+    margin-left: 183px;
 }
 
 .titleLine {
     margin: auto;
     border : 0;
     border-top : 2px solid #dbdbdbde;
-    width: 92%;
+    width: 96%;
     margin-bottom: 30px;
 }
 
 .bottonLine {
-    position : relative;
     margin: auto;
     border : 0;
     border-top : 2px solid #dbdbdbde;
-    width: 92%;
-    margin-top: 10px;
+    width: 96%;
+    margin-top: 220px;
 }
 
+.paging {
+    margin: auto;
+}
 
 /* 회원권 등록하기 */
 /* content */

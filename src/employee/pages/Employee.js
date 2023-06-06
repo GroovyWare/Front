@@ -4,41 +4,47 @@ import { useEffect, useState } from "react";
 import { callEmployeeListAPI, callEmployeeSearchListAPI } from "../../api/EmployeeAPICalls";
 import EmployeeList from "./EmployeeList";
 import PagingBar from "../../components/common/PagingBar";
-import search from "../../components/common/img/search.svg"
+import searchImg from "../../components/common/img/search.svg";
 
 function Employee() {
+
 
     const dispatch = useDispatch();
     const employees = useSelector(state => state.employeeReducer);
     const pageInfo = employees.pageInfo;
     const employeeList = employees.data;
-
-
+    
+    const [ search, setSearch ] = useState('');
     const [ currentPage, setCurrentPage ] = useState(1);
 
     useEffect(
         () => {
-            dispatch(callEmployeeListAPI({ currentPage }));
+            if(search) {
+                dispatch(callEmployeeSearchListAPI({ search, currentPage }));
+            } else {
+                dispatch(callEmployeeListAPI({ currentPage })); 
+            }
         },
-        [currentPage]
+        [currentPage, search] 
     );
-    
-    const searchHandler = () => {
-        dispatch(callEmployeeSearchListAPI({ search, currentPage }));
-    }
 
+    const searchChangeHandler =(e) => {
+        setSearch(e.target.value)
+    }
+    
     return (
         <div className={ EmpCSS.container }>
             <div className={ EmpCSS.pageTitle }>
-                <div>직원관리</div>
-            </div>
+                직원관리
+            </div>  
             <div className={ EmpCSS.searchbar}>
                 <input
                     type="text"
-                    placeholder="이름을 입력해주세요."
+                    placeholder="이름을 입력해주세요"
+                    onChange={ searchChangeHandler }
                 />
-                <button onclick={ searchHandler }>
-                    <img src={ search } alt="검색" className={ EmpCSS.search }/>
+                <button>
+                    <img src={ searchImg } alt="검색" className={ EmpCSS.search }/>
                 </button>
             </div>
             <div>{ employeeList && <EmployeeList employeeList={ employeeList } employees ={ employees }/>}</div>

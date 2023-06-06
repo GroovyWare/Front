@@ -39,7 +39,6 @@ import No from './Approval/pages/lists/No';
 
 
 
-
 export const GlobalStyle = createGlobalStyle`
 .Toastify__toast-container {
   width: 300px !important;

@@ -90,6 +90,7 @@ export const callEmplopyeeUpdateAPI = (formData) => {
 /* 직원명 검색 */
 export const callEmployeeSearchListAPI = ({ search, currentPage = 1}) => {
 
+    console.log(search, currentPage);
     const requestURL = `${PRE_URL}/auth/emps/search?search=${search}&page=${currentPage}`;
 
     return async (dispatch, getState) => {

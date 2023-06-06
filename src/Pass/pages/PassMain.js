@@ -35,24 +35,18 @@ function PassMain() {
         </div>
         <div>
             <hr className={PassCSS.titleLine}></hr>
-        </div>    
-            <div>
+        </div>
+            <div className={PassCSS.mainTableWarp}>
                 { passLists && <PassList passLists={passLists}/> }
             </div>
-            <div className={PassCSS.pagebottom}>
 
-            <div>
             <hr className={PassCSS.bottonLine}></hr>
-            </div>
-
 
             <button 
                 className={PassCSS.registBtnRg}
                 onClick={ onClickRegistHandler }>등록</button>
-            </div>
 
-
-            <div>
+            <div className={PassCSS.paging}>
                 { pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage }/> }
             </div>
 
