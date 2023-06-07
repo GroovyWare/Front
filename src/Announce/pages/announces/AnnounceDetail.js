@@ -5,11 +5,10 @@ import { callAnnounceDetailAPI } from "../../../api/AnnounceAPICalls";
 import AnnounceDetailCSS from "./AnnounceDetail.module.css";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { isAdmin } from "../../../utils/TokenUtils"
 
 function AnnounceDetail() {
 
-    // const userRole = useSelector(state => state.authCode); // 이 부분은 실제 authCode를 가져오는 Redux Selector로 변경해야 합니다.
-    const [userRole, setUserRole] = useState('1'); // 임의의 userRole 상태 생성
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const params = useParams();
@@ -82,12 +81,10 @@ function AnnounceDetail() {
     return (
         <>
         <div className={ AnnounceDetailCSS.container }>
-            {userRole === '1' && (
                 <div className={ AnnounceDetailCSS.registBtn }>
-                  <button onClick={() => goToUpdate(annCode)}>수정</button>
-                  <button onClick={handleDelete}>삭제</button>
+                  {isAdmin() ? <button onClick={() => goToUpdate(annCode)}>수정</button>:""}
+                  {isAdmin() ? <button onClick={handleDelete}>삭제</button>:""}
                 </div>
-            )}
             <h2 className={ AnnounceDetailCSS.annTitle }>{announce.annTitle}</h2>
             <p className={ AnnounceDetailCSS.annNameAndDate }>{`${announce?.employee?.empName}`} {`${new Date(announce.annDate).toLocaleString()}`}</p>
             <div className={AnnounceDetailCSS.content}>
