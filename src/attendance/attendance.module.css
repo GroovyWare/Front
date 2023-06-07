@@ -1,82 +1,125 @@
-@font-face {
-    font-family: "LINESeedKR-Bold";
-    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2")
-      format("woff2");
-    font-weight: normal;
-    font-style: normal;
+
+
+.container {
+    width: 1300px;
+    height: 900px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'LineSeedKR-Rg';
 }
+
+.bg {
+    background:  rgba( 255, 255, 255, 0.85 );
+    backdrop-filter: blur( 20px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    margin: 10px;
+    padding: 10px;
+    background-color: #fff;
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.05), 0 6px 6px rgba(0, 0, 0, 0.1);   
+}
+
+.info {
+    display: flex;
+    align-items: center;
+}
+
+.userDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-right: 2px solid #5a5a5a1a;
+    width: 200px;
+    height: 180px;
+    padding-right: 15px;
+}
+
 
 
 .buttons {
     cursor: pointer;
     position: relative;
-    font-size: 14px;
-    font-family: "LineSeedKR-Bd";
+    font-size: 18px;
+    font-family: "LineSeedKR-Rg";
     background-color: #716dff;
     color: #fff;
     border-radius: 3px;  
     width: 70px;
+    height: 40px;
     padding: 3px 7px;
     padding-top: 5px;
     font-weight: 700;
     letter-spacing: 1px;
     /* transform: translate(1680%, -150%); */
     border: none;
-}
-
-.working {
-    background-color: white;
-    border-radius: 5%;
-    outline: 1px black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 3px 2px 5px rgba(0, 0, 0, 0.2);
-    width: 500px;
-    height : 250px;
-    margin-left: 30px;
-    font-size: xx-large;
-}
-
-.leaving {
-    background-color: white;
-    border-radius: 5%;
-    outline: 1px black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 3px 2px 5px rgba(0, 0, 0, 0.2);
-    width: 500px;
-    height : 250px;
-    margin-left: 30px;
-    font-size: xx-large;
+    margin-left: 20px;
 }
 
 .whole {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    width: 440px;
+    height: 200px;
+    padding-top: 20px;
 }
+
+.working {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height : 50px;
+    font-size: 25px;
+    border-bottom: 2px solid #5a5a5a1a;
+    padding-bottom: 20px;
+}
+
+.leaving {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height : 50px;
+    font-size: 25px;
+    padding-top: 20px;
+}
+
+
 
 
 .nowtime{
     margin-top: 20px;
-    background-color: white;
-    border-radius: 5%;
-    outline: 1px black;
-    box-shadow: 3px 2px 5px rgba(0, 0, 0, 0.7);
-    justify-content: center;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    border-radius: 3px;
     align-items: center;
     display: flex;
-    font-size: xx-large;
-    font-weight: 500;
-    width: 1000px;
-    margin-left: 7vw;
-
+    font-size: 24px;
+    width: 700px;
+    border-bottom: 3px solid #5a5a5a1a;
 }
 
-.nowtime label {
+.container label {
+    margin-right: 15px;
+}
+.nowtime > div {
     margin-right: 20px;
-    margin-left: 20px;
-    
+}
+
+.workingTime {
+    margin-bottom: 20px;
+    padding-top: 10px;
+    margin-top: 20px;
+    border-radius: 3px;
+    align-items: center;
+    display: flex;
+    font-size: 24px;
+    width: 700px;
+    border-top: 3px solid #5a5a5a1a;
 }

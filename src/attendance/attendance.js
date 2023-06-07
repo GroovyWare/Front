@@ -92,12 +92,17 @@ const Attendance = () => {
     // console.log("form : ", form);
 
     return (
-        <div>
-            <div>
-                <div>
+        <div className={attendanceCSS.container}>
+            <div className={attendanceCSS.bg}>
+                <div className={attendanceCSS.nowtime}>
+                        <label>오늘 날짜 : </label>
+                        <div>{time.toLocaleDateString()}</div>
+                        <div>{time.toLocaleTimeString()}</div>           
+                </div>
+                <div className={attendanceCSS.info}>
                     {/* 유저 정보 표시 */}
                     {user && (
-                        <div className={NavbarCSS.profileDiv}>
+                        <div className={attendanceCSS.userDiv}>
                             <div className={NavbarCSS.profileBox}>
                                 {user.data.file !== null ? (
                                     <img src={user.data?.file.fileSavedName} alt="프로필" className={NavbarCSS.profile} />
@@ -110,31 +115,27 @@ const Attendance = () => {
                             </div>
                         </div>
                     )}
-                </div>
                 <div className={attendanceCSS.whole}>
                     <div className={attendanceCSS.working}>
 
                         <div className={attendanceCSS.gowork}>
-                            <label>  출근 시간 : </label>
+                            <label>출근 시간 :</label>
                             {attendance && attendance.data && attendance.data.attStart ? (
                                 attendance.data.attStart
                             ) : (
                                 time.toLocaleTimeString()
                             )}
-                        </div>
-                        {!attendance?.data?.attStart && (
+                             {!attendance?.data?.attStart && (
                             <button onClick={goWorking}
                                 className={attendanceCSS.buttons}>
                                 출근
                             </button>
                         )}
-                    </div>
+                        </div>
 
-
-
-                    <div>
+                        </div>
                         <div className={attendanceCSS.leaving}>
-                            퇴근시간 표시
+                             <label>퇴근 시간 :</label>
                             {attendance && attendance.data && attendance.data.attEnd ? (
                                 attendance.data.attEnd
                             ) : (
@@ -145,19 +146,12 @@ const Attendance = () => {
                                     퇴근
                                 </button>
                             )}
-
                         </div>
-                    </div>
                 </div>
-                <div className={attendanceCSS.nowtime}>
-                    <label>현재시간 : </label>
-                    {time.toLocaleTimeString()}
-                    <label>오늘날짜 : </label>
-                    {time.toLocaleDateString()}
-
                 </div>
 
-                <div className={attendanceCSS.nowtime}>
+
+                <div className={attendanceCSS.workingTime}>
                     <label>근무시간:</label>
                     {attendance?.data?.attEnd && attendance?.data?.attStart ? (
                         workingTimes(attendance.data.attStart, attendance.data.attEnd)
