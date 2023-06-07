@@ -8,8 +8,7 @@ export function decodeJwt() {
 }
 
 export function isLogin() {
-    const token = decodeJwt();
-                    
+    const token = decodeJwt();              
     return !(token === undefined || token === null || token.exp * 1000 < Date.now());
 }
 

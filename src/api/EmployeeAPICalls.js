@@ -14,7 +14,6 @@ export const callEmployeeListAPI = ({ currentPage=1}) => {
         const result = await fetch(requestURL).then(res => res.json());
 
         if(result.status === 200) {
-            console.log('[EmployeeAPICalls] : callEmployeeListAPI result : ', result);
             dispatch(getEmployees(result));
         }
     }
@@ -33,8 +32,6 @@ export const callEmployeeIdCheckAPI = (empId) => {
                 "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
             },
         }).then(res => res.json());
-
-        console.log(result);
 
         dispatch(getEmployeeId(result));
     }
@@ -56,7 +53,6 @@ export const callEmployeeRegistAPI = (formData) => {
         }).then(response => response.json());
 
         if(result.status === 200) {
-            console.log('[EmployeeAPICalls] : callEmployeeRegistAPI result : ', result);
             dispatch(postEmployee(result));
         }
     }
@@ -79,7 +75,6 @@ export const callEmplopyeeUpdateAPI = (formData) => {
         }).then(response => response.json());
 
         if(result.status === 200) {
-            console.log('[EmployeeAPICalls] callEmplopyeeUpdateAPI result :', result);
             dispatch(putEmployee(result));
         }
     }
@@ -90,7 +85,6 @@ export const callEmplopyeeUpdateAPI = (formData) => {
 /* 직원명 검색 */
 export const callEmployeeSearchListAPI = ({ search, currentPage = 1}) => {
 
-    console.log(search, currentPage);
     const requestURL = `${PRE_URL}/auth/emps/search?search=${search}&page=${currentPage}`;
 
     return async (dispatch, getState) => {
@@ -98,7 +92,6 @@ export const callEmployeeSearchListAPI = ({ search, currentPage = 1}) => {
         const result = await fetch(requestURL).then(response => response.json());
 
         if(result.status === 200) {
-            console.log("[EmployeeAPICalls] callEmployeeSearchListAPI result : ", result);
             dispatch(getEmployees(result));
         }
     }
