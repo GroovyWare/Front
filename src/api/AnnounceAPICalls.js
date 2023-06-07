@@ -15,7 +15,6 @@ export const callAnnounceListAPI = ({ currentPage = 1 }) => {
         }).then(response => response.json());        
 
         if(result.status === 200) {
-            console.log('[AnnounceAPICalls] : callAnnounceListAPI result : ', result);
             dispatch(getAnnounces(result));
         }
     }
@@ -33,7 +32,6 @@ export const callAnnounceSearchListAPI = ({ search, currentPage = 1}) => {
         
 
         if(result.status === 200) {
-            console.log("[AnnounceAPICalls] callAnnounceSearchAPI result : ", result);
             dispatch(getAnnounces(result));
         }
     }
@@ -51,7 +49,6 @@ export const callAnnounceDetailAPI = ({ annCode }) => {
         
 
         if(result.status === 200) {
-            console.log("[AnnounceAPICalls] callAnnounceDetailAPI result : ", result);
             dispatch(getAnnounce(result));
         }
     }
@@ -72,7 +69,6 @@ export const callAnnounceListForAdminAPI = ({ currentPage = 1 }) => {
         }).then(response => response.json());
 
         if(result.status === 200) {
-            console.log("[AnnounceAPICalls] callAnnounceListForAdminAPI result : ", result);
             dispatch(getAnnounces(result));
         }
     }
@@ -93,7 +89,6 @@ export const callAnnounceRegistAPI = (formData) => {
         }).then(response => response.json());
 
         if(result.status === 200) {
-            console.log("[AnnounceAPICalls] callAnnounceRegistAPI result : ", result);
             dispatch(postAnnounce(result));
         }
     }
@@ -113,7 +108,6 @@ export const callAnnounceDetailForAdminAPI = ({ annCode }) => {
         }).then(response => response.json());
 
         if(result.status === 200) {
-            console.log("[AnnounceAPICalls] callAnnounceDetailForAdminAPI result : ", result);
             dispatch(getAnnounce(result));
         }
     }
@@ -134,7 +128,6 @@ export const callAnnounceUpdateAPI = (formData) => {
         }).then(response => response.json());
 
         if(result.status === 200) {
-            console.log("[AnnounceAPICalls] callAnnounceUpdateAPI result : ", result);
             dispatch(putAnnounce(result));
         }
     }
@@ -155,7 +148,6 @@ export const callAnnounceDeleteAPI = (formData) => {
         }).then(response => response.json());
 
         if(result.status === 200) {
-            console.log("[AnnounceAPICalls] callAnnounceDeleteAPI result : ", result);
             dispatch(deleteAnnounce(result));
         }
     }

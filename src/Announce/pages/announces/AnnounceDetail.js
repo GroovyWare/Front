@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { callAnnounceDetailAPI } from "../../../api/AnnounceAPICalls";
+import AnnounceDetailCSS from "./AnnounceDetail.module.css";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 function AnnounceDetail() {
 
@@ -42,7 +44,6 @@ function AnnounceDetail() {
               )
             )
               .then(iframelyContents => setIframelyContent(iframelyContents.join('')))
-              .catch(error => console.error(error));
           }, [content]);
       
         return (
@@ -66,33 +67,33 @@ function AnnounceDetail() {
           axios.delete(`http://localhost:8059/announce/${annCode}`)
             .then(res => {
               if(res.status === 200) {
-                alert("게시글이 삭제되었습니다.");
+                toast.success("게시글이 삭제되었습니다.");
                 navigate('/announce');
               } else {
-                alert("삭제할 수 없습니다. 다시 한 번 시도해주세요.");
+                toast.error("삭제할 수 없습니다. 다시 한 번 시도해주세요.");
               }
             })
             .catch(err => {
-              console.error(err);
-              alert("삭제할 수 없습니다. 다시 한 번 시도해주세요.");
+              toast.error("삭제할 수 없습니다. 다시 한 번 시도해주세요.");
             });
         }
     }
 
     return (
         <>
-        <div>
+        <div className={ AnnounceDetailCSS.container }>
             {userRole === '1' && (
-                <>
-                <button onClick={() => goToUpdate(annCode)}>수정</button>
-                <button onClick={handleDelete}>삭제</button>
-                </>
+                <div className={ AnnounceDetailCSS.registBtn }>
+                  <button onClick={() => goToUpdate(annCode)}>수정</button>
+                  <button onClick={handleDelete}>삭제</button>
+                </div>
             )}
-            <h2>{announce.annTitle}</h2>
-            <p>{`${announce?.employee?.empName}`}</p>
-            <p>{`${new Date(announce.annDate).toLocaleString()}`}</p>
-            <PostContent content={announce.annContent} />
-            <button onClick={ goToMain }>목록</button>
+            <h2 className={ AnnounceDetailCSS.annTitle }>{announce.annTitle}</h2>
+            <p className={ AnnounceDetailCSS.annNameAndDate }>{`${announce?.employee?.empName}`} {`${new Date(announce.annDate).toLocaleString()}`}</p>
+            <div className={AnnounceDetailCSS.content}>
+              <PostContent content={announce.annContent} />
+            </div>
+            <button className={ AnnounceDetailCSS.listBtn } onClick={ goToMain }>목록</button>
         </div>
         </>
     );

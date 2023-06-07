@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { callEquipmentListAPI, callEquipmentSearchListAPI } from "../../api/EquipmentAPICalls";
 import PagingBar from "../../components/common/PagingBar";
-import EquipmentSearchBar from "../../components/common/EquipmentSearchBar";
+import EquipmentSearchBar from "./EquipmentSearchbar";
 import { useSearchParams } from "react-router-dom";
 import EquipmentMainCSS from './EquipmentMain.module.css';
 import axios from "axios";
 import EquipmentRegist from "./EquipmentRegist";
 import EquipmentUpdate from "./EquipmentUpdate";
+import { toast } from "react-toastify";
 
 function EquipmentMain() {
 
@@ -105,7 +106,7 @@ function EquipmentMain() {
 
     const handleDelete = () => {
         if (checkedEquipments.length === 0) {
-            alert("삭제할 기구를 선택해주세요.");
+            toast.error("삭제할 기구를 선택해주세요.");
             return;
         }
         
@@ -119,18 +120,24 @@ function EquipmentMain() {
                     const allSuccessful = responses.every(res => res.status === 200);
                     
                     if(allSuccessful) {
-                        alert("선택한 기구가 삭제되었습니다.");
+                        toast.success("선택한 기구가 삭제되었습니다.");
                         
                         window.location.href = "http://localhost:3000/equipment";  // 특정 URL로 리디렉션
                     } else {
-                        alert("하나 이상의 기구를 삭제할 수 없습니다. 다시 시도해주세요.");
+                        toast.error("하나 이상의 기구를 삭제할 수 없습니다. 다시 시도해주세요.");
                     }
                 })
                 .catch(err => {
-                    console.error(err);
-                    alert("하나 이상의 기구를 삭제할 수 없습니다. 다시 시도해주세요.");
+                    toast.error("하나 이상의 기구를 삭제할 수 없습니다. 다시 시도해주세요.");
                 });
         }
+    }
+
+    const formatDate = (dateString) => {
+        if (!dateString) {
+            return '점검내역없음';  // or any other value you want to display
+        }
+        return new Date(dateString).toLocaleDateString('ko-KR', { year: '2-digit', month: '2-digit', day: '2-digit' });
     }
 
     const openRegistModal = () => {
@@ -156,51 +163,54 @@ function EquipmentMain() {
     };
 
     return (
-        <>  
+        <div className={ EquipmentMainCSS.container }>
+                <div className={ EquipmentMainCSS.pageTitle }>시설관리</div>
             <div>
                 <EquipmentSearchBar onSearch={onSearch} />
             </div>
-            <div className={ EquipmentMainCSS.bodyDiv }>
-            <table className={ EquipmentMainCSS.productTable }>
-                <colgroup>
-                    <col width="2%" />
-                    <col width="20%" />
-                    <col width="8%" />
-                    <col width="6%" />
-                    <col width="8%" />
-                    <col width="56%" />
-                </colgroup>
-                <thead>
-                    <tr>
-                        <th><input type="checkbox" checked={selectAll} onChange={(e) => setSelectAll(e.target.checked)} /></th>
-                        <th onClick={() => handleSort('eqpTitle')}>기구명</th>
-                        <th onClick={() => handleSort('eqpPurchase')}>구매일자</th>
-                        <th onClick={() => handleSort('eqpInspector')}>점검자</th>
-                        <th onClick={() => handleSort('eqpDate')}>최근점검일자</th>
-                        <th>점검내용</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {sortedEquipmentList.map(p => (
-                        <tr key={p.eqpCode} onClick={() => openUpdateModal(p)}>
-                            <td style={{textAlign: "center"}}>
-                                <input 
-                                    type="checkbox" 
-                                    checked={checkedEquipments.includes(p.eqpCode)}
-                                    onClick={(e) => e.stopPropagation()}
-                                    onChange={(e) => handleCheckChange(e, p.eqpCode)}
-                                />
-                            </td>
-                            <td>{p.eqpTitle}</td>
-                            <td>{new Date(p.eqpPurchase).toLocaleDateString('ko-KR', { year: '2-digit', month: '2-digit', day: '2-digit' })}</td>
-                            <td>{p.eqpInspector}</td> {/* 'employee' 대신 'eqpInspector' 필드 사용 */}
-                            <td>{new Date(p.eqpDate).toLocaleDateString('ko-KR', { year: '2-digit', month: '2-digit', day: '2-digit' })}</td>
-                            <td style={tdStyles}>{p.eqpStatus}</td>
+            <div className={ EquipmentMainCSS.content }>
+                <table className={ EquipmentMainCSS.eqpTable }>
+                    <colgroup>
+                        <col width="2%" />
+                        <col width="20%" />
+                        <col width="8%" />
+                        <col width="6%" />
+                        <col width="8%" />
+                        <col width="56%" />
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" checked={selectAll} onChange={(e) => setSelectAll(e.target.checked)} /></th>
+                            <th onClick={() => handleSort('eqpTitle')}>기구명</th>
+                            <th onClick={() => handleSort('eqpPurchase')}>구매일자</th>
+                            <th onClick={() => handleSort('eqpInspector')}>점검자</th>
+                            <th onClick={() => handleSort('eqpDate')}>최근점검일자</th>
+                            <th>점검내용</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
-            <div className={ EquipmentMainCSS.buttonDiv }>
+                    </thead>
+                    <tbody>
+                        {sortedEquipmentList.map(p => (
+                            <tr key={p.eqpCode} onClick={() => openUpdateModal(p)}>
+                                <td style={{textAlign: "center"}}>
+                                    <input 
+                                        type="checkbox" 
+                                        checked={checkedEquipments.includes(p.eqpCode)}
+                                        onClick={(e) => e.stopPropagation()}
+                                        onChange={(e) => handleCheckChange(e, p.eqpCode)}
+                                    />
+                                </td>
+                                <td>{p.eqpTitle}</td>
+                                <td>{formatDate(p.eqpPurchase)}</td>
+                                <td>{p.eqpInspector}</td>
+                                <td>{formatDate(p.eqpDate)}</td>
+                                <td style={tdStyles}>{p.eqpStatus}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+        </div>
+            <div className={ EquipmentMainCSS.registBtn }>
+            {userRole === '1' && <button onClick={handleDelete}>삭제</button>}
             {userRole === '1' && <button onClick={openRegistModal}>등록</button>}
             <EquipmentRegist isOpen={isRegistModalOpen} onRequestClose={closeRegistModal}/>
             {selectedEquipment && 
@@ -210,13 +220,11 @@ function EquipmentMain() {
                     equipment={selectedEquipment}
                 />
             }
-            {userRole === '1' && <button onClick={handleDelete}>삭제</button>}
             </div>
             <div>
                 { pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage } /> }
             </div>
         </div>
-        </>
     );
 }
 
