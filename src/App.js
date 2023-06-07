@@ -49,7 +49,7 @@ export const GlobalStyle = createGlobalStyle`
   box-sizing: border-box;
   color: #fff;
   top: 0;   
-  left: 53%;
+  left: 50%;
   margin : auto;
 }
 `;

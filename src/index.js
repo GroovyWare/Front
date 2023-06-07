@@ -13,7 +13,7 @@ root.render(
 <Provider store={store}>
 <EmployeeProvider>
     <DndProvider backend={HTML5Backend}>
-        <ToastContainer/>
+        <ToastContainer position="top-center" autoClose={1000} />
         <GlobalStyle/>
             <App/>
     </DndProvider>
