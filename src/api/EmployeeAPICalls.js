@@ -86,3 +86,20 @@ export const callEmplopyeeUpdateAPI = (formData) => {
 
 }
 
+
+/* 직원명 검색 */
+export const callEmployeeSearchListAPI = ({ search, currentPage = 1}) => {
+
+    console.log(search, currentPage);
+    const requestURL = `${PRE_URL}/auth/emps/search?search=${search}&page=${currentPage}`;
+
+    return async (dispatch, getState) => {
+
+        const result = await fetch(requestURL).then(response => response.json());
+
+        if(result.status === 200) {
+            console.log("[EmployeeAPICalls] callEmployeeSearchListAPI result : ", result);
+            dispatch(getEmployees(result));
+        }
+    }
+}

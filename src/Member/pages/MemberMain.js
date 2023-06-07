@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { callMemberListAPI, callMemberSearchListAPI } from "../../api/MemberAPICalls";
 import MemberList from "./MemberList";
 import PagingBar from "../../components/common/PagingBar";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
+import MemberListCSS from "./MemberList.module.css";
 
 
 
@@ -37,13 +38,19 @@ function MemberMain() {
 
     return(
         <>
-            <div>
+            <div className={MemberListCSS.mainTableWarp}>
                 { memberList && <MemberList memberList={memberList}/> }
             </div>
+
             <div>
+            <hr className={MemberListCSS.bottonLine}></hr>
+            </div>
+
+            <div className={MemberListCSS.paging}>
                 { pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage}/> }
             </div>
 
+                
         </>
     );
 }

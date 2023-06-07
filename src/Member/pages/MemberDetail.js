@@ -141,7 +141,7 @@ function MemberDetail() {
                     <div>
                         <button 
                             className={MemberDetailCSS.cancelBtn}
-                            onClick={ onClickCancelHandler }>취소하기</button>
+                            onClick={ onClickCancelHandler }>취소</button>
                     </div>
                     </div>
 

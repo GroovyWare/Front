@@ -31,6 +31,11 @@
     z-index: 1000;
 }
 
+
+.updatingformDiv label {
+    font-family:  "LINESeedKR-Bold"
+}
+
 .datearea{
     border: none;
     border-bottom: 1px solid rgba(85, 138, 190, 0.9);
@@ -84,8 +89,7 @@
     
 }
 
-.buttons + button {
+.buttons + button + button {
     background-color: red;
 }
 
-/* .buttons  */

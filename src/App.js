@@ -34,11 +34,8 @@ import RequestWait from './Approval/pages/lists/RequestWait';
 import ReqeustWaitDetail from './Approval/pages/lists/RequestWaitDetail';
 import Attendance from './attendance/attendance';
 import EquipmentMain from './Equipment/pages/EquipmentMain';
-import AttendanceMain from './attendance/admin/AttendanceMain';
-import AttendanceDetail from './attendance/admin/AttendanceDetail';
 import Confirm from './Approval/pages/lists/Confirm';
 import No from './Approval/pages/lists/No';
-
 
 
 
@@ -51,7 +48,7 @@ export const GlobalStyle = createGlobalStyle`
   z-index: 9999;
   box-sizing: border-box;
   color: #fff;
-  top: 0;
+  top: 0;   
   left: 53%;
   margin : auto;
 }
@@ -63,7 +60,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<ProtectedRoute loginCheck={true}><Layout /></ProtectedRoute>}>
-
+        <Route index element={<Attendance/>}></Route>
           <Route path="approval">
             <Route index element={<ApvContent />}/>
             <Route path="new" element={<ProtectedRoute loginCheck={true}><ApvContent /></ProtectedRoute>} />
@@ -78,10 +75,10 @@ function App() {
             <Route path="no" element={<ProtectedRoute loginCheck={true}><No/></ProtectedRoute>}/>
           </Route>
 
-          <Route path="play" element={<PlayMemberList />}>
+          {/* <Route path="play" element={<PlayMemberList />}>
             <Route index element={<ProtectedRoute loginCheck={true}><PlayMemberList /></ProtectedRoute>} />
             <Route path="history" element={<PlayHistory />} />
-          </Route>
+          </Route> */}
 
           <Route path="/announce">
             <Route index element={<ProtectedRoute loginCheck={true}><AnnounceMain /></ProtectedRoute>} />
@@ -95,11 +92,7 @@ function App() {
           </Route>
 
           <Route path="schedule" element={<Schedule />} />
-          <Route path="attendance">
-            <Route index element={<Attendance/>} />
-            <Route path="list" element={ <AttendanceMain/> } />
-            <Route path="detail/:empCode" element={ <AttendanceDetail/> } />
-          </Route>
+          <Route path="attendance" element={<Attendance/>} />
 
           <Route path="member">
             <Route index element={<ProtectedRoute loginCheck={true}><MemberMain /></ProtectedRoute>} />

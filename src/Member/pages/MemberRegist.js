@@ -90,6 +90,26 @@ const onChangeHandler = (e) => {
     /* 회원등록 버튼 클릭 */
     const onClickMemberRegistHandler = () => {
 
+        if (!form.memName) {
+            toast('회원의 이름을 입력해주세요');
+            return;
+        } else if (!form.memPhone) {
+            toast('회원의 전화번호를 입력해주세요');
+            return;
+        } else if (!form.passCode) {
+            toast('회원권을 입력해주세요');
+            return;
+        } else if (!form.empCode) {
+            toast('담당자를 입력해주세요');
+            return;
+        }
+    
+        if (form.passCode > 3 && !form.empCode) {
+            toast('담당자와 PT 횟수를 입력해주세요');
+            return;
+        }
+
+
         /* 서버로 전달할 formData 형태의 객체 설정 */
         const formData = new FormData();
 
@@ -102,7 +122,10 @@ const onChangeHandler = (e) => {
         formData.append("history[0].resStart", form.memStartDate);
         formData.append("history[0].resEnd", form.memEndDate);
         formData.append("history[0].pass.passCode", form.passCode);
-        formData.append("history[0].employee.empCode", form.empCode);
+
+        if (form.empCode) {
+            formData.append("history[0].employee.empCode", form.empCode);
+        }
 
         dispatch(callMemberRegistAPI(formData));
     }
@@ -116,6 +139,7 @@ const onChangeHandler = (e) => {
     return (
         <>
         <div className={MemberRegistCSS.pageTitle}>회원 등록</div>
+        
             <div className={MemberRegistCSS.contentWrap}>
             
                 <table className={MemberRegistCSS.contentTb}>
@@ -164,10 +188,10 @@ const onChangeHandler = (e) => {
                                     onChange={ onChangeHandler }
                                 >
                                     <option>선택하세요</option>
-                                    <option value="1">3개월</option>
-                                    <option value="2">6개월</option>
-                                    <option value="3">12개월</option>
-                                    <option value="4">PT</option>
+                                    <option value={1}>3개월</option>
+                                    <option value={2}>6개월</option>
+                                    <option value={3}>12개월</option>
+                                    <option value={4}>PT</option>
                                 </select>
                             </td>
                         </tr>
@@ -234,18 +258,18 @@ const onChangeHandler = (e) => {
                     className={MemberRegistCSS.registBtn}
                     onClick={ onClickMemberRegistHandler }
                 >
-                    등록하기
+                    등록
                 </button>
                 </div>
-
                 <div>
                 <button
                     className={MemberRegistCSS.cancelBtn}
                     onClick={ () => navigate('/member') }
                 >
-                    취소하기
+                    취소
                 </button>
                 </div>
+
             </div>
         </div>
             </>

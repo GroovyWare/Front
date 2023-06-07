@@ -7,7 +7,8 @@ import RequestDetailCSS from "./RequestDetail.module.css";
 import { useDispatch, useSelector } from 'react-redux';
 import { searchContextAPI } from '../../../api/ApprovalAPICall';
 import { EmployeeContext } from '../employee/EmployeeProvider';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { searchRequestAPI } from '../../../api/ApprovalAPICall';
 
 const Parchment = Quill.import('parchment');
 
@@ -49,12 +50,13 @@ const modules = {
     height: 50px;
   }
   .ql-container {
-    height: 350px;
+    height: 600px;
     background-color : white;
   }
 `;
 
 function RequestDetail(){
+    const navigate = useNavigate();
     
     const dispatch = useDispatch();
     const location = useLocation();
@@ -82,6 +84,11 @@ function RequestDetail(){
     )
 
     return(
+        <div className={RequestDetailCSS.container}>
+            <div className={RequestDetailCSS.pageTitle}>
+                <div>문서 번호 {apvCode}</div>
+            </div>
+            <div className={RequestDetailCSS.content}>
         <div className={RequestDetailCSS.wrap}>
             <div className={RequestDetailCSS.editor}>
                 <StyledQuill 
@@ -93,6 +100,8 @@ function RequestDetail(){
             </div>
             <div className={RequestDetailCSS.detail}>
             </div>
+        </div>
+        </div>
         </div>
     )
 }

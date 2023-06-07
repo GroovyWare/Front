@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import EmployeeItem from "./EmployeeItem";
 import employeeListCSS from "./EmployeeList.module.css";
+import { isAdmin } from "../../utils/TokenUtils";
 
 
 function EmployeeList({employeeList}) {
@@ -34,7 +35,9 @@ function EmployeeList({employeeList}) {
                     </table>
                 </div>
           </div>
-          <button className={ employeeListCSS.registBtn } onClick={ moveToRegistPage }>등록</button>
+          { isAdmin() ?
+            <button className={ employeeListCSS.registBtn } onClick={ moveToRegistPage }>등록</button>
+          : '' }
     </>
     )
 }

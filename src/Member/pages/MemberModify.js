@@ -39,7 +39,7 @@ function MemberModify() {
         setForm({ 
             ...info, 
             passCode : info.history[0]?.pass.passCode,
-            empCode :  info.history[0]?.employee.empCode,
+            empCode: info.history[0]?.employee.empCode || "",
             memCode : info.history[0]?.memCode
         });
         setModifyMode(true);

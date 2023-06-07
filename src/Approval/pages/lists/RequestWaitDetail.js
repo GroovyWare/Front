@@ -9,6 +9,9 @@ import { searchContextAPI } from '../../../api/ApprovalAPICall';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { searchApproveLineAPI } from '../../../api/ApprovalAPICall';
 import { acceptApprovalAPI } from '../../../api/ApprovalAPICall';
+import { toast } from 'react-toastify';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import { confirmAlert } from 'react-confirm-alert';
 
 const Parchment = Quill.import('parchment');
 
@@ -50,7 +53,7 @@ const modules = {
     height: 50px;
   }
   .ql-container {
-    height: 350px;
+    height: 600px;
     background-color : white;
   }
 `;
@@ -92,23 +95,41 @@ function ReqeustWaitDetail(){
 
     const onClickOkHandler = (e) => {
 
-        const form = {
-            'apvCode' : apvCode,
-            'approveLine' : [{
-                'aplStatus' : e.target.dataset.value,
-                'aplDate' : new Date
-            }]
-        }
+       
 
-        dispatch(acceptApprovalAPI(form));
+            confirmAlert({
+                title: `${e.target.dataset.value} 하시겠습니까?`,
+                buttons: [
+                  {
+                    label: '네',
+                    onClick: () => {
+                        const form = {
+                            'apvCode' : apvCode,
+                            'approveLine' : [{
+                                'aplStatus' : e.target.dataset.value,
+                                'aplDate' : new Date
+                            }]
+                        }
+                
+                        dispatch(acceptApprovalAPI(form));
 
-        if(accept?.status === 200){
-            navigate('/approval/wait', {replace : true});
-        }
+                        navigate('/approval', {replace : true})
+                    }  
+                  },
+                  {
+                    label: '아니오',
+                    onClick: () => navigate('/approval/wait', {replace : true})
+                  }
+                ]
+              });
     }
 
     return(
-        <>
+        <div className={RequestDetailCSS.container}>
+        <div className={RequestDetailCSS.pageTitle}>
+            <div>문서 번호 {apvCode}</div>
+        </div>
+        <div className={RequestDetailCSS.content}>
             <div className={RequestDetailCSS.button}>
                 <div className={RequestDetailCSS.ok} onClick={onClickOkHandler} data-value="승인"><img src='../images/ok.png'></img>승인</div>
                 <div className={RequestDetailCSS.no} onClick={onClickOkHandler} data-value="반려"><img src='../images/no.png'></img>반려</div>
@@ -128,10 +149,8 @@ function ReqeustWaitDetail(){
                 </tr>
             </table>
             </div>
-           
-        
             <div className={RequestDetailCSS.wrap}>
-                    <div className={RequestDetailCSS.content}>
+                    <div className={RequestDetailCSS.contents}>
                         <div className={RequestDetailCSS.editor2}>
                             <StyledQuill 
                                 value={html} 
@@ -145,7 +164,8 @@ function ReqeustWaitDetail(){
                         </div>
                     </div>
             </div>
-        </>
+        </div>
+        </div>
     )
 }
 

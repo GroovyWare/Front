@@ -38,13 +38,29 @@ function PassRegist() {
     /* 회원권 등록 버튼 이벤트 */
     const onClickPassRegistHandler = () => {
 
+        if (!form.passType) {
+            toast('회원권의 종류를 입력해주세요');
+            return;
+        } else if (!form.passPrice) {
+            toast('회원권의 가격을 입력해주세요');
+            return;
+        }
+    
+        if (form.passType === 'PT' && !form.passAmount) {
+            toast('PT 횟수를 입력해주세요');
+            return;
+        }
+
         /* 서버로 전달할 formData 형태의 객체 설정 */
         const formData = new FormData();
 
         formData.append("passType", form.passType);
         formData.append("passPrice", form.passPrice);
-        formData.append("passAmount", form.passAmount);
         formData.append("passEtc", form.passEtc);
+
+        if (form.empCode) {
+            formData.append("passAmount", form.passAmount);
+        }
 
         dispatch(callPassRegistAPI(formData));
     }
@@ -116,7 +132,7 @@ function PassRegist() {
                 className={PassCSS.registBtn}
                 onClick={ onClickPassRegistHandler }
             >
-                등록하기
+                등록
             </button>
             </div>
 
