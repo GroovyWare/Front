@@ -25,7 +25,6 @@ function VacationInsertModal({ schedule, setVacationInsertModal }) {
         });
     };
 
-    console.log("form : ", form);
     const handleSubmit = () => {
 
         dispatch(createSchedule(form));

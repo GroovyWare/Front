@@ -29,7 +29,7 @@ const Attendance = () => {
         dispatch(leaveWork(form))
     }
 
-    console.log(attendance)
+  
 
     
     const convertToValidDate = (timeString) => {
@@ -55,7 +55,6 @@ const Attendance = () => {
         return null;
       };
       
-      console.log(workingTimes(attendance?.data?.attStart, attendance?.data?.attEnd));
       
       
 
@@ -89,7 +88,7 @@ const Attendance = () => {
     }, [update]);
 
 
-    // console.log("form : ", form);
+   
 
     return (
         <div className={attendanceCSS.container}>
