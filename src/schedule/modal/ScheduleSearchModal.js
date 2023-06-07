@@ -16,7 +16,7 @@ function ScheduleSearchModal({ searchSchedule, setScheduleSearchModal, setSchedu
   const [currentPage, setCurrentPage] = useState(1);
   const pageInfo = searchvalues && searchvalues.pageInfo;
 
- console.log(pageInfo);
+
 
   const searchData = searchvalues && searchvalues.data ? searchvalues.data : [];
 

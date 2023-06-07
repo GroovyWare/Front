@@ -22,10 +22,10 @@ export const AllSchedules = () => {
             }
         }).then(response => response.json());
         
-console.log(result);
+
 
         if(result.status === 200) {
-            console.log('[CalendarAPICalls] : callScheduleListAPI result,', result);
+     
             dispatch(getSchedules(result));
         }
 
@@ -44,7 +44,7 @@ export const oneSchedule = ({ id }) => {
         const result = await fetch(requestURL).then(response => response.json());
 
         if(result.status === 200) {
-            console.log("[ProductAPICalls] callProductCategoriesListAPI result : ", result);
+           
             dispatch(getSchedule(result));
         }
     }
@@ -67,7 +67,7 @@ export const  searchingSchedule = ({searchSchedule, currentPage = 1}) => {
         }).then(response => response.json());
 
     if(result.status === 200) {
-        console.log("[searchingSchedule] calling result :  " , result);
+    
         dispatch(searchSchedules(result));
     }
 
@@ -91,7 +91,7 @@ export const createSchedule = (form) => {
         }).then(response => response.json());
 
         if(result.status === 200) {
-            console.log('[CalendarAPICalls] : callcreateAPI result : ', result);
+      
             dispatch(postSchedule(result));
             dispatch(AllSchedules());
         }
@@ -114,7 +114,7 @@ export const updateSchedule = (form) => {
         }).then(response => response.json());
 
         if (result.status === 200) {
-            console.log('[ProductAPICalls] callProductUpdateAPI result:', result);
+         
             dispatch(putSchedule(result));
         }
     }
@@ -139,36 +139,11 @@ export const deleteOne = (form) => {
       }).then(response => response.json());
   
       if (result.status === 200) {
-        console.log('[CalendarAPICalls] callDeleteAPI result:', result);
+     
         dispatch(deleteSchedule(result));
       }
     }
   }
   
-
-/* 휴가신청(폐기) */
-// export const createVacation = (form) => {
-
-//     const requestURL = `${PRE_URL}/calendar/schedule/vacation/${form.id}`;
-
-//     return async (dispatch, getState) => {
-       
-//         const result = await fetch(requestURL, {
-//             method : 'POST',
-//             headers : {
-//                 "Content-Type": "application/json",
-//                 Authorization: "Bearer " + window.localStorage.getItem("accessToken")
-//             },
-//             body : JSON.stringify(form)
-//         }).then(response => response.json());
-
-//         if(result.status === 200) {
-//             console.log('[CalendarAPICalls] : callcreateAPI result : ', result);
-//             dispatch(postSchedule(result));
-//             dispatch(AllSchedules());
-//         }
-//     }
-// }
-
 
 

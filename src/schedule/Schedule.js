@@ -103,13 +103,9 @@ const Schedule = () => {
 
   const onEventClickHandler = (info) => {
 
-    console.log(info)
-    console.log(info.event.id)
-    console.log(events.data);
-
 
     const clickedEvent = events.data.find(event => event.id == info.event.id); // 값이 안나와서 비교연산자를 사용해보았다.
-    console.log(clickedEvent);
+  
     setJustSchedule(clickedEvent);
     setScheduleUpdateModal(true);
     // const clickedEvent = events.find(info.event.id);
@@ -124,10 +120,7 @@ const Schedule = () => {
       end,
       dragEvent: true,
     };
-    console.log(event)
-    console.log(event.event)
-
-    console.log(updatedEvent);
+   
     dispatch(updateSchedule(updatedEvent));
 
 

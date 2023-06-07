@@ -22,7 +22,6 @@ export const callMemberListAPI = ( {currentPage = 1} ) => {
         
 
         if(result.status === 200) {
-            console.log('[MemberAPICalls] : callMemberListAPI result,', result);
             dispatch(getMembers(result));
         }
     }
@@ -44,7 +43,6 @@ export const callMemberDetailAPI = ({ memCode }) => {
         }).then(response => response.json());
 
         if(result.status === 200) {
-            console.log('[MemberAPICalls] : callMemberListAPI result,', result);
             dispatch(getMember(result));
         }
     }
@@ -66,7 +64,6 @@ export const callMemberRegistAPI = (formData) => {
         }).then(response => response.json());
 
         if(result.status === 200) {
-            console.log('[MemberAPICalls] : callMemberRegistAPI result,', result);
             dispatch(postMember(result));
         }
     }
@@ -87,7 +84,7 @@ export const callMemberDetailReadModifyAPI = ({ memCode }) => {
         }).then(response => response.json());
 
         if(result.status === 200) {
-            console.log("[MemberAPICalls] callMemberDetailReadModifyAPI result : ", result);
+            dispatch(getMember(result));
         }
     }
 }
@@ -108,7 +105,6 @@ export const callMemberModifyAPI = (formData) => {
         }).then(response => response.json());
 
         if(result.status === 200) {
-            console.log('[MemberAPICalls] callMemberModifyAPI result :', result);
             dispatch(putMember(result));
         }
     }
@@ -126,7 +122,6 @@ export const callMemberSearchListAPI = ({ search, currentPage = 1}) => {
         const result = await fetch(requestURL).then(response => response.json());
 
         if(result.status === 200) {
-            console.log("[MemberAPICalls] callMemberSearchListAPI result : ", result);
             dispatch(getMembers(result));
         }
     }

@@ -1,0 +1,32 @@
+.searchbar {
+    position: relative;
+    float: right;
+    top: 30px;
+    right: 10px;
+    border: none;
+    width: 230px;
+    height: 30px;
+    border-bottom: 1.5px solid #5a5a5a;
+}
+
+.searchbar > input {
+    border: none;
+    background-color: transparent;
+    font-size: 15px;
+    height: 30px;
+    margin-left: 8px;
+}
+
+.searchbar > button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.search {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 30px;
+    height: 30px;
+}

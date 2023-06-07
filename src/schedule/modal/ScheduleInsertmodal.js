@@ -25,7 +25,7 @@ function ScheduleInsertModal({ schedule, setScheduleInsertModal }) {
         });
     };
 
-    console.log("form : ", form);
+
     const handleSubmit = () => {
 
         dispatch(createSchedule(form));

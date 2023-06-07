@@ -5,6 +5,8 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { callAnnounceRegistAPI } from '../../../api/AnnounceAPICalls';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
+import AnnounceRegistrationCSS from './AnnounceRegistration.module.css'
+import { toast } from 'react-toastify';
 
 const AnnounceRegistration = () => {
 
@@ -63,12 +65,11 @@ const AnnounceRegistration = () => {
         navigate("/", { replace: true });
         return;
       } else {
-        alert("업로드 실패.");
+        toast.error("업로드 실패.");
         return;
       }
     } catch (error) {
-      console.error(error);
-      alert("네트워크 오류: " + error.message);
+      toast.error("네트워크 오류: " + error.message);
       return;
     }
   };
@@ -77,7 +78,7 @@ const AnnounceRegistration = () => {
   useEffect(
     () => {
         if(regist?.status === 200) {
-            alert('게시글 등록이 완료되었습니다.');
+            toast.success('게시글 등록이 완료되었습니다.');
             navigate('/announce', { replace : true });
         }
     },
@@ -109,7 +110,7 @@ const AnnounceRegistration = () => {
   const onClickAnnounceRegistrationHandler = () => {
 
     if (!form.annTitle || !content) {
-      alert("제목과 내용을 모두 입력해주세요.");
+      toast.error("제목과 내용을 모두 입력해주세요.");
       return;
     }
 
@@ -128,13 +129,20 @@ const AnnounceRegistration = () => {
   }
 
   return (
-    <div className="Editor">
+    <div className={ AnnounceRegistrationCSS.container }>
+      <style jsx>{`
+      .ck.ck-editor__editable {
+          min-height: 500px;
+          max-height: 500px;
+      }
+    `}</style>
       <section>
-        <div className="title-wrapper">
-        <td><input name='annTitle' type="text" onChange={ onChangeHandler } /></td>
+        <div>
+          <td className={ AnnounceRegistrationCSS.title } align="center">제목 : </td>
+          <td><input name='annTitle' type="text" className={ AnnounceRegistrationCSS.titleWrapper } onChange={ onChangeHandler } /></td>
         </div>
       </section>
-      <section>
+      <section className={ AnnounceRegistrationCSS.content }>
         <CKEditor
           name='annContent'
           editor={ClassicEditor}
@@ -142,30 +150,30 @@ const AnnounceRegistration = () => {
           config={{ extraPlugins: [uploadPlugin] }}
           onReady={(editor) => {
             // You can store the "editor" and use when it is needed.
-            console.log("Editor is ready to use!", editor);
+            // console.log("Editor is ready to use!", editor);
           }}
           onChange={(event, editor) => {
             setContent(editor.getData());
-            console.log({ event, editor, content });
+            // console.log({ event, editor, content });
           }}
           onBlur={(event, editor) => {
-            console.log("Blur.", editor);
+            // console.log("Blur.", editor);
           }}
           onFocus={(event, editor) => {
-            console.log("Focus.", editor);
+            // console.log("Focus.", editor);
           }}
         />
       </section>
       <section>
-        <div className="control-box">
-          <div className="cancel-btn-wrapper">
-            <button
-              onClick={() => navigate(-1, { replace: true })}
-            >취소</button>
-          </div>
-          <div className="submit-btn-wrapper">
-            <button onClick={onClickAnnounceRegistrationHandler}>등록</button>
-          </div>
+        <div className={ AnnounceRegistrationCSS.registBtn }>
+          <button
+            onClick={() => {
+              if(window.confirm("게시글 작성을 취소하시겠습니까?")) {
+                navigate(-1, { replace: true });
+              }
+            }}
+          >취소</button>
+          <button onClick={onClickAnnounceRegistrationHandler}>등록</button>
         </div>
       </section>
     </div>

@@ -91,10 +91,6 @@ function App() {
             <Route index element={<ProtectedRoute loginCheck={true}><EquipmentMain /></ProtectedRoute>} />
           </Route>
 
-          {/* <Route path="/locker">
-            <Route index element={<ProtectedRoute loginCheck={true}><LockerMain /></ProtectedRoute>} />
-          </Route> */}
-
           <Route path="schedule" element={<Schedule />} />
           <Route path="attendance" element={<Attendance/>} />
 

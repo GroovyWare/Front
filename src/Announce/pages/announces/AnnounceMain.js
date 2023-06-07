@@ -4,21 +4,22 @@ import { callAnnounceListAPI, callAnnounceSearchListAPI } from "../../../api/Ann
 import AnnounceList from "./AnnounceList";
 import PagingBar from "../../../components/common/PagingBar";
 import { useSearchParams } from "react-router-dom";
-import SearchBar from "../../../components/common/SearchBar";
+import AnnounceSearchBar from "./AnnounceSearchBar";
 import AnnounceMainCSS from './AnnounceMain.module.css';
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom/dist";
+import { isAdmin } from "../../../utils/TokenUtils"
 
 function AnnounceMain() {
 
     const dispatch = useDispatch();
-    // const userRole = useSelector('state => state.authCode'); // 이 부분은 실제 authCode를 가져오는 Redux Selector로 변경해야 합니다.
-    const [userRole, setUserRole] = useState('1'); // 임의의 userRole 상태 생성
     const announces = useSelector(state => state.announceReducer);
     const navigate = useNavigate();
     const announceList = announces?.data || [];
     const pageInfo = announces?.pageInfo || null;
 
+    const [sortConfig, setSortConfig] = useState(null);
+    const [sortedAnnounceList, setSortedAnnounceList] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [searchParams] = useSearchParams();
     const search = searchParams.get('search');
@@ -35,6 +36,54 @@ function AnnounceMain() {
         },
         [dispatch, currentPage, searchTerm]
     );
+
+    useEffect(() => {
+        let sortableItems = [...announceList];
+        if (sortConfig !== null) {
+            sortableItems.sort((a, b) => {
+                if (sortConfig.key.includes('.')) {
+                    // Split the key
+                    const keys = sortConfig.key.split('.');
+                    // Access the inner property
+                    const propA = a[keys[0]][keys[1]];
+                    const propB = b[keys[0]][keys[1]];
+    
+                    // Sort
+                    if (propA < propB) {
+                        return sortConfig.direction === 'ascending' ? -1 : 1;
+                    }
+                    if (propA > propB) {
+                        return sortConfig.direction === 'ascending' ? 1 : -1;
+                    }
+                    return 0;
+                } else if (sortConfig.key === 'annDate') {
+                    // 날짜에 대한 정렬 처리
+                    const dateA = Date.parse(a[sortConfig.key]);
+                    const dateB = Date.parse(b[sortConfig.key]);
+                    return sortConfig.direction === 'ascending' ? dateA - dateB : dateB - dateA;
+                } else {
+                    // 문자열에 대한 정렬 처리
+                    if (a[sortConfig.key] < b[sortConfig.key]) {
+                        return sortConfig.direction === 'ascending' ? -1 : 1;
+                    }
+                    if (a[sortConfig.key] > b[sortConfig.key]) {
+                        return sortConfig.direction === 'ascending' ? 1 : -1;
+                    }
+                    return 0;
+                }
+            });
+        }
+        setSortedAnnounceList(sortableItems); // 상태 업데이트
+    }, [announceList, sortConfig]);
+    
+
+    const handleSort = (key) => {
+        let direction = 'ascending';
+        if (sortConfig && sortConfig.key === key && sortConfig.direction === 'ascending') {
+            direction = 'descending';
+        }
+        setSortConfig({ key, direction });
+    }
 
     const displayTimeAgo = (dateString) => {
         const date = new Date(dateString);
@@ -64,12 +113,13 @@ function AnnounceMain() {
     }
 
     return (
-        <>  
-            <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "15px", marginRight: "20px" }}>
-                <SearchBar search={searchTerm} onSearch={onSearch} />
+        <div className={ AnnounceMainCSS.container }>
+            <div className={ AnnounceMainCSS.pageTitle }>공지사항</div>
+            <div>
+                <AnnounceSearchBar onSearch={onSearch} />
             </div>
-            <div className={ AnnounceMainCSS.bodyDiv }>
-            <table className={ AnnounceMainCSS.productTable }>
+            <div className={ AnnounceMainCSS.content }>
+            <table className={ AnnounceMainCSS.annTable }>
                 <colgroup>
                     <col width="5%" />
                     <col width="75%" />
@@ -79,17 +129,17 @@ function AnnounceMain() {
                 <thead>
                     <tr>
                         <th>번호</th>
-                        <th>제목</th>
-                        <th>작성자</th>
-                        <th>작성일</th>
+                        <th onClick={() => handleSort('annTitle')}>제목</th>
+                        <th onClick={() => handleSort('employee.empName')}>작성자</th>
+                        <th onClick={() => handleSort('annDate')}>작성일</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {announceList.map((p) => (
+                    {sortedAnnounceList.map((p) => (
                         <tr key={p.annCode}>
                             <td>{p.annCode}</td>
                             <td>
-                            <NavLink to={`/announce/${p.annCode}`} className="announce-link">
+                            <NavLink to={`/announce/${p.annCode}`} className={ AnnounceMainCSS.link } style={{ color: 'black', textDecoration: 'none', display: 'block' }}>
                                 {p.annTitle}
                             </NavLink>
                             </td>
@@ -102,14 +152,14 @@ function AnnounceMain() {
             <div>
                 { announceList.length > 0 && <AnnounceList announceList={announceList} /> }
             </div>
-            <div className={ AnnounceMainCSS.buttonDiv }>
-                {userRole === '1' && <button onClick={ goToRegistration }>등록</button>}
+        </div>
+            <div className={ AnnounceMainCSS.registBtn }>
+                {isAdmin() ? <button onClick={ goToRegistration }>등록</button>:""}
             </div>
             <div>
                 { pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage } /> }
             </div>
         </div>
-        </>
     );
 }
 

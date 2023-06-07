@@ -15,7 +15,7 @@ function ScheduleUpdateModal({  setScheduleUpdateModal , justSchedule}) {
   const { modify } = useSelector((state) => state.scheduleReducer);
   const { deleteStatus } = useSelector((state) => state.scheduleReducer);
   
-  console.log(form)
+
 
   useEffect(() => {
     if (modify?.status === 200 && setScheduleUpdateModal) {
@@ -46,8 +46,6 @@ function ScheduleUpdateModal({  setScheduleUpdateModal , justSchedule}) {
       [e.target.name]: e.target.value,
     });
   };
-
-  console.log("form : ", form);
 
   const deleteOneSchedule = () => {
     dispatch(deleteOne(form));
