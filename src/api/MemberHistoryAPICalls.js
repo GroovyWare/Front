@@ -20,13 +20,9 @@ export const callMemberHistoryCheckAPI = ({ memCode }) => {
         }).then((response) => response.json());
     
         if (result.status === 200) {
-          console.log("[MemberHistoryAPICalls] callMemberHistoryCheckAPI result : ", result);
           dispatch(getHistory(result));
         }
       };
-
-      
-
 };
 
 /* 회원의 회원권 추가 */
@@ -45,7 +41,6 @@ export const callMemberAddPassAPI = (formData) => {
       }).then(response => response.json());
 
       if(result.status === 200) {
-          console.log('[MemberHistoryAPICalls] callMemberAddPassAPI result :', result);
           dispatch(postHistory(result));
       }
   }

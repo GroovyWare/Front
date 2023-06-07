@@ -21,7 +21,6 @@ export const callPassListAPI = ( {currentPage = 1} ) => {
         }).then(response => response.json());
         
         if(result.status === 200) {
-            console.log('[PassAPICalls] : callPassListAPI result,', result);
             dispatch(getPass(result));
         }
     }
@@ -44,7 +43,6 @@ export const callPassRegistAPI = (formData) => {
         }).then(response => response.json());
 
         if(result.status === 200) {
-            console.log('[PassAPICalls] : callPassRegistAPI result,', result);
             dispatch(postPass(result));
         }
     }
@@ -67,7 +65,6 @@ export const callPassDetailReadModifyAPI = ({ passCode }) => {
         }).then(response => response.json());
 
         if(result.status === 200) {
-            console.log("[PassAPICalls] callPassDetailReadModifyAPI result : ", result);
             dispatch(getPas(result));
         }
     }
@@ -89,7 +86,6 @@ export const callPassModifyAPI = (formData) => {
         }).then(response => response.json());
 
         if(result.status === 200) {
-            console.log('[PassAPICalls] callPassModifyAPI result :', result);
             dispatch(putPass(result));
         }
     }
