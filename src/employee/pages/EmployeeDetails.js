@@ -17,7 +17,6 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
     const [ checkedInputs, setCheckedInputs ] = useState([]);
     const [ form, setForm ] = useState(emp);
 
-    console.log('checkedInputs', checkedInputs);
 
     const deptSelectList = [
         { value : "", name : "선택"},
@@ -39,10 +38,7 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
         () => {
             const tempArr = [];
             emp.auths.forEach((auth) => {tempArr.push(auth.auth.authCode)});
-            console.log('tempArr', tempArr);
             setCheckedInputs(tempArr);
-            // emp.auths.forEach(auth => 
-            //     setCheckedInputs([...checkedInputs, auth.empAuthPK.authCode]))
         },                           
         []
     )
@@ -66,7 +62,6 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
                  fileReader.onload = (e) => {
                     
                     const { result } = e.target;
-                    console.log('result : ' , result);
                     if(result) setImageUrl(result);
                  }
                  fileReader.readAsDataURL(image);
@@ -87,7 +82,6 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
             [e.target.name] : e.target.value
         });
     }
-    console.log(form);
 
     const onClickImageUpload = () => {
         ImageInput.current.click();
@@ -122,14 +116,6 @@ function EmployeeDetails({ setEmpDetailsOpen, emp }) {
              formData.append(`auths[${i}].auth.authCode`, authCode)
         )
 
-        console.log('0번 권한', formData.get(`auths[0].authCode`));
-        console.log('1번 권한', formData.get(`auths[1].authCode`));
-
-        // for(let i=0; i < checkedInputs.length; i++) {
-        //     formData.append(`auths[${i}].empAuthPK.authCode`, checkedInputs[i])
-        //     console.log('체크박스 값', formData.get(`auths[${i}].empAuthPK.authCode`));
-        // }
-        
         if(image) {
             formData.append("imgUrl", image);
         }

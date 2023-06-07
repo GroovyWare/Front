@@ -20,8 +20,6 @@ export const callLoginAPI = (form) => {
              body : JSON.stringify(form)
         })
         .then(res => res.json())
-        
-        console.log('[LoginAPICalls] callLoginAPI result : ', result);
 
         if(result.status === 200) {
           
@@ -46,8 +44,6 @@ export const callGetUserAPI = () => {
                 "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
             }
         }).then(response => response.json());
-
-        console.log('[callGETUserAPI] callGetUserAPI result : ', result);
 
         if(result.status === 200) {
             dispatch(getUser(result));
