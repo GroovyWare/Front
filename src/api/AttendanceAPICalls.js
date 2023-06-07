@@ -23,7 +23,7 @@ export const AttendanceMain = () => {
         }).then(response => response.json());
 
         if (result.status === 200) {
-            console.log('[AttendanceAPICalls] : callAttendanceAPI result,', result);
+  
             dispatch(viewMain(result));
         }
 
@@ -48,7 +48,7 @@ export const goWork = (form) => {
         }).then(response => response.json());
 
         if(result.status === 200) {
-            console.log('[AttendanceAPICalls] : callgoWorkAPI result : ', result);
+
             dispatch(postOneAttendance(result));
             dispatch(viewMain());
         }
@@ -73,7 +73,7 @@ export const leaveWork = (form) => {
         }).then(response => response.json());
 
         if (result.status === 200) {
-            console.log('[AttendanceAPICalls] callleaveWork result:', result);
+   
             dispatch(putOneAttendance(result));
             dispatch(viewMain());
         }
@@ -98,7 +98,7 @@ export const callAttendanceListAPI = ({currentPage = 1}) => {
         }).then(response => response.json());
         
         if(result.status === 200) {
-            console.log('[AttendanceAPICalls] : callAttendanceListAPI result,', result);
+         
             dispatch(getAttendances(result));
         }
     }
@@ -120,7 +120,7 @@ export const callAttendanceDetailAPI = ({ empCode }) => {
         }).then(response => response.json());
 
         if(result.status === 200) {
-            console.log('[AttendanceAPICalls] : callAttendanceDetailAPI result,', result);
+       
             dispatch(getAttendance(result));
         }
     }
