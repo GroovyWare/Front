@@ -198,9 +198,7 @@ const Schedule = () => {
           일정 생성
         </button>
 
-        <button className={styles.inserting} onClick={onClickVacationHandler}>
-          휴가 생성
-        </button>
+      
       </div>
 
       <div className={styles.allview}>
