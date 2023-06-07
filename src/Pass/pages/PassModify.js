@@ -82,7 +82,7 @@ function PassModify(){
             <table className={PassCSS.contentTb}>
                     <tbody>
                     <tr>
-                        <td className={PassCSS.contentTitle} colspan="3"><label>회원권 번호</label></td>
+                        <td className={PassCSS.contentTitle}><label>회원권 번호</label></td>
                         <td className={PassCSS.contentText} colspan="3">
                             <input
                                 name='passCode'
