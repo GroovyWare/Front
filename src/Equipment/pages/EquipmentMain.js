@@ -9,11 +9,10 @@ import axios from "axios";
 import EquipmentRegist from "./EquipmentRegist";
 import EquipmentUpdate from "./EquipmentUpdate";
 import { toast } from "react-toastify";
+import { isAdmin } from "../../utils/TokenUtils"
 
 function EquipmentMain() {
 
-    // const userRole = useSelector('state => state.authCode'); // 이 부분은 실제 authCode를 가져오는 Redux Selector로 변경해야 합니다.
-    const [userRole] = useState('1'); // 임의의 userRole 상태 생성
     const dispatch = useDispatch();
     const equipments = useSelector(state => state.equipmentReducer);
     const equipmentList = equipments?.data || [];
@@ -210,8 +209,8 @@ function EquipmentMain() {
                 </table>
         </div>
             <div className={ EquipmentMainCSS.registBtn }>
-            {userRole === '1' && <button onClick={handleDelete}>삭제</button>}
-            {userRole === '1' && <button onClick={openRegistModal}>등록</button>}
+            {isAdmin() ? <button onClick={handleDelete}>삭제</button>:""}
+            <button onClick={openRegistModal}>등록</button>
             <EquipmentRegist isOpen={isRegistModalOpen} onRequestClose={closeRegistModal}/>
             {selectedEquipment && 
                 <EquipmentUpdate 

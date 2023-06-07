@@ -8,12 +8,11 @@ import AnnounceSearchBar from "./AnnounceSearchBar";
 import AnnounceMainCSS from './AnnounceMain.module.css';
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom/dist";
+import { isAdmin } from "../../../utils/TokenUtils"
 
 function AnnounceMain() {
 
     const dispatch = useDispatch();
-    // const userRole = useSelector('state => state.authCode'); // 이 부분은 실제 authCode를 가져오는 Redux Selector로 변경해야 합니다.
-    const [userRole, setUserRole] = useState('1'); // 임의의 userRole 상태 생성
     const announces = useSelector(state => state.announceReducer);
     const navigate = useNavigate();
     const announceList = announces?.data || [];
@@ -155,7 +154,7 @@ function AnnounceMain() {
             </div>
         </div>
             <div className={ AnnounceMainCSS.registBtn }>
-                {userRole === '1' && <button onClick={ goToRegistration }>등록</button>}
+                {isAdmin() ? <button onClick={ goToRegistration }>등록</button>:""}
             </div>
             <div>
                 { pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage } /> }
