@@ -56,11 +56,11 @@
     font-size: 13px;
     font-weight: 700;
     width: 110px;
-    margin-top: 450px;
     z-index: 1300;
 
     position: absolute;
-    left: 657px;
+    margin: auto;
+    margin-top: 457px;
   }
 
 /* 컨텐츠 테이블 */
